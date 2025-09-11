@@ -21,30 +21,29 @@ jobs:
 
           if [ "$ACTION" = "issues" ]; then
             EVENT_TYPE="📝 Issue Created"
-            URL="${{ github.event.issue.html_url }}"
+            ITEM_URL="${{ github.event.issue.html_url }}"
           else
             EVENT_TYPE="💬 Comment Added"
-            URL="${{ github.event.comment.html_url }}"
+            ITEM_URL="${{ github.event.comment.html_url }}"
           fi
 
           PAYLOAD=$(jq -n \
-            --arg event_type "$EVENT_TYPE" \
+            --arg title "$EVENT_TYPE" \
+            --arg title_link "$ITEM_URL" \
             --arg repo "$REPO_NAME" \
             --arg user "$USER" \
             --arg time "$TIME" \
-            --arg url "$URL" \
             '{
               attachments: [
                 {
                   color: "#36a64f",
-                  title: $event_type,
+                  title: $title,
+                  title_link: $title_link,
                   fields: [
-                    {title: "Repository", value: $repo, short: true},
-                    {title: "User", value: $user, short: true},
-                    {title: "Time", value: $time, short: true},
-                    {title: "URL", value: $url}
-                  ],
-                  footer: "GitHub → Slack Notification"
+                    {"title": "Repository", "value": $repo, "short": true},
+                    {"title": "User", "value": $user, "short": true},
+                    {"title": "Time", "value": $time, "short": true}
+                  ]
                 }
               ]
             }')
