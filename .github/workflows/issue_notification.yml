@@ -20,35 +20,30 @@ jobs:
           TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
 
           if [ "$ACTION" = "issues" ]; then
-            EVENT_TYPE="📝 Issue Created"
+            EVENT_TYPE="New Issue Created 📝"
             URL="${{ github.event.issue.html_url }}"
           else
-            EVENT_TYPE="💬 Comment Added"
+            EVENT_TYPE="New Comment Added 💬"
             URL="${{ github.event.comment.html_url }}"
           fi
 
           PAYLOAD=$(jq -n \
             --arg event_type "$EVENT_TYPE" \
-            --arg repo "$REPO_NAME" \
+            --arg repo "<$URL|$REPO_NAME>" \
             --arg user "$USER" \
             --arg time "$TIME" \
-            --arg url "$URL" \
             '{
               attachments: [
                 {
-                  color: "#36a64f",
+                  color: "#7d0354",
                   title: $event_type,
                   fields: [
-                    {title: "Repository", value: $repo, short: true},
+                    {title: "Repository", value: $repo, short: false},
                     {title: "User", value: $user, short: true},
                     {title: "Time", value: $time, short: true},
-                    {title: "URL", value: $url}
                   ]
                 }
               ]
             }')
 
           curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
-          curl -X POST -H 'Content-type: application/json' \
-            --data "$PAYLOAD" \
-            "$SLACK_WEBHOOK_URL"
