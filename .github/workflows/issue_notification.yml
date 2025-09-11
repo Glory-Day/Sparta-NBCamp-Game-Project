@@ -20,10 +20,10 @@ jobs:
           TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
 
           if [ "$ACTION" = "issues" ]; then
-            EVENT_TYPE="📝 Issue Created"
+            EVENT_TYPE="New Issue Created 📝"
             ITEM_URL="${{ github.event.issue.html_url }}"
           else
-            EVENT_TYPE="💬 Comment Added"
+            EVENT_TYPE="New Comment Added 💬"
             ITEM_URL="${{ github.event.comment.html_url }}"
           fi
 
@@ -40,14 +40,12 @@ jobs:
                   title: $title,
                   title_link: $title_link,
                   fields: [
-                    {"title": "Repository", "value": $repo, "short": true},
                     {"title": "User", "value": $user, "short": true},
                     {"title": "Time", "value": $time, "short": true}
-                  ]
+                  ],
+                  footer: "GitHub → Slack Notification"
                 }
               ]
             }')
 
-          curl -X POST -H 'Content-type: application/json' \
-            --data "$PAYLOAD" \
-            "$SLACK_WEBHOOK_URL"
+          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
