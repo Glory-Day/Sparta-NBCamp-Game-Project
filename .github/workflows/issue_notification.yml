@@ -20,32 +20,40 @@ jobs:
           TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
 
           if [ "$ACTION" = "issues" ]; then
-            EVENT_TYPE="New Issue Created 📝"
-            ISSUE_URL="${{ github.event.issue.html_url }}"
+            EVENT_TYPE="📝 Issue Created"
+            ITEM_URL="${{ github.event.issue.html_url }}"
           else
-            EVENT_TYPE="New Comment Added 💬"
-            ISSUE_URL="${{ github.event.comment.html_url }}"
+            EVENT_TYPE="💬 Comment Added"
+            ITEM_URL="${{ github.event.comment.html_url }}"
           fi
 
+          # 제목에 URL 링크
+          TITLE_LINK="<${ITEM_URL}|${EVENT_TYPE}>"
+          # 레포 링크
+          REPO_URL="https://github.com/$REPO_NAME"
+          REPO_LINK="<${REPO_URL}|${REPO_NAME}>"
+
           PAYLOAD=$(jq -n \
-            --arg event_type "$EVENT_TYPE" \
-            --arg repo "$REPO_NAME" \
+            --arg title "$TITLE_LINK" \
+            --arg repo "$REPO_LINK" \
             --arg user "$USER" \
             --arg time "$TIME" \
-            --arg url "$ISSUE_URL" \
             '{
               attachments: [
                 {
-                  color: "#7d0354",
-                  title: $event_type,
-                  title_link: $url,
+                  color: "#36a64f",
+                  title: $title,
+                  mrkdwn_in: ["title", "fields"],
                   fields: [
-                    {title: "Repository", value: $repo, short: false},
-                    {title: "User", value: $user, short: true},
-                    {title: "Time", value: $time, short: true}
-                  ]
+                    {"title": "Repository", "value": $repo, "short": true},
+                    {"title": "User", "value": $user, "short": true},
+                    {"title": "Time", "value": $time, "short": true}
+                  ],
+                  footer: "GitHub → Slack Notification"
                 }
               ]
             }')
 
-          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
+          curl -X POST -H 'Content-type: application/json' \
+            --data "$PAYLOAD" \
+            "$SLACK_WEBHOOK_URL"
