@@ -37,6 +37,7 @@ jobs:
                 {
                   color: "#7d0354",
                   title: $event_type,
+                  mrkdwn_in: ["fields"],
                   fields: [
                     {title: "Repository", value: $repo, short: false},
                     {title: "User", value: $user, short: true},
