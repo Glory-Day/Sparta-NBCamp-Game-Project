@@ -16,20 +16,19 @@ jobs:
         run: |
           ACTION="${{ github.event_name }}"
           REPO_NAME="${{ github.repository }}"
+          REPO_URL="https://github.com/$REPO_NAME"
           USER="${{ github.actor }}"
           TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
 
           if [ "$ACTION" = "issues" ]; then
             EVENT_TYPE="New Issue Created 📝"
-            URL="${{ github.event.issue.html_url }}"
           else
             EVENT_TYPE="New Comment Added 💬"
-            URL="${{ github.event.comment.html_url }}"
           fi
 
           PAYLOAD=$(jq -n \
             --arg event_type "$EVENT_TYPE" \
-            --arg repo "<$URL|$REPO_NAME>" \
+            --arg repo "<$REPO_URL|$REPO_NAME>" \
             --arg user "$USER" \
             --arg time "$TIME" \
             '{
