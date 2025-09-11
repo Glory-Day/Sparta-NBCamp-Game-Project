@@ -20,10 +20,10 @@ jobs:
           TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
 
           if [ "$ACTION" = "issues" ]; then
-            EVENT_TYPE="New Issue Created 📝"
+            EVENT_TYPE="📝 New Issue Created"
             ITEM_URL="${{ github.event.issue.html_url }}"
           else
-            EVENT_TYPE="New Comment Added 💬"
+            EVENT_TYPE="💬 New Comment Added"
             ITEM_URL="${{ github.event.comment.html_url }}"
           fi
 
@@ -40,8 +40,8 @@ jobs:
                   title: $title,
                   title_link: $title_link,
                   fields: [
-                    {"title": "User", "value": $user, "short": true},
-                    {"title": "Time", "value": $time, "short": true}
+                    {"title": "User", "value": $user, "short": false},
+                    {"title": "Time", "value": $time, "short": false}
                   ],
                   footer: "GitHub → Slack Notification"
                 }
