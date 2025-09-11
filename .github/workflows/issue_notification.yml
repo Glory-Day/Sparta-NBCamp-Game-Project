@@ -36,7 +36,7 @@ jobs:
             '{
               attachments: [
                 {
-                  color: "#36a64f",
+                  color: "#7d0354",
                   title: $title,
                   title_link: $title_link,
                   fields: [
