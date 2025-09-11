@@ -40,7 +40,7 @@ jobs:
                   fields: [
                     {title: "Repository", value: $repo, short: false},
                     {title: "User", value: $user, short: true},
-                    {title: "Time", value: $time, short: true},
+                    {title: "Time", value: $time, short: true}
                   ]
                 }
               ]
