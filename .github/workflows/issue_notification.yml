@@ -27,15 +27,10 @@ jobs:
             ITEM_URL="${{ github.event.comment.html_url }}"
           fi
 
-          # 제목에 URL 링크
-          TITLE_LINK="<${ITEM_URL}|${EVENT_TYPE}>"
-          # 레포 링크
-          REPO_URL="https://github.com/$REPO_NAME"
-          REPO_LINK="<${REPO_URL}|${REPO_NAME}>"
-
           PAYLOAD=$(jq -n \
-            --arg title "$TITLE_LINK" \
-            --arg repo "$REPO_LINK" \
+            --arg title "$EVENT_TYPE" \
+            --arg title_link "$ITEM_URL" \
+            --arg repo "$REPO_NAME" \
             --arg user "$USER" \
             --arg time "$TIME" \
             '{
@@ -43,6 +38,7 @@ jobs:
                 {
                   color: "#36a64f",
                   title: $title,
+                  title_link: $title_link,
                   mrkdwn_in: ["title", "fields"],
                   fields: [
                     {"title": "Repository", "value": $repo, "short": true},
