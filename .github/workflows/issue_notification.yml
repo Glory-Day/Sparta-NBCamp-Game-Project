@@ -39,16 +39,15 @@ jobs:
                   color: "#36a64f",
                   title: $title,
                   title_link: $title_link,
-                  mrkdwn_in: ["title", "fields"],
                   fields: [
                     {"title": "Repository", "value": $repo, "short": true},
                     {"title": "User", "value": $user, "short": true},
                     {"title": "Time", "value": $time, "short": true}
-                  ],
-                  footer: "GitHub → Slack Notification"
+                  ]
                 }
               ]
-            }')
+            }'
+          )
 
           curl -X POST -H 'Content-type: application/json' \
             --data "$PAYLOAD" \
