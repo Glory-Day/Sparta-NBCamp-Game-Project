@@ -1,0 +1,54 @@
+name: Issue & Comment Notification
+
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Slack Notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          ACTION="${{ github.event_name }}"
+          REPO_NAME="${{ github.repository }}"
+          USER="${{ github.actor }}"
+          TIME=$(TZ=Asia/Seoul date +"%Y-%m-%d %H:%M:%S KST")
+
+          if [ "$ACTION" = "issues" ]; then
+            EVENT_TYPE="📝 Issue Created"
+            URL="${{ github.event.issue.html_url }}"
+          else
+            EVENT_TYPE="💬 Comment Added"
+            URL="${{ github.event.comment.html_url }}"
+          fi
+
+          PAYLOAD=$(jq -n \
+            --arg event_type "$EVENT_TYPE" \
+            --arg repo "$REPO_NAME" \
+            --arg user "$USER" \
+            --arg time "$TIME" \
+            --arg url "$URL" \
+            '{
+              attachments: [
+                {
+                  color: "#36a64f",
+                  title: $event_type,
+                  fields: [
+                    {title: "Repository", value: $repo, short: true},
+                    {title: "User", value: $user, short: true},
+                    {title: "Time", value: $time, short: true},
+                    {title: "URL", value: $url}
+                  ]
+                }
+              ]
+            }')
+
+          curl -X POST -H 'Content-type: application/json' --data "$PAYLOAD" "$SLACK_WEBHOOK_URL"
+          curl -X POST -H 'Content-type: application/json' \
+            --data "$PAYLOAD" \
+            "$SLACK_WEBHOOK_URL"
