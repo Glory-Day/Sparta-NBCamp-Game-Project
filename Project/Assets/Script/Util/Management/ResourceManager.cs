@@ -1,38 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Backend.Util.Debug;
-using UnityEngine;
+using Backend.Util.Data;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Rendering;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.SceneManagement;
+using System.Linq;
 
 namespace Backend.Util.Management
 {
-    public static class LabelAssets
-    {
-        public static List<string> GetAssetsByLabel(string label)
-        {
-            List<string> assetNames = new List<string>();
-            if (label == "aaa")
-            {
-                assetNames.Add("Cube");
-                assetNames.Add("Assets/Script/Test/Cube 1.prefab");
-                assetNames.Add("Assets/Script/Test/Cube 2.prefab");
-                assetNames.Add("Assets/Script/Test/Cube 3.prefab");
-                assetNames.Add("Sliding");
-                assetNames.Add("Square");
-            }
-            else if (label == "bbb")
-            {
-                assetNames.Add("Cube");
-            }
-            return assetNames;
-        }
-    }
-
     public class ResourceManager : Singleton<ResourceManager>
     {
         private ResourceManager()
@@ -43,38 +18,41 @@ namespace Backend.Util.Management
         private List<string> _list = new();
         private List<Task> _tasks = new();
 
-        private void LoadAssetsByLabelAsync_Internal(string label)
+        private void LoadAssetsByLabelAsync_Internal(string label, string nextLabel)
         {
             // 1. Label에 맞는 Asset 주소 목록을 _list로 가져오기
-            List<string> _list = LabelAssets.GetAssetsByLabel(label);
+            List<string> _list = AddressData.Groups[label].ToList<string>();
+            var set = AddressData.Groups[label].Intersect(AddressData.Groups[nextLabel]);   //둘다 가지고 있는거
+            List<string> set2 = AddressData.Groups[label].Except(set).ToList<string>();   // 둘중에 라벨만 가지고 있는것 언로드만 모임
+            List<string> set3 = AddressData.Groups[nextLabel].Except(set).ToList<string>();   //둘중에 넥스트 라벨만 가지고 있는것 로드할 것만 모임
 
-            // 2. _assets에 이미 포함된 것은 _list에서 제거
-            // 3. Label 목록에 포함이 안되어 있으면 UnLoad 한다.
-            for (int i = _list.Count - 1; i >= 0; i--)
+            string setstr = string.Join(",", set);
+            string setstr2 = string.Join(",", set2);
+            string setstr3 = string.Join(",", set3);
+
+            Debugger.LogMessage("공동 목록" + setstr);
+            Debugger.LogMessage("언로드 목록" + setstr2);
+            Debugger.LogMessage("로드 목록" + setstr3);
+
+            // 2. 에셋주소 목록에 포함이 안되어 있으면 UnLoad 한다.
+            for (int i = set2.Count - 1; i >= 0; i--)
             {
-                if (_assets.ContainsKey(_list[i]))
+                try
                 {
-                    _list.RemoveAt(i);
+                    Addressables.Release(_assets[set2[i]]);
                 }
-                else
+                catch
                 {
-                    try
-                    {
-                        Addressables.Release(_assets[_list[i]]);
-                    }
-                    catch
-                    {
-                        continue;
-                    }
+                    Debugger.LogMessage("메모리에 없음");
                 }
             }
 
-            // 4. _list 순회하며 비동기 Load 후 _assets에 추가
-            for (int i = 0; i < _list.Count; i++)
+            // 3. 로드목록을 순회하며 비동기 Load 후 _assets에 추가
+            for (int i = 0; i < set3.Count; i++)
             {
-                AsyncOperationHandle<UnityEngine.Object> handle = Addressables.LoadAssetAsync<UnityEngine.Object>(_list[i]);
+                AsyncOperationHandle<UnityEngine.Object> handle = Addressables.LoadAssetAsync<UnityEngine.Object>(set3[i]);
 
-                Task task = SetTask(handle, _list[i]); //핸들 작업을 테스크로 바꾸기
+                Task task = SetTask(handle, set3[i]); //핸들 작업을 테스크로 바꾸기
                 _tasks.Add(task);   //리스트에 담기
             }
         }
@@ -142,9 +120,9 @@ namespace Backend.Util.Management
             }
         }
 
-        public static void LoadAssetsByLabelAsync(string label)
+        public static void LoadAssetsByLabelAsync(string label, string nextLabel)
         {
-            Instance.LoadAssetsByLabelAsync_Internal(label);
+            Instance.LoadAssetsByLabelAsync_Internal(label, nextLabel);
         }
 
         public static float GetProgress()
