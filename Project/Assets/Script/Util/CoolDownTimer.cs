@@ -1,58 +1,29 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Backend.Util.Debug;
+﻿using UnityEngine;
 
 namespace Backend.Util
 {
     public class CoolDownTimer
     {
-        private CancellationTokenSource _source;
-
-        private readonly TimeSpan _time;
+        private float _time;
+        private float _duration;
 
         public CoolDownTimer(float time)
         {
-            _time = TimeSpan.FromSeconds(time);
+            _duration = time;
         }
 
         public void Start()
         {
-            if (IsCoolingDown)
-            {
-                return;
-            }
-
-            IsCoolingDown = true;
-
-            _source = new CancellationTokenSource();
-
-            Task.Run(
-                async () =>
-                {
-                    try
-                    {
-                        await Task.Delay(_time, _source.Token);
-                    }
-                    catch (TaskCanceledException exception)
-                    {
-                        Debugger.LogError(exception.Message);
-                    }
-                });
-
-            IsCoolingDown = false;
+            _time = UnityEngine.Time.time + _duration;
         }
 
         public void Stop()
         {
-            if (_source != null && _source.IsCancellationRequested)
-            {
-                _source.Cancel();
-
-                IsCoolingDown = false;
-            }
+            _time = 0f;
         }
 
-        public bool IsCoolingDown { get; private set; }
+        public float RemainingTime => Mathf.Max(0f, _time - UnityEngine.Time.time);
+
+        public bool IsCoolingDown => UnityEngine.Time.time < _time;
     }
 }
