@@ -27,7 +27,7 @@ namespace Backend.Object.Character
             Animator.SetInteger(name, value);
         }
 
-        public void SetAnimationFloat(string name, int value)
+        public void SetAnimationFloat(string name, float value)
         {
             Animator.SetFloat(name, value);
         }

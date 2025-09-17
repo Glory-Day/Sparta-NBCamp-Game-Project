@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Ironcow.Synapse.BT;
 
-public partial class BehaviourTreeRunner : BTActionsBase
+public class BehaviourTreeRunner : BTActionsBase
 {
     [Header("Behaviour Tree Reference")]
     [SerializeField] private BTRunner runner;
