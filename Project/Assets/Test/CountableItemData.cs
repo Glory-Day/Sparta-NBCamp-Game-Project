@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Backend.Util.Data
+namespace Backend.Util.Data.Base
 {
     /// <summary> 셀 수 있는 아이템 데이터 </summary>
     public abstract class CountableItemData : ItemData
@@ -11,4 +11,3 @@ namespace Backend.Util.Data
         [SerializeField] private int _maxAmount = 99;
     }
 }
-

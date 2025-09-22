@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Data;
+using Backend.Util.Data.Base;
 using UnityEngine;
 
-namespace Backend.Util.Items
+namespace Backend.Util.Item.Base
 {
     /// <summary> 수량을 셀 수 있는 아이템 </summary>
-    [System.Serializable]
     public abstract class CountableItem : Item
     {
         public CountableItemData CountableData { get; private set; }
@@ -22,6 +21,7 @@ namespace Backend.Util.Items
 
         /// <summary> 개수가 없는지 여부 </summary>
         public bool IsEmpty => Amount <= 0;
+
 
         public CountableItem(CountableItemData data, int amount = 1) : base(data)
         {

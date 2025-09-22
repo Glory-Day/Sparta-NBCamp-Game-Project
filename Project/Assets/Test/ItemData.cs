@@ -1,11 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Items;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.UI;
 
-namespace Backend.Util.Data
+// 날짜 : 2021-03-07 PM 8:45:55
+// 작성자 : Rito
+
+namespace Backend.Util.Data.Base
 {
+    /*
+        [상속 구조]
+
+        ItemData(abstract)
+            - CountableItemData(abstract)
+                - PortionItemData
+            - EquipmentItemData(abstract)
+                - WeaponItemData
+                - ArmorItemData
+
+    */
+
     public abstract class ItemData : ScriptableObject
     {
         public int ID => _id;
@@ -21,6 +36,6 @@ namespace Backend.Util.Data
         [SerializeField] private GameObject _dropItemPrefab; // 바닥에 떨어질 때 생성할 프리팹
 
         /// <summary> 타입에 맞는 새로운 아이템 생성 </summary>
-        public abstract Items.Item CreateItem();
+        public abstract Item.Base.Item CreateItem();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,13 @@ namespace Backend.Object.UI
 {
     public class ItemSlotUI : MonoBehaviour
     {
+        /***********************************************************************
+        *                               Option Fields
+        ***********************************************************************/
+        #region .
+        [Tooltip("슬롯 내에서 아이콘과 슬롯 사이의 여백")]
+        [SerializeField] private float _padding = 1f;
+
         [Tooltip("아이템 아이콘 이미지")]
         [SerializeField] private Image _iconImage;
 
@@ -17,6 +25,9 @@ namespace Backend.Object.UI
         [Tooltip("슬롯이 포커스될 때 나타나는 하이라이트 이미지")]
         [SerializeField] private Image _highlightImage;
 
+        [Tooltip("장착 여부 텍스트")]
+        [SerializeField] private TextMeshProUGUI _equipmentText;
+
         [Space]
         [Tooltip("하이라이트 이미지 알파 값")]
         [SerializeField] private float _highlightAlpha = 0.5f;
@@ -24,7 +35,11 @@ namespace Backend.Object.UI
         [Tooltip("하이라이트 소요 시간")]
         [SerializeField] private float _highlightFadeDuration = 0.2f;
 
-
+        #endregion
+        /***********************************************************************
+        *                               Properties
+        ***********************************************************************/
+        #region .
         /// <summary> 슬롯의 인덱스 </summary>
         public int Index { get; private set; }
 
@@ -37,7 +52,11 @@ namespace Backend.Object.UI
         public RectTransform SlotRect => _slotRect;
         public RectTransform IconRect => _iconRect;
 
-
+        #endregion
+        /***********************************************************************
+        *                               Fields
+        ***********************************************************************/
+        #region .
         private InventoryUI _inventoryUI;
 
         private RectTransform _slotRect;
@@ -47,6 +66,7 @@ namespace Backend.Object.UI
         private GameObject _iconGo;
         private GameObject _textGo;
         private GameObject _highlightGo;
+        private GameObject _equipTextGo;
 
         private Image _slotImage;
 
@@ -60,11 +80,82 @@ namespace Backend.Object.UI
         private static readonly Color InaccessibleSlotColor = new Color(0.2f, 0.2f, 0.2f, 0.5f);
         /// <summary> 비활성화된 아이콘 색상 </summary>
         private static readonly Color InaccessibleIconColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+
+        #endregion
+        /***********************************************************************
+        *                               Unity Events
+        ***********************************************************************/
+        #region .
+        private void Awake()
+        {
+            InitComponents();
+            InitValues();
+        }
+
+        #endregion
+        /***********************************************************************
+        *                               Private Methods
+        ***********************************************************************/
+        #region .
+        private void InitComponents()
+        {
+            _inventoryUI = GetComponentInParent<InventoryUI>();
+
+            // Rects
+            _slotRect = GetComponent<RectTransform>();
+            _iconRect = _iconImage.rectTransform;
+            _highlightRect = _highlightImage.rectTransform;
+
+            // Game Objects
+            _iconGo = _iconRect.gameObject;
+            _textGo = _amountText.gameObject;
+            _highlightGo = _highlightImage.gameObject;
+            _equipTextGo = _equipmentText.gameObject;
+
+            // Images
+            _slotImage = GetComponent<Image>();
+        }
+        private void InitValues()
+        {
+            // 1. Item Icon, Highlight Rect
+            _iconRect.pivot = new Vector2(0.5f, 0.5f); // 피벗은 중앙
+            _iconRect.anchorMin = Vector2.zero;        // 앵커는 Top Left
+            _iconRect.anchorMax = Vector2.one;
+
+            // 패딩 조절
+            _iconRect.offsetMin = Vector2.one * (_padding);
+            _iconRect.offsetMax = Vector2.one * (-_padding);
+
+            // 아이콘과 하이라이트 크기가 동일하도록
+            _highlightRect.pivot = _iconRect.pivot;
+            _highlightRect.anchorMin = _iconRect.anchorMin;
+            _highlightRect.anchorMax = _iconRect.anchorMax;
+            _highlightRect.offsetMin = _iconRect.offsetMin;
+            _highlightRect.offsetMax = _iconRect.offsetMax;
+
+            // 2. Image
+            _iconImage.raycastTarget = false;
+            _highlightImage.raycastTarget = false;
+
+            // 3. Deactivate Icon
+            HideIcon();
+            HideEquipText();
+            _highlightGo.SetActive(false);
+        }
+
         private void ShowIcon() => _iconGo.SetActive(true);
         private void HideIcon() => _iconGo.SetActive(false);
 
         private void ShowText() => _textGo.SetActive(true);
         private void HideText() => _textGo.SetActive(false);
+        private void ShowEquipText() => _equipTextGo.SetActive(true);
+        private void HideEquipText() => _equipTextGo.SetActive(false);
+
+        #endregion
+        /***********************************************************************
+        *                               Public Methods
+        ***********************************************************************/
+        #region .
 
         public void SetSlotIndex(int index) => Index = index;
 
@@ -84,6 +175,7 @@ namespace Backend.Object.UI
                 _slotImage.color = InaccessibleSlotColor;
                 HideIcon();
                 HideText();
+                HideEquipText();
             }
 
             _isAccessibleSlot = value;
@@ -92,6 +184,7 @@ namespace Backend.Object.UI
         /// <summary> 아이템 활성화/비활성화 여부 설정 </summary>
         public void SetItemAccessibleState(bool value)
         {
+            // 중복 처리는 지양
             if (_isAccessibleItem == value)
                 return;
 
@@ -137,6 +230,8 @@ namespace Backend.Object.UI
         /// <summary> 슬롯에 아이템 등록 </summary>
         public void SetItem(Sprite itemSprite)
         {
+            //if (!this.IsAccessible) return;
+
             if (itemSprite != null)
             {
                 _iconImage.sprite = itemSprite;
@@ -154,6 +249,7 @@ namespace Backend.Object.UI
             _iconImage.sprite = null;
             HideIcon();
             HideText();
+            HideEquipText();
         }
 
         /// <summary> 아이템 이미지 투명도 설정 </summary>
@@ -167,6 +263,8 @@ namespace Backend.Object.UI
         /// <summary> 아이템 개수 텍스트 설정(amount가 1 이하일 경우 텍스트 미표시) </summary>
         public void SetItemAmount(int amount)
         {
+            //if (!this.IsAccessible) return;
+
             if (HasItem && amount > 1)
                 ShowText();
             else
@@ -175,5 +273,89 @@ namespace Backend.Object.UI
             _amountText.text = amount.ToString();
         }
 
+        public void SetEquipment(bool equip)
+        {
+            print(equip);
+            //테스트중
+            if (equip)
+            {
+                ShowEquipText();
+            }
+            else
+            {
+                HideEquipText();
+            }
+        }
+
+        /// <summary> 슬롯에 하이라이트 표시/해제 </summary>
+        public void Highlight(bool show)
+        {
+            if (!this.IsAccessible)
+                return;
+
+            if (show)
+                StartCoroutine(nameof(HighlightFadeInRoutine));
+            else
+                StartCoroutine(nameof(HighlightFadeOutRoutine));
+        }
+
+        /// <summary> 하이라이트 이미지를 아이콘 이미지의 상단/하단으로 표시 </summary>
+        public void SetHighlightOnTop(bool value)
+        {
+            if (value)
+                _highlightRect.SetAsLastSibling();
+            else
+                _highlightRect.SetAsFirstSibling();
+        }
+
+        #endregion
+        /***********************************************************************
+        *                               Coroutines
+        ***********************************************************************/
+        #region .
+        /// <summary> 하이라이트 알파값 서서히 증가 </summary>
+        private IEnumerator HighlightFadeInRoutine()
+        {
+            StopCoroutine(nameof(HighlightFadeOutRoutine));
+            _highlightGo.SetActive(true);
+
+            float unit = _highlightAlpha / _highlightFadeDuration;
+
+            for (; _currentHLAlpha <= _highlightAlpha; _currentHLAlpha += unit * Time.deltaTime)
+            {
+                _highlightImage.color = new Color(
+                    _highlightImage.color.r,
+                    _highlightImage.color.g,
+                    _highlightImage.color.b,
+                    _currentHLAlpha
+                );
+
+                yield return null;
+            }
+        }
+
+        /// <summary> 하이라이트 알파값 0%까지 서서히 감소 </summary>
+        private IEnumerator HighlightFadeOutRoutine()
+        {
+            StopCoroutine(nameof(HighlightFadeInRoutine));
+
+            float unit = _highlightAlpha / _highlightFadeDuration;
+
+            for (; _currentHLAlpha >= 0f; _currentHLAlpha -= unit * Time.deltaTime)
+            {
+                _highlightImage.color = new Color(
+                    _highlightImage.color.r,
+                    _highlightImage.color.g,
+                    _highlightImage.color.b,
+                    _currentHLAlpha
+                );
+
+                yield return null;
+            }
+
+            _highlightGo.SetActive(false);
+        }
+
+        #endregion
     }
 }

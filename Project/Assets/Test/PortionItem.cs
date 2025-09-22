@@ -1,16 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Backend.Util.Data;
+using Backend.Util.Item.Base;
 using UnityEngine;
 
-namespace Backend.Util.Items
+namespace Backend.Util.Item
 {
-    interface IUsableItem
-    {
-        // 아이템 사용 : 성공 여부 리턴
-        bool Use();
-    }
-
     /// <summary> 수량 아이템 - 포션 아이템 </summary>
     [System.Serializable]
     public class PortionItem : CountableItem, IUsableItem

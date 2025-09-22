@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Items;
+using Backend.Util.Data.Base;
+using Backend.Util.Item;
 using UnityEngine;
-using static UnityEditor.Progress;
+
+// 날짜 : 2021-03-28 PM 10:42:48
+// 작성자 : Rito
 
 namespace Backend.Util.Data
 {
@@ -13,7 +17,7 @@ namespace Backend.Util.Data
         /// <summary> 효과량(회복량 등) </summary>
         public float Value => _value;
         [SerializeField] private float _value;
-        public override Items.Item CreateItem()
+        public override Item.Base.Item CreateItem()
         {
             return new PortionItem(this);
         }
