@@ -10,7 +10,6 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
     public abstract class BossSkillBase : MonoBehaviour
     {
         [field: SerializeField] public ActionBossData SkillData { get; protected set; }
-        [field: SerializeField] protected BossAttackHitBox _hitbox;
 
         [field: SerializeField] protected GameObject projectilePrefab;
         [field: SerializeField] protected Transform[] projectileTransform;
@@ -41,14 +40,6 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
         private void OnDestroy()
         {
             OnSkillEnd = null;
-        }
-
-        private void Awake()
-        {
-            if (_hitbox == null)
-            {
-                _hitbox = GetComponentInChildren<BossAttackHitBox>();
-            }
         }
     }
 }

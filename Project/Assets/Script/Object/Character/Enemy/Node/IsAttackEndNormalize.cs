@@ -25,17 +25,17 @@ namespace Backend.Object.Character.Enemy.Node
                 return State.Running;
             }
 
-            //if(agent.AnimationController.GetCurrentNameHash(0) == blackboard.currentAnimationHash)
-            //{
-            //    if(agent.AnimationController.GetAnimationNormalize(0) >= TransitionPoint && agent.AnimationController.GetAnimationNormalize(0) < 1.0f)
-            //    {
-            //        return State.Success;
-            //    }
-            //    else if(agent.AnimationController.GetAnimationNormalize(0) >= 1.0f)
-            //    {
-            //        return State.Success;
-            //    }
-            //}
+            if (agent.AnimationController.GetCurrentNameHash(0) == blackboard.currentAnimationHash)
+            {
+                if (agent.AnimationController.GetAnimationNormalize(0) >= TransitionPoint && agent.AnimationController.GetAnimationNormalize(0) < 1.0f)
+                {
+                    return State.Success;
+                }
+                else if (agent.AnimationController.GetAnimationNormalize(0) >= 1.0f)
+                {
+                    return State.Success;
+                }
+            }
             return State.Running;
         }
     }

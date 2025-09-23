@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Backend.Util.Debug;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Backend.Object.Character.Enemy.Boss
+namespace Backend.Object.Character.Enemy
 {
     public class EnemyMovementController : MovementController
     {
@@ -91,11 +87,6 @@ namespace Backend.Object.Character.Enemy.Boss
             return (targetPos - originPos).normalized;
         }
 
-        public void UseGravity(bool enable)
-        {
-            Rigidbody.useGravity = enable;
-        }
-
         public bool IsFaceToPlayer()
         {
             Vector3 dir = GetDirection();
@@ -108,43 +99,5 @@ namespace Backend.Object.Character.Enemy.Boss
             }
             return false;
         }
-
-        //public bool IsStrafing()
-        //{
-        //    return _strafeCoroutine != null;
-        //}
-
-        //public void StartStrafe()
-        //{
-        //    if (IsStrafing())
-        //    {
-        //        return;
-        //    }
-        //    _strafeCoroutine = StartCoroutine(Strafe());
-        //}
-
-        //public IEnumerator Strafe()
-        //{
-        //    float duration = Random.Range(1.0f, 2.5f);
-        //    float direction = (Random.value > 0.5f) ? 1.0f : -1.0f;
-
-        //    float time = 0f;
-
-        //    while (time < duration)
-        //    {
-        //        SetLerpRotation();
-
-        //        Vector3 moveDirection = transform.right * direction;
-        //        Vector3 targetPosition = Rigidbody.position + (StrafeSpeed * Time.deltaTime * moveDirection);
-
-        //        Rigidbody.MovePosition(targetPosition);
-
-        //        time += Time.deltaTime;
-        //        yield return null;
-        //    }
-
-        //    Debugger.LogProgress("스트레이프 코루틴 실행됨");
-        //    _strafeCoroutine = null;
-        //}
     }
 }

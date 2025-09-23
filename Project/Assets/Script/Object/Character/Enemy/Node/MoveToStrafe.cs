@@ -1,10 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Node
 {
     public class MoveToStrafe : ActionNode
     {
         public float StrafeSpeed;
+        public float ForwardBackwardSpeed = 1.0f;
+        public float MaxDistance;
+        public float MinDistance;
+
         private float _duration;
         private float _direction;
         private float _timer;
@@ -19,10 +23,27 @@ namespace Backend.Object.Character.Enemy.Node
                 return State.Success;
             }
 
+            agent.MovementController.SetRotation();
+
             Vector3 movement = _direction * StrafeSpeed * Time.deltaTime * agent.MovementController.transform.right;
 
-            agent.MovementController.transform.position += movement;
-            agent.MovementController.SetRotation();
+            Vector3 forwardBackwardMovement = Vector3.zero;
+            if (agent.MovementController.Target != null)
+            {
+                Transform target = agent.MovementController.Target.transform;
+                float distanceToTarget = agent.MovementController.Distance;
+
+                if (distanceToTarget > MaxDistance)
+                {
+                    forwardBackwardMovement = ForwardBackwardSpeed * Time.deltaTime * agent.MovementController.transform.forward;
+                }
+                else
+                {
+                    forwardBackwardMovement = -ForwardBackwardSpeed * Time.deltaTime * agent.MovementController.transform.forward;
+                }
+            }
+
+            agent.MovementController.transform.position += movement + forwardBackwardMovement;
 
             _timer += Time.deltaTime;
 
@@ -41,7 +62,7 @@ namespace Backend.Object.Character.Enemy.Node
             {
                 agent.AnimationController.SetCrossFadeInFixedTime(_animStrafeLeft, 0.1f);
             }
-            
+
             _timer = 0f;
         }
         protected override void Stop()

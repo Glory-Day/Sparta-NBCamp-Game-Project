@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Backend.Object.Character.Enemy;
 using UnityEditor;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ public class BehaviourTree : ScriptableObject
         }
         Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
         AssetDatabase.SaveAssets();
-        
+
         return node;
     }
 
@@ -69,7 +70,7 @@ public class BehaviourTree : ScriptableObject
         {
             return;
         }
-        
+
         Undo.RecordObject(composite, "Behaviour Tree (AddChild)");
         composite.Children.Add(child);
         EditorUtility.SetDirty(composite);
@@ -144,7 +145,7 @@ public class BehaviourTree : ScriptableObject
         return tree;
     }
 
-    public void Bind(BossComponent agent)
+    public void Bind(EnemyComponent agent)
     {
         Traverse(RootNode, node =>
         {

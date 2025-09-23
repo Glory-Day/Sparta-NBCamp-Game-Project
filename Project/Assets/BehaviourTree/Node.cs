@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Backend.Object.Character.Enemy;
 using UnityEngine;
 
 public abstract class Node : ScriptableObject
@@ -17,7 +16,7 @@ public abstract class Node : ScriptableObject
     [HideInInspector] public Vector2 Position;
     [HideInInspector] public Blackboard blackboard;
     [HideInInspector] public BehaviourTree tree;
-    [HideInInspector] public BossComponent agent;
+    [HideInInspector] public EnemyComponent agent;
     [TextArea] public string description;
 
     public State Update()
@@ -46,7 +45,8 @@ public abstract class Node : ScriptableObject
 
     public void Abort()
     {
-        tree.Traverse(this, (node) => {
+        tree.Traverse(this, (node) =>
+        {
             node.Started = false;
             node.mState = State.Running;
             node.Stop();
@@ -54,8 +54,8 @@ public abstract class Node : ScriptableObject
     }
 
     protected abstract void Start();
-    
+
     protected abstract void Stop();
-    
+
     protected abstract State OnUpdate();
 }
