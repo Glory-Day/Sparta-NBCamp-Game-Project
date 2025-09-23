@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 [System.Serializable]
 public class Blackboard
 {
     public float attackTimeCounter = 0f;
+
 
     public bool isHit = false;
 
@@ -14,4 +15,6 @@ public class Blackboard
     public float currentAnimationDuration = 0f;
 
     public Vector3 moveDestination = Vector3.zero;
+
+    public RangeCheck RangeCheck = RangeCheck.None; // 현재 체크한 공격 범위 
 }

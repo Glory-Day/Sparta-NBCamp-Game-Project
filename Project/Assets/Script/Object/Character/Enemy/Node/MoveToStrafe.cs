@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Node
 {
@@ -41,6 +41,7 @@ namespace Backend.Object.Character.Enemy.Node
             {
                 agent.AnimationController.SetCrossFadeInFixedTime(_animStrafeLeft, 0.1f);
             }
+            
             _timer = 0f;
         }
         protected override void Stop()

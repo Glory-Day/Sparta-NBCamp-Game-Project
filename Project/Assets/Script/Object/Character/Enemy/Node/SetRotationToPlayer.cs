@@ -1,4 +1,4 @@
-﻿namespace Backend.Object.Character.Enemy.Node
+namespace Backend.Object.Character.Enemy.Node
 {
     public class SetRotationToPlayer : ActionNode
     {
