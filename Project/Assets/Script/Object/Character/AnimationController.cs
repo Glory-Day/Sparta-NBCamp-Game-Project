@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Backend.Object.Character
 {
@@ -17,9 +17,14 @@ namespace Backend.Object.Character
             Animator.SetTrigger(value);
         }
 
-        public void SetAnimationBoolean(string name, bool value)
+        public void SetAnimationBoolean(int name, bool value)
         {
             Animator.SetBool(name, value);
+        }
+
+        public void SetCrossFadeInFixedTime(int name, float value)
+        {
+            Animator.CrossFadeInFixedTime(name, value);
         }
 
         public void SetAnimationInteger(string name, int value)
