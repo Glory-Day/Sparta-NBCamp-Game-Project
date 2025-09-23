@@ -1,4 +1,4 @@
-﻿using Backend.Util.Data.ActionDatas;
+using Backend.Util.Data.ActionDatas;
 
 namespace Backend.Object.Character.Enemy.Node
 {
@@ -7,9 +7,11 @@ namespace Backend.Object.Character.Enemy.Node
         public float minDistance = 0f;
         public float maxDistance = 5f;
 
+
         // RangeCheck 열거형을 사용할지 여부에 대한 변수
         public bool useRangeCheck = false;
         public RangeCheck rangeCheck = RangeCheck.None;
+
         protected override void Start()
         {
         }
@@ -18,8 +20,6 @@ namespace Backend.Object.Character.Enemy.Node
         }
         protected override State OnUpdate()
         {
-
-
             float distance = agent.MovementController.Distance; // 플레이어와의 거리 계산
 
             if (useRangeCheck)

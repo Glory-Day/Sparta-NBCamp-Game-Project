@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Node
 {
-    public class EnemyAttack : ActionNode
+    public class EnemyAttackNormalize : ActionNode
     {
         [Tooltip("For attack array in enemy combat controller")]
         public int AttackNum;
@@ -18,7 +18,6 @@ namespace Backend.Object.Character.Enemy.Node
             {
                 combat = agent.CombatController;
             }
-            blackboard.attackTimeCounter = 0f;
         }
         protected override void Stop()
         {
@@ -39,15 +38,11 @@ namespace Backend.Object.Character.Enemy.Node
             int SkillName = Animator.StringToHash(attack.ID);
             agent.AnimationController.SetCrossFadeInFixedTime(SkillName, 0.1f); // 공격 애니메이션 재생
 
-            Debug.Log($"Enemy Attack: {attack.ID}");
-            
-            //넉백 처리
-            //if (attack.force > 1)
-            //{
-            //    agent.forceReceiver.AddForce();
-            //}
+            blackboard.currentAnimationHash = SkillName;
 
-            blackboard.attackTimeCounter += Time.deltaTime;
+            float animLength = agent.AnimationController.GetAnimationClipLength(SkillName);
+            blackboard.currentAnimationDuration = animLength;
+
             return State.Success;
         }
     }

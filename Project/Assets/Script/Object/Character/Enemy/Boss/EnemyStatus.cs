@@ -8,6 +8,6 @@ namespace Backend.Object.Character.Enemy.Boss
 {
     public class EnemyStatus : Status
     {
-        [field: SerializeField] public StatusBossData BossStatus { get; private set; }
+        [field:SerializeField] public StatusBossData BossStatus { get; private set; }
     }
 }

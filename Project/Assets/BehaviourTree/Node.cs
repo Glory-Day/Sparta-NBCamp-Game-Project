@@ -54,8 +54,8 @@ public abstract class Node : ScriptableObject
     }
 
     protected abstract void Start();
-
+    
     protected abstract void Stop();
-
+    
     protected abstract State OnUpdate();
 }
