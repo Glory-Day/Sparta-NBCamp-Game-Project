@@ -1,0 +1,33 @@
+﻿using Backend.Object.Character;
+using Backend.Object.Character.Enemy;
+using Backend.Object.Character.Enemy.Boss;
+using UnityEngine;
+
+public class BehaviourTreeRunner : MonoBehaviour
+{
+    public BehaviourTree Tree;
+    public bool stop;
+
+    private void Awake()
+    {
+        var component = new BossComponent()
+        {
+            Status = GetComponent<EnemyStatus>(),
+            AnimationController = GetComponent<EnemyAnimationController>(),
+            MovementController = GetComponent<EnemyMovementController>(),
+            CombatController = GetComponent<EnemyCombatController>()
+        };
+        Tree = Tree.Clone();
+        Tree.Bind(component);
+    }
+
+    private void Update()
+    {
+        if (stop)
+        {
+            return;
+        }
+        Tree.Update();
+    }
+}
+
