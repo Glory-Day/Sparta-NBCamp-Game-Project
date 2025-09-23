@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Character.Enemy.Boss;
 using UnityEngine;
 

@@ -1,4 +1,5 @@
 ﻿using Backend.Object.Character;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Character.Enemy.Boss;
 using UnityEngine;
 

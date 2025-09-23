@@ -14,5 +14,7 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
                 ObjectPoolManager.SpawnPoolObject(projectilePrefab, projectileTransform.position, projectileTransform.rotation, projectileTransform);
             }
         }
+
+        protected override IEnumerator ExecuteSkillLogic(EnemyAnimationController animController, ActionBossData data) => throw new System.NotImplementedException();
     }
 }

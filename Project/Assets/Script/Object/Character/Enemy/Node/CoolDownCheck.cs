@@ -10,14 +10,14 @@ namespace Backend.Object.Character.Enemy.Node
         {
             if (agent.CombatController.ActionData != null)
             {
-                if (agent.CombatController.ActionCoolTimer[agent.CombatController.ActionData.ID].IsCoolingDown)
-                {
-                    return State.Failure;
-                }
-                else
-                {
-                    return State.Success;
-                }
+                //if (agent.CombatController.ActionCoolTimer[agent.CombatController.ActionData.ID].IsCoolingDown)
+                //{
+                //    return State.Failure;
+                //}
+                //else
+                //{
+                //    return State.Success;
+                //}
             }
 
             return State.Failure;
