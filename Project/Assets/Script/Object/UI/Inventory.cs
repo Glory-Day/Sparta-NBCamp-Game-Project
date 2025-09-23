@@ -13,8 +13,8 @@ using UnityEngine;
         - CountableItem
             - PortionItem : IUsableItem.Use() -> 사용 및 수량 1 소모
         - EquipmentItem
-            - WeaponItem
-            - ArmorItem
+            - WeaponItem : IUsableItem.Use() -> 착용 및 해제
+            - ArmorItem : IUsableItem.Use() -> 착용 및 해제
 
     [ItemData의 상속구조]
       (ItemData는 해당 아이템이 공통으로 가질 데이터 필드 모음)
@@ -58,6 +58,9 @@ using UnityEngine;
 
 namespace Backend.Object.UI
 {
+    /// <summary>
+    /// 캐릭터가 소유한 인벤토리 클래스
+    /// </summary>
     public class Inventory : MonoBehaviour
     {
         /***********************************************************************
@@ -94,6 +97,7 @@ namespace Backend.Object.UI
         /// <summary> 업데이트 할 인덱스 목록 </summary>
         private readonly HashSet<int> _indexSetForUpdate = new HashSet<int>();
 
+        // 아이템 장착 여부 및 슬롯 번호
         private bool _isArmorEquip = false;
         private bool _isWeaponEquip = false;
         private int _currentArmorEquip;
@@ -556,6 +560,12 @@ namespace Backend.Object.UI
             }
         }
 
+
+        /// <summary>
+        /// 아이템 타입의 따른 장착 여부 확인 및 착용/해제
+        /// </summary>
+        /// <param name="index">착용/해제 할 아이템 슬롯 번호</param>
+        /// <param name="uItem">해당 아이템</param>
         private void EquipCheck(int index, IUsableItem uItem)
         {
             if (_isArmorEquip && _currentArmorEquip != index && uItem is ArmorItem)

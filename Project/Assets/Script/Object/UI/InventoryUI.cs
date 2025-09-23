@@ -587,7 +587,11 @@ namespace Backend.Object.UI
             _slotUIList[index].SetItemAmount(1);
         }
 
-        /// <summary> 해당 슬롯의 아이템 장착 여부 텍스트 지정 </summary>
+        /// <summary>
+        ///해당 슬롯의 아이템 장착 여부 텍스트 지정
+        /// </summary>
+        /// <param name="index">슬롯 번호</param>
+        /// <param name="equip">장착 여부</param>
         public void SetEquipmentText(int index, bool equip)
         {
             //테스트중
