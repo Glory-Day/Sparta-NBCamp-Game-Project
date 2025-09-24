@@ -25,8 +25,13 @@ namespace Backend.Util.Editor
             component.isOffset = EditorGUILayout.Toggle("Is Offset", component.isOffset);
 
             DrawRaycastArrayPreview(component);
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(component);
+            }
         }
-        
+
         private void DrawRaycastArrayPreview(MovementController component)
         {
             if (component.mode != Sensor.CastMethodMode.MultipleRay)
@@ -46,7 +51,7 @@ namespace Backend.Util.Editor
             var width = space.height;
             var height = space.height;
             Rect background = new (x, y, width, height);
-            EditorGUI.DrawRect(background, Color.grey);
+            EditorGUI.DrawRect(background, GUI.skin.settings.selectionColor);
 
             var positions = component.multipleRayPositions;
             var center = new Vector2(background.x + (background.width / 2f), background.y + (background.height / 2f));
