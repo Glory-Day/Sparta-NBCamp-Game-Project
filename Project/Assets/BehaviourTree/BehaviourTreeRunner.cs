@@ -1,4 +1,5 @@
 ﻿using Backend.Object.Character;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Character.Enemy.Boss;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class BehaviourTreeRunner : MonoBehaviour
 
     private void Awake()
     {
-        var component = new BossComponent()
+        var component = new EnemyComponent()
         {
             Status = GetComponent<EnemyStatus>(),
             AnimationController = GetComponent<EnemyAnimationController>(),

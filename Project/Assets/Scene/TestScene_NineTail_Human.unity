@@ -1496,8 +1496,8 @@ GameObject:
   m_Component:
   - component: {fileID: 962320190}
   - component: {fileID: 962320195}
-  - component: {fileID: 962320194}
-  - component: {fileID: 962320193}
+  - component: {fileID: 962320197}
+  - component: {fileID: 962320196}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
@@ -1521,34 +1521,6 @@ Transform:
   - {fileID: 251091243}
   m_Father: {fileID: 845736403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &962320193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962320189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344e0ecf18fb58a48b5324a03c78ef6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &962320194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962320189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22059b40b56958e4eac10dc193f6c920, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackDamage: 0
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!136 &962320195
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1572,6 +1544,34 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &962320196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962320189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb5230927b93e84185192a5635ef8ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &962320197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962320189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ed7607bb7bff141b87f165cc6509b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackDamage: 0
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1105478361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,10 +1691,10 @@ GameObject:
   - component: {fileID: 1187285152}
   - component: {fileID: 1187285151}
   - component: {fileID: 1187285153}
+  - component: {fileID: 1187285157}
+  - component: {fileID: 1187285156}
   - component: {fileID: 1187285155}
   - component: {fileID: 1187285154}
-  - component: {fileID: 1187285156}
-  - component: {fileID: 1187285157}
   m_Layer: 0
   m_Name: NineTail_Human
   m_TagString: Untagged
@@ -1801,7 +1801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598e3a02052f41a4dac756ac497cd8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tree: {fileID: 11400000, guid: 01b1ec1354beb6b4988e889340899221, type: 2}
+  Tree: {fileID: 11400000, guid: 9d7a9f7e4c1cc0347a7f9b5071a5f130, type: 2}
   stop: 0
 --- !u!114 &1187285154
 MonoBehaviour:
@@ -1829,10 +1829,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187285148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ebaf8234b5afd345b65047bb93322f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 91c71caa9a0243d4191fa395bf909db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <BossStatus>k__BackingField: {fileID: 11400000, guid: f806a8fac0486a544b7484d20ef46dae, type: 2}
 --- !u!114 &1187285156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,9 +1841,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187285148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465eeb6b1bb53b5429fa40fc23ba2d8d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e885a1fa26ec4646a8567bd78372dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BossStatus>k__BackingField: {fileID: 0}
 --- !u!114 &1187285157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1854,22 +1854,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1187285148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9992a6c965ed7249a56ee7c852d2dac, type: 3}
+  m_Script: {fileID: 11500000, guid: deefe09bc373fb34fa5ebb1f31154b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <ActionDatas>k__BackingField:
-  - {fileID: 11400000, guid: e112aa2524814d2419073d03a26c8027, type: 2}
+  - {fileID: 11400000, guid: fb27cb9ea7576454fb5c5cf48bd63dcb, type: 2}
+  - {fileID: 11400000, guid: 7dbafa8c6889dbb4c976dccaa6cdbb6d, type: 2}
+  - {fileID: 11400000, guid: d5bb41f5254462e469ad46cffbd39987, type: 2}
   - {fileID: 11400000, guid: 55400f95b8b5089498cacbfc6378001a, type: 2}
   - {fileID: 11400000, guid: 011e3d65559073445b506430b356cac2, type: 2}
   - {fileID: 11400000, guid: 33de81f378503de47b89d9be088d2fdc, type: 2}
   - {fileID: 11400000, guid: 9a7aef805c54f354c8936c2ec3f8e992, type: 2}
   - {fileID: 11400000, guid: b2c8a4acdad93e3459277ce03097d1c7, type: 2}
   - {fileID: 11400000, guid: dae9d90675c94cd43bef2c5717132689, type: 2}
-  - {fileID: 11400000, guid: 7dbafa8c6889dbb4c976dccaa6cdbb6d, type: 2}
-  - {fileID: 11400000, guid: d5bb41f5254462e469ad46cffbd39987, type: 2}
-  - {fileID: 11400000, guid: dae9d90675c94cd43bef2c5717132689, type: 2}
   <ActionData>k__BackingField: {fileID: 0}
-  _weapon: {fileID: 962320193}
+  _weapon: {fileID: 962320196}
   _weapons: []
 --- !u!1 &1712069637
 GameObject:

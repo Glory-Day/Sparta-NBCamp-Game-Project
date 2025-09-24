@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Backend.Util.Debug;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Backend.Object.Character.Enemy.Boss
+namespace Backend.Object.Character.Enemy
 {
     public class EnemyMovementController : MovementController
     {
@@ -36,6 +32,12 @@ namespace Backend.Object.Character.Enemy.Boss
             transform.position += speedFactor * speed * Time.deltaTime * transform.forward;
         }
 
+        public void MoveToTarget(Vector3 originPos, Vector3 targetPos, float speed)
+        {
+            Vector3 dir = GetDirection(originPos, targetPos);
+            transform.position += speed * Time.deltaTime * dir;
+        }
+
         private float GetDistance()
         {
             float distance = Vector3.Distance(transform.position, Target.transform.position);
@@ -64,14 +66,25 @@ namespace Backend.Object.Character.Enemy.Boss
             }
         }
 
+        public void SetLerpRotation(Vector3 originPos, Vector3 targetPos, float speed)
+        {
+            Vector3 dir = GetDirection(originPos, targetPos);
+            dir.y = 0f;
+            if (dir != Vector3.zero)
+            {
+                Quaternion targetRot = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, speed * Time.deltaTime);
+            }
+        }
+
         public Vector3 GetDirection()
         {
             return (Target.transform.position - transform.position).normalized;
         }
 
-        public void UseGravity(bool enable)
+        public Vector3 GetDirection(Vector3 originPos, Vector3 targetPos)
         {
-            Rigidbody.useGravity = enable;
+            return (targetPos - originPos).normalized;
         }
 
         public bool IsFaceToPlayer()
@@ -86,43 +99,5 @@ namespace Backend.Object.Character.Enemy.Boss
             }
             return false;
         }
-
-        //public bool IsStrafing()
-        //{
-        //    return _strafeCoroutine != null;
-        //}
-
-        //public void StartStrafe()
-        //{
-        //    if (IsStrafing())
-        //    {
-        //        return;
-        //    }
-        //    _strafeCoroutine = StartCoroutine(Strafe());
-        //}
-
-        //public IEnumerator Strafe()
-        //{
-        //    float duration = Random.Range(1.0f, 2.5f);
-        //    float direction = (Random.value > 0.5f) ? 1.0f : -1.0f;
-
-        //    float time = 0f;
-
-        //    while (time < duration)
-        //    {
-        //        SetLerpRotation();
-
-        //        Vector3 moveDirection = transform.right * direction;
-        //        Vector3 targetPosition = Rigidbody.position + (StrafeSpeed * Time.deltaTime * moveDirection);
-
-        //        Rigidbody.MovePosition(targetPosition);
-
-        //        time += Time.deltaTime;
-        //        yield return null;
-        //    }
-
-        //    Debugger.LogProgress("스트레이프 코루틴 실행됨");
-        //    _strafeCoroutine = null;
-        //}
     }
 }

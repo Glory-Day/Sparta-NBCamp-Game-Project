@@ -16,7 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: "\uB3CC\uC9C4\uCC0C\uB974\uAE30"
   <Damage>k__BackingField: 1.2
   <ActionSound>k__BackingField: {fileID: 0}
-  <ActionRange>k__BackingField: 1
+  <ActionRange>k__BackingField: 0
   <IsParryable>k__BackingField: 1
   <AttackWeight>k__BackingField: 0
   <CoolDown>k__BackingField: 15

@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Backend.Object.Character.Enemy.Boss
+namespace Backend.Object.Character.Enemy
 {
     public class EnemyAnimationController : AnimationController
     {
@@ -25,6 +25,12 @@ namespace Backend.Object.Character.Enemy.Boss
         {
             var information = Animator.GetNextAnimatorStateInfo(layer);
             return information.length;
+        }
+
+        public int GetCurrentNameHash(int layer)
+        {
+            var information = Animator.GetCurrentAnimatorStateInfo(layer);
+            return information.shortNameHash;
         }
 
         /// <summary>

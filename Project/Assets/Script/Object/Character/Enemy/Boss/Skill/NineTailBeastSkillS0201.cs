@@ -5,11 +5,13 @@ using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Boss.Skill
 {
-    public class NineTailBeastSkillS0201 : BossSkillBase
+    public  class NineTailBeastSkillS0201 : BossSkillBase
     {
         public void SpawnProjectile()
         {
             ObjectPoolManager.SpawnPoolObject(projectilePrefab, projectileTransform[0].position, projectileTransform[0].rotation, projectileTransform[0]);
         }
+
+        protected override IEnumerator ExecuteSkillLogic(EnemyAnimationController animController, ActionBossData data) => throw new System.NotImplementedException();
     }
 }

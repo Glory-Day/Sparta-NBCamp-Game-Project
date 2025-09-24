@@ -16,7 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: EnergyExplosion
   <Damage>k__BackingField: 3
   <ActionSound>k__BackingField: {fileID: 0}
-  <ActionRange>k__BackingField: 1
+  <ActionRange>k__BackingField: 0
   <IsParryable>k__BackingField: 0
   <AttackWeight>k__BackingField: 0
   <CoolDown>k__BackingField: 30

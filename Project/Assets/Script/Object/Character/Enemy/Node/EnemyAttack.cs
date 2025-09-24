@@ -1,5 +1,6 @@
 ﻿using Backend.Util.Data.ActionDatas;
 using UnityEngine;
+using Backend.Object.Character.Enemy;
 
 namespace Backend.Object.Character.Enemy.Node
 {

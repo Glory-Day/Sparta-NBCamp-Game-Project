@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace Backend.Util.Management
 {
+    /// <summary>
+    /// 리소스 기능을 관리 하는 클래스.
+    /// </summary>
     public class ResourceManager : Singleton<ResourceManager>
     {
         private ResourceManager()
@@ -15,26 +18,16 @@ namespace Backend.Util.Management
         }
 
         private Dictionary<string, UnityEngine.Object> _assets = new();
-        private List<string> _list = new();
         private List<Task> _tasks = new();
 
         private void LoadAssetsByLabelAsync_Internal(string label, string nextLabel)
         {
-            // 1. Label에 맞는 Asset 주소 목록을 _list로 가져오기
-            List<string> _list = AddressData.Groups[label].ToList<string>();
-            var set = AddressData.Groups[label].Intersect(AddressData.Groups[nextLabel]);   //둘다 가지고 있는거
-            List<string> set2 = AddressData.Groups[label].Except(set).ToList<string>();   // 둘중에 라벨만 가지고 있는것 언로드만 모임
-            List<string> set3 = AddressData.Groups[nextLabel].Except(set).ToList<string>();   //둘중에 넥스트 라벨만 가지고 있는것 로드할 것만 모임
+            // 1. 로드 된 에셋과 로드 할 에셋의 합집합 차집합을 구한다.
+            var set = AddressData.Groups[label].Intersect(AddressData.Groups[nextLabel]);   // 현재 로드된 에셋, 로드할 에셋의 합집합
+            List<string> set2 = AddressData.Groups[label].Except(set).ToList<string>();   // 로드할 에셋의 차집합  (label - nextLabel): 언로드 목록
+            List<string> set3 = AddressData.Groups[nextLabel].Except(set).ToList<string>();   // 로드 된 에셋의 차집합 (nextLabel - label): 로드 목록
 
-            string setstr = string.Join(",", set);
-            string setstr2 = string.Join(",", set2);
-            string setstr3 = string.Join(",", set3);
-
-            Debugger.LogMessage("공동 목록" + setstr);
-            Debugger.LogMessage("언로드 목록" + setstr2);
-            Debugger.LogMessage("로드 목록" + setstr3);
-
-            // 2. 에셋주소 목록에 포함이 안되어 있으면 UnLoad 한다.
+            // 2. 언로드 목록에 포함이 되어 있으면 언로드 한다.
             for (int i = set2.Count - 1; i >= 0; i--)
             {
                 try
@@ -47,13 +40,13 @@ namespace Backend.Util.Management
                 }
             }
 
-            // 3. 로드목록을 순회하며 비동기 Load 후 _assets에 추가
+            // 3. 로드목록을 순회하며 비동기 로드 후 _assets에 추가
             for (int i = 0; i < set3.Count; i++)
             {
                 AsyncOperationHandle<UnityEngine.Object> handle = Addressables.LoadAssetAsync<UnityEngine.Object>(set3[i]);
 
-                Task task = SetTask(handle, set3[i]); //핸들 작업을 테스크로 바꾸기
-                _tasks.Add(task);   //리스트에 담기
+                Task task = SetTask(handle, set3[i]); //핸들 작업을 테스크로 보관
+                _tasks.Add(task);   //리스트에 추가
             }
         }
 
@@ -69,15 +62,8 @@ namespace Backend.Util.Management
             }
         }
 
-        // 진행률 셋팅 하는 함수
         private float GetProgress_Internal()
         {
-            // 진행률을 전달해야함. Task를 이용할 것
-            // 업데이트에서 돌리는 게 아님. 가능한가? 이게 async로 계속 반환 해줘야 하나?
-            // 그럼 async Task<float> 로 해야 하나?
-            // 여기서 for문을 돌리나? awit를 써서? 그럼 여기서 반환 되는 값은 하나 아닌가?
-
-            //이미 로딩이 다 되어있으면 바로 1 반환
             if (_tasks.Count == 0)
             {
                 return 1f;
@@ -96,7 +82,7 @@ namespace Backend.Util.Management
 
             // 로딩 완료된 갯수 / 총 갯수 를 나눠 반환 (퍼센트 구하는 공식)
             Debugger.LogMessage(((float)completed / _tasks.Count).ToString());
-            return ((float)completed / _tasks.Count);
+            return (float)completed / _tasks.Count;
         }
 
         private T GetAsset_Internal<T>(string key) where T : UnityEngine.Object
@@ -120,16 +106,31 @@ namespace Backend.Util.Management
             }
         }
 
+        /// <summary>
+        /// 로드 할 씬에 필요한 에셋을 로드 하는 함수.
+        /// </summary>
+        /// <param name="label">현재 로드 된 씬의 이름.</param>
+        /// <param name="nextLabel">로드 할 씬의 이름.</param>
         public static void LoadAssetsByLabelAsync(string label, string nextLabel)
         {
             Instance.LoadAssetsByLabelAsync_Internal(label, nextLabel);
         }
 
+        /// <summary>
+        /// 진행률 셋팅 하는 함수.
+        /// </summary>
+        /// <returns>얼마나 진행 되었는지를 백분율로 반환.</returns>
         public static float GetProgress()
         {
             return Instance.GetProgress_Internal();
         }
 
+        /// <summary>
+        /// 필요한 에셋을 지정한 타입으로 받아오기 위한 함수.
+        /// </summary>
+        /// <typeparam name="T">원하는 타입.</typeparam>
+        /// <param name="key">원하는 에셋의 주소.</param>
+        /// <returns>필요한 에셋을 지정한 타입으로 반환.</returns>
         public static T GetAsset<T>(string key) where T : UnityEngine.Object
         {
             return Instance.GetAsset_Internal<T>(key);

@@ -32,29 +32,3 @@ namespace Backend.Object.Character.Enemy.Node
         }
     }
 }
-
-//        // 쿨다운 확인 후 사용 가능한 스킬 리스트에 추가
-//        public eNodeState CoolDownCheck(DataContext context) //특수 스킬, 노말 스킬, 10, 20, 0, 0
-//        {
-//            if (_isSkillExecuting)
-//            {
-
-//                return eNodeState.failure;
-//            }
-
-//            foreach (string cool in _cooltimer.Keys)
-//            {
-//                if (!_cooltimer[cool].IsCoolingDown)
-//                {
-//                    _usableSkills.Add(_skillCache[cool]);
-//                }
-//            }
-//            if (_usableSkills.Count <= 0)
-//            {
-//                return eNodeState.failure;
-//            }
-//            else
-//            {
-//                return eNodeState.success;
-//            }
-//        }
