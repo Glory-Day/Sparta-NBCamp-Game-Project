@@ -26,8 +26,7 @@ namespace Backend.Util.Editor
 
             DrawRaycastArrayPreview(component);
         }
-
-        //Draw preview of raycast array in inspector;
+        
         private void DrawRaycastArrayPreview(MovementController component)
         {
             if (component.mode != Sensor.CastMethodMode.MultipleRay)
