@@ -5,6 +5,8 @@ namespace Backend.Object.Character.Player
 {
     public class CeilingDetector : MonoBehaviour
     {
+        #region SERIALIZABLE FIELD API
+
         [Header("Detection Settings")]
         [Tooltip("Angle limit for ceiling hits\n\n" +
                  "천장 충돌 각도 제한 값")]
@@ -25,6 +27,8 @@ namespace Backend.Object.Character.Player
         private const float Duration = 2.0f;
 
 #endif
+
+        #endregion
 
         private void OnCollisionEnter(Collision collision)
         {

@@ -7,44 +7,46 @@ namespace Backend.Object.Character.Player
     [RequireComponent(typeof(MovementController))]
     public class AdvancedActionController : MonoBehaviour
     {
+        #region SERIALIZABLE FIELD API
+
         [Header("Target Reference")]
         [Tooltip("Optional camera transform used for calculating movement direction. If assigned, character movement will take camera view into account.\n\n" +
                  "움직임 방향 계산에 사용되는 선택적 카메라 트렌스폼 레퍼런스. 할당된 경우 캐릭터 움직임이 카메라 시점을 고려한다.")]
         public Transform cameraTransform;
-        
+
         [Header("Physics Settings")]
         [Tooltip("Movement speed.\n\n" +
                  "이동 속도.")]
         public float movementSpeed = 7f;
-        
+
         [Tooltip("The speed at which a character descends a steep slope.\n\n" +
                  "캐릭터가 가파른 경사면을 내려갈 때의 속도.")]
         public float slidingSpeed = 5f;
-        
+
         [Tooltip("Acceptable slope angle limit.\n\n" +
                  "허용 가능한 경사각 한계")]
         public float slopeLimit = 80f;
-        
+
         [Tooltip("How fast the controller can change direction while in the air. Higher values result in more air control.\n\n" +
                  "공중에 있을 때 컨트롤러가 방향을 전환할 수 있는 속도. 더 높은 값은 더 많은 제어력를 가진다.")]
         public float airControlRate = 2f;
-        
+
         [Tooltip("Amount of downward gravity.\n\n" +
                  "하향 중력의 양.")]
         public float gravity = 30f;
-        
+
         [Tooltip("Jump speed.\n\n" +
                  "점프 속도.")]
         public float jumpSpeed = 10f;
-        
+
         [Tooltip("Jump duration variables.\n\n" +
                  "점프 지속 시간")]
         public float jumpDuration = 0.2f;
-        
+
         [Tooltip("Air friction determines how fast the controller loses its momentum while in the air.\n\n" +
                  "공기 마찰은 컨트롤러가 공중에 있을 때 운동량을 얼마나 빨리 잃는지를 결정한다.")]
         public float airFriction = 0.5f;
-        
+
         [Tooltip("Ground friction is used instead, if the controller is grounded.\n\n" +
                  "컨트롤러가 접지된 경우 접지 마찰이 대신 사용된다.")]
         public float groundFriction = 100f;
@@ -52,22 +54,20 @@ namespace Backend.Object.Character.Player
         [Tooltip("If true calculate and apply momentum relative to the controller's transform.\n\n" +
                  "컨트롤러의 변환에 대한 상대적 운동량을 계산하고 적용할지 여부.")]
         public bool useLocalSpace;
-        
-        private MovementController _movementController;
+
+        #endregion
+
+        private MovementController _controller;
         private CharacterKeyboardInput _input;
         private CeilingDetector _detector;
-        
-        private ControllerState _state = ControllerState.Falling;
-        
-        private Vector3 _momentum = Vector3.zero;
-        
-        // Cached velocity from last frame.
 
-        // Cached horizontal movement velocity from last frame.
+        private ControllerState _state = ControllerState.Falling;
+
+        private Vector3 _momentum = Vector3.zero;
 
         private void Awake()
         {
-            _movementController = GetComponent<MovementController>();
+            _controller = GetComponent<MovementController>();
             _input = GetComponent<CharacterKeyboardInput>();
             _detector = GetComponent<CeilingDetector>();
 
@@ -80,7 +80,7 @@ namespace Backend.Object.Character.Player
         public void FixedUpdate()
         {
             // Check if mover is grounded.
-            _movementController.CheckForGround();
+            _controller.CheckForGround();
 
             // Determine controller state.
             _state = DetermineControllerState();
@@ -110,10 +110,10 @@ namespace Backend.Object.Character.Player
 
             // If player is grounded or sliding on a slope, extend mover's sensor range.
             // This enables the player to walk up/downstairs and slopes without losing ground contact.
-            _movementController.SetExtendRangeToUsing(IsGrounded);
+            _controller.SetExtendRangeToUsing(IsGrounded);
 
             // Set mover velocity.
-            _movementController.SetVelocity(velocity);
+            _controller.SetVelocity(velocity);
 
             // Store velocity for next frame.
             Velocity = velocity;
@@ -128,7 +128,7 @@ namespace Backend.Object.Character.Player
             // Reset ceiling detector, if one is attached to this instance.
             _detector?.Refresh();
         }
-        
+
         /// <returns>
         /// Movement direction based on player input.
         /// </returns>
@@ -178,7 +178,7 @@ namespace Backend.Object.Character.Player
 
             return direction;
         }
-        
+
         /// <summary>
         /// Determine current controller state based on current momentum and whether the controller is grounded (or not).
         /// </summary>
@@ -186,9 +186,9 @@ namespace Backend.Object.Character.Player
         {
             // Check if vertical momentum is pointing upwards.
             var isRising = IsAirborne() && VectorMath.GetDotProduct(ConvertMomentumToWorldSpace(), transform.up) > 0f;
-            
+
             // Check if controller is sliding.
-            var isSliding = _movementController.IsGrounded() && IsGroundTooSteep();
+            var isSliding = _controller.IsGrounded() && IsGroundTooSteep();
 
             switch (_state)
             {
@@ -197,14 +197,14 @@ namespace Backend.Object.Character.Player
                     if (isRising)
                     {
                         TranslateToAirborne();
-                        
+
                         return ControllerState.Rising;
                     }
 
-                    if (_movementController.IsGrounded() == false)
+                    if (_controller.IsGrounded() == false)
                     {
                         TranslateToAirborne();
-                        
+
                         return ControllerState.Falling;
                     }
 
@@ -212,9 +212,9 @@ namespace Backend.Object.Character.Player
                     {
                         return ControllerState.Grounded;
                     }
-                    
+
                     TranslateToAirborne();
-                    
+
                     return ControllerState.Sliding;
                 }
                 case ControllerState.Sliding:
@@ -222,24 +222,24 @@ namespace Backend.Object.Character.Player
                     if (isRising)
                     {
                         TranslateToAirborne();
-                        
+
                         return ControllerState.Rising;
                     }
 
-                    if (_movementController.IsGrounded() == false)
+                    if (_controller.IsGrounded() == false)
                     {
                         TranslateToAirborne();
-                        
+
                         return ControllerState.Falling;
                     }
 
-                    if (_movementController.IsGrounded() == false || isSliding)
+                    if (_controller.IsGrounded() == false || isSliding)
                     {
                         return ControllerState.Sliding;
                     }
-                    
+
                     TranslateToGrounded();
-                    
+
                     return ControllerState.Grounded;
                 }
                 case ControllerState.Falling:
@@ -249,23 +249,23 @@ namespace Backend.Object.Character.Player
                         return ControllerState.Rising;
                     }
 
-                    if (_movementController.IsGrounded() == false || isSliding)
+                    if (_controller.IsGrounded() == false || isSliding)
                     {
                         return isSliding ? ControllerState.Sliding : ControllerState.Falling;
                     }
-                    
+
                     TranslateToGrounded();
-                    
+
                     return ControllerState.Grounded;
                 }
                 case ControllerState.Rising:
                 {
                     if (isRising == false)
                     {
-                        if (_movementController.IsGrounded() && isSliding == false)
+                        if (_controller.IsGrounded() && isSliding == false)
                         {
                             TranslateToGrounded();
-                            
+
                             return ControllerState.Grounded;
                         }
 
@@ -274,25 +274,25 @@ namespace Backend.Object.Character.Player
                             return ControllerState.Sliding;
                         }
 
-                        if (_movementController.IsGrounded() == false)
+                        if (_controller.IsGrounded() == false)
                         {
                             return ControllerState.Falling;
                         }
                     }
 
-                    //If a ceiling detector has been attached to this instance, check for ceiling hits.
+                    // If a ceiling detector has been attached to this instance, check for ceiling hits.
                     if (_detector == null)
                     {
                         return ControllerState.Rising;
                     }
-                    
+
                     if (_detector.WasDetected == false)
                     {
                         return ControllerState.Rising;
                     }
-                    
+
                     OnCeilingContact();
-                    
+
                     return ControllerState.Falling;
                 }
                 case ControllerState.Jumping:
@@ -314,21 +314,21 @@ namespace Backend.Object.Character.Player
                     {
                         return ControllerState.Jumping;
                     }
-                    
+
                     if (_detector.WasDetected == false)
                     {
                         return ControllerState.Jumping;
                     }
-                    
+
                     OnCeilingContact();
-                    
+
                     return ControllerState.Falling;
                 }
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         /// <summary>
         /// Check if player has initiated a jump.
         /// </summary>
@@ -338,19 +338,19 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-            
+
             if ((_input.IsJumpKeyPressed == false && _input.WasJumpKeyPressed == false) || _input.IsJumpLocked)
             {
                 return;
             }
-            
+
             TranslateToAirborne();
-            
+
             Jump();
 
             _state = ControllerState.Jumping;
         }
-        
+
         /// <summary>
         /// Apply friction to both vertical and horizontal momentum based on friction and gravity.
         /// </summary>
@@ -410,7 +410,7 @@ namespace Backend.Object.Character.Player
             if (_state == ControllerState.Sliding)
             {
                 // Calculate vector pointing away from slope.
-                var direction = Vector3.ProjectOnPlane(_movementController.GetGroundNormal(), transform.up).normalized;
+                var direction = Vector3.ProjectOnPlane(_controller.GetGroundNormal(), transform.up).normalized;
 
                 // Calculate movement velocity and remove all velocity that is pointing up the slope.
                 var velocity = CalculateMovementVelocity();
@@ -433,7 +433,7 @@ namespace Backend.Object.Character.Player
                 case ControllerState.Sliding:
                 {
                     // Project the current momentum onto the current ground normal if the controller is sliding down a slope.
-                    _momentum = Vector3.ProjectOnPlane(_momentum, _movementController.GetGroundNormal());
+                    _momentum = Vector3.ProjectOnPlane(_momentum, _controller.GetGroundNormal());
 
                     // Remove any upwards momentum when sliding.
                     if (VectorMath.GetDotProduct(_momentum, transform.up) > 0f)
@@ -442,9 +442,9 @@ namespace Backend.Object.Character.Player
                     }
 
                     // Apply additional slide gravity.
-                    var direction = Vector3.ProjectOnPlane(-transform.up, _movementController.GetGroundNormal()).normalized;
+                    var direction = Vector3.ProjectOnPlane(-transform.up, _controller.GetGroundNormal()).normalized;
                     _momentum += direction * (slidingSpeed * Time.deltaTime);
-                    
+
                     break;
                 }
                 // If controller is jumping, override vertical velocity with jump speed.
@@ -462,7 +462,7 @@ namespace Backend.Object.Character.Player
 
             _momentum = ConvertMomentumToLocalSpace();
         }
-        
+
         /// <summary>
         /// This function is called when the player has initiated a jump.
         /// </summary>
@@ -478,12 +478,12 @@ namespace Backend.Object.Character.Player
 
             // Lock jump input until jump key is released again.
             _input.IsJumpLocked = true;
-            
+
             OnJump?.Invoke(_momentum);
 
             _momentum = ConvertMomentumToLocalSpace();
         }
-        
+
         /// <summary>
         /// This function is called when the controller has lost ground contact. (i.e. is either falling or rising, or generally in the air)
         /// </summary>
@@ -499,7 +499,7 @@ namespace Backend.Object.Character.Player
             {
                 // Project momentum onto movement direction.
                 var momentum = Vector3.Project(_momentum, velocity.normalized);
-                
+
                 // Calculate dot product to determine whether momentum and movement are aligned.
                 var dot = VectorMath.GetDotProduct(momentum.normalized, velocity.normalized);
 
@@ -520,7 +520,7 @@ namespace Backend.Object.Character.Player
 
             _momentum = ConvertMomentumToLocalSpace();
         }
-        
+
         /// <summary>
         /// This function is called when the controller has landed on a surface after being in the air.
         /// </summary>
@@ -530,9 +530,9 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-            
+
             var momentum = _momentum;
-            
+
             // If local momentum is used, transform momentum into world coordinates first.
             if (useLocalSpace)
             {
@@ -542,7 +542,9 @@ namespace Backend.Object.Character.Player
             OnLand.Invoke(momentum);
         }
 
-        //This function is called when the controller has collided with a ceiling while jumping or moving upwards;
+        /// <summary>
+        /// This function is called when the controller has collided with a ceiling while jumping or moving upwards.
+        /// </summary>
         private void OnCeilingContact()
         {
             _momentum = ConvertMomentumToWorldSpace();
@@ -552,40 +554,40 @@ namespace Backend.Object.Character.Player
 
             _momentum = ConvertMomentumToLocalSpace();
         }
-        
+
         /// <returns>
         /// True if vertical momentum is above a small threshold. otherwise false.
         /// </returns>
         private bool IsAirborne()
         {
-            // Setup threshold to check against.
+            // Set up threshold to check against.
             // For most applications, a value of '0.001f' is recommended.
             const float limit = 0.001f;
-            
+
             // Calculate current vertical momentum.
             var momentum = VectorMath.ExtractDotVector(ConvertMomentumToWorldSpace(), transform.up);
-            
+
             // Return true if vertical momentum is above limit.
             return momentum.magnitude > limit;
         }
-        
+
         /// <returns>
         /// True if angle between controller and ground normal is too big (greater than slope limit), i.e. ground is too steep. otherwise false.
         /// </returns>
         private bool IsGroundTooSteep()
         {
-            if (_movementController.IsGrounded() == false)
+            if (_controller.IsGrounded() == false)
             {
                 return true;
             }
 
-            return Vector3.Angle(_movementController.GetGroundNormal(), transform.up) > slopeLimit;
+            return Vector3.Angle(_controller.GetGroundNormal(), transform.up) > slopeLimit;
         }
-        
+
         private Vector3 ConvertMomentumToWorldSpace()
         {
             var momentum = _momentum;
-            
+
             // If local momentum is used, transform momentum into world coordinates system first.
             if (useLocalSpace)
             {
@@ -598,7 +600,7 @@ namespace Backend.Object.Character.Player
         private Vector3 ConvertMomentumToLocalSpace()
         {
             var momentum = _momentum;
-            
+
             if (useLocalSpace)
             {
                 momentum = transform.worldToLocalMatrix * _momentum;
@@ -606,12 +608,12 @@ namespace Backend.Object.Character.Player
 
             return momentum;
         }
-        
+
         /// <returns>
         /// True if controller is grounded (or sliding down a slope).
         /// </returns>
         public bool IsGrounded => _state is ControllerState.Grounded or ControllerState.Sliding;
-        
+
         /// <returns>
         /// True if controller is sliding.
         /// </returns>
@@ -621,7 +623,7 @@ namespace Backend.Object.Character.Player
         }
 
         public Vector3 Velocity { get; private set; } = Vector3.zero;
-        
+
         public Vector3 MovementVelocity { get; private set; } = Vector3.zero;
 
         /// <summary>
@@ -635,7 +637,7 @@ namespace Backend.Object.Character.Player
 
             _momentum = ConvertMomentumToLocalSpace();
         }
-        
+
         /// <param name="momentum">Controller momentum directly.</param>
         public void SetMomentum(Vector3 momentum)
         {
@@ -648,11 +650,11 @@ namespace Backend.Object.Character.Player
                 _momentum = momentum;
             }
         }
-        
+
         public event Action<Vector3> OnJump;
-        
+
         public event Action<Vector3> OnLand;
-        
+
         #region NESTED ENUMERATION API
 
         public enum ControllerState

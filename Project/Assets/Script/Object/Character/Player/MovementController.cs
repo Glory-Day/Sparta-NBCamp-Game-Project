@@ -11,7 +11,9 @@ namespace Backend.Object.Character.Player
         private const float RadiusModifier = 0.8f;
 
         #endregion
-        
+
+        #region SERIALIZABLE FIELD API
+
         [Header("Movement Settings")] [Range(0f, 1f)]
         [SerializeField] private float stepHeightRatio = 0.25f;
 
@@ -19,10 +21,10 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float height = 2f;
         [SerializeField] private float thickness = 1f;
         [SerializeField] private Vector3 offset = Vector3.zero;
-        
+
         [Header("Debug Settings")]
         [SerializeField] private bool isDebugMode;
-        
+
         [Header("Detection Settings")]
         [SerializeField] public Sensor.CastMethodMode mode = Sensor.CastMethodMode.SingleRay;
         [HideInInspector] public int rows = 1;
@@ -30,32 +32,34 @@ namespace Backend.Object.Character.Player
         [HideInInspector] public bool isOffset;
 
         [HideInInspector] public Vector3[] multipleRayPositions;
-        
+
+        #endregion
+
         private Collider _collider;
         private CapsuleCollider _capsuleCollider;
         private Rigidbody _rigidbody;
         private Sensor _sensor;
-        
+
         private bool _isGrounded;
-        
+
         private bool _useExtendedRange = true;
         private float _extendedRange;
 
         private int _layer;
-        
+
         // Current upwards (or downwards) velocity necessary to keep the correct distance to the ground.
         private Vector3 _adjustmentVelocity = Vector3.zero;
-        
+
         private void Awake()
         {
             SetUp();
-            
+
             _sensor = new Sensor(transform, _collider);
-            
+
             RecalculateColliderDimensions();
             RecalibrateSensor();
         }
-        
+
         private void LateUpdate()
         {
             if (isDebugMode)
@@ -70,7 +74,7 @@ namespace Backend.Object.Character.Player
         }
 
 #if UNITY_EDITOR
-        
+
         private void OnValidate()
         {
             // Recalculate collider dimensions.
@@ -85,9 +89,9 @@ namespace Backend.Object.Character.Player
                 multipleRayPositions = Sensor.GetRaycastOriginPositions(rows, 1f, count, isOffset);
             }
         }
-        
+
 #endif
-        
+
         private void SetUp()
         {
             _collider = GetComponent<Collider>();
@@ -107,15 +111,15 @@ namespace Backend.Object.Character.Player
                 transform.gameObject.AddComponent<Rigidbody>();
                 _rigidbody = GetComponent<Rigidbody>();
             }
-            
+
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
             // Freeze rigidbody rotation and disable rigidbody gravity.
             _rigidbody.freezeRotation = true;
             _rigidbody.useGravity = false;
         }
-        
-        
+
+
 
         //Recalculate collider height/width/thickness;
         private void RecalculateColliderDimensions()
@@ -153,8 +157,8 @@ namespace Backend.Object.Character.Player
         private void RecalibrateSensor()
         {
             //Set sensor ray origin and direction.
-            _sensor.SetCastOrigin(GetColliderCenter());
-            _sensor.SetCastDirection(Sensor.Direction.Down);
+            _sensor.SetOriginPosition(GetColliderCenter());
+            _sensor.SetDirection(Sensor.Direction.Down);
 
             // Calculate sensor layer mask.
             RecalculateSensorLayerMask();
@@ -261,7 +265,7 @@ namespace Backend.Object.Character.Player
             if (_sensor.Hit.IsDetected == false)
             {
                 _isGrounded = false;
-                
+
                 return;
             }
 
@@ -304,19 +308,19 @@ namespace Backend.Object.Character.Player
         {
             return _isGrounded;
         }
-        
+
         public void SetExtendRangeToUsing(bool isExtended)
         {
             _useExtendedRange = isExtended;
         }
-        
+
         public void SetColliderHeight(float value)
         {
             height = value;
-            
+
             RecalculateColliderDimensions();
         }
-        
+
         public void SetColliderThickness(float value)
         {
             if (value < 0f)
@@ -325,16 +329,16 @@ namespace Backend.Object.Character.Player
             }
 
             thickness = value;
-            
+
             RecalculateColliderDimensions();
         }
-        
+
         public void SetStepHeightRatio(float value)
         {
             value = Mathf.Clamp(value, 0f, 1f);
-            
+
             stepHeightRatio = value;
-            
+
             RecalculateColliderDimensions();
         }
 

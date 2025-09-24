@@ -5,33 +5,37 @@ namespace Backend.Object.Character.Player
     public class TurnTowardControllerVelocity : MonoBehaviour
     {
         #region CONSTANT FIELD API
-        
+
         // When the angle between the current direction and the target direction falls below the threshold, the rotation speed gradually slows down (eventually approaching ‘0f’).
         // This adds a smooth effect to the rotation.
         private const float Threshold = 90f;
 
         #endregion
-        
+
+        #region SERIALIZABLE FIELD API
+
         [Header("Target Reference")]
         public AdvancedActionController controller;
-        
+
         [Header("Controller Settings")]
         [Tooltip("Speed at which this instance turns toward the controller's velocity.\n\n" +
                  "해당 인스턴스가 컨트롤러의 속도를 향해 회전하는 속도.")]
         [SerializeField] private float turningSpeed = 500f;
-        
+
         [Tooltip("When calculating a new direction, ignore the current controller's momentum if true. Otherwise, false.\n\n" +
                  "새로운 방향을 계산할 때 현재 컨트롤러의 운동량을 무시해야 하는지 여부.")]
         [SerializeField] private bool isMomentumIgnored;
 
+        #endregion
+
         // Current local rotation around the local y-axis of this instance.
         private float _yAxisAngle;
-        
+
         private void OnEnable()
         {
             _yAxisAngle = transform.localEulerAngles.y;
         }
-        
+
         private void Start()
         {
             // Throw warning if no controller has been assigned.
@@ -39,9 +43,9 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-            
+
             Debug.LogWarning("No controller script has been assigned to this component.", this);
-                
+
             enabled = false;
         }
 
@@ -90,7 +94,7 @@ namespace Backend.Object.Character.Player
             {
                 _yAxisAngle -= 360f;
             }
-            
+
             if (_yAxisAngle < -360f)
             {
                 _yAxisAngle += 360f;
