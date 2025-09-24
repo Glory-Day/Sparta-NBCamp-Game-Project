@@ -6,70 +6,71 @@ using Backend.Object.Character.Player;
 
 namespace Backend.Util.Editor
 {
-	//This editor script displays some additional information in the mover inspector, like a preview of the current raycast array;
-	[CustomEditor(typeof(MovementController))]
-	public class MovementControllerInspector : UnityEditor.Editor {
+    [CustomEditor(typeof(MovementController))]
+    public class MovementControllerInspector : UnityEditor.Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
 
-		private MovementController _movementController;
+            var component = (MovementController)target;
 
-		void Reset()
-		{
-			Setup();
-		}
+            if (component.mode != Sensor.CastMethodMode.MultipleRay)
+            {
+                return;
+            }
 
-		void OnEnable()
-		{
-			Setup();
-		}
+            component.rows = EditorGUILayout.IntField("Rows", component.rows);
+            component.count = EditorGUILayout.IntField("Count", component.count);
+            component.isOffset = EditorGUILayout.Toggle("Is Offset", component.isOffset);
 
-		void Setup()
-		{
-			//Get reference to mover component;
-			_movementController = (MovementController)target;
-		}
+            DrawRaycastArrayPreview(component);
+        }
 
-		public override void OnInspectorGUI()
-		{
-			base.OnInspectorGUI();
-			DrawRaycastArrayPreview();
-		}
+        //Draw preview of raycast array in inspector;
+        private void DrawRaycastArrayPreview(MovementController component)
+        {
+            if (component.mode != Sensor.CastMethodMode.MultipleRay)
+            {
+                return;
+            }
 
-		//Draw preview of raycast array in inspector;
-		void DrawRaycastArrayPreview()
-		{
-			if(_movementController.mode == Sensor.CastMethodMode.MultipleRay)
-			{
-				Rect _space;
-				GUILayout.Space(5);
+            const float size = 3f;
 
-				_space = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, GUILayout.Height(100));
+            GUILayout.Space(5);
 
-				Rect background = new Rect(_space.x + (_space.width - _space.height)/2f, _space.y, _space.height, _space.height);
-				EditorGUI.DrawRect(background, Color.grey);
+            var option = GUILayout.Height(100);
+            var space = GUILayoutUtility.GetRect(GUIContent.none, GUIStyle.none, option);
 
-				float point_size = 3f;
+            var x = space.x + ((space.width - space.height) / 2f);
+            var y = space.y;
+            var width = space.height;
+            var height = space.height;
+            Rect background = new (x, y, width, height);
+            EditorGUI.DrawRect(background, Color.grey);
 
-				Vector3[] _previewPositions = _movementController.multipleRayPositions;
+            var positions = component.multipleRayPositions;
+            var center = new Vector2(background.x + (background.width / 2f), background.y + (background.height / 2f));
 
-				Vector2 center = new Vector2(background.x + background.width/2f, background.y + background.height/2f);
+            if (positions != null && positions.Length != 0)
+            {
+                for (int i = 0; i < positions.Length; i++)
+                {
+                    var offset = new Vector2(positions[i].x, positions[i].z) * background.width / 2f * 0.9f;
+                    var position = center + offset;
 
-				if(_previewPositions != null && _previewPositions.Length != 0)
-				{
-					for(int i = 0; i < _previewPositions.Length; i++)
-					{
-						Vector2 position = center + new Vector2(_previewPositions[i].x, _previewPositions[i].z) * background.width/2f * 0.9f;
+                    x = position.x - (size / 2f);
+                    y = position.y - (size / 2f);
+                    EditorGUI.DrawRect(new Rect(x, y, size, size), Color.magenta);
+                }
+            }
 
-						EditorGUI.DrawRect(new Rect(position.x - point_size/2f, position.y - point_size/2f, point_size, point_size), Color.white);
-					}
-				}
-
-				if(_previewPositions != null && _previewPositions.Length != 0)
-					GUILayout.Label("Number of rays = " + _previewPositions.Length, EditorStyles.centeredGreyMiniLabel );
-			}
-		}
-
-
-	}
+            if (positions != null && positions.Length != 0)
+            {
+                GUILayout.Label("Number of rays: " + positions.Length, EditorStyles.centeredGreyMiniLabel);
+            }
+        }
+    }
 }
 
 #endif

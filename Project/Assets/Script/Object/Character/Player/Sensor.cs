@@ -6,17 +6,14 @@ namespace Backend.Object.Character.Player
 {
     public class Sensor
     {
-        public CastMethodMode CastMode = CastMethodMode.SingleRay;
-        public LayerMask LayerMask = 255;
-        
         private readonly Transform _transform;
 
         private readonly RaycastExcluder _excluder;
-        
+
         // Starting point of ray cast.
         private Vector3 _origin = Vector3.zero;
         private Direction _direction;
-        
+
         // Backup normal used for specific edge cases when using sphere casts.
         private Vector3 _cache;
 
@@ -24,26 +21,29 @@ namespace Backend.Object.Character.Player
         private readonly List<Vector3> _points = new ();
         private readonly List<Vector3> _normals = new ();
 
+        public CastMethodMode CastMode = CastMethodMode.SingleRay;
+        public LayerMask LayerMask = 255;
+
         public float MaximumDistance = 1f;
         public float Radius = 0.2f;
-        
+
         /// <summary>
         /// Cast an additional ray to get the true surface normal.
         /// </summary>
         public bool UseRealisticSurfaceNormal;
-        
+
         /// <summary>
         /// Cast an additional ray to get the true distance to the ground.
         /// </summary>
         public bool UseRealisticDistance;
 
 #if UNITY_EDITOR
-        
+
         // Whether to draw debug information in the editor.
         public bool IsDebugMode = false;
-        
+
 #endif
-        
+
         public Sensor(Transform transform, Collider collider)
         {
             _transform = transform;
@@ -66,7 +66,7 @@ namespace Backend.Object.Character.Player
             Hit.Distance = 0f;
 
             Hit.IsDetected = false;
-            
+
             Hit.Transforms.Clear();
             Hit.Colliders.Clear();
         }
@@ -103,7 +103,7 @@ namespace Backend.Object.Character.Player
 
             _excluder.Restore();
         }
-        
+
         /// <summary>
         /// Cast a single ray into direction from origin position.
         /// </summary>
@@ -115,7 +115,7 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-            
+
             Hit.Position = hit.point;
             Hit.Normal = hit.normal;
             Hit.Distance = hit.distance;
@@ -123,7 +123,7 @@ namespace Backend.Object.Character.Player
             Hit.Colliders.Add(hit.collider);
             Hit.Transforms.Add(hit.transform);
         }
-        
+
         /// <summary>
         /// Cast an array of rays into direction and centered around origin.
         /// </summary>
@@ -132,11 +132,11 @@ namespace Backend.Object.Character.Player
             // Clear results from last frame.
             _normals.Clear();
             _points.Clear();
-            
+
             // Calculate origin and direction of ray in world coordinates system.
             var position = Vector3.zero;
             var rayDirection = GetDirection();
-            
+
             for (var i = 0; i < _origins.Length; i++)
             {
                 // Calculate ray origin position.
@@ -147,30 +147,30 @@ namespace Backend.Object.Character.Player
                 {
                     continue;
                 }
-                
+
 #if UNITY_EDITOR
-                
+
                 if (IsDebugMode)
                 {
                     Debug.DrawRay(hit.point, hit.normal, Color.red, Time.fixedDeltaTime * 1.01f);
                 }
 
 #endif
-                
+
                 Hit.Colliders.Add(hit.collider);
                 Hit.Transforms.Add(hit.transform);
-                    
+
                 _normals.Add(hit.normal);
                 _points.Add(hit.point);
             }
-            
+
             Hit.IsDetected = _points.Count > 0;
-            
+
             if (Hit.IsDetected == false)
             {
                 return;
             }
-            
+
             // Calculate average surface normal.
             var normal = _normals.Aggregate(Vector3.zero, (current, v) => current + v);
             normal.Normalize();
@@ -183,24 +183,24 @@ namespace Backend.Object.Character.Player
             Hit.Normal = normal;
             Hit.Distance = VectorMath.ExtractDotVector(origin - Hit.Position, direction).magnitude;
         }
-        
+
         private void CastBySphere(Vector3 origin, Vector3 direction)
         {
             var distance = MaximumDistance - Radius;
-            
+
             Hit.IsDetected = Physics.SphereCast(origin, Radius, direction, out var hit, distance, LayerMask, QueryTriggerInteraction.Ignore);
 
             if (Hit.IsDetected == false)
             {
                 return;
             }
-            
+
             Hit.Position = hit.point;
             Hit.Normal = hit.normal;
-                
+
             Hit.Distance = hit.distance;
             Hit.Distance += Radius;
-                
+
             Hit.Colliders.Add(hit.collider);
             Hit.Transforms.Add(hit.transform);
 
@@ -217,7 +217,7 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-                
+
             var ray = new Ray(Hit.Position - direction, direction);
             if (collider.Raycast(ray, out hit, 1.5f))
             {
@@ -247,9 +247,9 @@ namespace Backend.Object.Character.Player
                 _ => Vector3.one
             };
         }
-        
+
 #if UNITY_EDITOR
-        
+
         /// <summary>
         /// Draw debug information in editor (hit positions and ground surface normals).
         /// </summary>
@@ -261,34 +261,35 @@ namespace Backend.Object.Character.Player
             {
                 return;
             }
-            
+
+            var position = Hit.Position;
             var color = Color.red;
             var time = Time.deltaTime;
-            Debug.DrawRay(Hit.Position, Hit.Normal, color, time);
-                
+            Debug.DrawRay(position, Hit.Normal, color, time);
+
             color = Color.green;
-            Debug.DrawLine(Hit.Position + Vector3.up * size, Hit.Position - Vector3.up * size, color, time);
-            Debug.DrawLine(Hit.Position + Vector3.right * size, Hit.Position - Vector3.right * size, color, time);
-            Debug.DrawLine(Hit.Position + Vector3.forward * size, Hit.Position - Vector3.forward * size, color, time);
+            Debug.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size), color, time);
+            Debug.DrawLine(position + (Vector3.right * size), position - (Vector3.right * size), color, time);
+            Debug.DrawLine(position + (Vector3.forward * size), position - (Vector3.forward * size), color, time);
         }
 
 #endif
-        
+
         /// <summary>
         /// Set the position for the raycast to start from.
         /// </summary>
-        public void SetCastOrigin(Vector3 origin)
+        public void SetOriginPosition(Vector3 origin)
         {
             if (_transform == null)
             {
                 return;
             }
-            
+
             _origin = _transform.InverseTransformPoint(origin);
         }
-        
+
         /// <param name="direction">Axis of this instance's transform will be used as the direction for the raycast.</param>
-        public void SetCastDirection(Direction direction)
+        public void SetDirection(Direction direction)
         {
             if (_transform == null)
             {
@@ -297,7 +298,7 @@ namespace Backend.Object.Character.Player
 
             _direction = direction;
         }
-        
+
         /// <summary>
         /// Recalculate start positions for the raycast array
         /// </summary>
@@ -305,7 +306,7 @@ namespace Backend.Object.Character.Player
         {
             _origins = GetRaycastOriginPositions(Option.Rows, Radius, Option.Count, Option.IsOffset);
         }
-        
+
         /// <returns>
         /// An array containing the starting positions of all array rays (in local coordinates system) based on the input arguments.
         /// </returns>
@@ -342,9 +343,9 @@ namespace Backend.Object.Character.Player
             // Convert list to array and return array.
             return positions.ToArray();
         }
-        
+
         public HitInformation Hit { get; } = new();
-        
+
         public MultipleRayOption Option { get; } = new();
 
         #region NESTED ENUMERATION API
@@ -358,7 +359,7 @@ namespace Backend.Object.Character.Player
             Left,
             Down
         }
-        
+
         public enum CastMethodMode
         {
             SingleRay,
@@ -375,26 +376,26 @@ namespace Backend.Object.Character.Player
             public Vector3 Position;
             public Vector3 Normal;
             public float Distance;
-            
+
             public bool IsDetected;
-            
+
             public List<Transform> Transforms { get; } = new ();
-            
+
             public List<Collider> Colliders { get; } = new ();
-            
+
             public Transform Transform => Transforms[0];
-            
+
             public Collider Collider => Colliders[0];
         }
-        
+
         public class MultipleRayOption
         {
             // Number of rays in every row.
             public int Rows = 3;
-            
+
             // Number of rows around the central ray;
-            public int Count = 9; 
-            
+            public int Count = 9;
+
             // Whether offset every other row.
             public bool IsOffset = false;
         }

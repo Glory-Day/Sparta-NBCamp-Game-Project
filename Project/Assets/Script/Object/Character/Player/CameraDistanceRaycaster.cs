@@ -5,6 +5,8 @@ namespace Backend.Object.Character.Player
 {
     public class CameraDistanceRaycaster : MonoBehaviour
     {
+        #region SERIALIZABLE FIELD API
+
         [Header("Target Reference")]
         [Tooltip("The target transform reference that the camera will look at.\n\n" +
                  "카메라의 트랜스폼 참조.")]
@@ -57,6 +59,8 @@ namespace Backend.Object.Character.Player
                  "구형 탐지 반경, 'SphereCast'가 선택된 경우에만 사용된다.")]
         [HideInInspector] public float radius = 0.2f;
 
+        #endregion
+
         private RaycastExcluder _excluder;
 
         private float _distance;
@@ -104,7 +108,7 @@ namespace Backend.Object.Character.Player
             // Set new position of camera transform reference.
             cameraTransform.position = transform.position + (cameraRigTransform.position - transform.position).normalized * _distance;
         }
-        
+
         /// <returns>
         /// Maximum distance by casting a ray (or sphere) from this transform to the camera rig transform.
         /// </returns>
@@ -121,7 +125,7 @@ namespace Backend.Object.Character.Player
         private float GetDistanceByRayCast()
         {
             var direction = cameraRigTransform.position - transform.position;
-            
+
             var ray = new Ray(transform.position, direction);
             var distance = direction.magnitude + minimumCastingDistance;
 
@@ -130,7 +134,7 @@ namespace Backend.Object.Character.Player
                 // If no obstacle was hit, return full distance.
                 return direction.magnitude;
             }
-            
+
             // Check if minimum distance from obstacles can be subtracted from hit distance, then return distance.
             if (hit.distance - minimumCastingDistance < 0f)
             {
@@ -143,12 +147,12 @@ namespace Backend.Object.Character.Player
         private float GetDistanceBySphereCast()
         {
             var direction = cameraRigTransform.position - transform.position;
-            
+
             var ray = new Ray(transform.position, direction);
             var distance = direction.magnitude;
 
             var isHit = Physics.SphereCast(ray, radius, out var hit, distance, includeLayers, QueryTriggerInteraction.Ignore);
-            
+
             // If no obstacle was hit, return full distance.
             return isHit ? hit.distance : direction.magnitude;
         }
