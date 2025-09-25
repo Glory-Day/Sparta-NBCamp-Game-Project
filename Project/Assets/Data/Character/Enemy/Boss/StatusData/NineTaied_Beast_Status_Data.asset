@@ -15,7 +15,8 @@ MonoBehaviour:
   <ID>k__BackingField: 002
   <Name>k__BackingField: "\uAD6C\uBBF8\uD638"
   <HealthPoint>k__BackingField: 1000
-  <Speed>k__BackingField: 3
+  <Speed>k__BackingField: 7
+  <Damage>k__BackingField: 0
   <ChasingSpeed>k__BackingField: 7
   <TurnSpeed>k__BackingField: 90
   <AttackRange>k__BackingField:
