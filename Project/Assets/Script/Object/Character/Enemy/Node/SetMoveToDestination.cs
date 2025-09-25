@@ -29,14 +29,14 @@ namespace Backend.Object.Character.Enemy.Node
                 Vector3 dir = agent.MovementController.GetDirection();
                 Vector3 destination = playerTransform.position - (dir * Offset);
                 Debug.Log(agent.NavMeshAgent.destination);
-                agent.NavMeshAgent.destination = destination;
+                blackboard.moveDestination = destination;
 
                 return State.Success;
             }
             else
             {
                 Vector3 worldDestination = agent.MovementController.transform.TransformPoint(DestinationPosition);
-                agent.NavMeshAgent.destination = worldDestination;
+                blackboard.moveDestination = worldDestination;
 
                 return State.Success;
             }
