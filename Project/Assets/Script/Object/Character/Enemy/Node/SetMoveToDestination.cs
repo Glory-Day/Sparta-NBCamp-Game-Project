@@ -28,15 +28,15 @@ namespace Backend.Object.Character.Enemy.Node
 
                 Vector3 dir = agent.MovementController.GetDirection();
                 Vector3 destination = playerTransform.position - (dir * Offset);
-                destination.y = agentTransform.position.y;
-                blackboard.moveDestination = destination;
+                Debug.Log(agent.NavMeshAgent.destination);
+                agent.NavMeshAgent.destination = destination;
 
                 return State.Success;
             }
             else
             {
                 Vector3 worldDestination = agent.MovementController.transform.TransformPoint(DestinationPosition);
-                blackboard.moveDestination = worldDestination;
+                agent.NavMeshAgent.destination = worldDestination;
 
                 return State.Success;
             }
