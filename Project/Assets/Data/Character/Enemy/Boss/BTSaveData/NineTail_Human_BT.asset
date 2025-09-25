@@ -309,7 +309,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 7c0e90f912108de4db1f8b0827762864
-  Position: {x: -730, y: 1229}
+  Position: {x: -730, y: 1240.5}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -489,7 +489,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: 8235598465980633819}
   - {fileID: -4015314173987743893}
   - {fileID: -5017519745789492910}
   - {fileID: 8333044123334359841}
@@ -524,33 +523,6 @@ MonoBehaviour:
   description: 40 Percent
   Child: {fileID: 3252167318922827858}
   probability: 0.4
---- !u!114 &-6161289339559802907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254a94de7bf3fdb4ca5cb9bf0d2afb55, type: 3}
-  m_Name: CoolDownCheckTest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 21afbd9b055c601438dc3a0ca5399e65
-  Position: {x: -1110, y: 1238}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  SkillID: S0104
 --- !u!114 &-6056127263743510746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +683,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 7704e473345563e4d8924c484a9a899e
-  Position: {x: 1595.7502, y: 1287.0002}
+  Position: {x: 1607, y: 1281}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -956,8 +928,7 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: ComboAttack Sequence
   Children:
-  - {fileID: 212410001375187091}
-  - {fileID: -3211670294379580077}
+  - {fileID: -3559517589438100041}
 --- !u!114 &-3821193191832750408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,6 +959,33 @@ MonoBehaviour:
   maxDistance: 5
   useRangeCheck: 1
   rangeCheck: 0
+--- !u!114 &-3559517589438100041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0aea03134a7d3446842d858bb88f7d8, type: 3}
+  m_Name: DebugLogNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: b53617d5701d1584cbbee81467af7155
+  Position: {x: 626, y: 1527.4314}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+  tree: {fileID: 0}
+  description: "\uCF54\uBCF4"
+  Message: 
 --- !u!114 &-3484653285933638386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,7 +1060,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 7f9a39b5dbd04aa4ba875b39e7155fff
-  Position: {x: -1207, y: 1116}
+  Position: {x: -1193, y: 1120}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1103,35 +1101,6 @@ MonoBehaviour:
   Children:
   - {fileID: 1961806028789682678}
   - {fileID: -8611561205198946890}
---- !u!114 &-3211670294379580077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7133fa3eca52b5b4fbe0747314ce6b6f, type: 3}
-  m_Name: IsAttackEndNormalize
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 8ba171847ef87b64d9c7ac6b3c3ba5ad
-  Position: {x: 786, y: 1512}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  TransitionPoint: 0.8
-  LayerNumber: 0
-  MinimTime: 0.1
 --- !u!114 &-3210874482422250282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,7 +1116,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 092910af9b475164ba38f4b846007278
-  Position: {x: -1382, y: 1118}
+  Position: {x: -1374, y: 1124}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1313,7 +1282,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 84054c374650fea4f914f99a4a9041ff
-  Position: {x: -1555, y: 1118}
+  Position: {x: -1552, y: 1126}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1507,7 +1476,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 22e6a9b5fd29a3647911e50aec370f24
-  Position: {x: 3096, y: 801}
+  Position: {x: 3072, y: 798}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1534,7 +1503,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 0f8548497d0159d47a89091d2b13e54a
-  Position: {x: 2483, y: 806}
+  Position: {x: 2490, y: 809}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1641,8 +1610,6 @@ MonoBehaviour:
   - {fileID: 1961806028789682678}
   - {fileID: -3821193191832750408}
   - {fileID: -165650059232956020}
-  - {fileID: 212410001375187091}
-  - {fileID: -3211670294379580077}
   - {fileID: 4183118288179688315}
   - {fileID: -4834716007765957266}
   - {fileID: -3335139785924217894}
@@ -1651,7 +1618,6 @@ MonoBehaviour:
   - {fileID: 3252167318922827858}
   - {fileID: -4624665785465009901}
   - {fileID: -8602030299021604700}
-  - {fileID: 2160299871438958691}
   - {fileID: 5505066126621014693}
   - {fileID: 1251324351453558181}
   - {fileID: -5456584929735401027}
@@ -1669,10 +1635,7 @@ MonoBehaviour:
   - {fileID: 6482572739651556139}
   - {fileID: -3210874482422250282}
   - {fileID: -3451212145976078872}
-  - {fileID: 8926419092297490105}
-  - {fileID: -6161289339559802907}
   - {fileID: 968261291201453236}
-  - {fileID: 8235598465980633819}
   - {fileID: 584257691640861492}
   - {fileID: -7216550933711581919}
   - {fileID: -4741182797045214552}
@@ -1702,6 +1665,7 @@ MonoBehaviour:
   - {fileID: -8404111535619350918}
   - {fileID: 6820303782738309}
   - {fileID: 8333044123334359841}
+  - {fileID: -3559517589438100041}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1740,36 +1704,6 @@ MonoBehaviour:
   StopDistance: 5
   Offset: 0
   EnableRotation: 0
---- !u!114 &212410001375187091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c644e9ec142d3d429503066321321e0, type: 3}
-  m_Name: EnemyAttackNormalize
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: fb7866db78e3430478702f6da01e3215
-  Position: {x: 549, y: 1509}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: Combo1
-  AttackNum: 0
-  IsRandomAttack: 0
-  MinRandomIndex: 0
-  RandomLength: 0
 --- !u!114 &584257691640861492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1869,7 +1803,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: b7e9faec79fde7946a2b1af52c2f75c9
-  Position: {x: -553, y: 1227}
+  Position: {x: -548, y: 1240.5}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1964,7 +1898,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: FoxFireBall Sequence
   Children:
-  - {fileID: 8926419092297490105}
   - {fileID: 6482572739651556139}
   - {fileID: -2134505852709630021}
   - {fileID: -3210874482422250282}
@@ -2153,7 +2086,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: f238caf77f0b66b4c881d93a64361b76
-  Position: {x: -919, y: 1229.5}
+  Position: {x: -915, y: 1240.5}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2414,7 +2347,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: cce10cb58d9d1124fbe0d7b27d041b3b
-  Position: {x: 1428.0504, y: 1287.0002}
+  Position: {x: 1426, y: 1283}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2711,7 +2644,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: EnergyExplosion Sequence
   Children:
-  - {fileID: -6161289339559802907}
   - {fileID: 2346159103369870095}
   - {fileID: -8011504528685046152}
   - {fileID: 968261291201453236}
@@ -2730,7 +2662,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 387001cd20ca1634197e3fcdb7463005
-  Position: {x: -1727, y: 1118}
+  Position: {x: -1730, y: 1126}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2936,7 +2868,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: f08896691c67aa04293a6d7016f0ac5b
-  Position: {x: 2840, y: 942.5}
+  Position: {x: 2855, y: 951}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -3009,33 +2941,6 @@ MonoBehaviour:
   restartOnSuccess: 1
   restartOnFailure: 1
   maxRepeats: 0
---- !u!114 &8235598465980633819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254a94de7bf3fdb4ca5cb9bf0d2afb55, type: 3}
-  m_Name: CoolDownCheckTest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 96988d9c2e9067743bbaca8ac22b838a
-  Position: {x: -561, y: 917}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  SkillID: S0103
 --- !u!114 &8333044123334359841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,30 +3002,3 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: Middle Attack
   Child: {fileID: 6285781711267574053}
---- !u!114 &8926419092297490105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254a94de7bf3fdb4ca5cb9bf0d2afb55, type: 3}
-  m_Name: CoolDownCheckTest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 873548f620a38c648ab51d7ea7bca772
-  Position: {x: -1895.16, y: 1124}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  SkillID: S0106

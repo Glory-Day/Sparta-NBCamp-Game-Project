@@ -374,7 +374,6 @@ MonoBehaviour:
   description: 
   Children:
   - {fileID: -4692668094431931776}
-  - {fileID: -2980614398117227694}
 --- !u!114 &-5360488362849388099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,39 +547,9 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Children:
+  - {fileID: 7420482688122018720}
   - {fileID: 102122613125878905}
   - {fileID: 361946504005081647}
-  - {fileID: 7420482688122018720}
---- !u!114 &-2980614398117227694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4ed0157a1bf794fafe8eb6769926be, type: 3}
-  m_Name: MoveToDest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 940b71bd09b8d9b47a20ad6bf4932ab9
-  Position: {x: 260.52185, y: 760.4998}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  EnableRotation: 1
-  Speed: 10
-  RotationSpeed: 10
-  VariableSpeedForDist: 0
 --- !u!114 &-2888109623071080032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,7 +838,6 @@ MonoBehaviour:
   description: 
   Children:
   - {fileID: -2582110176121731978}
-  - {fileID: 8431855270055545504}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -931,11 +899,9 @@ MonoBehaviour:
   - {fileID: -6911394494930318590}
   - {fileID: 8790707912942630147}
   - {fileID: -9138334587311993550}
-  - {fileID: 8431855270055545504}
   - {fileID: -2582110176121731978}
   - {fileID: 6502269791540809497}
   - {fileID: -4692668094431931776}
-  - {fileID: -2980614398117227694}
   - {fileID: -1716695008728482479}
   - {fileID: -5610799417832798661}
   - {fileID: -6786636598484907}
@@ -1750,36 +1716,6 @@ MonoBehaviour:
   maxDistance: 6
   useRangeCheck: 0
   rangeCheck: 0
---- !u!114 &8431855270055545504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4ed0157a1bf794fafe8eb6769926be, type: 3}
-  m_Name: MoveToDest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 13eed2a24be49064093b0542f1766df7
-  Position: {x: 525.80865, y: 564.5}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  EnableRotation: 1
-  Speed: 10
-  RotationSpeed: 10
-  VariableSpeedForDist: 0
 --- !u!114 &8502603631727450951
 MonoBehaviour:
   m_ObjectHideFlags: 0
