@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Backend.Object.Character.Player
 {
-	//This script handles and plays audio cues like footsteps, jump and land audio clips based on character movement speed and events; 
+	//This script handles and plays audio cues like footsteps, jump and land audio clips based on character movement speed and events;
 	public class AudioControl : MonoBehaviour {
 
 		//References to components;
         AdvancedActionController controller;
 		Animator animator;
-		MovementController _movementController;
+		PlayerMovementController _movementController;
 		Transform tr;
 		public AudioSource audioSource;
 
@@ -45,7 +45,7 @@ namespace Backend.Object.Character.Player
 			//Get component references;
 			controller = GetComponent<AdvancedActionController>();
 			animator = GetComponentInChildren<Animator>();
-			_movementController = GetComponent<MovementController>();
+			_movementController = GetComponent<PlayerMovementController>();
 			tr = transform;
 
 			//Connecting events to controller events;
@@ -55,7 +55,7 @@ namespace Backend.Object.Character.Player
 			if(!animator)
 				useAnimationBasedFootsteps = false;
 		}
-		
+
 		//Update;
 		void Update () {
 
@@ -63,7 +63,7 @@ namespace Backend.Object.Character.Player
 			Vector3 _velocity = controller.Velocity;
 
 			//Calculate horizontal velocity;
-			Vector3 _horizontalVelocity = VectorMath.RemoveDotVector(_velocity, tr.up);
+			Vector3 _horizontalVelocity = _velocity.Reject(tr.up);
 
 			FootStepUpdate(_horizontalVelocity.magnitude);
 		}
@@ -81,7 +81,7 @@ namespace Backend.Object.Character.Player
 				if((currentFootStepValue <= 0f && _newFootStepValue > 0f) || (currentFootStepValue >= 0f && _newFootStepValue < 0f))
 				{
 					//Only play footstep sound if mover is grounded and movement speed is above the threshold;
-					if(_movementController.IsGrounded() && _movementSpeed > _speedThreshold)
+					if(_movementController.IsGrounded && _movementSpeed > _speedThreshold)
 						PlayFootstepSound(_movementSpeed);
 				}
 				currentFootStepValue = _newFootStepValue;
@@ -94,7 +94,7 @@ namespace Backend.Object.Character.Player
 				if(currentFootstepDistance > footstepDistance)
 				{
 					//Only play footstep sound if mover is grounded and movement speed is above the threshold;
-					if(_movementController.IsGrounded() && _movementSpeed > _speedThreshold)
+					if(_movementController.IsGrounded && _movementSpeed > _speedThreshold)
 						PlayFootstepSound(_movementSpeed);
 					currentFootstepDistance = 0f;
 				}
@@ -110,7 +110,7 @@ namespace Backend.Object.Character.Player
 		void OnLand(Vector3 _v)
 		{
 			//Only trigger sound if downward velocity exceeds threshold;
-			if(VectorMath.GetDotProduct(_v, tr.up) > -landVelocityThreshold)
+			if(Vector3.Dot(_v, tr.up.normalized) > -landVelocityThreshold)
 				return;
 
 			//Play land audio clip;

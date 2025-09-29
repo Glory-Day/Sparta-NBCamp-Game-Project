@@ -28,7 +28,20 @@ namespace Backend.Object.Character.Player
                  "카메라가 컨트롤러의 이동 방향을 향하는지 여부.")]
         [SerializeField] private bool isTurningToward = true;
 
+        [SerializeField] public Transform target;
+        [SerializeField] private LayerMask layerMask;
+
         #endregion
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (target != null)
+            {
+                RotateTowardPosition(target.position, turningTowardSpeed);
+            }
+        }
 
         protected override void SetUp()
         {
@@ -65,33 +78,35 @@ namespace Backend.Object.Character.Player
         private void RotateInDirectionOfVelocity(Vector3 velocity, float speed)
         {
             //Remove any unwanted components of direction.
-            velocity = VectorMath.RemoveDotVector(velocity, GetUpDirection());
+            velocity = velocity.Reject(UpDirection);
 
             // Calculate angle difference of current direction and new direction.
-            var angle = VectorMath.GetAngle(GetFacingDirection(), velocity, GetUpDirection());
+            var angle = FacingDirection.SignedAngle(velocity, UpDirection);
 
             // Calculate sign of angle.
             var sign = Mathf.Sign(angle);
 
             // Calculate final angle difference.
-            var result = sign * Mathf.Abs(angle / 90f) * speed * Time.deltaTime;
+            var difference = sign * Mathf.Abs(angle / 90f) * speed * Time.deltaTime;
 
             // If angle is greater than 90 degrees, recalculate final angle difference.
             if (Mathf.Abs(angle) > 90f)
             {
-                result = Time.deltaTime * speed * sign * (Mathf.Abs(180f - Mathf.Abs(angle)) / 90f);
+                difference = Time.deltaTime * speed * sign * (Mathf.Abs(180f - Mathf.Abs(angle)) / 90f);
             }
 
             // Check if calculated angle overshoots.
-            if (Mathf.Abs(result) > Mathf.Abs(angle))
+            if (Mathf.Abs(difference) > Mathf.Abs(angle))
             {
-                result = angle;
+                difference = angle;
             }
 
             // Take movement speed into account by comparing it to maximum movement speed.
-            result *= Mathf.InverseLerp(0f, maximumMovementSpeed, velocity.magnitude);
+            difference *= Mathf.InverseLerp(0f, maximumMovementSpeed, velocity.magnitude);
 
-            SetRotationAngles(GetCurrentXAngle(), GetCurrentYAngle() + result);
+            Angles = new Vector2(Angles.x, Angles.y + difference);
         }
+
+        public PerspectiveMode Mode => target != null ? PerspectiveMode.LockOn : PerspectiveMode.ThirdPerson;
     }
 }

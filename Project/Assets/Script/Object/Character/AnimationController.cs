@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Backend.Object.Character
 {
-    [RequireComponent(typeof(Animator))]
+    //[RequireComponent(typeof(Animator))]
     public class AnimationController : MonoBehaviour
     {
         protected Animator Animator;
@@ -20,6 +20,11 @@ namespace Backend.Object.Character
         public void SetAnimationBoolean(int name, bool value)
         {
             Animator.SetBool(name, value);
+        }
+
+        public void SetAnimationBoolean(string id, bool value)
+        {
+            Animator.SetBool(id, value);
         }
 
         public void SetCrossFadeInFixedTime(int name, float value)
