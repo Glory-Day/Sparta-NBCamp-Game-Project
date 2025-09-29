@@ -20,6 +20,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -43,6 +46,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -70,6 +76,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -101,6 +110,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -132,6 +144,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -158,6 +173,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -189,6 +207,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -214,6 +235,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -240,6 +264,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -264,6 +291,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -290,6 +320,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -317,6 +350,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: back step
@@ -342,6 +378,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -366,6 +405,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -391,6 +433,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -416,6 +461,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -440,6 +488,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -468,6 +519,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -495,6 +549,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -519,6 +576,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -550,6 +610,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -575,6 +638,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -596,11 +662,14 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 57fdc15d25a81724d81c46596eb4b4db
-  Position: {x: 892, y: 352}
+  Position: {x: 900, y: 359}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -628,6 +697,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: "\uAC70\uB9AC\uAC00 \uBA40\uB54C"
@@ -655,6 +727,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -681,6 +756,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -708,6 +786,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -732,6 +813,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -756,6 +840,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -783,6 +870,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -807,6 +897,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -832,6 +925,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -917,6 +1013,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
 --- !u!114 &310004476240461778
 MonoBehaviour:
@@ -938,6 +1037,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -965,6 +1067,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -991,6 +1096,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1018,6 +1126,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1042,6 +1153,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1068,6 +1182,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1091,6 +1208,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1118,6 +1238,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1145,6 +1268,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1172,6 +1298,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1196,6 +1325,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1220,6 +1352,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1245,6 +1380,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1269,6 +1407,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1294,6 +1435,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1321,6 +1465,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1348,6 +1495,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1372,6 +1522,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1398,6 +1551,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1425,6 +1581,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1451,6 +1610,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: "\uC6D0\uAC70\uB9AC \uC0AC\uAC70\uB9AC \uC77C\uB54C"
@@ -1478,6 +1640,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1507,6 +1672,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1531,6 +1699,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1558,6 +1729,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1585,6 +1759,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 
@@ -1612,6 +1789,9 @@ MonoBehaviour:
     attackTimeCounter: 0
     isHit: 0
     playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
   tree: {fileID: 0}
   description: 

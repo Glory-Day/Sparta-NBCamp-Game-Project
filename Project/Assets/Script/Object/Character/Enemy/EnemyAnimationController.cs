@@ -67,18 +67,55 @@ namespace Backend.Object.Character.Enemy
             }
         }
 
-        public bool IsPlayingCheckName(string stateName, int layer)
+        public float GetAnimationNormalByTag(int tagHash, int layer)
         {
+            var currentStateInfo = Animator.GetCurrentAnimatorStateInfo(layer);
+
             if (Animator.IsInTransition(layer))
             {
-                AnimatorStateInfo nextStateInfo = Animator.GetNextAnimatorStateInfo(layer);
-                return nextStateInfo.IsName(stateName);
+                var nextStateInfo = Animator.GetNextAnimatorStateInfo(layer);
+                if (nextStateInfo.tagHash == tagHash)
+                {
+                    return nextStateInfo.normalizedTime;
+                }
             }
-            else
+
+            if (currentStateInfo.tagHash == tagHash)
             {
-                AnimatorStateInfo currentStateInfo = Animator.GetCurrentAnimatorStateInfo(layer);
-                return currentStateInfo.IsName(stateName);
+                return currentStateInfo.normalizedTime;
             }
+
+            return 0f;
+        }
+
+        public bool IsStatePlayingByTag(int tagHash, int layer)
+        {
+            var currentStateInfo = Animator.GetCurrentAnimatorStateInfo(layer);
+            if(currentStateInfo.tagHash == tagHash)
+            {
+                return true;
+            }
+
+            if (Animator.IsInTransition(layer))
+            {
+                var nextStateInfo = Animator.GetNextAnimatorStateInfo(layer);
+                if(nextStateInfo.tagHash == tagHash)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void SetAnimationFloat(int hash, float value, float dampTime, float time)
+        {
+            Animator.SetFloat(hash, value, dampTime, time);
+        }
+
+        public void SetAnimatorSpeed(float speed)
+        {
+            Animator.speed = speed;
         }
     }
 }
