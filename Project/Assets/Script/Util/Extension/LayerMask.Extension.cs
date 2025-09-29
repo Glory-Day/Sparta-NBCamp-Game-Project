@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Backend.Object.Character.Player
+namespace Backend.Util.Extension
 {
     public static class LayerMaskExtension
     {
@@ -16,7 +16,7 @@ namespace Backend.Object.Character.Player
             {
                 layerMask &= ~(1 << layer);
             }
-            
+
             return layerMask;
         }
     }

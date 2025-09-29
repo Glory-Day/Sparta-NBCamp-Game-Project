@@ -6,16 +6,16 @@ using Backend.Object.Character.Player;
 
 namespace Backend.Util.Editor
 {
-    [CustomEditor(typeof(MovementController))]
+    [CustomEditor(typeof(PlayerMovementController))]
     public class MovementControllerInspector : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            var component = (MovementController)target;
+            var component = (PlayerMovementController)target;
 
-            if (component.mode != Sensor.CastMethodMode.MultipleRay)
+            if (component.mode != CastMode.MultipleRay)
             {
                 return;
             }
@@ -32,13 +32,8 @@ namespace Backend.Util.Editor
             }
         }
 
-        private void DrawRaycastArrayPreview(MovementController component)
+        private void DrawRaycastArrayPreview(PlayerMovementController component)
         {
-            if (component.mode != Sensor.CastMethodMode.MultipleRay)
-            {
-                return;
-            }
-
             const float size = 3f;
 
             GUILayout.Space(5);

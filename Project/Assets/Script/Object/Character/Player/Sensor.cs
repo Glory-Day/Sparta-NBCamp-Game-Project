@@ -12,7 +12,7 @@ namespace Backend.Object.Character.Player
 
         // Starting point of ray cast.
         private Vector3 _origin = Vector3.zero;
-        private Direction _direction;
+        private DirectionType _directionType;
 
         // Backup normal used for specific edge cases when using sphere casts.
         private Vector3 _cache;
@@ -20,29 +20,6 @@ namespace Backend.Object.Character.Player
         private Vector3[] _origins;
         private readonly List<Vector3> _points = new ();
         private readonly List<Vector3> _normals = new ();
-
-        public CastMethodMode CastMode = CastMethodMode.SingleRay;
-        public LayerMask LayerMask = 255;
-
-        public float MaximumDistance = 1f;
-        public float Radius = 0.2f;
-
-        /// <summary>
-        /// Cast an additional ray to get the true surface normal.
-        /// </summary>
-        public bool UseRealisticSurfaceNormal;
-
-        /// <summary>
-        /// Cast an additional ray to get the true distance to the ground.
-        /// </summary>
-        public bool UseRealisticDistance;
-
-#if UNITY_EDITOR
-
-        // Whether to draw debug information in the editor.
-        public bool IsDebugMode = false;
-
-#endif
 
         public Sensor(Transform transform, Collider collider)
         {
@@ -57,21 +34,6 @@ namespace Backend.Object.Character.Player
         }
 
         /// <summary>
-        /// Reset all variables related to storing information on ray cast hits.
-        /// </summary>
-        private void Refresh()
-        {
-            Hit.Position = Vector3.zero;
-            Hit.Normal = -GetDirection();
-            Hit.Distance = 0f;
-
-            Hit.IsDetected = false;
-
-            Hit.Transforms.Clear();
-            Hit.Colliders.Clear();
-        }
-
-        /// <summary>
         /// Cast a ray (or sphere or array of rays) to check for colliders.
         /// </summary>
         public void Cast()
@@ -79,21 +41,21 @@ namespace Backend.Object.Character.Player
             Refresh();
 
             // Calculate origin and direction of ray in world coordinates system.
-            var origin = _transform.TransformPoint(_origin);
-            var direction = GetDirection();
+            var origin = _transform.TransformPoint(Origin);
+            var direction = Direction;
 
             _excluder.Apply();
 
             // Depending on the chosen mode of detection, call different functions to check for colliders.
             switch (CastMode)
             {
-                case CastMethodMode.SingleRay:
+                case CastMode.SingleRay:
                     CastBySingleRay(origin, direction);
                     break;
-                case CastMethodMode.Sphere:
+                case CastMode.Sphere:
                     CastBySphere(origin, direction);
                     break;
-                case CastMethodMode.MultipleRay:
+                case CastMode.MultipleRay:
                     CastByMultipleRay(origin, direction);
                     break;
                 default:
@@ -135,7 +97,7 @@ namespace Backend.Object.Character.Player
 
             // Calculate origin and direction of ray in world coordinates system.
             var position = Vector3.zero;
-            var rayDirection = GetDirection();
+            var rayDirection = Direction;
 
             for (var i = 0; i < _origins.Length; i++)
             {
@@ -181,7 +143,7 @@ namespace Backend.Object.Character.Player
 
             Hit.Position = point;
             Hit.Normal = normal;
-            Hit.Distance = VectorMath.ExtractDotVector(origin - Hit.Position, direction).magnitude;
+            Hit.Distance = (origin - Hit.Position).Project(direction).magnitude;
         }
 
         private void CastBySphere(Vector3 origin, Vector3 direction)
@@ -207,7 +169,7 @@ namespace Backend.Object.Character.Player
             // Calculate real distance.
             if (UseRealisticDistance)
             {
-                Hit.Distance = VectorMath.ExtractDotVector(origin - Hit.Position, direction).magnitude;
+                Hit.Distance = (origin - Hit.Position).Project(direction).magnitude;
             }
 
             var collider = Hit.Collider;
@@ -231,21 +193,19 @@ namespace Backend.Object.Character.Player
             _cache = Hit.Normal;
         }
 
-        /// <returns>
-        /// Calculate a direction in world coordinates based on the local axes of this instance's transform component.
-        /// </returns>
-        private Vector3 GetDirection()
+        /// <summary>
+        /// Reset all variables related to storing information on ray cast hits.
+        /// </summary>
+        private void Refresh()
         {
-            return _direction switch
-            {
-                Direction.Up => _transform.up,
-                Direction.Down => -_transform.up,
-                Direction.Left => -_transform.right,
-                Direction.Right => _transform.right,
-                Direction.Forward => _transform.forward,
-                Direction.Backward => -_transform.forward,
-                _ => Vector3.one
-            };
+            Hit.Position = Vector3.zero;
+            Hit.Normal = -Direction;
+            Hit.Distance = 0f;
+
+            Hit.IsDetected = false;
+
+            Hit.Transforms.Clear();
+            Hit.Colliders.Clear();
         }
 
 #if UNITY_EDITOR
@@ -265,7 +225,7 @@ namespace Backend.Object.Character.Player
             var position = Hit.Position;
             var color = Color.red;
             var time = Time.deltaTime;
-            Debug.DrawRay(position, Hit.Normal, color, time);
+            Debug.DrawLine(position, position + Hit.Normal, color, time);
 
             color = Color.green;
             Debug.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size), color, time);
@@ -278,25 +238,51 @@ namespace Backend.Object.Character.Player
         /// <summary>
         /// Set the position for the raycast to start from.
         /// </summary>
-        public void SetOriginPosition(Vector3 origin)
+        public Vector3 Origin
         {
-            if (_transform == null)
+            get => _origin;
+            set
             {
-                return;
-            }
+                if (_transform == null)
+                {
+                    return;
+                }
 
-            _origin = _transform.InverseTransformPoint(origin);
+                _origin = _transform.InverseTransformPoint(value);
+            }
         }
 
-        /// <param name="direction">Axis of this instance's transform will be used as the direction for the raycast.</param>
-        public void SetDirection(Direction direction)
+        /// <summary>
+        /// Set axis of this instance's transform will be used as the direction for the raycast.
+        /// </summary>
+        public DirectionType DirectionType
         {
-            if (_transform == null)
+            set
             {
-                return;
-            }
+                if (_transform == null)
+                {
+                    return;
+                }
 
-            _direction = direction;
+                _directionType = value;
+            }
+        }
+
+        /// <returns>
+        /// Calculate a direction in world coordinates based on the local axes of this instance's transform component.
+        /// </returns>
+        private Vector3 Direction
+        {
+            get => _directionType switch
+            {
+                DirectionType.Up => _transform.up,
+                DirectionType.Down => -_transform.up,
+                DirectionType.Left => -_transform.right,
+                DirectionType.Right => _transform.right,
+                DirectionType.Forward => _transform.forward,
+                DirectionType.Backward => -_transform.forward,
+                _ => Vector3.one
+            };
         }
 
         /// <summary>
@@ -344,40 +330,42 @@ namespace Backend.Object.Character.Player
             return positions.ToArray();
         }
 
+        public CastMode CastMode { get; set; } = CastMode.SingleRay;
+        public LayerMask LayerMask { get; set; } = 255;
+
+        public float MaximumDistance { get; set; } = 1f;
+        public float Radius { get; set; } = 0.2f;
+
+        /// <summary>
+        /// Cast an additional ray to get the true surface normal.
+        /// </summary>
+        public bool UseRealisticSurfaceNormal { get; set; }
+
+        /// <summary>
+        /// Cast an additional ray to get the true distance to the ground.
+        /// </summary>
+        public bool UseRealisticDistance { get; set; }
+
+#if UNITY_EDITOR
+
+        // Whether to draw debug information in the editor.
+        public bool IsDebugMode { get; set; }
+
+#endif
+
         public HitInformation Hit { get; } = new();
 
         public MultipleRayOption Option { get; } = new();
-
-        #region NESTED ENUMERATION API
-
-        public enum Direction
-        {
-            Forward,
-            Right,
-            Up,
-            Backward,
-            Left,
-            Down
-        }
-
-        public enum CastMethodMode
-        {
-            SingleRay,
-            MultipleRay,
-            Sphere
-        }
-
-        #endregion
 
         #region NESTED STRUCTURE API
 
         public class HitInformation
         {
-            public Vector3 Position;
-            public Vector3 Normal;
-            public float Distance;
+            public Vector3 Position { get; set; }
+            public Vector3 Normal { get; set; }
+            public float Distance { get; set; }
 
-            public bool IsDetected;
+            public bool IsDetected { get; set; }
 
             public List<Transform> Transforms { get; } = new ();
 
@@ -391,13 +379,13 @@ namespace Backend.Object.Character.Player
         public class MultipleRayOption
         {
             // Number of rays in every row.
-            public int Rows = 3;
+            public int Rows { get; set; } = 3;
 
             // Number of rows around the central ray;
-            public int Count = 9;
+            public int Count { get; set; } = 9;
 
             // Whether offset every other row.
-            public bool IsOffset = false;
+            public bool IsOffset { get; set; }
         }
 
         #endregion

@@ -44,6 +44,15 @@ namespace Backend.Util.Input
                     ""id"": ""ee2d0e81-9273-4b89-8ff4-9f94c402885b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e67f240-28c0-4cee-979b-ce7af44f746f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
@@ -107,11 +116,22 @@ namespace Backend.Util.Input
                 {
                     ""name"": """",
                     ""id"": ""f15a661f-053a-40f2-a726-4fc00e56c593"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17b3a305-bb83-44eb-9c4e-98ecb53dd48b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -152,6 +172,7 @@ namespace Backend.Util.Input
             m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
             m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
             m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
+            m_Movement_Roll = m_Movement.FindAction("Roll", throwIfNotFound: true);
             // Perspective
             m_Perspective = asset.FindActionMap("Perspective", throwIfNotFound: true);
             m_Perspective_Look = m_Perspective.FindAction("Look", throwIfNotFound: true);
@@ -218,12 +239,14 @@ namespace Backend.Util.Input
         private List<IMovementActions> m_MovementActionsCallbackInterfaces = new List<IMovementActions>();
         private readonly InputAction m_Movement_Move;
         private readonly InputAction m_Movement_Jump;
+        private readonly InputAction m_Movement_Roll;
         public struct MovementActions
         {
             private @PlayerControls m_Wrapper;
             public MovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Movement_Move;
             public InputAction @Jump => m_Wrapper.m_Movement_Jump;
+            public InputAction @Roll => m_Wrapper.m_Movement_Roll;
             public InputActionMap Get() { return m_Wrapper.m_Movement; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -239,6 +262,9 @@ namespace Backend.Util.Input
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
             }
 
             private void UnregisterCallbacks(IMovementActions instance)
@@ -249,6 +275,9 @@ namespace Backend.Util.Input
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Roll.started -= instance.OnRoll;
+                @Roll.performed -= instance.OnRoll;
+                @Roll.canceled -= instance.OnRoll;
             }
 
             public void RemoveCallbacks(IMovementActions instance)
@@ -316,6 +345,7 @@ namespace Backend.Util.Input
         {
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnRoll(InputAction.CallbackContext context);
         }
         public interface IPerspectiveActions
         {

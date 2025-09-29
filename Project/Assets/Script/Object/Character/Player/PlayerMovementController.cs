@@ -4,7 +4,7 @@ namespace Backend.Object.Character.Player
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
-    public class MovementController : MonoBehaviour
+    public class PlayerMovementController : MovementController
     {
         #region CONSTANT FIELD API
 
@@ -26,7 +26,7 @@ namespace Backend.Object.Character.Player
         [SerializeField] private bool isDebugMode;
 
         [Header("Detection Settings")]
-        [SerializeField] public Sensor.CastMethodMode mode = Sensor.CastMethodMode.SingleRay;
+        [SerializeField] public CastMode mode = CastMode.SingleRay;
         [HideInInspector] public int rows = 1;
         [HideInInspector] public int count = 6;
         [HideInInspector] public bool isOffset;
@@ -37,10 +37,7 @@ namespace Backend.Object.Character.Player
 
         private Collider _collider;
         private CapsuleCollider _capsuleCollider;
-        private Rigidbody _rigidbody;
         private Sensor _sensor;
-
-        private bool _isGrounded;
 
         private bool _useExtendedRange = true;
         private float _extendedRange;
@@ -50,8 +47,10 @@ namespace Backend.Object.Character.Player
         // Current upwards (or downwards) velocity necessary to keep the correct distance to the ground.
         private Vector3 _adjustmentVelocity = Vector3.zero;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             SetUp();
 
             _sensor = new Sensor(transform, _collider);
@@ -60,6 +59,8 @@ namespace Backend.Object.Character.Player
             RecalibrateSensor();
         }
 
+#if UNITY_EDITOR
+
         private void LateUpdate()
         {
             if (isDebugMode)
@@ -67,6 +68,8 @@ namespace Backend.Object.Character.Player
                 _sensor.DrawDebug();
             }
         }
+
+#endif
 
         private void Reset()
         {
@@ -84,7 +87,7 @@ namespace Backend.Object.Character.Player
             }
 
             // Recalculate raycast array preview positions.
-            if (mode == Sensor.CastMethodMode.MultipleRay)
+            if (mode == CastMode.MultipleRay)
             {
                 multipleRayPositions = Sensor.GetRaycastOriginPositions(rows, 1f, count, isOffset);
             }
@@ -100,28 +103,28 @@ namespace Backend.Object.Character.Player
             if (_collider == null)
             {
                 transform.gameObject.AddComponent<CapsuleCollider>();
+
                 _collider = GetComponent<Collider>();
             }
 
-            _rigidbody = GetComponent<Rigidbody>();
-
             // If no rigidbody is attached to this instance, add a rigidbody.
-            if (_rigidbody == null)
+            if (Rigidbody == null)
             {
                 transform.gameObject.AddComponent<Rigidbody>();
-                _rigidbody = GetComponent<Rigidbody>();
+
+                Rigidbody = GetComponent<Rigidbody>();
             }
 
             _capsuleCollider = GetComponent<CapsuleCollider>();
 
             // Freeze rigidbody rotation and disable rigidbody gravity.
-            _rigidbody.freezeRotation = true;
-            _rigidbody.useGravity = false;
+            Rigidbody.freezeRotation = true;
+            Rigidbody.useGravity = false;
         }
 
-
-
-        //Recalculate collider height/width/thickness;
+        /// <summary>
+        /// Recalculate collider height, width and thickness.
+        /// </summary>
         private void RecalculateColliderDimensions()
         {
             // Check if a collider is attached to this instance.
@@ -153,12 +156,14 @@ namespace Backend.Object.Character.Player
             }
         }
 
-        // Recalibrate sensor variables;
+        /// <summary>
+        /// Recalibrate sensor variables.
+        /// </summary>
         private void RecalibrateSensor()
         {
             //Set sensor ray origin and direction.
-            _sensor.SetOriginPosition(GetColliderCenter());
-            _sensor.SetDirection(Sensor.Direction.Down);
+            _sensor.Origin = ColliderCenter;
+            _sensor.DirectionType = DirectionType.Down;
 
             // Calculate sensor layer mask.
             RecalculateSensorLayerMask();
@@ -202,7 +207,9 @@ namespace Backend.Object.Character.Player
             _sensor.RecalibrateRaycastOriginPositions();
         }
 
-        // Recalculate sensor layer mask based on current physics settings;
+        /// <summary>
+        /// Recalculate sensor layer mask based on current physics settings.
+        /// </summary>
         private void RecalculateSensorLayerMask()
         {
             var layerMask = 0;
@@ -230,29 +237,27 @@ namespace Backend.Object.Character.Player
             _layer = layer;
         }
 
-        // Returns the collider's center in world coordinates;
-        private Vector3 GetColliderCenter()
+        /// <summary>
+        /// Check if mover is grounded.
+        /// Store all relevant collision information for later.
+        /// Calculate necessary adjustment velocity to keep the correct distance to the ground.
+        /// </summary>
+        public void Check()
         {
-            if (_collider == null)
+            // Check if object layer has been changed since last frame.
+            // If so, recalculate sensor layer mask.
+            if (_layer != gameObject.layer)
             {
-                SetUp();
+                RecalculateSensorLayerMask();
             }
 
-            return _collider.bounds.center;
-        }
-
-        // Check if mover is grounded;
-        //Store all relevant collision information for later;
-        //Calculate necessary adjustment velocity to keep the correct distance to the ground;
-        private void Check()
-        {
             // Reset ground adjustment velocity.
             _adjustmentVelocity = Vector3.zero;
 
             // Set sensor length.
             if (_useExtendedRange)
             {
-                _sensor.MaximumDistance = _extendedRange + height * transform.localScale.x * stepHeightRatio;
+                _sensor.MaximumDistance = _extendedRange + (height * transform.localScale.x * stepHeightRatio);
             }
             else
             {
@@ -264,82 +269,93 @@ namespace Backend.Object.Character.Player
             // If sensor has not detected anything, set flags and return.
             if (_sensor.Hit.IsDetected == false)
             {
-                _isGrounded = false;
+                IsGrounded = false;
 
                 return;
             }
 
             // Set flags for ground detection.
-            _isGrounded = true;
+            IsGrounded = true;
 
             // Get distance that sensor ray reached.
             var distance = _sensor.Hit.Distance;
 
             // Calculate how much mover needs to be moved up or down.
             var length = height * transform.localScale.x * (1f - stepHeightRatio) * 0.5f;
-            var middle = length + height * transform.localScale.x * stepHeightRatio;
+            var middle = length + (height * transform.localScale.x * stepHeightRatio);
             var difference = middle - distance;
 
             // Set new ground adjustment velocity for the next frame.
             _adjustmentVelocity = transform.up * (difference / Time.fixedDeltaTime);
         }
 
-        //Check if mover is grounded;
-        public void CheckForGround()
+        /// <returns>
+        /// True if mover is touching ground and the angle between hte 'up' vector and ground normal is not too steep.
+        /// </returns>
+        public bool IsGrounded { get; private set; }
+
+        public Vector3 FacingDirection => _adjustmentVelocity;
+
+        /// <summary>
+        /// Set movement controller's velocity.
+        /// </summary>
+        public Vector3 Velocity { get => Rigidbody.velocity; set => Rigidbody.velocity = value + _adjustmentVelocity; }
+
+        public bool UseExtendedRange { set => _useExtendedRange = value; }
+
+        public float ColliderHeight
         {
-            // Check if object layer has been changed since last frame.
-            // If so, recalculate sensor layer mask.
-            if (_layer != gameObject.layer)
+            get => height;
+            set
             {
-                RecalculateSensorLayerMask();
+                height = value;
+
+                RecalculateColliderDimensions();
             }
-
-            Check();
         }
 
-        //Set mover velocity;
-        public void SetVelocity(Vector3 velocity)
+        /// <returns>
+        /// The collider's center in world coordinates system.
+        /// </returns>
+        private Vector3 ColliderCenter
         {
-            _rigidbody.velocity = velocity + _adjustmentVelocity;
-        }
-
-        //Returns 'true' if mover is touching ground and the angle between hte 'up' vector and ground normal is not too steep (e.g., angle < slope_limit);
-        public bool IsGrounded()
-        {
-            return _isGrounded;
-        }
-
-        public void SetExtendRangeToUsing(bool isExtended)
-        {
-            _useExtendedRange = isExtended;
-        }
-
-        public void SetColliderHeight(float value)
-        {
-            height = value;
-
-            RecalculateColliderDimensions();
-        }
-
-        public void SetColliderThickness(float value)
-        {
-            if (value < 0f)
+            get
             {
-                value = 0f;
+                if (_collider == null)
+                {
+                    SetUp();
+                }
+
+                return _collider.bounds.center;
             }
-
-            thickness = value;
-
-            RecalculateColliderDimensions();
         }
 
-        public void SetStepHeightRatio(float value)
+        public float ColliderThickness
         {
-            value = Mathf.Clamp(value, 0f, 1f);
+            get => thickness;
+            set
+            {
+                if (value < 0f)
+                {
+                    value = 0f;
+                }
 
-            stepHeightRatio = value;
+                thickness = value;
 
-            RecalculateColliderDimensions();
+                RecalculateColliderDimensions();
+            }
+        }
+
+        public float StopHeightRatio
+        {
+            set
+            {
+                value = Mathf.Clamp(value, 0f, 1f);
+
+                stepHeightRatio = value;
+
+                RecalculateColliderDimensions();
+            }
         }
 
         public Vector3 GetGroundNormal()

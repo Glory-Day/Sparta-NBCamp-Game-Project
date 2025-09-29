@@ -11,6 +11,7 @@ namespace Backend.Object.Character.Player
         [SerializeField] private string horizontalInputAxis = "Horizontal";
         [SerializeField] private string verticalInputAxis = "Vertical";
         [SerializeField] private KeyCode jumpKey = KeyCode.Space;
+        [SerializeField] private KeyCode rollKey = KeyCode.LeftControl;
 
         [Tooltip("If this is enabled, Unity's internal input smoothing is bypassed.\n\n" +
                  "이 옵션이 활성화되면 Unity의 내부 입력 스무딩이 우회된다.")]
@@ -18,22 +19,16 @@ namespace Backend.Object.Character.Player
 
         #endregion
 
+        private void Awake()
+        {
+            JumpButton = new Button(jumpKey);
+            RollButton = new Button(rollKey);
+        }
+
         private void Update()
         {
-            var isPressed = Input.GetKey(jumpKey);
-
-            switch (IsJumpKeyPressed)
-            {
-                case false when isPressed == true:
-                    WasJumpKeyPressed = true;
-                    break;
-                case true when isPressed == false:
-                    WasJumpKeyReleased = true;
-                    IsJumpLocked = false;
-                    break;
-            }
-
-            IsJumpKeyPressed = isPressed;
+            JumpButton.Check();
+            RollButton.Check();
         }
 
         public float GetHorizontalMovementInput()
@@ -46,15 +41,46 @@ namespace Backend.Object.Character.Player
             return useRawInput ? Input.GetAxisRaw(verticalInputAxis) : Input.GetAxis(verticalInputAxis);
         }
 
-        public float LastJumpPressedTime { get; set; }
+        public Button JumpButton { get; private set; }
 
-        //Jump key variables;
-        public bool IsJumpLocked { get; set; }
+        public Button RollButton { get; private set; }
 
-        public bool WasJumpKeyPressed  { get; set; }
+        public class Button
+        {
+            private readonly KeyCode _key;
 
-        public bool WasJumpKeyReleased  { get; set; }
+            public Button(KeyCode key)
+            {
+                _key = key;
+            }
 
-        public bool IsJumpKeyPressed  { get; set; }
+            public void Check()
+            {
+                var isPressed = Input.GetKey(_key);
+
+                switch (IsPressed)
+                {
+                    case false when isPressed == true:
+                        WasPressed = true;
+                        break;
+                    case true when isPressed == false:
+                        WasReleased = true;
+                        IsLocked = false;
+                        break;
+                }
+
+                IsPressed = isPressed;
+            }
+
+            public float LastPressedTime { get; set; }
+
+            public bool IsLocked { get; set; }
+
+            public bool WasPressed { get; set; }
+
+            public bool WasReleased { get; set; }
+
+            public bool IsPressed { get; set; }
+        }
     }
 }
