@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: S0206_Data
   m_EditorClassIdentifier: 
   <ID>k__BackingField: S0206
-  <Name>k__BackingField: "\uB3CC\uC9C4"
-  <Damage>k__BackingField: 0.3
+  <Name>k__BackingField: "\uC9C0\uBA74 \uAC15\uD0C0"
+  <Damage>k__BackingField: 0.2
   <ActionSound>k__BackingField: {fileID: 0}
-  <ActionRange>k__BackingField: 2
-  <IsParryable>k__BackingField: 1
-  <AttackWeight>k__BackingField: 0
-  <CoolDown>k__BackingField: 20
+  <ActionRange>k__BackingField: 1
+  <IsParryable>k__BackingField: 0
+  <AttackWeight>k__BackingField: 10
+  <CoolDown>k__BackingField: 10

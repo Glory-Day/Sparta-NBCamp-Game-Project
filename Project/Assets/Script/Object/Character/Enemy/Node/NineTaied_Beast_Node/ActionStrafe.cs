@@ -26,6 +26,8 @@ namespace Backend.Object.Character.Enemy.Node
             agent.NavMeshAgent.speed = MoveSpeed;
             agent.NavMeshAgent.angularSpeed = RotationSpeed;
             _strafeDuration = Random.Range(MinStrafeDuration, MaxStrafeDuration);
+
+            agent.NavMeshAgent.isStopped = false;
         }
         protected override void Stop()
         {
@@ -43,7 +45,7 @@ namespace Backend.Object.Character.Enemy.Node
             // 보스가 항상 플레이어를 바라보게 만드는 부분
             // context.transform.LookAt(playerTransform);
             _desiredDistance = agent.MovementController.Distance; // 현재 플레이어와의 거리
-                                                                  // 다음 이동 지점을 계산
+            // 다음 이동 지점을 계산
             Vector3 nextPoint = CalculateStrafePoint(_playerTransform, agent.MovementController.transform, _direction, _desiredDistance);
 
             // 해당 지점으로 이동 명령
