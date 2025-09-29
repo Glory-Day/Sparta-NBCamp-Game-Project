@@ -16,5 +16,9 @@ public class Blackboard
 
     public Vector3 moveDestination = Vector3.zero;
 
-    public RangeCheck RangeCheck = RangeCheck.None; // 현재 체크한 공격 범위 
+    public RangeCheck RangeCheck = RangeCheck.None; // 현재 체크한 공격 범위
+
+    public bool IsBackstepping;
+
+    public bool IsParry = false;
 }

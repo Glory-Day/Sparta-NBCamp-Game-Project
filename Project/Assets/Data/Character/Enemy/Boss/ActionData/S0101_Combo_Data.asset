@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b7e850394ef394abb0ecc056d5d1a8, type: 3}
-  m_Name: S0101_Combo2_Data
+  m_Name: S0101_Combo_Data
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: S0101_2
-  <Name>k__BackingField: 123
-  <Damage>k__BackingField: 12
+  <ID>k__BackingField: S0101
+  <Name>k__BackingField: "\uC5F0\uC18D \uACF5\uACA9"
+  <Damage>k__BackingField: 10
   <ActionSound>k__BackingField: {fileID: 0}
   <ActionRange>k__BackingField: 0
   <IsParryable>k__BackingField: 0
-  <AttackWeight>k__BackingField: 5
-  <CoolDown>k__BackingField: 0
+  <AttackWeight>k__BackingField: 0
+  <CoolDown>k__BackingField: 5
