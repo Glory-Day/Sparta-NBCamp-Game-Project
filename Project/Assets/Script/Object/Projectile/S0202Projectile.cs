@@ -12,15 +12,15 @@ namespace Backend.Object.Projectile
         [SerializeField] private bool _isSpawner = false;
 
         // 데미지 수동 적용 여부
-        [SerializeField]  private bool _isManualDamage = false;
-        [SerializeField] private float _damage = 5f;
+        [SerializeField] private bool _isManualDamage = false;
+        [SerializeField] private float _manualDamage = 5f;
         private void OnEnable()
         {
             StartCoroutine(DestroyAfterDelay());
 
             if (_isManualDamage)
             {
-                Init(_damage, Vector3.zero); // 예시로 데미지 10, 위치 (0,0,0)으로 초기화
+                Init(_manualDamage, Vector3.zero); // 예시로 데미지 10, 위치 (0,0,0)으로 초기화
             }
 
             if (_isSpawner)
