@@ -65,6 +65,7 @@ namespace Backend.Object.Character.Player
             if (useStrafeAnimations)
             {
                 Vector3 localVelocity = _transform.InverseTransformVector(h);
+                localVelocity.Normalize();
 
                 SetAnimationFloat("Forward Speed", localVelocity.z);
                 SetAnimationFloat("Strafe Speed", localVelocity.x);

@@ -67,15 +67,20 @@ namespace Backend.Object.Character.Player
 
         private PlayerAnimationController _animationController;
         private PlayerMovementController _movementController;
+
+        private PlayerStatus _status;
+
         private CeilingDetector _detector;
 
         private Vector3 _momentum = Vector3.zero;
-        private Vector3 _facing = Vector3.zero;
 
         private void Awake()
         {
             _animationController = GetComponent<PlayerAnimationController>();
             _movementController = GetComponent<PlayerMovementController>();
+
+            _status = GetComponent<PlayerStatus>();
+
             _detector = GetComponent<CeilingDetector>();
 
             _actions = new PlayerControls();
@@ -90,6 +95,7 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Move.canceled += Stop;
             _actions.Movement.Jump.performed += Jump;
             _actions.Movement.Roll.performed += Roll;
+            _actions.Movement.Attack.performed += Attack;
         }
 
         private void FixedUpdate()
@@ -105,7 +111,7 @@ namespace Backend.Object.Character.Player
 
             // Calculate movement velocity.
             var velocity = Vector3.zero;
-            if (_state is State.Grounded or State.Rolling)
+            if (_state is State.Grounded or State.Rolling or State.Attacking)
             {
                 velocity = CalculateMovementVelocity();
             }
@@ -152,6 +158,7 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Move.canceled -= Stop;
             _actions.Movement.Jump.performed -= Jump;
             _actions.Movement.Roll.performed -= Roll;
+            _actions.Movement.Attack.performed -= Attack;
             _actions.Disable();
         }
 
@@ -187,11 +194,6 @@ namespace Backend.Object.Character.Player
             if (direction.magnitude > 1f)
             {
                 direction.Normalize();
-            }
-
-            if (direction != Vector3.zero)
-            {
-                _facing = direction;
             }
 
             return direction;
@@ -232,7 +234,7 @@ namespace Backend.Object.Character.Player
             v -= transform.up * (gravity * Time.deltaTime);
 
             // Remove any downward force if the controller is grounded.
-            if (_state == State.Grounded && Vector3.Dot(v, transform.up.normalized) < 0f)
+            if (_state is State.Grounded or State.Rolling or State.Attacking && Vector3.Dot(v, transform.up.normalized) < 0f)
             {
                 v = Vector3.zero;
             }
@@ -279,7 +281,7 @@ namespace Backend.Object.Character.Player
             }
 
             // Apply friction to horizontal momentum based on whether the controller is grounded;
-            var friction = _state == State.Grounded ? groundFriction : airFriction;
+            var friction = _state is State.Grounded or State.Rolling or State.Attacking ? groundFriction : airFriction;
             h = Vector3.MoveTowards(h, Vector3.zero, friction * Time.deltaTime);
 
             // Add horizontal and vertical momentum back together.
@@ -314,6 +316,7 @@ namespace Backend.Object.Character.Player
                 case State.Falling:
                 case State.Rising:
                 case State.Rolling:
+                case State.Attacking:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -418,10 +421,6 @@ namespace Backend.Object.Character.Player
             return momentum;
         }
 
-        public Vector3 Velocity { get; private set; } = Vector3.zero;
-
-        public Vector3 MovementVelocity { get; private set; } = Vector3.zero;
-
         /// <summary>
         /// Add momentum to controller.
         /// </summary>
@@ -446,5 +445,9 @@ namespace Backend.Object.Character.Player
                 _momentum = momentum;
             }
         }
+
+        public Vector3 Velocity { get; private set; } = Vector3.zero;
+
+        public Vector3 MovementVelocity { get; private set; } = Vector3.zero;
     }
 }

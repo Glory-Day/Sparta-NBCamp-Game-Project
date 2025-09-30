@@ -55,6 +55,15 @@ namespace Backend.Util.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ca5f548-dd88-4a6d-a797-0381d95a8fd0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -134,6 +143,17 @@ namespace Backend.Util.Input
                     ""action"": ""Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71601e3f-2560-4076-b32e-6945d41ce40b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -173,6 +193,7 @@ namespace Backend.Util.Input
             m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
             m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
             m_Movement_Roll = m_Movement.FindAction("Roll", throwIfNotFound: true);
+            m_Movement_Attack = m_Movement.FindAction("Attack", throwIfNotFound: true);
             // Perspective
             m_Perspective = asset.FindActionMap("Perspective", throwIfNotFound: true);
             m_Perspective_Look = m_Perspective.FindAction("Look", throwIfNotFound: true);
@@ -240,6 +261,7 @@ namespace Backend.Util.Input
         private readonly InputAction m_Movement_Move;
         private readonly InputAction m_Movement_Jump;
         private readonly InputAction m_Movement_Roll;
+        private readonly InputAction m_Movement_Attack;
         public struct MovementActions
         {
             private @PlayerControls m_Wrapper;
@@ -247,6 +269,7 @@ namespace Backend.Util.Input
             public InputAction @Move => m_Wrapper.m_Movement_Move;
             public InputAction @Jump => m_Wrapper.m_Movement_Jump;
             public InputAction @Roll => m_Wrapper.m_Movement_Roll;
+            public InputAction @Attack => m_Wrapper.m_Movement_Attack;
             public InputActionMap Get() { return m_Wrapper.m_Movement; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -265,6 +288,9 @@ namespace Backend.Util.Input
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
 
             private void UnregisterCallbacks(IMovementActions instance)
@@ -278,6 +304,9 @@ namespace Backend.Util.Input
                 @Roll.started -= instance.OnRoll;
                 @Roll.performed -= instance.OnRoll;
                 @Roll.canceled -= instance.OnRoll;
+                @Attack.started -= instance.OnAttack;
+                @Attack.performed -= instance.OnAttack;
+                @Attack.canceled -= instance.OnAttack;
             }
 
             public void RemoveCallbacks(IMovementActions instance)
@@ -346,6 +375,7 @@ namespace Backend.Util.Input
             void OnMove(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnRoll(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
         }
         public interface IPerspectiveActions
         {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Backend.Object.Character.Player
 {
@@ -59,18 +61,6 @@ namespace Backend.Object.Character.Player
             RecalibrateSensor();
         }
 
-#if UNITY_EDITOR
-
-        private void LateUpdate()
-        {
-            if (isDebugMode)
-            {
-                _sensor.DrawDebug();
-            }
-        }
-
-#endif
-
         private void Reset()
         {
             SetUp();
@@ -91,6 +81,61 @@ namespace Backend.Object.Character.Player
             {
                 multipleRayPositions = Sensor.GetRaycastOriginPositions(rows, 1f, count, isOffset);
             }
+        }
+
+        private void OnDrawGizmos()
+        {
+            const float size = 0.2f;
+            const float radius = 0.04f;
+
+            if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
+            {
+                return;
+            }
+
+            var position = Vector3.zero;
+            var distance = Vector3.zero;
+
+            switch (mode)
+            {
+                case CastMode.SingleRay:
+                {
+                    position = _sensor.Position;
+                    distance = _sensor.Normal;
+
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(position, position + distance);
+                    Gizmos.DrawSphere(position, radius);
+                    Gizmos.DrawSphere(position + distance, radius);
+
+                    break;
+                }
+                case CastMode.MultipleRay:
+                {
+                    for (var i = 0; i < _sensor.Hits.Count; i++)
+                    {
+                        position = _sensor.Hits[i].Position;
+                        distance = _sensor.Hits[i].Normal;
+
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawLine(position, position + distance);
+                        Gizmos.DrawSphere(position, radius);
+                        Gizmos.DrawSphere(position + distance, radius);
+                    }
+
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            position = _sensor.Position;
+            distance = _sensor.Normal;
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size));
+            Gizmos.DrawLine(position + (Vector3.right * size), position - (Vector3.right * size));
+            Gizmos.DrawLine(position + (Vector3.forward * size), position - (Vector3.forward * size));
         }
 
 #endif
@@ -267,7 +312,7 @@ namespace Backend.Object.Character.Player
             _sensor.Cast();
 
             // If sensor has not detected anything, set flags and return.
-            if (_sensor.Hit.IsDetected == false)
+            if (_sensor.IsDetected == false)
             {
                 IsGrounded = false;
 
@@ -278,7 +323,7 @@ namespace Backend.Object.Character.Player
             IsGrounded = true;
 
             // Get distance that sensor ray reached.
-            var distance = _sensor.Hit.Distance;
+            var distance = _sensor.Distance;
 
             // Calculate how much mover needs to be moved up or down.
             var length = height * transform.localScale.x * (1f - stepHeightRatio) * 0.5f;
@@ -293,8 +338,6 @@ namespace Backend.Object.Character.Player
         /// True if mover is touching ground and the angle between hte 'up' vector and ground normal is not too steep.
         /// </returns>
         public bool IsGrounded { get; private set; }
-
-        public Vector3 FacingDirection => _adjustmentVelocity;
 
         /// <summary>
         /// Set movement controller's velocity.
@@ -346,6 +389,12 @@ namespace Backend.Object.Character.Player
             }
         }
 
+        public bool IsColliderEnabled
+        {
+            get => _capsuleCollider.enabled;
+            set => _capsuleCollider.enabled = value;
+        }
+
         public float StopHeightRatio
         {
             set
@@ -360,17 +409,12 @@ namespace Backend.Object.Character.Player
 
         public Vector3 GetGroundNormal()
         {
-            return _sensor.Hit.Normal;
+            return _sensor.Normal;
         }
 
         public Vector3 GetGroundPoint()
         {
-            return _sensor.Hit.Position;
-        }
-
-        public Collider GetGroundCollider()
-        {
-            return _sensor.Hit.Collider;
+            return _sensor.Position;
         }
     }
 }

@@ -3,7 +3,6 @@
     public enum CastMode
     {
         SingleRay,
-        MultipleRay,
-        Sphere
+        MultipleRay
     }
 }
