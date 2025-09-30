@@ -6,5 +6,10 @@ namespace Backend.Object.Character.Enemy
     public class EnemyStatus : Status
     {
         [field: SerializeField] public StatusBossData BossStatus { get; private set; }
+
+        private void Awake()
+        {
+            HealthPoint = BossStatus.HealthPoint;
+        }
     }
 }
