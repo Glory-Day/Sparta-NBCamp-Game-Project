@@ -190,7 +190,7 @@ namespace Backend.Object.Character.Player
         /// <returns>
         /// True if controller is grounded (or sliding down a slope).
         /// </returns>
-        public bool IsGrounded => _state is State.Grounded or State.Sliding;
+        public bool IsGrounded => _state is State.Grounded or State.Sliding or State.Rolling or State.Attacking;
 
         /// <returns>
         /// True if controller is sliding.
@@ -209,6 +209,7 @@ namespace Backend.Object.Character.Player
             Rising,
             Jumping,
             Rolling,
+            Attacking
         }
 
         #endregion

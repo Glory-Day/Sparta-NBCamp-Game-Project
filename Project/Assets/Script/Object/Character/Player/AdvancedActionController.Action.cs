@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Backend.Util.Debug;
 using Backend.Util.Input;
 using UnityEngine;
@@ -10,12 +9,17 @@ namespace Backend.Object.Character.Player
     public partial class AdvancedActionController
     {
         private PlayerControls _actions;
+        private Vector3 _facing = Vector3.zero;
         private Vector3 _direction = Vector3.zero;
+
+        private bool _isRolling;
+        private bool _isRollButtonBuffered;
 
         private float _lastJumpButtonUsed;
 
-        private float _isRollButtonBuffered;
-        private float _lastRollButtonUsed;
+        private int _combatIndex = -1;
+        private bool _isAttacking;
+        private bool _isAttackButtonBuffered;
 
         public event Action<Vector3> OnJump;
         public event Action<Vector3> OnLand;
@@ -24,6 +28,7 @@ namespace Backend.Object.Character.Player
         private void Move(InputAction.CallbackContext context)
         {
             _direction = context.ReadValue<Vector3>().normalized;
+            _facing = _direction;
         }
 
         private void Jump(InputAction.CallbackContext context)
@@ -59,17 +64,51 @@ namespace Backend.Object.Character.Player
         {
             Debugger.LogProgress();
 
-            if (_state != State.Grounded)
+            if (_status.IsUsingStaminaAvailable() == false)
             {
                 return;
             }
 
-            if (Time.time < _lastRollButtonUsed + rollingDuration)
+            switch (_state)
             {
-                return;
+                case State.Grounded when _state != State.Rolling:
+                    _animationController.SetAnimationBoolean("Is Rolling", true);
+                    break;
+                case State.Rolling:
+                    _isRollButtonBuffered = true;
+                    break;
+                case State.Sliding:
+                case State.Falling:
+                case State.Rising:
+                case State.Jumping:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void Attack(InputAction.CallbackContext context)
+        {
+            switch (_state)
+            {
+                case State.Grounded:
+                    _combatIndex = 0;
+                    break;
+                case State.Attacking:
+                    if (_isAttackButtonBuffered == false)
+                    {
+                        _isAttackButtonBuffered = true;
+                        _combatIndex = 1;
+                    }
+                    break;
             }
 
-            _animationController.SetAnimationBoolean("Is Rolling", true);
+            _animationController.SetAnimationInteger("Combat Index", _combatIndex);
+        }
+
+        private void Stop(InputAction.CallbackContext context)
+        {
+            _direction = Vector3.zero;
         }
 
         public void OnRollingStateEntered()
@@ -77,8 +116,15 @@ namespace Backend.Object.Character.Player
             Debugger.LogProgress();
 
             _state = State.Rolling;
+            _isRollButtonBuffered = false;
 
-            _actions.Movement.Disable();
+            _status.UseStamina();
+
+            _movementController.IsColliderEnabled = false;
+
+            _actions.Movement.Move.Disable();
+            _actions.Movement.Jump.Disable();
+            _actions.Movement.Attack.Disable();
 
             _direction = _facing;
         }
@@ -87,18 +133,53 @@ namespace Backend.Object.Character.Player
         {
             Debugger.LogProgress();
 
+            _state = State.Grounded;
+            _direction = Vector3.zero;
+
+            _movementController.IsColliderEnabled = true;
+
+            _actions.Movement.Move.Enable();
+            _actions.Movement.Jump.Enable();
+            _actions.Movement.Attack.Enable();
+
             _animationController.SetAnimationBoolean("Is Rolling", false);
 
-            _direction = Vector3.zero;
-
-            _actions.Movement.Enable();
-
-            _state = State.Grounded;
+            if (_isRollButtonBuffered)
+            {
+                _animationController.SetAnimationBoolean("Is Rolling", true);
+            }
         }
 
-        private void Stop(InputAction.CallbackContext context)
+        public void OnAttackingStateEntered()
         {
-            _direction = Vector3.zero;
+            Debugger.LogProgress();
+
+            _state = State.Attacking;
+            _isAttackButtonBuffered = false;
+
+            _actions.Movement.Move.Disable();
+            _actions.Movement.Jump.Disable();
+            _actions.Movement.Roll.Disable();
+        }
+
+        public void OnAttackingStateExited()
+        {
+            Debugger.LogProgress();
+
+            _state = State.Grounded;
+
+            _actions.Movement.Move.Enable();
+            _actions.Movement.Jump.Enable();
+            _actions.Movement.Roll.Enable();
+
+            _combatIndex = -1;
+
+            if (_isAttackButtonBuffered)
+            {
+                _combatIndex = 0;
+            }
+
+            _animationController.SetAnimationInteger("Combat Index", _combatIndex);
         }
     }
 }

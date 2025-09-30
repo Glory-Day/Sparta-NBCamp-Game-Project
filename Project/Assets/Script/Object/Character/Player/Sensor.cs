@@ -18,8 +18,6 @@ namespace Backend.Object.Character.Player
         private Vector3 _cache;
 
         private Vector3[] _origins;
-        private readonly List<Vector3> _points = new ();
-        private readonly List<Vector3> _normals = new ();
 
         public Sensor(Transform transform, Collider collider)
         {
@@ -38,7 +36,7 @@ namespace Backend.Object.Character.Player
         /// </summary>
         public void Cast()
         {
-            Refresh();
+            Hits.Clear();
 
             // Calculate origin and direction of ray in world coordinates system.
             var origin = _transform.TransformPoint(Origin);
@@ -52,14 +50,11 @@ namespace Backend.Object.Character.Player
                 case CastMode.SingleRay:
                     CastBySingleRay(origin, direction);
                     break;
-                case CastMode.Sphere:
-                    CastBySphere(origin, direction);
-                    break;
                 case CastMode.MultipleRay:
                     CastByMultipleRay(origin, direction);
                     break;
                 default:
-                    Hit.IsDetected = false;
+                    IsDetected = false;
                     break;
             }
 
@@ -71,19 +66,16 @@ namespace Backend.Object.Character.Player
         /// </summary>
         private void CastBySingleRay(Vector3 origin, Vector3 direction)
         {
-            Hit.IsDetected = Physics.Raycast(origin, direction, out var hit, MaximumDistance, LayerMask, QueryTriggerInteraction.Ignore);
+            IsDetected = Physics.Raycast(origin, direction, out var hit, MaximumDistance, LayerMask, QueryTriggerInteraction.Ignore);
 
-            if (Hit.IsDetected == false)
+            if (IsDetected == false)
             {
                 return;
             }
 
-            Hit.Position = hit.point;
-            Hit.Normal = hit.normal;
-            Hit.Distance = hit.distance;
-
-            Hit.Colliders.Add(hit.collider);
-            Hit.Transforms.Add(hit.transform);
+            Position = hit.point;
+            Normal = hit.normal;
+            Distance = hit.distance;
         }
 
         /// <summary>
@@ -91,10 +83,6 @@ namespace Backend.Object.Character.Player
         /// </summary>
         private void CastByMultipleRay(Vector3 origin, Vector3 direction)
         {
-            // Clear results from last frame.
-            _normals.Clear();
-            _points.Clear();
-
             // Calculate origin and direction of ray in world coordinates system.
             var position = Vector3.zero;
             var rayDirection = Direction;
@@ -110,130 +98,73 @@ namespace Backend.Object.Character.Player
                     continue;
                 }
 
-#if UNITY_EDITOR
-
-                if (IsDebugMode)
-                {
-                    Debug.DrawRay(hit.point, hit.normal, Color.red, Time.fixedDeltaTime * 1.01f);
-                }
-
-#endif
-
-                Hit.Colliders.Add(hit.collider);
-                Hit.Transforms.Add(hit.transform);
-
-                _normals.Add(hit.normal);
-                _points.Add(hit.point);
+                Hits.Add(new HitInformation(hit));
             }
 
-            Hit.IsDetected = _points.Count > 0;
+            IsDetected = Hits.Count > 0;
 
-            if (Hit.IsDetected == false)
+            if (IsDetected == false)
             {
                 return;
             }
 
             // Calculate average surface normal.
-            var normal = _normals.Aggregate(Vector3.zero, (current, v) => current + v);
+            var normal = Hits.Aggregate(Vector3.zero, (current, hit) => current + hit.Normal);
             normal.Normalize();
 
             //Calculate average surface point;
-            var point = _points.Aggregate(Vector3.zero, (current, p) => current + p);
-            point /= _points.Count;
+            var point = Hits.Aggregate(Vector3.zero, (current, hit) => current + hit.Position);
+            point /= Hits.Count;
 
-            Hit.Position = point;
-            Hit.Normal = normal;
-            Hit.Distance = (origin - Hit.Position).Project(direction).magnitude;
-        }
-
-        private void CastBySphere(Vector3 origin, Vector3 direction)
-        {
-            var distance = MaximumDistance - Radius;
-
-            Hit.IsDetected = Physics.SphereCast(origin, Radius, direction, out var hit, distance, LayerMask, QueryTriggerInteraction.Ignore);
-
-            if (Hit.IsDetected == false)
-            {
-                return;
-            }
-
-            Hit.Position = hit.point;
-            Hit.Normal = hit.normal;
-
-            Hit.Distance = hit.distance;
-            Hit.Distance += Radius;
-
-            Hit.Colliders.Add(hit.collider);
-            Hit.Transforms.Add(hit.transform);
-
-            // Calculate real distance.
-            if (UseRealisticDistance)
-            {
-                Hit.Distance = (origin - Hit.Position).Project(direction).magnitude;
-            }
-
-            var collider = Hit.Collider;
-
-            // Calculate real surface normal by casting an additional ray cast.
-            if (UseRealisticSurfaceNormal == false)
-            {
-                return;
-            }
-
-            var ray = new Ray(Hit.Position - direction, direction);
-            if (collider.Raycast(ray, out hit, 1.5f))
-            {
-                Hit.Normal = Vector3.Angle(hit.normal, -direction) >= 89f ? _cache : hit.normal;
-            }
-            else
-            {
-                Hit.Normal = _cache;
-            }
-
-            _cache = Hit.Normal;
+            Position = point;
+            Normal = normal;
+            Distance = (origin - Position).Project(direction).magnitude;
         }
 
         /// <summary>
-        /// Reset all variables related to storing information on ray cast hits.
+        /// Recalculate start positions for the raycast array
         /// </summary>
-        private void Refresh()
+        public void RecalibrateRaycastOriginPositions()
         {
-            Hit.Position = Vector3.zero;
-            Hit.Normal = -Direction;
-            Hit.Distance = 0f;
-
-            Hit.IsDetected = false;
-
-            Hit.Transforms.Clear();
-            Hit.Colliders.Clear();
+            _origins = GetRaycastOriginPositions(Option.Rows, Radius, Option.Count, Option.IsOffset);
         }
 
-#if UNITY_EDITOR
-
-        /// <summary>
-        /// Draw debug information in editor (hit positions and ground surface normals).
-        /// </summary>
-        public void DrawDebug()
+        /// <returns>
+        /// An array containing the starting positions of all array rays (in local coordinates system) based on the input arguments.
+        /// </returns>
+        public static Vector3[] GetRaycastOriginPositions(int rows, float radius, int count, bool isOffset)
         {
-            const float size = 0.2f;
+            // Initialize list used to store the positions.
+            // Add central start position to the list.
+            var positions = new List<Vector3> { Vector3.zero };
 
-            if (Hit.IsDetected == false || IsDebugMode == false)
+            for (var i = 0; i < rows; i++)
             {
-                return;
+                // Calculate radius for all positions on this row.
+                var r = (float)(i + 1) / rows;
+
+                for (var j = 0; j < count * (i + 1); j++)
+                {
+                    // Calculate angle (in degrees) for this individual position.
+                    var angle = 360f / (count * (i + 1)) * j;
+
+                    //If 'offsetRows' is set to 'true', every other row is offset;
+                    if (isOffset && i % 2 == 0)
+                    {
+                        angle += 360f / (count * (i + 1)) / 2f;
+                    }
+
+                    // Combine radius and angle into one position and add it to the list.
+                    var x = r * Mathf.Cos(Mathf.Deg2Rad * angle);
+                    var y = r * Mathf.Sin(Mathf.Deg2Rad * angle);
+
+                    positions.Add(new Vector3(x, 0f, y) * radius);
+                }
             }
 
-            var position = Hit.Position;
-            var color = Color.red;
-            var time = Time.deltaTime;
-            Debug.DrawLine(position, position + Hit.Normal, color, time);
-
-            color = Color.green;
-            Debug.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size), color, time);
-            Debug.DrawLine(position + (Vector3.right * size), position - (Vector3.right * size), color, time);
-            Debug.DrawLine(position + (Vector3.forward * size), position - (Vector3.forward * size), color, time);
+            // Convert list to array and return array.
+            return positions.ToArray();
         }
-
-#endif
 
         /// <summary>
         /// Set the position for the raycast to start from.
@@ -285,56 +216,17 @@ namespace Backend.Object.Character.Player
             };
         }
 
-        /// <summary>
-        /// Recalculate start positions for the raycast array
-        /// </summary>
-        public void RecalibrateRaycastOriginPositions()
-        {
-            _origins = GetRaycastOriginPositions(Option.Rows, Radius, Option.Count, Option.IsOffset);
-        }
-
-        /// <returns>
-        /// An array containing the starting positions of all array rays (in local coordinates system) based on the input arguments.
-        /// </returns>
-        public static Vector3[] GetRaycastOriginPositions(int rows, float radius, int count, bool isOffset)
-        {
-            // Initialize list used to store the positions.
-            // Add central start position to the list.
-            var positions = new List<Vector3> { Vector3.zero };
-
-            for (var i = 0; i < rows; i++)
-            {
-                // Calculate radius for all positions on this row.
-                var r = (float)(i + 1) / rows;
-
-                for (var j = 0; j < count * (i + 1); j++)
-                {
-                    // Calculate angle (in degrees) for this individual position.
-                    var angle = 360f / (count * (i + 1)) * j;
-
-                    //If 'offsetRows' is set to 'true', every other row is offset;
-                    if (isOffset && i % 2 == 0)
-                    {
-                        angle += 360f / (count * (i + 1)) / 2f;
-                    }
-
-                    // Combine radius and angle into one position and add it to the list.
-                    var x = r * Mathf.Cos(Mathf.Deg2Rad * angle);
-                    var y = r * Mathf.Sin(Mathf.Deg2Rad * angle);
-
-                    positions.Add(new Vector3(x, 0f, y) * radius);
-                }
-            }
-
-            // Convert list to array and return array.
-            return positions.ToArray();
-        }
-
         public CastMode CastMode { get; set; } = CastMode.SingleRay;
         public LayerMask LayerMask { get; set; } = 255;
 
         public float MaximumDistance { get; set; } = 1f;
         public float Radius { get; set; } = 0.2f;
+
+        public bool IsDetected { get; private set; }
+
+        public Vector3 Position { get; private set; }
+        public Vector3 Normal { get; private set; }
+        public float Distance { get; private set; }
 
         /// <summary>
         /// Cast an additional ray to get the true surface normal.
@@ -353,27 +245,30 @@ namespace Backend.Object.Character.Player
 
 #endif
 
-        public HitInformation Hit { get; } = new();
+        public List<HitInformation> Hits { get; } = new();
 
         public MultipleRayOption Option { get; } = new();
 
         #region NESTED STRUCTURE API
 
-        public class HitInformation
+        public struct HitInformation
         {
+            public HitInformation(RaycastHit hit)
+            {
+                Transform = hit.transform;
+                Collider = hit.collider;
+
+                Position = hit.point;
+                Normal = hit.normal;
+                Distance = hit.distance;
+            }
+
+            public Transform Transform { get; set; }
+            public Collider Collider { get; set; }
+
             public Vector3 Position { get; set; }
             public Vector3 Normal { get; set; }
             public float Distance { get; set; }
-
-            public bool IsDetected { get; set; }
-
-            public List<Transform> Transforms { get; } = new ();
-
-            public List<Collider> Colliders { get; } = new ();
-
-            public Transform Transform => Transforms[0];
-
-            public Collider Collider => Colliders[0];
         }
 
         public class MultipleRayOption
