@@ -21,7 +21,7 @@ public class BaseProjectile : MonoBehaviour
         _rigidbody.useGravity = false; // 중력 비활성화
     }
 
-    public void Init(float damage, Vector3 position)
+    public virtual void Init(float damage, Vector3 position)
     {
         _damage = damage;
         _tagetPosition = position;
@@ -42,6 +42,6 @@ public class BaseProjectile : MonoBehaviour
 
     public float SetDamage()
     {
-        return _damage; 
+        return _damage;
     }
 }

@@ -708,6 +708,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2593834130920936431, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2754763856285015560, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2754763856285015560, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
+      propertyPath: isParticleSystem
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5967844515003779013, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
       propertyPath: m_Name
       value: S0206_Projectile
@@ -773,6 +785,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: S0201_Projectile
       objectReference: {fileID: 0}
+    - target: {fileID: 6352715123424040704, guid: 8f4f356061b1cfe44960301f532dd351, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -792,7 +808,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2873213410975290457, guid: b75f62eef35e263469f3a15b33993d1d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7123592766339001253, guid: b75f62eef35e263469f3a15b33993d1d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -955,6 +971,18 @@ PrefabInstance:
     - target: {fileID: 4993321780099923417, guid: 4d8e7a35029539945a64260784383b21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364353666644225198, guid: 4d8e7a35029539945a64260784383b21, type: 3}
+      propertyPath: m_randomPos.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364353666644225198, guid: 4d8e7a35029539945a64260784383b21, type: 3}
+      propertyPath: m_randomPos.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364353666644225198, guid: 4d8e7a35029539945a64260784383b21, type: 3}
+      propertyPath: m_randomPos.z
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

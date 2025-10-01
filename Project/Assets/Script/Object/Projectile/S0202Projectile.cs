@@ -23,6 +23,12 @@ namespace Backend.Object.Projectile
                 Init(_manualDamage, Vector3.zero); // 예시로 데미지 10, 위치 (0,0,0)으로 초기화
             }
 
+        }
+
+        public override void Init(float damage, Vector3 position)
+        {
+            base.Init(damage, position);
+
             if (_isSpawner)
             {
                 transform.position = _tagetPosition;

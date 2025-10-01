@@ -11,6 +11,12 @@ namespace Backend.Object.Projectile
         private void OnEnable()
         {
             StartCoroutine(DestroyAfterDelay());
+
+        }
+
+        public override void Init(float damage, Vector3 position)
+        {
+            base.Init(damage, position);
             // _tagetPosition 위치를 바라보도록 설정
             Vector3 direction = (_tagetPosition - transform.position).normalized;
             if (direction != Vector3.zero)
