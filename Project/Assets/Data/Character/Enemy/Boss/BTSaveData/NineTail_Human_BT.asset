@@ -25,6 +25,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -56,6 +57,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -87,6 +89,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: LongLength Attack
   Child: {fileID: -4276195094700390624}
@@ -115,6 +118,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 7837282814814943857}
@@ -143,6 +147,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 4178337039563730154}
@@ -171,6 +176,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -199,6 +205,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -236,6 +243,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -268,6 +276,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -299,6 +308,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -329,6 +339,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -358,6 +369,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -388,6 +400,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -2871859711533766674}
@@ -416,6 +429,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 8228998882334389856}
@@ -444,6 +458,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -476,10 +491,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 40 Percent
   Child: {fileID: 3252167318922827858}
-  probability: 1
+  probability: 0.4
 --- !u!114 &-6358433520164823119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +521,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -535,6 +552,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   ActionID: S0103
@@ -564,6 +582,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 1217796976436968837}
@@ -592,6 +611,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -627,6 +647,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -3335139785924217894}
@@ -655,6 +676,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -683,6 +705,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
 --- !u!114 &-4662626354756941682
@@ -710,6 +733,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -745,6 +769,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   minDistance: 0
@@ -776,6 +801,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -806,6 +832,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -837,6 +864,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -866,6 +894,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: ComboAttack Sequence
   Children:
@@ -896,6 +925,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   LayerNum: 0
@@ -925,6 +955,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -956,6 +987,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -4011844537385484231}
@@ -984,6 +1016,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 'Min Distance not Used
 
@@ -1017,6 +1050,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   SkillId: S0106
@@ -1045,6 +1079,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: "\t\t\t\t"
   Children:
@@ -1075,6 +1110,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
 --- !u!114 &-2871859711533766674
@@ -1102,6 +1138,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Sting Sequence
   Children:
@@ -1135,6 +1172,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -1163,6 +1201,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -1193,6 +1232,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
 --- !u!114 &-2134505852709630021
@@ -1220,6 +1260,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Projectile: {fileID: 1801832409821887468, guid: cdd220dc076f0ff4b9695bafcac032a1, type: 3}
@@ -1257,6 +1298,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -1327019705708857543}
@@ -1285,6 +1327,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -2600514874059813964}
@@ -1313,6 +1356,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Slash Sequence
   Children:
@@ -1343,6 +1387,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -1372,6 +1417,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Close Attack
   Child: {fileID: -7973213361870217918}
@@ -1400,6 +1446,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   minSimilarity: 0.99
@@ -1428,6 +1475,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -1456,6 +1504,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -1582,6 +1631,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
 --- !u!114 &167325235828605754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1607,6 +1657,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   ActionID: S0106
@@ -1636,6 +1687,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Sting
   AttackNum: 2
@@ -1665,6 +1717,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   SkillId: S0103
@@ -1693,6 +1746,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -4662626354756941682}
@@ -1721,6 +1775,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Range LongRange
   minDistance: 0
@@ -1752,6 +1807,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   SkillId: S0104
@@ -1780,9 +1836,10 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
-  faceToPlayer: 0
+  faceToPlayer: 1
   faceRotationLerpTime: 2
 --- !u!114 &1043950281438485854
 MonoBehaviour:
@@ -1809,6 +1866,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -1838,6 +1896,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   LayerNum: 0
@@ -1867,6 +1926,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: FoxFireBall Sequence
   Children:
@@ -1900,6 +1960,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -1930,6 +1991,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -865392500505012858}
@@ -1958,6 +2020,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   HashTag: Sting
@@ -1991,6 +2054,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -2051,6 +2115,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -2080,6 +2145,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 6386906560035937883}
@@ -2108,6 +2174,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 0
@@ -2137,6 +2204,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 0
@@ -2166,6 +2234,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -2199,6 +2268,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   minDistance: 12
@@ -2230,6 +2300,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Range 0~12
   minDistance: 0
@@ -2261,6 +2332,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -2292,6 +2364,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Slash
   AttackNum: 1
@@ -2323,6 +2396,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   StepSpeed: 12
@@ -2352,6 +2426,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   HashTag: Energy
@@ -2385,6 +2460,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   minSimilarity: 0.99
@@ -2413,6 +2489,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   ActionID: S0104
@@ -2442,6 +2519,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -6698346766732218813}
@@ -2470,6 +2548,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -7881696742356237389}
@@ -2498,6 +2577,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Use Strafe
   Child: {fileID: 1251324351453558181}
@@ -2526,6 +2606,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -2554,6 +2635,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -2585,6 +2667,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: EnergyExplosion Sequence
   Children:
@@ -2617,6 +2700,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   AttackNum: 5
@@ -2648,6 +2732,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Range 4.5~12
   minDistance: 4.5
@@ -2679,6 +2764,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -2714,6 +2800,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: 2273972576164154844}
@@ -2742,6 +2829,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Children:
@@ -2772,6 +2860,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   minDistance: 0
@@ -2803,6 +2892,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Speed: 5
@@ -2835,6 +2925,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   faceToPlayer: 0
@@ -2864,6 +2955,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: "\uCF64\uBCF4"
   AttackNum: 0
@@ -2895,6 +2987,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Child: {fileID: -8022844229400373636}
@@ -2926,6 +3019,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -2954,10 +3048,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: 
   Speed: 30
-  StopDistance: 4
+  StopDistance: 2.5
   Offset: 0
   EnableRotation: 0
   EnableUseAnim: 1
@@ -2986,6 +3081,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: Middle Attack
   Child: {fileID: 6285781711267574053}
@@ -3014,6 +3110,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
+    IsParry: 0
   tree: {fileID: 0}
   description: EnergyExplosion
   AttackNum: 3
