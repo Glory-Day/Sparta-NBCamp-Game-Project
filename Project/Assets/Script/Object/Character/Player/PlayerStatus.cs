@@ -14,8 +14,8 @@ namespace Backend.Object.Character.Player
         [Header("Default Statue")]
         [SerializeField] private float currentStamina = 100f;
         [SerializeField] private float maxStamina = 100f;
-        [SerializeField] private float damage;
-        [SerializeField] private float defense;
+        [SerializeField] private float damagePoint;
+        [SerializeField] private float defensePoint;
 
         [Header("Stamina Settings")]
         [SerializeField] private float regenDelay = 1.0f;
@@ -23,8 +23,17 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float regenAmount = 30.0f;
         [SerializeField] private float cost = 30f;
 
+        private PlayerAnimationController _animationController;
+        private AdvancedActionController _actionController;
+
         private float _regenRate;
         private float _lastUseTime;
+
+        private void Awake()
+        {
+            _animationController = GetComponent<PlayerAnimationController>();
+            _actionController = GetComponent<AdvancedActionController>();
+        }
 
         private void Start()
         {
@@ -48,6 +57,16 @@ namespace Backend.Object.Character.Player
         }
 
 #endif
+
+        public override void TakeDamage(float damage)
+        {
+            base.TakeDamage(damage);
+
+            if (_actionController.IsDamageReactable)
+            {
+                _animationController.SetAnimationFloat("Damage", damage);
+            }
+        }
 
         public void UseStamina()
         {
