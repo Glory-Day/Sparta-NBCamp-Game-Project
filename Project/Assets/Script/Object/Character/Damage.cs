@@ -1,4 +1,5 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Backend.Util.Debug;
 using UnityEngine;
 
 namespace Backend.Object.Character
@@ -14,17 +15,13 @@ namespace Backend.Object.Character
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_hitColliders.Contains(other))
-            {
-                return;
-            }
-
             //적중 검사
             if (other.TryGetComponent(out IDamagable target))
             {
-                if (_hitColliders.Contains(other) && other.gameObject.layer == (int)Mathf.Log(hitLayer.value, 2))
+                if (!_hitColliders.Contains(other) && other.gameObject.layer == (int)Mathf.Log(hitLayer.value, 2))
                 {
                     target.TakeDamage(AttackDamage);
+                    _hitColliders.Add(other);
                 }
             }
         }
