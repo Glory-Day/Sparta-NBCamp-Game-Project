@@ -16,11 +16,13 @@ namespace Backend.Object.Projectile
         [SerializeField] private float _manualDamage = 5f;
         private void OnEnable()
         {
+            _isHit = false;
             StartCoroutine(DestroyAfterDelay());
 
             if (_isManualDamage)
             {
                 Init(_manualDamage, Vector3.zero); // 예시로 데미지 10, 위치 (0,0,0)으로 초기화
+                CheckForPlayer();
             }
 
         }
@@ -32,6 +34,14 @@ namespace Backend.Object.Projectile
             if (_isSpawner)
             {
                 transform.position = _tagetPosition;
+            }
+        }
+
+        protected override void OnDrawGizmos()
+        {
+            if (_isManualDamage)
+            {
+                base.OnDrawGizmos();
             }
         }
 

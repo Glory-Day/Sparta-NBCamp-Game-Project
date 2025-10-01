@@ -10,6 +10,8 @@ namespace Backend.Object.Projectile
         [SerializeField] private float _disteyTime = 1f; // 사라지기 전 대기 시간
         private void OnEnable()
         {
+            _isHit = false;
+            CheckForPlayer();
             StartCoroutine(DestroyAfterDelay());
         }
 
