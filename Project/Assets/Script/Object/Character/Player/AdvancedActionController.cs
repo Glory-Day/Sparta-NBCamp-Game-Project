@@ -45,7 +45,7 @@ namespace Backend.Object.Character.Player
 
         [Tooltip("Rolling speed.\n\n" +
                  "구르기 속도")]
-        [SerializeField] public float rollingSpeed = 1f;
+        [SerializeField] public float deltaSpeed = 1f;
 
         [Tooltip("rolling duration variables.\n\n" +
                  "구르기 지속 시간")]
@@ -206,7 +206,7 @@ namespace Backend.Object.Character.Player
         {
             // Calculate normalized movement direction and multiply normalized velocity with movement speed.
             var direction = CalculateMovementDirection();
-            direction *= movementSpeed * rollingSpeed;
+            direction *= movementSpeed * deltaSpeed;
 
             return direction;
         }

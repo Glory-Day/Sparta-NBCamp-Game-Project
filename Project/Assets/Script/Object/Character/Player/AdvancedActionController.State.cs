@@ -192,6 +192,8 @@ namespace Backend.Object.Character.Player
         /// </returns>
         public bool IsGrounded => _state is State.Grounded or State.Sliding or State.Rolling or State.Attacking;
 
+        public bool IsDamageReactable => _state is State.Grounded or State.Sliding;
+
         /// <returns>
         /// True if controller is sliding.
         /// </returns>
