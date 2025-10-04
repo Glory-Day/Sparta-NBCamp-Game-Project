@@ -11,8 +11,8 @@ namespace Backend.Object.Character.Enemy
     {
         [field: SerializeField] public ActionBossData[] ActionDatas { get; private set; }
         [field: SerializeField] public ActionBossData ActionData { get; set; }
-        [SerializeField] private WeaponController _weapon;
-        [SerializeField] private WeaponController[] _weapons;
+        [SerializeField] private DamageSender _damageSender;
+        [SerializeField] private DamageSender[] _damageSenders;
         [SerializeField] private EffectController _effect;
         [SerializeField] private EffectController[] _effects;
         public readonly Dictionary<string, CoolDownTimer> ActionCoolTimer = new(); // 스킬 쿨다운 타이머 딕셔너리
@@ -26,25 +26,26 @@ namespace Backend.Object.Character.Enemy
         }
         public void StartAttack()
         {
-            _weapon.StartAttack(ActionData.Damage);
+            _damageSender.Damage = ActionData.Damage;
+            _damageSender.StartDetection();
         }
 
         public void StartAttackOf(int attackNum)
         {
-            _weapon.StartAttack(ActionDatas[attackNum].Damage);
+            //_weapon.StartAttack(ActionDatas[attackNum].Damage);
         }
 
         public void EndAttack()
         {
-            if (_weapon != null)
+            if (_damageSender != null)
             {
-                _weapon.StopAttack();
+                _damageSender.StopDetection();
             }
         }
 
         public void SetWeapon(int weaponNum)
         {
-            _weapon = _weapons[weaponNum];
+            _damageSender = _damageSenders[weaponNum];
         }
 
         public void StartEffect()

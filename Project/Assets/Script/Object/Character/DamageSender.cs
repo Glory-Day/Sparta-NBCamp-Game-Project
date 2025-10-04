@@ -27,6 +27,7 @@ namespace Backend.Object.Character
         private Coroutine _detectCoroutine = null;
         private float _detectInterval = 0.1f;
         private bool _useRealtime = false;
+        public float Damage { get; set; }
 
         private HashSet<int> _hits = new HashSet<int>();
 
@@ -89,6 +90,11 @@ namespace Backend.Object.Character
             {
                 var id = _lastHits[i].gameObject.GetInstanceID();
 
+                if (!_hits.Contains(id) && _lastHits[i].TryGetComponent<IDamagable>(out var target))
+                {
+                    target.TakeDamage(Damage);
+                }
+
                 _hits.Add(id);
             }
 
@@ -103,14 +109,7 @@ namespace Backend.Object.Character
             while (true)
             {
                 RefreshOverlap();
-                if (_useRealtime)
-                {
-                    yield return new WaitForSecondsRealtime(_detectInterval);
-                }
-                else
-                {
-                    yield return new WaitForSeconds(_detectInterval);
-                }
+                yield return null;
             }
         }
 
