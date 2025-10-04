@@ -28,7 +28,7 @@ namespace Backend.Object.Character.Player
         private void Move(InputAction.CallbackContext context)
         {
             _direction = context.ReadValue<Vector3>().normalized;
-            _facing = _direction;
+            _facing = _direction == Vector3.zero ? _facing : _direction;
         }
 
         private void Jump(InputAction.CallbackContext context)
@@ -160,6 +160,8 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Move.Disable();
             _actions.Movement.Jump.Disable();
             _actions.Movement.Roll.Disable();
+
+            _direction = _facing;
         }
 
         public void OnAttackingStateExited()
@@ -167,6 +169,7 @@ namespace Backend.Object.Character.Player
             Debugger.LogProgress();
 
             _state = State.Grounded;
+            _direction = Vector3.zero;
 
             _actions.Movement.Move.Enable();
             _actions.Movement.Jump.Enable();
@@ -180,6 +183,28 @@ namespace Backend.Object.Character.Player
             }
 
             _animationController.SetAnimationInteger("Combat Index", _combatIndex);
+        }
+
+        public void OnDamagedStateEntered()
+        {
+            Debugger.LogProgress();
+
+            _actions.Movement.Move.Disable();
+            _actions.Movement.Jump.Disable();
+            _actions.Movement.Roll.Disable();
+            _actions.Movement.Attack.Disable();
+        }
+
+        public void OnDamagedStateExited()
+        {
+            Debugger.LogProgress();
+
+            _actions.Movement.Move.Enable();
+            _actions.Movement.Jump.Enable();
+            _actions.Movement.Roll.Enable();
+            _actions.Movement.Attack.Enable();
+
+            _animationController.SetAnimationFloat("Damage", 0f);
         }
     }
 }

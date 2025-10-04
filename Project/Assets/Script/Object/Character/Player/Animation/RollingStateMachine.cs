@@ -19,12 +19,12 @@ namespace Backend.Object.Character.Player.Animation
         {
             var normalized = stateInfo.normalizedTime % 1f;
 
-            _controller.rollingSpeed = speed.Evaluate(normalized);
+            _controller.deltaSpeed = speed.Evaluate(normalized);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _controller.rollingSpeed = 1f;
+            _controller.deltaSpeed = 1f;
             _controller.OnRollingStateExited();
         }
     }
