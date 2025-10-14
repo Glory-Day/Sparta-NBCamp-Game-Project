@@ -69,5 +69,7 @@ namespace Backend.Object.Projectile
                 ObjectPoolManager.Release(gameObject);
             }
         }
+
+        public void Initialized(Transform target, float damage) => throw new System.NotImplementedException();
     }
 }

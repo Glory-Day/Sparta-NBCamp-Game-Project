@@ -19,10 +19,12 @@
             }
             agent.MovementController.FaceLerpTime = faceRotationLerpTime;
         }
+
         protected override void Stop()
         {
 
         }
+
         protected override State OnUpdate()
         {
             return State.Success;

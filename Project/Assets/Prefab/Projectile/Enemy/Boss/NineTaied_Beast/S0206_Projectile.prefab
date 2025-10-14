@@ -19799,7 +19799,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1453624646077910811}
   - component: {fileID: 4070452627043180988}
-  - component: {fileID: 1982492575756616911}
+  - component: {fileID: 7421413859665321745}
+  - component: {fileID: 5851204254370266114}
   m_Layer: 10
   m_Name: S0206_Projectile
   m_TagString: Untagged
@@ -19850,7 +19851,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1982492575756616911
+--- !u!114 &7421413859665321745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -19859,12 +19860,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5967844515003779013}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6172ef7d81d6324a8a2a53526e5e890, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a3ef955cd54da446bf4020713f05b12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 8
-  _playerLayer:
+  speed: 0
+  remainingTime: 0
+  spawnDelay: 0
+  chasingTime: 0
+  HitLayer:
     serializedVersion: 2
     m_Bits: 64
-  isDestroyed: 0
-  _destroyTime: 1
+  _radius: 7
+  _hitColliders: []
+--- !u!114 &5851204254370266114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967844515003779013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec6e8da8e4f38f499e3f046ee538230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectDestroyTime: 2

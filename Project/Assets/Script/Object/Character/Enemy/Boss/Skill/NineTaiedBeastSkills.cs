@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Backend.Object.Management;
+using Backend.Object.Projectile;
 using Backend.Util.Data.ActionDatas;
 using UnityEngine;
 using UnityEngine.AI;
@@ -58,7 +59,7 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
                         var baseProjectile = projectile.GetComponent<BaseProjectile>();
                         if (baseProjectile != null)
                         {
-                            baseProjectile.Init(_enemyStatus.BossStatus.Damage * skillParam.SkillData.Damage, _movementController.Target.transform.position);
+                            baseProjectile.Initialized(_movementController.Target.transform, _enemyStatus.BossStatus.Damage * skillParam.SkillData.Damage);
                         }
                     }
                 }
