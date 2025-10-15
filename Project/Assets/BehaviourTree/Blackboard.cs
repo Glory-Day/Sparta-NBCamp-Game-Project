@@ -20,5 +20,5 @@ public class Blackboard
 
     public bool IsBackstepping;
 
-    public bool IsParry = false;
+    [field: SerializeField] public bool IsParry { get; set; } = true;
 }

@@ -1,4 +1,6 @@
-﻿using Backend.Object.Character.Enemy;
+﻿using System;
+using System.Collections.Generic;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
 using Backend.Util.Debug;
 using UnityEngine;
@@ -8,106 +10,77 @@ namespace Backend.Object.Character
     [System.Serializable]
     public struct AnimationEvent
     {
-        public enum EventType { SetEffect, PlayEffect, StopEffect, SetWeapon, StartAttack, EndAttack }
+        public enum EventType { SetEffect, PlayEffect, PlaySfx, StopSfx, StopEffect, SetWeapon, StartAttack, EndAttack, SetSpeed }
         public string Descript;
         public EventType TypeEvent;
         [Range(0f, 1f)] public float NormalizeTime;
         public int Index;
-        public AudioClip Sfx;
+        public float Value;
     }
 
-    public class StateMachineBase : StateMachineBehaviour
+    public abstract class StateMachineBase : StateMachineBehaviour
     {
-        [Header("SFX")]
-        public AudioClip Sound;
-        public float PlaySoundTime;
-        private bool _isPlayedSound = false;
+        [Header("Events")]
+        public AnimationEvent[] AnimationEvents;
 
-        [Header("VFX")]
-        public GameObject Vfx;
-        public Vector3 offset = Vector3.zero;
-        public float PlayVfxTime;
-        private bool _isPlayedVfx = false;
-        private GameObject _spawnedVfx;
+        private bool[] _eventsFired;
+        protected Dictionary<AnimationEvent.EventType, Action<AnimationEvent>> _eventHandlers;
 
-        [Header("Hit")]
-        public float attackEnableTime;
-        public float attackDisableTime;
-        private bool _isAttackEnabled = false;
-
-        private EnemyCombatController _combatController;
-        private AudioSource _audioSource;
+        protected Animator _animator;
+        protected AudioSource _audioSource;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            if (attackEnableTime >= attackDisableTime)
-            {
-                Debugger.LogError("You Need Change attackEnable < attackDisable");
-            }
+            _animator = animator;
+            InitializeComponents(_animator);
 
-            if(_combatController == null)
-            {
-                _combatController = animator.GetComponent<EnemyCombatController>();
-            }
+            _eventHandlers = new Dictionary<AnimationEvent.EventType, Action<AnimationEvent>>();
+            InitializeEventHandlers();
 
-            _isPlayedSound = false;
-            _isPlayedVfx = false;
-            _isAttackEnabled = false;
-        }
-
-        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-            if (_combatController != _isAttackEnabled)
-            {
-                _combatController.EndAttack();
-            }
-
-            if(_spawnedVfx != null)
-            {
-                ObjectPoolManager.Release(_spawnedVfx);
-            }
+            _eventsFired = new bool[AnimationEvents.Length];
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             float normalizeTime = stateInfo.normalizedTime % 1;
 
-            if (!_isPlayedSound && normalizeTime >= PlaySoundTime)
+            for (int i = 0; i < AnimationEvents.Length; i++)
             {
-                if(Sound != null && _audioSource != null)
+                if (!_eventsFired[i] && normalizeTime >= AnimationEvents[i].NormalizeTime)
                 {
-                    _audioSource.PlayOneShot(Sound);
+                    ProcessEvent(AnimationEvents[i]);
+                    _eventsFired[i] = true;
                 }
-                _isPlayedSound = true;
             }
+        }
 
-            if (!_isPlayedVfx && normalizeTime >= PlayVfxTime)
-            {
-                if (Vfx != null)
-                {
-                    _spawnedVfx = ObjectPoolManager.SpawnPoolObject(Vfx, animator.transform.position + offset, Quaternion.identity, null);
-                }
-                _isPlayedVfx = true;
-            }
+        public virtual void InitializeComponents(Animator animator)
+        {
+            _audioSource = animator.GetComponent<AudioSource>();
+        }
 
-            if (!_isAttackEnabled && normalizeTime >= attackEnableTime)
-            {
-                if(_combatController != null)
-                {
-                    _combatController.StartAttack();
-                }
-                _isAttackEnabled = true;
-            }
+        public abstract void InitializeEventHandlers();
 
-            if (_isAttackEnabled && normalizeTime >= attackDisableTime)
+        //private void HandlePlaySfx(Animator animator, AnimationEvent e)
+        //{
+        //    //if (e.Sfx != null && _audioSource != null)
+        //    //{
+        //    //    _audioSource.PlayOneShot(e.Sfx);
+        //    //}
+        //    Debugger.LogMessage("PlaySfx");
+        //}
+
+        //private void HandleStopSfx(Animator animator, AnimationEvent e)
+        //{
+        //    Debugger.LogMessage("StopSfx");
+        //}
+
+        public void ProcessEvent(AnimationEvent e)
+        {
+            if (_eventHandlers.TryGetValue(e.TypeEvent, out var handler))
             {
-                if(_combatController != null)
-                {
-                    _combatController.EndAttack();
-                }
-                _isAttackEnabled = false;
+                handler?.Invoke(e);
             }
         }
     }
-
 }
