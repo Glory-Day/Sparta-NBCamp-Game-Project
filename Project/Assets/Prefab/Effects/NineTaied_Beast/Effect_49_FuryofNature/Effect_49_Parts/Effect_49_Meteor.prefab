@@ -24599,8 +24599,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7281159161875971381}
-  - component: {fileID: 7281159161875971380}
   - component: {fileID: 9076113950683099240}
+  - component: {fileID: 5509170793048639491}
+  - component: {fileID: 1815723594532222115}
   m_Layer: 10
   m_Name: Effect_49_Meteor
   m_TagString: Untagged
@@ -24628,31 +24629,6 @@ Transform:
   - {fileID: 2694716036430318840}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!114 &7281159161875971380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7281159161875971371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56e17d10c4e020147ae8b5e49a85fd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gameObjectMain: {fileID: 7281159161875971371}
-  m_gameObjectTail: {fileID: 0}
-  m_hitObject: {fileID: 2434423925942292171, guid: d423a7567137e7b47981e384a619a2e2, type: 3}
-  isDestroy: 1
-  ObjectDestroyTime: 10
-  TailDestroyTime: 0
-  HitObjectDestroyTime: 2
-  isHitMake: 1
-  MoveSpeed: 40
-  maxLength: 2
-  isCheckHitTag: 0
-  mtag: 
-  isShieldActive: 0
 --- !u!135 &9076113950683099240
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24674,3 +24650,53 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.94
   m_Center: {x: 0, y: 0, z: 2.46}
+--- !u!54 &5509170793048639491
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281159161875971371}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1815723594532222115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281159161875971371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f1741203f775648a8354116e872df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  remainingTime: 20
+  spawnDelay: 0
+  chasingTime: 0
+  HitLayer:
+    serializedVersion: 2
+    m_Bits: 1025
+  shouldTrackTarget: 0
+  lookAtTargetOnInit: 0
+  isCreateRangeProjectile: 1
+  rangeProjectilePrefab: {fileID: 509133941378628043, guid: d423a7567137e7b47981e384a619a2e2, type: 3}
