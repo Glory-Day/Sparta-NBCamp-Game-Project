@@ -33,6 +33,7 @@ namespace Backend.Object.Projectile
         {
             // 시작 시간과 마지막 생성 시간을 현재 시간으로 초기화
             _Time = _Time2 = Time.time;
+            _count = 0; // 생성 횟수 초기화
             // 씬의 전역 스케일 값을 가져옴
             _scalefactor = VariousEffectsScene.m_gaph_scenesizefactor;
         }
@@ -59,7 +60,7 @@ namespace Backend.Object.Projectile
                         // 오브젝트 풀에서 오브젝트 생성
                         GameObject obj = ObjectPoolManager.SpawnPoolObject(makeObjs[i], m_pos, m_rot, transform.parent);
 
-                        obj.transform.parent = transform.parent; // 부모 오브젝트로 설정
+                       // obj.transform.parent = transform.parent; // 부모 오브젝트로 설정
 
                         obj.GetComponent<BaseProjectile>()?.Initialized(target, damage);
 

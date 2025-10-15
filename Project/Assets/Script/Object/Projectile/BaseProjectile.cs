@@ -41,6 +41,7 @@ namespace Backend.Object.Projectile
             _rigidbody = GetComponent<Rigidbody>();
             _rigidbody.useGravity = false; // 중력 비활성화
         }
+
         protected virtual void OnInitialized()
         {
 
