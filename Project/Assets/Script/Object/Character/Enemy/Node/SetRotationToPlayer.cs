@@ -6,11 +6,6 @@
         public float faceRotationLerpTime = 2f;
         protected override void Start()
         {
-            if (agent.MovementController.IsFaceToPlayer())
-            {
-                return;
-            }
-
             agent.MovementController.FaceToPlayer = faceToPlayer;
 
             if (!faceToPlayer)

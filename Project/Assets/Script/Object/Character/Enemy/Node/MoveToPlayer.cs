@@ -26,7 +26,8 @@ namespace Backend.Object.Character.Enemy.Node
             {
                 if (EnableUseAnim)
                 {
-                    agent.AnimationController.SetCrossFadeInFixedTime(_animRun, 0.1f);
+                    agent.AnimationController.SetAnimationFloat("MoveX", 1f);
+                    agent.AnimationController.SetAnimationFloat("MoveZ", 0f);
                 }
                 playerTransform = agent.MovementController.Target.transform;
             }
@@ -36,7 +37,7 @@ namespace Backend.Object.Character.Enemy.Node
         {
             if (EnableUseAnim)
             {
-                agent.AnimationController.SetCrossFadeInFixedTime(_animIdle, 0.1f);
+                agent.AnimationController.SetAnimationFloat("MoveX", 0f);
             }
         }
 
