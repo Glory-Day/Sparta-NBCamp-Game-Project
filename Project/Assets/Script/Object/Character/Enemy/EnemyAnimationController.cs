@@ -168,5 +168,11 @@ namespace Backend.Object.Character.Enemy
 
             _isHit = false;
         }
+
+        // 몬스터가 죽었을때 죽음 애니메이션 실행
+        public void PlayDeathAnimation()
+        {
+            Animator.SetTrigger("IsDie");
+        }
     }
 }
