@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Backend.Util.Data.StatusDatas;
 using Backend.Util.Debug;
 using UnityEngine;
