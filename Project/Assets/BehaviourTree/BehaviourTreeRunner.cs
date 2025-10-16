@@ -21,6 +21,10 @@ public class BehaviourTreeRunner : MonoBehaviour
         };
         Tree = Tree.Clone();
         Tree.Bind(component);
+
+        component.Status.OnEnemyDeath += EnemyDeath;
+        component.Status.OnEnemyDeath += component.AnimationController.PlayDeathAnimation;
+        component.Status.OnEnemyDeath += component.MovementController.OnEnemyDeath;
     }
 
     private void Update()
@@ -30,6 +34,14 @@ public class BehaviourTreeRunner : MonoBehaviour
             return;
         }
         Tree.Update();
+    }
+
+    // 몬스터가 죽었을 때 실행 되는 메서드
+    public void EnemyDeath()
+    {
+        stop = true;
+        GetComponent<NavMeshAgent>().isStopped = true;
+        GetComponent<Collider>().enabled = false;
     }
 }
 
