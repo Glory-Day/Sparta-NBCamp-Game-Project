@@ -1,10 +1,17 @@
-using System;
+﻿using System;
 using Backend.Util.Data.StatusDatas;
 using Backend.Util.Debug;
 using UnityEngine;
 
 namespace Backend.Object.Character.Enemy
 {
+    public enum EnemyState
+    {
+        Idle,
+        Attack,
+        Move,
+        Parry,
+    }
     public class EnemyStatus : Status
     {
         [field: SerializeField] public StatusBossData BossStatus { get; private set; }
@@ -12,6 +19,7 @@ namespace Backend.Object.Character.Enemy
 
         // 플레이어가 죽었을 때 이벤트
         public event Action OnEnemyDeath;
+        public bool IsParryable = false;
 
         private void Awake()
         {
@@ -35,6 +43,11 @@ namespace Backend.Object.Character.Enemy
                 _enemyAnimationController.PlayHitCoroutine();
                 Debugger.LogMessage("Hit Coroutine check");
             }
+        }
+
+        public void SetParry(bool parry)
+        {
+            IsParryable = parry;
         }
     }
 }

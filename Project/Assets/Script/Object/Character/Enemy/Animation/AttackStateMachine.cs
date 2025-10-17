@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Backend.Util.Debug;
 using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Animation
 {
+    [CustomAttribute(
+        AnimationEvent.EventType.SetWeapon, AnimationEvent.EventType.StartAttack, AnimationEvent.EventType.EndAttack)]
     public class AttackStateMachine : StateMachineBase
     {
         private bool _isAttack = false;

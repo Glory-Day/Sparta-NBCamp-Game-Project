@@ -10,12 +10,13 @@ namespace Backend.Object.Character
     [System.Serializable]
     public struct AnimationEvent
     {
-        public enum EventType { SetEffect, PlayEffect, PlaySfx, StopSfx, StopEffect, SetWeapon, StartAttack, EndAttack, SetSpeed }
+        public enum EventType { SetEffect, PlayEffect, PlaySfx, StopSfx, StopEffect, SetWeapon, StartAttack, EndAttack, SetSpeed, SetParry, PlaySkill, MovePos }
         public string Descript;
         public EventType TypeEvent;
         [Range(0f, 1f)] public float NormalizeTime;
         public int Index;
         public float Value;
+        public bool IsBool;
     }
 
     public abstract class StateMachineBase : StateMachineBehaviour

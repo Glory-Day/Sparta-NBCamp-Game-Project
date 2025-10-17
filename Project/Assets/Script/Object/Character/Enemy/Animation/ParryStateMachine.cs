@@ -1,38 +1,39 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 namespace Backend.Object.Character.Enemy.Animation
 {
-    [CustomAttribute(
-        AnimationEvent.EventType.SetSpeed)]
-    public class SpeedStateMachine : StateMachineBase
+    [CustomAttribute(AnimationEvent.EventType.SetParry)]
+    public class ParryStateMachine : StateMachineBase
     {
-        private float _speed;
+        private EnemyStatus _enemyStatus;
         public override void InitializeComponents(Animator animator)
         {
             base.InitializeComponents(animator);
+            _enemyStatus = animator.GetComponent<EnemyStatus>();
         }
         public override void InitializeEventHandlers()
         {
-            _eventHandlers.Add(AnimationEvent.EventType.SetSpeed, SpeedChangeHandler);
+            _eventHandlers.Add(AnimationEvent.EventType.SetParry, HandleSetParry);
         }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateEnter(animator, stateInfo, layerIndex);
-            _speed = animator.speed;
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateExit(animator, stateInfo, layerIndex);
-            animator.speed = _speed;
+            _enemyStatus.SetParry(false);
         }
 
-        public void SpeedChangeHandler(AnimationEvent e)
+        private void HandleSetParry(AnimationEvent e)
         {
-            _animator.speed = e.Value;
+            _enemyStatus.SetParry(e.IsBool);
         }
     }
 }

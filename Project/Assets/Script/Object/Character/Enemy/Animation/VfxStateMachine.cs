@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Animation
 {
+    [CustomAttribute(
+        AnimationEvent.EventType.SetEffect, AnimationEvent.EventType.PlayEffect, AnimationEvent.EventType.StopEffect)]
     public class VfxStateMachine : StateMachineBase
     {
         private EnemyCombatController _combatController;

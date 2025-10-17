@@ -17,16 +17,20 @@ namespace Backend.Object.Character.Enemy
         [SerializeField] private EffectController[] _effects;
         public readonly Dictionary<string, CoolDownTimer> ActionCoolTimer = new(); // 스킬 쿨다운 타이머 딕셔너리
 
+        private EnemyStatus _enemyStatus;
+
         public void Start()
         {
+            _enemyStatus = GetComponent<EnemyStatus>();
             foreach (var action in ActionDatas)
             {
                 ActionCoolTimer.Add(action.ID, new CoolDownTimer(action.CoolDown));
             }
         }
+
         public void StartAttack()
         {
-            _damageSender.Damage = ActionData.Damage;
+            _damageSender.Damage = ActionData.Damage * _enemyStatus.BossStatus.Damage;
             _damageSender.StartDetection();
         }
 
