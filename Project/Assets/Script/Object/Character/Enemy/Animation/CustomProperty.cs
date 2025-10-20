@@ -31,6 +31,7 @@ namespace Backend.Object.Character.Enemy.Animation
                 var normalizeTimeProp = property.FindPropertyRelative("NormalizeTime");
                 var indexProp = property.FindPropertyRelative("Index");
                 var valueProp = property.FindPropertyRelative("Value");
+                var posProp = property.FindPropertyRelative("Pos");
                 var booleanProp = property.FindPropertyRelative("IsBool");
 
                 //필터링된 Popup
@@ -70,9 +71,14 @@ namespace Backend.Object.Character.Enemy.Animation
                 var currentSelectedType = (AnimationEvent.EventType)typeEventProp.enumValueIndex;
                 switch (currentSelectedType)
                 {
-                    case AnimationEvent.EventType.SetEffect:
                     case AnimationEvent.EventType.SetWeapon:
                         EditorGUI.PropertyField(currentPos, indexProp);
+                        currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
+                        break;
+                    case AnimationEvent.EventType.PlayEffect:
+                        EditorGUI.PropertyField(currentPos, indexProp);
+                        currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
+                        EditorGUI.PropertyField(currentPos, posProp);
                         currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
                         break;
                     case AnimationEvent.EventType.SetSpeed:
@@ -83,10 +89,9 @@ namespace Backend.Object.Character.Enemy.Animation
                         EditorGUI.PropertyField(currentPos, booleanProp);
                         currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
                         break;
-                    case AnimationEvent.EventType.PlayEffect:
-                    case AnimationEvent.EventType.StopEffect:
                     case AnimationEvent.EventType.StartAttack:
                     case AnimationEvent.EventType.EndAttack:
+                    case AnimationEvent.EventType.StopEffect:
                         currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
                         break;
                 }
@@ -112,11 +117,13 @@ namespace Backend.Object.Character.Enemy.Animation
                 // 필드의 높이를 추가합니다.
                 switch (currentSelectedType)
                 {
-                    case AnimationEvent.EventType.SetEffect:
                     case AnimationEvent.EventType.SetWeapon:
                     case AnimationEvent.EventType.SetSpeed:
                     case AnimationEvent.EventType.SetParry:
                         totalHeight += EditorGUIUtility.singleLineHeight * VerticalSpacing;
+                        break;
+                    case AnimationEvent.EventType.PlayEffect:
+                        totalHeight += EditorGUIUtility.singleLineHeight * VerticalSpacing * 2;
                         break;
                 }
             }

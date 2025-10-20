@@ -19,12 +19,14 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 1
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uD328\uB9C1 \uBD88\uAC00\uB2A5"
     TypeEvent: 9
     NormalizeTime: 0.6
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1102 &-9099270391470776533
 AnimatorState:
   serializedVersion: 6
@@ -73,18 +75,21 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uBB34\uAE30 \uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.275
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uBB34\uAE30 \uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.34
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1107 &-7482852920179519515
 AnimatorStateMachine:
   serializedVersion: 6
@@ -283,42 +288,49 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.15
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.19
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.33
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.36
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.56
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.6
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!206 &-4724514362424383798
 BlendTree:
   m_ObjectHideFlags: 1
@@ -455,18 +467,21 @@ MonoBehaviour:
     Index: 1
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.353
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.376
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!114 &-1489843213716072801
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -486,12 +501,14 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 1
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uD328\uB9C1 \uBD88\uAC00\uB2A5"
     TypeEvent: 9
     NormalizeTime: 0.6
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!206 &-1196036974714818713
 BlendTree:
   m_ObjectHideFlags: 1
@@ -534,18 +551,21 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC2DC\uC791"
     TypeEvent: 6
     NormalizeTime: 0.33
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uACF5\uACA9 \uC885\uB8CC"
     TypeEvent: 7
     NormalizeTime: 0.6
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -623,12 +643,14 @@ MonoBehaviour:
     Index: 0
     Value: 0.2
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uC18D\uB3C4 \uC81C\uC5B4 1"
     TypeEvent: 8
     NormalizeTime: 0.2
     Index: 0
     Value: 1
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!206 &678998438128389808
 BlendTree:
   m_ObjectHideFlags: 1
@@ -663,12 +685,14 @@ MonoBehaviour:
     Index: 0
     Value: 0
     IsBool: 1
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uD328\uB9C1 \uBD88\uAC00\uB2A5"
     TypeEvent: 9
     NormalizeTime: 0.32
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1102 &2110967135687181397
 AnimatorState:
   serializedVersion: 6
@@ -944,12 +968,14 @@ MonoBehaviour:
     Index: 0
     Value: 0.4
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uC18D\uB3C4 \uC870\uC815 2"
     TypeEvent: 8
     NormalizeTime: 0.15
     Index: 0
     Value: 3
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1101 &6330800478956661641
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1124,42 +1150,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationEvents:
-  - Descript: "\uD6A8\uACFC \uC120\uD0DD"
-    TypeEvent: 0
-    NormalizeTime: 0
-    Index: 1
-    Value: 0
-    IsBool: 0
   - Descript: "\uD6A8\uACFC \uC2DC\uC791"
     TypeEvent: 1
     NormalizeTime: 0.1
-    Index: 0
+    Index: 1
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 3, z: 0}
   - Descript: "\uD6A8\uACFC \uC885\uB8CC"
     TypeEvent: 4
     NormalizeTime: 0.33
     Index: 0
     Value: 0
     IsBool: 0
-  - Descript: "\uD6A8\uACFC \uC120\uD0DD"
-    TypeEvent: 0
-    NormalizeTime: 0.34
-    Index: 0
-    Value: 0
-    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uD6A8\uACFC\uC2DC\uC791"
     TypeEvent: 1
     NormalizeTime: 0.353
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
   - Descript: "\uD6A8\uACFC \uC885\uB8CC"
     TypeEvent: 4
     NormalizeTime: 0.9
     Index: 0
     Value: 0
     IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1101 &8827508757699217445
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
