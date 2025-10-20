@@ -35,6 +35,12 @@ namespace Backend.Object.Management
 
         private int _index;
 
+        public int TotalCloneCount
+        {
+            get { return _clones.Count; }
+            private set { }
+        }
+
         public Pool(GameObject origin, int capacity, Transform parent = null)
         {
             _clones = new List<Clone>(capacity);
@@ -196,6 +202,15 @@ namespace Backend.Object.Management
             _poolObjects.Clear();
         }
 
+        private int GetPoolObjectCount_Internal(GameObject origin)
+        {
+            if (_poolObjects.TryGetValue(origin, out Pool pool))
+            {
+                return pool.TotalCloneCount;
+            }
+            return 0;
+        }
+
         public static void CreatePoolObject(GameObject origin, int capacity, Transform parent = null)
         {
             Instance.CreatePoolObject_Internal(origin, capacity, parent);
@@ -219,6 +234,11 @@ namespace Backend.Object.Management
         public static void DestroyPoolObject()
         {
             Instance.DestroyPoolObject_Internal();
+        }
+
+        public static int GetPoolObjectCount(GameObject origin)
+        {
+            return Instance.GetPoolObjectCount_Internal(origin);
         }
     }
 }
