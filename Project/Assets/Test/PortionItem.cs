@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Backend.Util.Data;
-using Backend.Util.Item.Base;
+using Test.Data;
+using Test.Item.Base;
 using UnityEngine;
 
-namespace Backend.Util.Item
+namespace Test.Item
 {
     /// <summary> 수량 아이템 - 포션 아이템 </summary>
     [System.Serializable]

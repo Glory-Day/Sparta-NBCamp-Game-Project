@@ -3350,8 +3350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8f22874200893439957ac8d12cc2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _titleText: {fileID: 6460836793026855707}
-  _contentText: {fileID: 5981750476331417618}
+  nameText: {fileID: 6460836793026855707}
+  descriptionText: {fileID: 5981750476331417618}
 --- !u!1 &3874011964638270193
 GameObject:
   m_ObjectHideFlags: 0
@@ -3935,7 +3935,7 @@ MonoBehaviour:
   _showRemovingPopup: 1
   _contentAreaRT: {fileID: 4579106881792460949}
   _slotUiPrefab: {fileID: 7601254168315639223, guid: 5b34b52a0ce4f104e89dc8f4d204f016, type: 3}
-  _itemTooltip: {fileID: 3941161533271271567}
+  _itemInformationView: {fileID: 3941161533271271567}
   _popup: {fileID: 3777393021112021552}
   _trimButton: {fileID: 7098301496124815999}
   _sortButton: {fileID: 6119990559015605889}
@@ -4390,7 +4390,7 @@ MonoBehaviour:
   m_ContentType: 2
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 2
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 1

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Data;
-using Backend.Util.Data.Base;
-using Backend.Util.Item;
-using Backend.Util.Item.Base;
+using Test.Data;
+using Test.Data.Base;
+using Test.Item;
+using Test.Item.Base;
 using UnityEngine;
 
 /*
@@ -66,18 +65,16 @@ namespace Backend.Object.UI
         /***********************************************************************
         *                               Public Properties
         ***********************************************************************/
-        #region .
+
         /// <summary> 아이템 수용 한도 </summary>
         public int Capacity { get; private set; }
 
         // /// <summary> 현재 아이템 개수 </summary>
         //public int ItemCount => _itemArray.Count;
 
-        #endregion
         /***********************************************************************
         *                               Private Fields
         ***********************************************************************/
-        #region .
 
         // 초기 수용 한도
         [SerializeField, Range(8, 81)]
@@ -88,7 +85,7 @@ namespace Backend.Object.UI
         private int _maxCapacity = 81;
 
         [SerializeField]
-        private InventoryUI _inventoryUI; // 연결된 인벤토리 UI
+        private InventoryView inventoryView; // 연결된 인벤토리 UI
 
         /// <summary> 아이템 목록 </summary>
         [SerializeField]
@@ -103,29 +100,9 @@ namespace Backend.Object.UI
         private int _currentArmorEquip;
         private int _currentWeaponEquip;
 
-        /// <summary> 아이템 데이터 타입별 정렬 가중치 </summary>
-        private readonly static Dictionary<Type, int> _sortWeightDict = new Dictionary<Type, int>
-        {
-            { typeof(PortionItemData), 10000 },
-            { typeof(WeaponItemData),  20000 },
-            { typeof(ArmorItemData),   30000 },
-        };
-
-        private class ItemComparer : IComparer<Item>
-        {
-            public int Compare(Item a, Item b)
-            {
-                return (a.Data.ID + _sortWeightDict[a.Data.GetType()])
-                     - (b.Data.ID + _sortWeightDict[b.Data.GetType()]);
-            }
-        }
-        private static readonly ItemComparer _itemComparer = new ItemComparer();
-
-        #endregion
         /***********************************************************************
         *                               Unity Events
         ***********************************************************************/
-        #region .
 
 #if UNITY_EDITOR
         private void OnValidate()
@@ -138,7 +115,7 @@ namespace Backend.Object.UI
         {
             _items = new Item[_maxCapacity];
             Capacity = _initalCapacity;
-            _inventoryUI.SetInventoryReference(this);
+            inventoryView.SetInventoryReference(this);
         }
 
         private void Start()
@@ -146,11 +123,10 @@ namespace Backend.Object.UI
             UpdateAccessibleStatesAll();
         }
 
-        #endregion
         /***********************************************************************
         *                               Private Methods
         ***********************************************************************/
-        #region .
+
         /// <summary> 인덱스가 수용 범위 내에 있는지 검사 </summary>
         private bool IsValidIndex(int index)
         {
@@ -198,7 +174,7 @@ namespace Backend.Object.UI
             if (item != null)
             {
                 // 아이콘 등록
-                _inventoryUI.SetItemIcon(index, item.Data.IconSprite);
+                inventoryView.SetItemIconImageByIndex(index, item.Data.IconSprite);
 
                 // 1-1. 셀 수 있는 아이템
                 if (item is CountableItem ci)
@@ -213,19 +189,19 @@ namespace Backend.Object.UI
                     // 1-1-2. 수량 텍스트 표시
                     else
                     {
-                        _inventoryUI.SetItemAmountText(index, ci.Amount);
-                        _inventoryUI.SetEquipmentText(index, item.IsEquipped);
+                        inventoryView.SetItemAmountTextByIndex(index, ci.Amount);
+                        inventoryView.SetEquipmentText(index, item.IsEquipped);
                     }
                 }
                 // 1-2. 셀 수 없는 아이템인 경우 수량 텍스트 제거
                 else
                 {
-                    _inventoryUI.HideItemAmountText(index);
-                    _inventoryUI.SetEquipmentText(index, item.IsEquipped);
+                    inventoryView.HideItemAmountText(index);
+                    inventoryView.SetEquipmentText(index, item.IsEquipped);
                 }
 
                 // 슬롯 필터 상태 업데이트
-                _inventoryUI.UpdateSlotFilterState(index, item.Data);
+                inventoryView.UpdateFilter(index, item.Data);
             }
             // 2. 빈 슬롯인 경우 : 아이콘 제거
             else
@@ -236,9 +212,9 @@ namespace Backend.Object.UI
             // 로컬 : 아이콘 제거하기
             void RemoveIcon()
             {
-                _inventoryUI.RemoveItem(index);
-                _inventoryUI.HideItemAmountText(index); // 수량 텍스트 숨기기
-                _inventoryUI.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
+                inventoryView.RemoveItem(index);
+                inventoryView.HideItemAmountText(index); // 수량 텍스트 숨기기
+                inventoryView.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
             }
         }
 
@@ -260,11 +236,9 @@ namespace Backend.Object.UI
             }
         }
 
-        #endregion
         /***********************************************************************
         *                               Check & Getter Methods
         ***********************************************************************/
-        #region .
 
         /// <summary> 해당 슬롯이 아이템을 갖고 있는지 여부 </summary>
         public bool HasItem(int index)
@@ -278,7 +252,7 @@ namespace Backend.Object.UI
             return HasItem(index) && _items[index] is CountableItem;
         }
 
-        /// <summary> 
+        /// <summary>
         /// 해당 슬롯의 현재 아이템 개수 리턴
         /// <para/> - 잘못된 인덱스 : -1 리턴
         /// <para/> - 빈 슬롯 : 0 리턴
@@ -287,9 +261,14 @@ namespace Backend.Object.UI
         public int GetCurrentAmount(int index)
         {
             if (!IsValidIndex(index))
+            {
                 return -1;
+            }
+
             if (_items[index] == null)
+            {
                 return 0;
+            }
 
             CountableItem ci = _items[index] as CountableItem;
             if (ci == null)
@@ -302,9 +281,14 @@ namespace Backend.Object.UI
         public ItemData GetItemData(int index)
         {
             if (!IsValidIndex(index))
+            {
                 return null;
+            }
+
             if (_items[index] == null)
+            {
                 return null;
+            }
 
             return _items[index].Data;
         }
@@ -313,23 +297,27 @@ namespace Backend.Object.UI
         public string GetItemName(int index)
         {
             if (!IsValidIndex(index))
+            {
                 return "";
+            }
+
             if (_items[index] == null)
+            {
                 return "";
+            }
 
             return _items[index].Data.Name;
         }
 
-        #endregion
         /***********************************************************************
         *                               Public Methods
         ***********************************************************************/
-        #region .
+
         /// <summary> 인벤토리 UI 연결 </summary>
-        public void ConnectUI(InventoryUI inventoryUI)
+        public void ConnectUI(InventoryView inventoryView)
         {
-            _inventoryUI = inventoryUI;
-            _inventoryUI.SetInventoryReference(this);
+            this.inventoryView = inventoryView;
+            this.inventoryView.SetInventoryReference(this);
         }
 
         /// <summary> 인벤토리에 아이템 추가
@@ -439,19 +427,26 @@ namespace Backend.Object.UI
         public void Remove(int index)
         {
             if (!IsValidIndex(index))
+            {
                 return;
+            }
 
             _items[index] = null;
-            _inventoryUI.RemoveItem(index);
+            inventoryView.RemoveItem(index);
         }
 
         /// <summary> 두 인덱스의 아이템 위치를 서로 교체 </summary>
         public void Swap(int indexA, int indexB)
         {
             if (!IsValidIndex(indexA))
+            {
                 return;
+            }
+
             if (!IsValidIndex(indexB))
+            {
                 return;
+            }
 
             Item itemA = _items[indexA];
             Item itemB = _items[indexB];
@@ -512,9 +507,14 @@ namespace Backend.Object.UI
             // amount : 나눌 목표 수량
 
             if (!IsValidIndex(indexA))
+            {
                 return;
+            }
+
             if (!IsValidIndex(indexB))
+            {
                 return;
+            }
 
             Item _itemA = _items[indexA];
             Item _itemB = _items[indexB];
@@ -535,9 +535,14 @@ namespace Backend.Object.UI
         public void Use(int index)
         {
             if (!IsValidIndex(index))
+            {
                 return;
+            }
+
             if (_items[index] == null)
+            {
                 return;
+            }
 
             // 사용 가능한 아이템인 경우
             if (_items[index] is IUsableItem uItem)
@@ -575,8 +580,8 @@ namespace Backend.Object.UI
                 bool isEquip = uItem.Use();
                 _ = currentEquip.Use();
 
-                _inventoryUI.SetEquipmentText(index, isEquip);
-                _inventoryUI.SetEquipmentText(_currentArmorEquip, !_isArmorEquip);
+                inventoryView.SetEquipmentText(index, isEquip);
+                inventoryView.SetEquipmentText(_currentArmorEquip, !_isArmorEquip);
 
                 UpdateSlot(index);
                 UpdateSlot(_currentArmorEquip);
@@ -591,8 +596,8 @@ namespace Backend.Object.UI
                 bool isEquip = uItem.Use();
                 _ = currentEquip.Use();
 
-                _inventoryUI.SetEquipmentText(index, isEquip);
-                _inventoryUI.SetEquipmentText(_currentWeaponEquip, !_isWeaponEquip);
+                inventoryView.SetEquipmentText(index, isEquip);
+                inventoryView.SetEquipmentText(_currentWeaponEquip, !_isWeaponEquip);
 
                 UpdateSlot(index);
                 UpdateSlot(_currentWeaponEquip);
@@ -605,7 +610,7 @@ namespace Backend.Object.UI
             {
                 bool isEquip = uItem.Use();
 
-                _inventoryUI.SetEquipmentText(index, isEquip);
+                inventoryView.SetEquipmentText(index, isEquip);
 
                 UpdateSlot(index);
 
@@ -627,7 +632,7 @@ namespace Backend.Object.UI
         /// <summary> 모든 슬롯 UI에 접근 가능 여부 업데이트 </summary>
         public void UpdateAccessibleStatesAll()
         {
-            _inventoryUI.SetAccessibleSlotRange(Capacity);
+            inventoryView.SetAccessibleSlotRange(Capacity);
         }
 
         /// <summary> 빈 슬롯 없이 앞에서부터 채우기 </summary>
@@ -656,7 +661,9 @@ namespace Backend.Object.UI
                     ;
 
                 if (j == Capacity)
+                {
                     break;
+                }
 
                 _indexSetForUpdate.Add(i);
                 _indexSetForUpdate.Add(j);
@@ -670,7 +677,7 @@ namespace Backend.Object.UI
             {
                 UpdateSlot(index);
             }
-            _inventoryUI.UpdateAllSlotFilters();
+            inventoryView.UpdateAllFilters();
 
             // _currentEquip 재설정
             _currentArmorEquip = -1; // 장착 아이템이 없으면 -1
@@ -688,53 +695,5 @@ namespace Backend.Object.UI
                 }
             }
         }
-
-        /// <summary> 빈 슬롯 없이 채우면서 아이템 종류별로 정렬하기 </summary>
-        public void SortAll()
-        {
-            // 1. Trim
-            int i = -1;
-            while (_items[++i] != null)
-                ;
-            int j = i;
-
-            while (true)
-            {
-                while (++j < Capacity && _items[j] == null)
-                    ;
-
-                if (j == Capacity)
-                    break;
-
-                _items[i] = _items[j];
-                _items[j] = null;
-                i++;
-            }
-
-            // 2. Sort
-            Array.Sort(_items, 0, i, _itemComparer);
-
-            // 3. Update
-            UpdateAllSlot();
-            _inventoryUI.UpdateAllSlotFilters(); // 필터 상태 업데이트
-
-            // 4. _currentEquip 재설정
-            _currentArmorEquip = -1; // 장착 아이템이 없으면 -1
-            _currentWeaponEquip = -1;
-            for (int k = 0; k < Capacity; k++)
-            {
-                if (_items[k] != null && _items[k].IsEquipped && _items[k] is ArmorItem)
-                {
-                    _currentArmorEquip = k;
-                }
-
-                if (_items[k] != null && _items[k].IsEquipped && _items[k] is WeaponItem)
-                {
-                    _currentWeaponEquip = k;
-                }
-            }
-        }
-
-        #endregion
     }
 }

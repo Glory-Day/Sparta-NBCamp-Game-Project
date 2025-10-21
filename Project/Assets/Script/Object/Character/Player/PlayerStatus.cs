@@ -1,4 +1,5 @@
 ﻿using System;
+using Backend.Util.Data;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -11,17 +12,21 @@ namespace Backend.Object.Character.Player
 {
     public class PlayerStatus : Status
     {
-        [Header("Default Statue")]
-        [SerializeField] private float currentStamina = 100f;
-        [SerializeField] private float maxStamina = 100f;
-        [SerializeField] private float damagePoint;
-        [SerializeField] private float defensePoint;
+        [Header("Stamina Point Information")]
+        [SerializeField] private float currentStaminaPoint;
+        [SerializeField] private float maximumStaminaPoint;
 
-        [Header("Stamina Settings")]
+        [Header("Stamina Point Settings")]
         [SerializeField] private float regenDelay = 1.0f;
         [SerializeField] private float regenDuration = 3.0f;
         [SerializeField] private float regenAmount = 30.0f;
         [SerializeField] private float cost = 30f;
+
+        [Header("Damage Point Information")]
+        [SerializeField] private float currentDamagePoint;
+
+        [Header("Defense Point Information")]
+        [SerializeField] private float currentDefensePoint;
 
         private PlayerAnimationController _animationController;
         private AdvancedActionController _actionController;
@@ -29,8 +34,13 @@ namespace Backend.Object.Character.Player
         private float _regenRate;
         private float _lastUseTime;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
+            maximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
+            currentStaminaPoint = maximumStaminaPoint;
+
             _animationController = GetComponent<PlayerAnimationController>();
             _actionController = GetComponent<AdvancedActionController>();
         }
@@ -42,21 +52,13 @@ namespace Backend.Object.Character.Player
 
         private void Update()
         {
-            if (Time.time - _lastUseTime >= regenDelay && currentStamina < maxStamina)
+            if (Time.time - _lastUseTime >= regenDelay && currentStaminaPoint < maximumStaminaPoint)
             {
-                currentStamina = Mathf.Min(currentStamina + (_regenRate * Time.deltaTime), maxStamina);
+                currentStaminaPoint = Mathf.Min(currentStaminaPoint + (_regenRate * Time.deltaTime), maximumStaminaPoint);
+
+                StaminaPointChanged?.Invoke(NormalizedStaminaPoint);
             }
         }
-
-#if UNITY_EDITOR
-
-        private void OnDrawGizmos()
-        {
-            var position = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
-            Handles.Label(position, $"HP: {HealthPoint:F2}\nSP: {currentStamina:F2}");
-        }
-
-#endif
 
         public override void TakeDamage(float damage)
         {
@@ -70,14 +72,20 @@ namespace Backend.Object.Character.Player
 
         public void UseStamina()
         {
-            currentStamina = Mathf.Max(currentStamina - cost, 0);
+            currentStaminaPoint = Mathf.Max(currentStaminaPoint - cost, 0);
 
             _lastUseTime = Time.time;
+
+            StaminaPointChanged?.Invoke(NormalizedStaminaPoint);
         }
 
         public bool IsUsingStaminaAvailable()
         {
-            return currentStamina >= cost;
+            return currentStaminaPoint >= cost;
         }
+
+        public Action<float> StaminaPointChanged;
+
+        private float NormalizedStaminaPoint => currentStaminaPoint / maximumStaminaPoint;
     }
 }
