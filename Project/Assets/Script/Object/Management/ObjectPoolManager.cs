@@ -96,6 +96,21 @@ namespace Backend.Object.Management
             _activeClones.Clear();
         }
 
+        public void Resize(int capacity)
+        {
+            if (capacity <= _clones.Count)
+            {
+                return;
+            }
+
+            int addCount = capacity - _clones.Count;
+
+            for(int i = 0; i < addCount; i++)
+            {
+                CreateClone();
+            }
+        }
+
         public GameObject Object
         {
             get
@@ -141,9 +156,10 @@ namespace Backend.Object.Management
 
         private void CreatePoolObject_Internal(GameObject origin, int capacity, Transform parent = null)
         {
-            if (_poolObjects.ContainsKey(origin))
+            if (_poolObjects.TryGetValue(origin, out Pool exitPool))
             {
-                Debugger.LogError($"Pool Object {origin} is already created.");
+                exitPool.Resize(capacity);
+                Debugger.LogError($"Pool Object {origin} is already created, Now Change Capacity => {capacity}");
                 return;
             }
 
