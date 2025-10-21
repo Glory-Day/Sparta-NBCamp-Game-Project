@@ -7,54 +7,76 @@ namespace Backend.Object.Character.Enemy.Node
 {
     public class MoveToBackWard : ActionNode
     {
-        public float StepSpeed = 15f;
         public float StepDistance = 10f;
+        public float JumpDuration = 0.8f;
+        public float JumpHeight = 2.0f;
 
-        private NavMeshHit _hitPos;
-        private bool _isArrive = false;
+        public AnimationCurve JumpCurve;
         private readonly int BackStep = Animator.StringToHash("S0107");
-        private readonly int BackStepTag = Animator.StringToHash("BackStep");
+        private readonly int Locomotion = Animator.StringToHash("Locomotion");
 
+        private float _elapsedTime;
+        private Vector3 _startPos;
+        private Vector3 _endPos;
+        private bool _isJumping = false;
         protected override void Start()
         {
-            agent.NavMeshAgent.speed = StepSpeed;
-            agent.NavMeshAgent.updateRotation = false;
+            _isJumping = false;
 
             Vector3 direction = agent.MovementController.transform.forward * -1f;
-            Vector3 targetPos = agent.MovementController.transform.position + (direction * StepDistance);
+            _startPos = agent.MovementController.transform.position;
+            Vector3 targetPos = _startPos + (direction * StepDistance);
 
-            if(NavMesh.SamplePosition(targetPos, out _hitPos, 1.0f, NavMesh.AllAreas))
+            NavMeshHit hitPos;
+            if (NavMesh.SamplePosition(targetPos, out hitPos, 1.0f, NavMesh.AllAreas))
             {
-                agent.NavMeshAgent.SetDestination(_hitPos.position);
+                _endPos = hitPos.position;
+                _elapsedTime = 0f;
+                _isJumping = true;
+
+                agent.NavMeshAgent.enabled = false;
                 agent.AnimationController.SetCrossFadeInFixedTime(BackStep, 0.1f);
             }
         }
+
         protected override void Stop()
         {
+            if (agent.NavMeshAgent != null && !agent.NavMeshAgent.enabled)
+            {
+                agent.NavMeshAgent.enabled = true;
+            }
+
+            _isJumping = false;
         }
+
         protected override State OnUpdate()
         {
-            if (!_isArrive && !agent.NavMeshAgent.pathPending)
+            if (!_isJumping)
             {
-                if (agent.NavMeshAgent.remainingDistance <= agent.NavMeshAgent.stoppingDistance)
-                {
-                    if (!agent.NavMeshAgent.hasPath || agent.NavMeshAgent.velocity.sqrMagnitude == 0f)
-                    {
-                        _isArrive = true;
-                        agent.NavMeshAgent.ResetPath();
-                    }
-                }
+                return State.Failure;
             }
 
-            if (_isArrive)
-            {
-                if (agent.AnimationController.GetAnimationNormalByTag(BackStepTag, 0) >= 0.8f)
-                {
-                    return State.Success;
-                }
-            }
+            _elapsedTime += Time.deltaTime;
+            float progress = _elapsedTime / JumpDuration;
 
-            return State.Running;
+            if (progress >= 1.0f)
+            {
+                agent.MovementController.transform.position = _endPos;
+                agent.NavMeshAgent.enabled = true;
+                _isJumping = false;
+
+                agent.AnimationController.SetCrossFadeInFixedTime(Locomotion, 0.5f);
+                return State.Success;
+            }
+            else
+            {
+                Vector3 currentPos = Vector3.Lerp(_startPos, _endPos, progress);
+                currentPos.y += JumpCurve.Evaluate(progress) * JumpHeight;
+
+                agent.MovementController.transform.position = currentPos;
+
+                return State.Running;
+            }
         }
     }
 }

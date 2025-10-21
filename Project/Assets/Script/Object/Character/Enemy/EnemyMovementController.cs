@@ -8,9 +8,9 @@ namespace Backend.Object.Character.Enemy
         [field: SerializeField] public float Distance { get; private set; }
         [field: SerializeField] public float StrafeSpeed { get; private set; }
 
-
         public bool FaceToPlayer;
         public float FaceLerpTime = 2f;
+        private bool _isDie = false;
 
         protected override void Awake()
         {
@@ -19,6 +19,11 @@ namespace Backend.Object.Character.Enemy
 
         private void Update()
         {
+            if (_isDie)
+            {
+                return;
+            }
+
             Distance = GetDistance();
 
             if (FaceToPlayer)
@@ -98,6 +103,12 @@ namespace Backend.Object.Character.Enemy
                 return true;
             }
             return false;
+        }
+
+        // 몬스터가 죽었을 때 호출
+        public void OnEnemyDeath()
+        {
+            _isDie = true;
         }
     }
 }

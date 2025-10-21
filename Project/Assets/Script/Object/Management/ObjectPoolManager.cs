@@ -35,6 +35,12 @@ namespace Backend.Object.Management
 
         private int _index;
 
+        public int TotalCloneCount
+        {
+            get { return _clones.Count; }
+            private set { }
+        }
+
         public Pool(GameObject origin, int capacity, Transform parent = null)
         {
             _clones = new List<Clone>(capacity);
@@ -90,6 +96,21 @@ namespace Backend.Object.Management
             _activeClones.Clear();
         }
 
+        public void Resize(int capacity)
+        {
+            if (capacity <= _clones.Count)
+            {
+                return;
+            }
+
+            int addCount = capacity - _clones.Count;
+
+            for(int i = 0; i < addCount; i++)
+            {
+                CreateClone();
+            }
+        }
+
         public GameObject Object
         {
             get
@@ -135,9 +156,10 @@ namespace Backend.Object.Management
 
         private void CreatePoolObject_Internal(GameObject origin, int capacity, Transform parent = null)
         {
-            if (_poolObjects.ContainsKey(origin))
+            if (_poolObjects.TryGetValue(origin, out Pool exitPool))
             {
-                Debugger.LogError($"Pool Object {origin} is already created.");
+                exitPool.Resize(capacity);
+                Debugger.LogError($"Pool Object {origin} is already created, Now Change Capacity => {capacity}");
                 return;
             }
 
@@ -196,6 +218,15 @@ namespace Backend.Object.Management
             _poolObjects.Clear();
         }
 
+        private int GetPoolObjectCount_Internal(GameObject origin)
+        {
+            if (_poolObjects.TryGetValue(origin, out Pool pool))
+            {
+                return pool.TotalCloneCount;
+            }
+            return 0;
+        }
+
         public static void CreatePoolObject(GameObject origin, int capacity, Transform parent = null)
         {
             Instance.CreatePoolObject_Internal(origin, capacity, parent);
@@ -219,6 +250,11 @@ namespace Backend.Object.Management
         public static void DestroyPoolObject()
         {
             Instance.DestroyPoolObject_Internal();
+        }
+
+        public static int GetPoolObjectCount(GameObject origin)
+        {
+            return Instance.GetPoolObjectCount_Internal(origin);
         }
     }
 }

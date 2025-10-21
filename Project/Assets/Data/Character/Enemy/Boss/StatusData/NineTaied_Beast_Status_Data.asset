@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 002
   <Name>k__BackingField: "\uAD6C\uBBF8\uD638"
-  <HealthPoint>k__BackingField: 1000
+  <HealthPoint>k__BackingField: 0
   <Speed>k__BackingField: 7
   <PhysicalDamage>k__BackingField: 0
   <MagicalDamage>k__BackingField: 0

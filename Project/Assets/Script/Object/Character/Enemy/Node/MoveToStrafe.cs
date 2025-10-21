@@ -13,37 +13,50 @@ namespace Backend.Object.Character.Enemy.Node
         private float _direction;
         private float _timer;
 
-        private readonly int _animStrafeRight = Animator.StringToHash("StrafeRight");
-        private readonly int _animStrafeLeft = Animator.StringToHash("StrafeLeft");
+        private float _targetMoveX = 0f;
+        private float _targetMoveZ = 0f;
+        private float _currentMoveX = 0f;
+        private float _currentMoveZ = 0f;
 
         protected override State OnUpdate()
         {
             if (_timer >= _duration)
             {
+                _targetMoveX = 0f;
+                _targetMoveZ = 0f;
+
                 return State.Success;
             }
 
-            agent.MovementController.SetRotation();
-
-            Vector3 movement = _direction * StrafeSpeed * Time.deltaTime * agent.MovementController.transform.right;
-
-            Vector3 forwardBackwardMovement = Vector3.zero;
             if (agent.MovementController.Target != null)
             {
-                Transform target = agent.MovementController.Target.transform;
                 float distanceToTarget = agent.MovementController.Distance;
 
                 if (distanceToTarget > MaxDistance)
                 {
-                    forwardBackwardMovement = ForwardBackwardSpeed * Time.deltaTime * agent.MovementController.transform.forward;
+                    _targetMoveX = 0.5f;
+                }
+                else if (distanceToTarget < MinDistance)
+                {
+                    _targetMoveX = -0.5f;
                 }
                 else
                 {
-                    forwardBackwardMovement = -ForwardBackwardSpeed * Time.deltaTime * agent.MovementController.transform.forward;
+                    _targetMoveX = 0f;
                 }
             }
 
+            agent.MovementController.SetLerpRotation(2f);
+
+            Vector3 movement = _direction * StrafeSpeed * Time.deltaTime * agent.MovementController.transform.right;
+            Vector3 forwardBackwardMovement = _currentMoveX * ForwardBackwardSpeed * Time.deltaTime * agent.MovementController.transform.forward;
             agent.MovementController.transform.position += movement + forwardBackwardMovement;
+
+            _currentMoveX = Mathf.Lerp(_currentMoveX, _targetMoveX, Time.deltaTime * 5.0f);
+            _currentMoveZ = Mathf.Lerp(_currentMoveZ, _targetMoveZ, Time.deltaTime * 5.0f);
+
+            agent.AnimationController.SetAnimationFloat("MoveX", _currentMoveX);
+            agent.AnimationController.SetAnimationFloat("MoveZ", _currentMoveZ);
 
             _timer += Time.deltaTime;
 
@@ -54,20 +67,17 @@ namespace Backend.Object.Character.Enemy.Node
             _duration = Random.Range(1.0f, 2.5f);
             _direction = (Random.value > 0.5f) ? 1.0f : -1.0f;
 
-            if (_direction > 0) // 오른쪽으로 이동
-            {
-                agent.AnimationController.SetCrossFadeInFixedTime(_animStrafeRight, 0.1f);
-            }
-            else // 왼쪽으로 이동
-            {
-                agent.AnimationController.SetCrossFadeInFixedTime(_animStrafeLeft, 0.1f);
-            }
+            _targetMoveZ = _direction;
+
+            _currentMoveX = agent.AnimationController.GetAnimationFloat("MoveX");
+            _currentMoveZ = agent.AnimationController.GetAnimationFloat("MoveZ");
 
             _timer = 0f;
         }
         protected override void Stop()
         {
-
+            _targetMoveX = 0f;
+            _targetMoveZ = 0f;
         }
     }
 }

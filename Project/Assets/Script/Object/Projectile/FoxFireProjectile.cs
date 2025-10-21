@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Backend.Object.Character;
 using Backend.Object.Management;
 using Backend.Util.Debug;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Backend.Object.Projectile
@@ -17,6 +18,7 @@ namespace Backend.Object.Projectile
         private float _spawnDelay = 0f;
         private float _time = 0f;
         public LayerMask HitLayer;
+        public GameObject HitEffectPrefab;
 
         public void Initialized(Transform target, float damage, float speed, float spawnDelay, float chasingTime, float duration)
         {
@@ -62,12 +64,29 @@ namespace Backend.Object.Projectile
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.TryGetComponent<IDamagable>(out var target) && other.gameObject.layer == (int)Mathf.Log(HitLayer.value, 2))
+            if ((HitLayer.value & (1 << other.gameObject.layer)) > 0)
             {
-                target.TakeDamage(_damage);
-                Debugger.LogProgress($"{_damage}만큼 데미지를 가하였습니다.");
+                //Effect
+                if (HitEffectPrefab != null)
+                {
+                    Debugger.LogSuccess("성공적 이펙트");
+                    ObjectPoolManager.SpawnPoolObject(HitEffectPrefab, transform.position, transform.rotation, null);
+                }
+                else
+                {
+                    Debugger.LogError("HitEffectPrefab is Null");
+                }
+
+                if (other.TryGetComponent<IDamagable>(out var target))
+                {
+                    target.TakeDamage(_damage);
+                    Debugger.LogProgress($"{_damage}만큼 데미지를 가하였습니다.");
+                }
+
                 ObjectPoolManager.Release(gameObject);
             }
         }
+
+        public void Initialized(Transform target, float damage) => throw new System.NotImplementedException();
     }
 }

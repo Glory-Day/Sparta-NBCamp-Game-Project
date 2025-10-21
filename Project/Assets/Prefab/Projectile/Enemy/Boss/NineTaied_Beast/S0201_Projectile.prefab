@@ -4924,7 +4924,8 @@ GameObject:
   m_Component:
   - component: {fileID: 33019586508051538}
   - component: {fileID: 562654166224055317}
-  - component: {fileID: 543777511893824931}
+  - component: {fileID: 447099167101712206}
+  - component: {fileID: 878561035051404990}
   m_Layer: 10
   m_Name: S0201_Projectile
   m_TagString: Untagged
@@ -4975,7 +4976,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &543777511893824931
+--- !u!114 &447099167101712206
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4984,20 +4985,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 6352715123424040704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1722548f7d8e6c4eb9d4b8f305ad777, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dd649875b8eb7946869e0695765ad30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 1
-  _playerLayer:
+  speed: 0
+  remainingTime: 0
+  spawnDelay: 0
+  chasingTime: 0
+  HitLayer:
     serializedVersion: 2
     m_Bits: 64
-  isDestroyed: 0
-  durationTime: 0.5
-  moveDistance: 2.5
-  _boxSize: {x: 2.25, y: 3.99, z: 0.42}
-  _playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  _boxSize: {x: 7.73, y: 7.54, z: 1.64}
+--- !u!114 &878561035051404990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6352715123424040704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec6e8da8e4f38f499e3f046ee538230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectDestroyTime: 2
 --- !u!1 &6566430306212070467
 GameObject:
   m_ObjectHideFlags: 0
