@@ -1,6 +1,7 @@
 ﻿using System;
 using Backend.Util.Data.StatusDatas;
 using Backend.Util.Debug;
+using Backend.Util.Presentation;
 using UnityEngine;
 
 namespace Backend.Object.Character.Enemy
@@ -21,9 +22,10 @@ namespace Backend.Object.Character.Enemy
         public event Action OnEnemyDeath;
         public bool IsParryable = false;
 
-        private void Awake()
+        protected override void Awake()
         {
-            HealthPoint = BossStatus.HealthPoint;
+            base.Awake();
+
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
         }
 
@@ -31,9 +33,9 @@ namespace Backend.Object.Character.Enemy
         {
             base.TakeDamage(damage);
 
-            if (HealthPoint <= 0)
+            if (currentHealthPoint <= 0)
             {
-                HealthPoint = 0;
+                currentHealthPoint = 0;
                 OnEnemyDeath?.Invoke();
                 OnEnemyDeath = null;
             }

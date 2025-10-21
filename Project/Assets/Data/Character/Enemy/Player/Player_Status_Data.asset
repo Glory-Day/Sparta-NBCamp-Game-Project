@@ -16,7 +16,7 @@ MonoBehaviour:
   <Name>k__BackingField: 
   <HealthPoint>k__BackingField: 100
   <Speed>k__BackingField: 0
-  <PhysicalDamage>k__BackingField: 0
+  <PhysicalDamage>k__BackingField: 5
   <MagicalDamage>k__BackingField: 0
   <PhysicalDefense>k__BackingField: 0
   <MagicalDefense>k__BackingField: 0

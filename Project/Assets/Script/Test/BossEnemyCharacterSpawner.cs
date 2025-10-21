@@ -1,16 +1,14 @@
-﻿using System;
-using Backend.Object.Character.Player;
+﻿using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
 using Script.Object.UI;
 using UnityEngine;
 
 namespace Script.Test
 {
-    [Serializable]
-    public class PlayerCharacterSpawner : Progress
+    public class BossEnemyCharacterSpawner : Progress
     {
         [SerializeField] private GameObject prefab;
-        [SerializeField] private PlayerConditionInformationBinder binder;
+        [SerializeField] private BossEnemyConditionInformationBinder binder;
 
         public override void Boot()
         {
@@ -18,13 +16,12 @@ namespace Script.Test
             var rotation = transform.rotation;
 
             var clone = ObjectPoolManager.SpawnPoolObject(prefab, position, rotation, null);
-            var model = clone.GetComponent<PlayerStatus>();
+            var component = clone.GetComponent<EnemyMovementController>();
+            component.Target = GetComponent<PlayerCharacterSpawner>().Target;
 
-            Target = clone;
+            var model = clone.GetComponent<EnemyStatus>();
 
             binder.Bind(model);
         }
-
-        public GameObject Target { get; set; }
     }
 }
