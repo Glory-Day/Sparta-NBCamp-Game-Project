@@ -6,7 +6,7 @@ using UnityEngine;
 // 날짜 : 2021-04-15 PM 2:59:59
 // 작성자 : Rito
 
-namespace Backend.Util.Item.Base
+namespace Test.Item.Base
 {
     /// <summary> 사용 가능한 아이템(착용/소모) </summary>
     public interface IUsableItem

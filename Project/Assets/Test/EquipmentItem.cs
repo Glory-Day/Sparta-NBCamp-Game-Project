@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Data.Base;
+using Test.Data.Base;
 using UnityEngine;
 
 // 날짜 : 2021-03-28 PM 10:55:00
 // 작성자 : Rito
 
-namespace Backend.Util.Item.Base
+namespace Test.Item.Base
 {
     /// <summary> 장비 아이템</summary>
     public abstract class EquipmentItem : Item

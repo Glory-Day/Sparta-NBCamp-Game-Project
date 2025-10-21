@@ -58,7 +58,7 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
                         var baseProjectile = projectile.GetComponent<BaseProjectile>();
                         if (baseProjectile != null)
                         {
-                            baseProjectile.Init(_enemyStatus.BossStatus.Damage * skillParam.SkillData.Damage, _movementController.Target.transform.position);
+                            baseProjectile.Init(_enemyStatus.BossStatus.PhysicalDamage * skillParam.SkillData.Damage, _movementController.Target.transform.position);
                         }
                     }
                 }

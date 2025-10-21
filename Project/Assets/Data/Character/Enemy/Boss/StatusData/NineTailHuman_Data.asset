@@ -16,7 +16,10 @@ MonoBehaviour:
   <Name>k__BackingField: "\uAD6C\uBBF8\uD638(\uC778\uAC04\uD615)"
   <HealthPoint>k__BackingField: 100
   <Speed>k__BackingField: 5
-  <Damage>k__BackingField: 10
+  <PhysicalDamage>k__BackingField: 0
+  <MagicalDamage>k__BackingField: 0
+  <PhysicalDefense>k__BackingField: 1
+  <MagicalDefense>k__BackingField: 1
   <ChasingSpeed>k__BackingField: 5
   <TurnSpeed>k__BackingField: 5
   <AttackRange>k__BackingField:
