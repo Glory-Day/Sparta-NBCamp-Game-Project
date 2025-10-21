@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using Backend.Util.Input;
 using UnityEngine;
+using Debugger = Backend.Util.Debug.Debugger;
 
 namespace Backend.Object.Character.Player
 {
@@ -76,7 +78,7 @@ namespace Backend.Object.Character.Player
 
         private void Awake()
         {
-            _animationController = GetComponent<PlayerAnimationController>();
+            _animationController = GetComponentInChildren<PlayerAnimationController>();
             _movementController = GetComponent<PlayerMovementController>();
 
             _status = GetComponent<PlayerStatus>();
