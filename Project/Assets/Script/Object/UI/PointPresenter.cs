@@ -1,7 +1,6 @@
 ﻿using Backend.Object.Character.Player;
 using Backend.Util.Presentation;
 using Script.Object.UI.View;
-using UnityEngine;
 
 namespace Script.Object.UI
 {
@@ -17,11 +16,11 @@ namespace Script.Object.UI
 
         }
 
-        private void OnPointChanged(float point)
+        private void OnPointChanged(int point)
         {
-            var text = Mathf.FloorToInt(point).ToString();
+            var text = point.ToString();
 
-            View.Change(text);
+            View.Change(point);
         }
     }
 }

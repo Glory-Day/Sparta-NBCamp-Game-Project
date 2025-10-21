@@ -31,6 +31,8 @@ namespace Backend.Object.Character.Player
         private PlayerAnimationController _animationController;
         private AdvancedActionController _actionController;
 
+        private DamageSender _damageSender;
+
         private float _regenRate;
         private float _lastUseTime;
 
@@ -43,6 +45,9 @@ namespace Backend.Object.Character.Player
 
             _animationController = GetComponent<PlayerAnimationController>();
             _actionController = GetComponent<AdvancedActionController>();
+
+            _damageSender = GetComponent<DamageSender>();
+            _damageSender.Damage = data.PhysicalDamage;
         }
 
         private void Start()

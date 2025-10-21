@@ -14,11 +14,11 @@ namespace Script.Object.UI.View
         [field: SerializeField] private Color increasedColor;
         [field: SerializeField] private Color decreasedColor;
 
-        public void Change(string current, string updated)
+        public void Change(int current, int updated)
         {
             base.Change(current);
 
-            UpdatedPointText.text = updated;
+            UpdatedPointText.text = updated.ToString();
 
             switch (type)
             {
@@ -26,9 +26,7 @@ namespace Script.Object.UI.View
                     break;
                 case DisplayType.Color:
                 {
-                    var a = int.Parse(CurrentPointText.text);
-                    var b = int.Parse(UpdatedPointText.text);
-                    var difference = b - a;
+                    var difference = updated - current;
 
                     UpdatedPointText.color = difference switch
                     {

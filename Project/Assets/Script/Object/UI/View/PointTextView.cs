@@ -9,9 +9,9 @@ namespace Script.Object.UI.View
         [field: Header("Text References")]
         [field: SerializeField] public TMP_Text CurrentPointText { get; private set; }
 
-        public void Change(string text)
+        public void Change(int point)
         {
-            CurrentPointText.text = text;
+            CurrentPointText.text = point.ToString();
         }
     }
 }
