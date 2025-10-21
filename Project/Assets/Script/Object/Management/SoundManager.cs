@@ -146,6 +146,10 @@ namespace Backend.Util.Management
             get => Instance.voiceAudioSource.mute;
             set => Instance.voiceAudioSource.mute = value;
         }
+        public static AudioMixerGroup EffectAudioMixerGroup
+        {
+            get => Instance.effectAudioMixerGroup;
+        }
         #endregion
     }
 }
