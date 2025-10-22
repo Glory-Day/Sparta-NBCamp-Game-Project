@@ -219,42 +219,6 @@ MonoBehaviour:
   Children:
   - {fileID: -4692668094431931776}
   - {fileID: -1908880003947460908}
---- !u!114 &-5398636526289971145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: df8ec0079eaf5ee44a2d5c1ce2932248
-  Position: {x: 380, y: 538}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 1
-  IsRun: 0
-  IsWalk: 0
 --- !u!114 &-5360488362849388099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +279,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 3.5
+  minDistance: 4.2
   maxDistance: 100
   useRangeCheck: 0
   rangeCheck: 999
@@ -406,7 +370,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Speed: 5
+  Speed: 16
   StopDistance: 4
   Offset: 2
   EnableRotation: 1
@@ -456,7 +420,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 296dab02c02ccdb4992ba1f27e1733e0
-  Position: {x: 820.99994, y: 799}
+  Position: {x: 820.99976, y: 783.9999}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -469,7 +433,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 3.5
+  minDistance: 4.2
   maxDistance: 10
   useRangeCheck: 0
   rangeCheck: 999
@@ -518,7 +482,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: cc7435a77581c42438419ec4119acdd5
-  Position: {x: 299.00006, y: 935.99994}
+  Position: {x: 305.00003, y: 978.5003}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -531,7 +495,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Speed: 5
+  Speed: 16
   StopDistance: 4
   Offset: 2
   EnableRotation: 1
@@ -581,7 +545,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 3248a656285882541b520d800a21469e
-  Position: {x: -1081.5002, y: 200.99995}
+  Position: {x: -1083.5002, y: 211.00002}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -610,7 +574,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 5e2a4b0efc6adfd4ab3c26876c460920
-  Position: {x: -1378, y: 489.22452}
+  Position: {x: -1366, y: 497.00003}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -624,7 +588,7 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
-  faceRotationLerpTime: 3
+  faceRotationLerpTime: 6
 --- !u!114 &-1228520444602973566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +707,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: 794353032825896662}
   - {fileID: 3118339430748246635}
   - {fileID: -1531969185876939531}
   - {fileID: -2062706167207358310}
@@ -863,12 +826,8 @@ MonoBehaviour:
   - {fileID: -2062706167207358310}
   - {fileID: 8860247534274247898}
   - {fileID: -1531969185876939531}
-  - {fileID: 794353032825896662}
-  - {fileID: 1009868254230665797}
   - {fileID: 387794137457488746}
   - {fileID: 8320623556477029204}
-  - {fileID: -5398636526289971145}
-  - {fileID: 3989319070836406407}
   - {fileID: 7796827454942154911}
   - {fileID: 8818763834237648692}
   - {fileID: 1838323921093320991}
@@ -918,9 +877,7 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: 1009868254230665797}
   - {fileID: -1228520444602973566}
-  - {fileID: -5398636526289971145}
 --- !u!114 &624816327747977018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -953,42 +910,6 @@ MonoBehaviour:
   - {fileID: 6749015067409651586}
   - {fileID: 4176920228514618056}
   - {fileID: -8885542161253328322}
---- !u!114 &794353032825896662
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 261b782f4cc2cff4dbe5cfb8fe2d0a92
-  Position: {x: -1563.9998, y: 209.00003}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 1
-  IsRun: 0
-  IsWalk: 0
 --- !u!114 &797466122177133647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,42 +940,6 @@ MonoBehaviour:
   description: 
   Children:
   - {fileID: -741069603052871899}
---- !u!114 &1009868254230665797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 760fd7cabe03aca4f952753c86b285d9
-  Position: {x: -18.353855, y: 538}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 1
-  IsRun: 0
-  IsWalk: 1
 --- !u!114 &1323451708371928054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,42 +1146,6 @@ MonoBehaviour:
   - {fileID: -4405800317841701576}
   - {fileID: 1323451708371928054}
   - {fileID: 5162685001821948759}
---- !u!114 &3989319070836406407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: ce9a19ab826f6a24fb71a915940c410c
-  Position: {x: 652.00714, y: 521.5001}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 1
-  IsRun: 0
-  IsWalk: 1
 --- !u!114 &4176920228514618056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,7 +1508,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: 3989319070836406407}
   - {fileID: -6495438391373211187}
 --- !u!114 &8756412124570333484
 MonoBehaviour:

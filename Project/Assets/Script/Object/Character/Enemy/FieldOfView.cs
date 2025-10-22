@@ -17,6 +17,8 @@ namespace Backend.Object.Character.Enemy
         // Target mask에 ray hit된 transform을 보관하는 리스트
         public List<Transform> visibleTargets = new List<Transform>();
 
+        // 한번 타겟이 들어오면 시야 반경 밖으로 나가도 헤제 되지 않는 bool
+        [SerializeField] private bool _keepTargetOutOfViewRadius = false;
         private EnemyMovementController _movementController;
         private EnemyStatus _enemyStatus;
 
@@ -52,7 +54,7 @@ namespace Backend.Object.Character.Enemy
             if (_movementController.Target != null)
             {
                 float dstToTarget = Vector3.Distance(transform.position, _movementController.Target.transform.position);
-                if (dstToTarget > viewRadius)
+                if (dstToTarget > viewRadius && !_keepTargetOutOfViewRadius)
                 {
                     // 타겟이 반경을 벗어나면 타겟 해제
                     _movementController.Target = null;

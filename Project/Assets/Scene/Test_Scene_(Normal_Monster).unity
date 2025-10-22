@@ -484,13 +484,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 562254507438740616, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
+      propertyPath: _keepTargetOutOfViewRadius
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4951998556538117109, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
       propertyPath: m_Name
       value: Tiger
       objectReference: {fileID: 0}
     - target: {fileID: 8964552541267814082, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.2
+      value: 5.9
       objectReference: {fileID: 0}
     - target: {fileID: 8964552541267814082, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -498,7 +502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8964552541267814082, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.3
+      value: 13.17
       objectReference: {fileID: 0}
     - target: {fileID: 8964552541267814082, guid: 20f4116d8e53c9f4fa1b9cb4e2a663f7, type: 3}
       propertyPath: m_LocalRotation.w
