@@ -2642,7 +2642,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: f08896691c67aa04293a6d7016f0ac5b
-  Position: {x: 2863, y: 978}
+  Position: {x: 2870, y: 986}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
