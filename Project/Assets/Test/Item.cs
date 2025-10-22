@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Data.Base;
+using Test.Data.Base;
 using UnityEngine;
 
-namespace Backend.Util.Item.Base
+namespace Test.Item.Base
 {
     /*
         [상속 구조]

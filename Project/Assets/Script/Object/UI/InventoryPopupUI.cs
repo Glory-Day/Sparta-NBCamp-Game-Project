@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +13,7 @@ namespace Backend.Object.UI
         /***********************************************************************
         *                               Fields
         ***********************************************************************/
-        #region .
+
         // 1. 아이템 버리기 확인 팝업
         [Header("Confirmation Popup")]
         [SerializeField] private GameObject _confirmationPopupObject;
@@ -41,11 +39,10 @@ namespace Backend.Object.UI
         // 수량 입력 제한 개수
         private int _maxAmount;
 
-        #endregion
         /***********************************************************************
         *                               Unity Events
         ***********************************************************************/
-        #region .
+
         private void Awake()
         {
             InitUIEvents();
@@ -80,11 +77,10 @@ namespace Backend.Object.UI
             }
         }
 
-        #endregion
         /***********************************************************************
         *                               Public Methods
         ***********************************************************************/
-        #region .
+
         /// <summary> 확인/취소 팝업 띄우기 </summary>
         public void OpenConfirmationPopup(Action okCallback, string itemName)
         {
@@ -103,11 +99,10 @@ namespace Backend.Object.UI
             SetAmountInputOKEvent(okCallback);
         }
 
-        #endregion
         /***********************************************************************
         *                               Private Methods
         ***********************************************************************/
-        #region .
+
         private void InitUIEvents()
         {
             // 1. 확인 취소 팝업
@@ -195,9 +190,5 @@ namespace Backend.Object.UI
 
         private void SetConfirmationOKEvent(Action handler) => OnConfirmationOK = handler;
         private void SetAmountInputOKEvent(Action<int> handler) => OnAmountInputOK = handler;
-
-
-        #endregion
-
     }
 }

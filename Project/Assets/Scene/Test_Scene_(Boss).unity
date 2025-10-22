@@ -11972,6 +11972,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2072770713272005762, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
+      propertyPath: _effects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072770713272005762, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
+      propertyPath: _effects.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2072770713272005762, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
+      propertyPath: _effects.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2194048773455325376, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
+      propertyPath: EffectData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 056e23152006d1c4198416e9e2ba9bc2, type: 2}
+    - target: {fileID: 2194048773455325376, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
+      propertyPath: EffectData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4240ef83429d2524ab3be35d1f1b6555, type: 2}
     - target: {fileID: 3397743543415209314, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
       propertyPath: <Target>k__BackingField
       value: 
@@ -11979,10 +11999,6 @@ PrefabInstance:
     - target: {fileID: 4106958459449520534, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
       propertyPath: m_Name
       value: NineTail_Human
-      objectReference: {fileID: 0}
-    - target: {fileID: 4106958459449520534, guid: d7cb4d0d09ec54140a1e86ddd6c8524b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21859,7 +21875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029998953033979374, guid: 60fcbd23b3d4c6b48a974b2bbdf1c043, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7043391714557343318, guid: 60fcbd23b3d4c6b48a974b2bbdf1c043, type: 3}
       propertyPath: <ActionDatas>k__BackingField.Array.data[4]

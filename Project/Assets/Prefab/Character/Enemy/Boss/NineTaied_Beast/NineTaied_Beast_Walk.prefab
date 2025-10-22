@@ -4965,6 +4965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e885a1fa26ec4646a8567bd78372dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 1893d547d8497d14095477721d60e7fc, type: 2}
+  currentHealthPoint: 0
+  maximumHealthPoint: 0
   <BossStatus>k__BackingField: {fileID: 11400000, guid: 1893d547d8497d14095477721d60e7fc, type: 2}
   IsParryable: 0
 --- !u!114 &6109890533763913142
@@ -5016,7 +5019,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c01efcb4260247645bf0ce9942978572, type: 2}
   - {fileID: 11400000, guid: 3688961b328f83f41ba011fd1d1759f2, type: 2}
   - {fileID: 11400000, guid: 89c6f17460cffdd46b61f32fa8d31f60, type: 2}
-  - {fileID: 11400000, guid: 9180b45968cb11844a5d300fc7392d54, type: 2}
+  - {fileID: 11400000, guid: 5213588aa82879c4283acd7b178f8360, type: 2}
   <ActionData>k__BackingField: {fileID: 0}
   _damageSender: {fileID: 0}
   _damageSenders: []
@@ -5079,7 +5082,7 @@ MonoBehaviour:
     MovePosition: {fileID: 9007736946275184068}
     MoveDuration: 0.15
     IsPlayerTarget: 0
-  - SkillData: {fileID: 11400000, guid: 9180b45968cb11844a5d300fc7392d54, type: 2}
+  - SkillData: {fileID: 11400000, guid: 5213588aa82879c4283acd7b178f8360, type: 2}
     ProjectilePrefab: {fileID: 5967844515003779013, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
     ProjectileTransform:
     - {fileID: 3714614323399163564}

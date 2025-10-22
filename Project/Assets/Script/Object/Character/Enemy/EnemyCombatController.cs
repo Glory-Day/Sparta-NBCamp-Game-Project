@@ -30,7 +30,7 @@ namespace Backend.Object.Character.Enemy
 
         public void StartAttack()
         {
-            _damageSender.Damage = ActionData.Damage * _enemyStatus.BossStatus.Damage;
+            _damageSender.PhysicalDamagePoint = ActionData.Damage * _enemyStatus.BossStatus.PhysicalDamage;
             _damageSender.StartDetection();
         }
 

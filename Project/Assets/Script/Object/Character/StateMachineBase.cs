@@ -17,6 +17,7 @@ namespace Backend.Object.Character
         public int Index;
         public float Value;
         public bool IsBool;
+        public Vector3 Pos;
     }
 
     public abstract class StateMachineBase : StateMachineBehaviour

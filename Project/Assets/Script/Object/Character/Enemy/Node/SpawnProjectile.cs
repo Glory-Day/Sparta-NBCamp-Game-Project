@@ -25,7 +25,7 @@ namespace Backend.Object.Character.Enemy.Node
         {
             _timer = 0f;
             _spawnCount = 0;
-            _damage = agent.Status.BossStatus.Damage * agent.CombatController.ActionData.Damage;
+            _damage = agent.Status.BossStatus.PhysicalDamage * agent.CombatController.ActionData.Damage;
 
             if (Duration < SpawnDelay || Duration < ChasingTime)
             {

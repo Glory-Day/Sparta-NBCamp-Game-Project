@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Backend.Object.UI;
-using Backend.Util.Data.Base;
+using Test.Data.Base;
 using UnityEngine;
 using UnityEngine.UI;
 

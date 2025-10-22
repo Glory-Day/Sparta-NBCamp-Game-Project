@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Backend.Util.Debug;
+using UnityEngine;
 
 namespace Backend.Object.Character.Player
 {
@@ -98,5 +99,9 @@ namespace Backend.Object.Character.Player
         {
 
         }
+
+        public Vector3 DeltaPosition => _animator.deltaPosition;
+
+        public Quaternion DeltaRotation => _animator.deltaRotation;
     }
 }
