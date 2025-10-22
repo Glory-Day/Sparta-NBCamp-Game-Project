@@ -74,7 +74,7 @@ namespace Backend.Object.Character.Player
                     _animationController.SetAnimationBoolean("Is Rolling", true);
                     break;
                 case State.Rolling:
-                    _isRollButtonBuffered = true;
+                    _isRollButtonBuffered = IsRollButtonBufferable;
                     break;
                 case State.Sliding:
                 case State.Falling:
@@ -181,5 +181,7 @@ namespace Backend.Object.Character.Player
 
             _animationController.SetAnimationFloat("Damage", 0f);
         }
+
+        public bool IsRollButtonBufferable { get; set; }
     }
 }
