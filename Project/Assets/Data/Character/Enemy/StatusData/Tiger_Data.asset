@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9e437ba1e7aab742ad4b8326fcbdc00, type: 3}
-  m_Name: NineTaied_Beast_Status_Data
+  m_Name: Tiger_Data
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 002
-  <Name>k__BackingField: "\uAD6C\uBBF8\uD638"
-  <HealthPoint>k__BackingField: 1000
+  <Name>k__BackingField: "\uC0B0\uC655"
+  <HealthPoint>k__BackingField: 420
   <Speed>k__BackingField: 7
   <Damage>k__BackingField: 10
   <ChasingSpeed>k__BackingField: 7
   <TurnSpeed>k__BackingField: 90
   <AttackRange>k__BackingField:
-  - 4.5
-  - 6
-  - 20
+  - 3.5
+  - 15

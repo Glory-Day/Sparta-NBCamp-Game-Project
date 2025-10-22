@@ -4966,6 +4966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BossStatus>k__BackingField: {fileID: 11400000, guid: 1893d547d8497d14095477721d60e7fc, type: 2}
+  IsParryable: 0
 --- !u!114 &6109890533763913142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4993,8 +4994,11 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 0}
   <Distance>k__BackingField: 0
   <StrafeSpeed>k__BackingField: 0
+  InitialPosition: {x: 0, y: 0, z: 0}
   FaceToPlayer: 0
   FaceLerpTime: 2
+  IsNormalMonster: 0
+  MoveRange: 10
 --- !u!114 &7043391714557343318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5053,7 +5057,7 @@ MonoBehaviour:
     MoveDuration: 0
     IsPlayerTarget: 0
   - SkillData: {fileID: 11400000, guid: c01efcb4260247645bf0ce9942978572, type: 2}
-    ProjectilePrefab: {fileID: 0}
+    ProjectilePrefab: {fileID: 2396454936313141767, guid: 4d8e7a35029539945a64260784383b21, type: 3}
     ProjectileTransform:
     - {fileID: 5219144737261579896}
     MovePosition: {fileID: 0}

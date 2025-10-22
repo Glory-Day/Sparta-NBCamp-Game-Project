@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BossStatus>k__BackingField: {fileID: 11400000, guid: f806a8fac0486a544b7484d20ef46dae, type: 2}
+  IsParryable: 0
 --- !u!114 &7378018209015142674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +198,8 @@ MonoBehaviour:
   <StrafeSpeed>k__BackingField: 0
   FaceToPlayer: 0
   FaceLerpTime: 2
+  IsNormalMonster: 0
+  MoveRange: 10
 --- !u!195 &5434808980080604214
 NavMeshAgent:
   m_ObjectHideFlags: 0

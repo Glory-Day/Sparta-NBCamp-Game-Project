@@ -1,130 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9144023704845362944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
-  m_Name: IsAttackEnd
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 370c540f391af274081b1539da9a98f7
-  Position: {x: -917, y: 529}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
---- !u!114 &-8835944018907128438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4ed0157a1bf794fafe8eb6769926be, type: 3}
-  m_Name: MoveToDest
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 2a981698ad7cf5f438c3f27053406e7e
-  Position: {x: 1650.3826, y: 303.99994}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  EnableRotation: 0
-  Speed: 7
-  RotationSpeed: 3
-  VariableSpeedForDist: 0
---- !u!114 &-8763083619909174564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: e45648c5285a6fe41a173b975b18e718
-  Position: {x: -1689, y: -635.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 1
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 0
-  IsRun: 0
-  IsWalk: 0
---- !u!114 &-8587105003120704181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 9415db3cf4511114d9691299b52ad935
-  Position: {x: 1228.3827, y: -133.00003}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 0
-  IsRun: 0
-  IsWalk: 0
---- !u!114 &-8495465810165076445
+--- !u!114 &-9138334587311993550
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 2a617f88103c3814cbaaa7ffa73d15b4
-  Position: {x: -1075, y: 36.50005}
+  Guid: e7ce2e04e7884314dad5c2718f60019d
+  Position: {x: 83.999664, y: 1668}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -148,12 +24,13 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 
+  description: "\uCE21\uBA74 \uD68C\uD53C"
   Children:
-  - {fileID: 3084493238394813707}
-  - {fileID: -2601548927107849610}
---- !u!114 &-7551565825373161039
+  - {fileID: -5710973995256376320}
+--- !u!114 &-9091137346738355540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,8 +44,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: dc8a86648997d1242810711931bcf551
-  Position: {x: 510.9999, y: -90.99999}
+  Guid: 441ddc5991a3b144d825aa0362cbca61
+  Position: {x: 743.8416, y: 1701.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -177,6 +54,8 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -184,38 +63,10 @@ MonoBehaviour:
   PlayStrafe: 0
   PlayDie: 0
   SetRun: 0
-  SetWalk: 0
+  SetWalk: 1
   IsRun: 0
-  IsWalk: 0
---- !u!114 &-7356419548608681423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
-  m_Name: SetRotationToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: f2e65b4dc723b4d4780ca61fdfc5d3d8
-  Position: {x: -857.5, y: -480.99994}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  faceToPlayer: 0
-  faceRotationLerpTime: 5
---- !u!114 &-6868549900092931513
+  IsWalk: 1
+--- !u!114 &-8885542161253328322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,8 +80,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: ff039ee114bf1bf4883dc227938880cb
-  Position: {x: -728.03406, y: -329.90906}
+  Guid: f908d70b979024246a2ba8ef7fa7cd15
+  Position: {x: -1921, y: 2064}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -239,12 +90,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: -6636166333830433143}
-  - {fileID: -6402955437926887762}
---- !u!114 &-6648857540161750439
+  - {fileID: 346922269436066849}
+  - {fileID: -173534402381503744}
+  - {fileID: 1890854356069920650}
+--- !u!114 &-8855911335895034557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,13 +107,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
-  m_Name: FailureNode
+  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
+  m_Name: SetNineTailHumanAnimation
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: d304456a63c0f574cb9b9f02fb1fed28
-  Position: {x: -1657, y: -788}
+  Guid: 2768c6a192cdf7f45929aab3b4219017
+  Position: {x: 1178.749, y: 1700.9999}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -268,10 +122,19 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: -8763083619909174564}
---- !u!114 &-6636166333830433143
+  TransitionDuration: 0.1
+  PlayIdle: 0
+  PlayStrafe: 0
+  PlayDie: 0
+  SetRun: 0
+  SetWalk: 1
+  IsRun: 0
+  IsWalk: 0
+--- !u!114 &-8789859347594941322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,13 +143,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
-  m_Name: SelectorNode
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 454dd9164c438c44a96bc51e5af04d73
-  Position: {x: -932.99994, y: -149.49994}
+  Guid: 5b69a7e2713f28048a21d1a77880f099
+  Position: {x: 126.99964, y: 2065}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -295,11 +158,107 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: -2376317629835652694}
-  - {fileID: -8495465810165076445}
+  - {fileID: 8136182588609659080}
+  - {fileID: -2719194665276342398}
+--- !u!114 &-8151297948656086862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1a0258bfbba5c4b8f1a1c7f53aea1f, type: 3}
+  m_Name: EnemyAttack
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 27d5bd19ecbf38b4eb4987f921417de6
+  Position: {x: -615.19257, y: 2345}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: S0201
+  AttackNum: 0
+  IsRandomAttack: 0
+  MinRandomIndex: 0
+  RandomLength: 0
+--- !u!114 &-8021746145534623750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ba2762b88289b4588f69cc46556fa2, type: 3}
+  m_Name: ProbabilityNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 9e3efbf3de862fd48b384a19b8766aca
+  Position: {x: 67.99989, y: 1441.5}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -9138334587311993550}
+  probability: 0.5
+--- !u!114 &-7700465058221151068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920f5a71697cc7e45905fed1f7230585, type: 3}
+  m_Name: MoveToStrafe
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 008b27024f762044984c0def4b506328
+  Position: {x: 474, y: 5.999983}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  StrafeSpeed: 0
+  ForwardBackwardSpeed: 1
+  MaxDistance: 0
+  MinDistance: 0
 --- !u!114 &-6629019543597350499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +274,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: d8c14975781d40a48a5a8ac1c3c050f8
-  Position: {x: -1220, y: -1324.0801}
+  Position: {x: -242.64607, y: -336.8132}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -324,239 +283,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: 7533039443331997008}
+  Child: {fileID: 8756412124570333484}
   restartOnSuccess: 1
   restartOnFailure: 1
   maxRepeats: 0
---- !u!114 &-6402955437926887762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 7c98417bd317b2d4d934f0f9d011a088
-  Position: {x: -628, y: -154}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: back step
-  Children:
-  - {fileID: 735048071721171887}
---- !u!114 &-6100749454395417162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: c85859edef4b5d644bb3f8c56503d382
-  Position: {x: 1532.3827, y: -141.00005}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: 3072618659975117379}
---- !u!114 &-5540754945912782548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
-  m_Name: SetRotationToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 7fb5941510ea9824293d540be07b4f1f
-  Position: {x: -1858.9994, y: -626.9999}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  faceToPlayer: 1
-  faceRotationLerpTime: 1
---- !u!114 &-4654984522364290257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba2762b88289b4588f69cc46556fa2, type: 3}
-  m_Name: ProbabilityNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: cb14b0002b1422844b423b6a170c4857
-  Position: {x: 875, y: -820}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -1054667690763421374}
-  probability: 0.8
---- !u!114 &-4424790819043595908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 4f4491584a32506458fda83493daa8e9
-  Position: {x: 825, y: -996}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -4654984522364290257}
---- !u!114 &-3679306218845705168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
-  m_Name: SelectorNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 5ba40a803741d79448acb64f23651c98
-  Position: {x: -1721, y: -972.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 7972944899104064160}
-  - {fileID: 3127103382632259601}
-  - {fileID: -6648857540161750439}
-  - {fileID: -3191617825148166587}
---- !u!114 &-3593776098529284501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 2bb9c067fbc90b84a8a9aeb53769dada
-  Position: {x: 322.75153, y: -82.999985}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minDistance: 20
-  maxDistance: 1000
-  useRangeCheck: 0
-  rangeCheck: 999
---- !u!114 &-3191617825148166587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 751be6e941b3e21448774b3098c2ee95
-  Position: {x: -1412, y: -788.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: 9062046424340713318}
---- !u!114 &-2674179139984608339
+--- !u!114 &-6506594378735350333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -570,8 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: ad040e9988afb644d8b552088c4ddd1b
-  Position: {x: -1103.5, y: -480.99994}
+  Guid: 8c06914b8730f7e4a883a9812e324ad5
+  Position: {x: -357.50012, y: 2817.6482}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -580,6 +315,8 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -587,10 +324,10 @@ MonoBehaviour:
   PlayStrafe: 0
   PlayDie: 0
   SetRun: 0
-  SetWalk: 0
+  SetWalk: 1
   IsRun: 0
-  IsWalk: 0
---- !u!114 &-2601548927107849610
+  IsWalk: 1
+--- !u!114 &-6495438391373211187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,13 +336,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba2762b88289b4588f69cc46556fa2, type: 3}
-  m_Name: ProbabilityNode
+  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
+  m_Name: RepeatNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: dbebb641b1249c04490753850add7f3a
-  Position: {x: -1008, y: 179.50009}
+  Guid: 86d1a164a805a604e99bf9b6ade9e535
+  Position: {x: 1499.51, y: 426.99994}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -614,11 +351,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: 1066014735154186919}
-  probability: 0.8
---- !u!114 &-2484665726281257301
+  Child: {fileID: -6786636598484907}
+  restartOnSuccess: 1
+  restartOnFailure: 0
+  maxRepeats: 0
+--- !u!114 &-6494827347744475839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -627,13 +368,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
+  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
+  m_Name: RepeatNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 95abd91bff158ae468752955cb86233e
-  Position: {x: -1412.0001, y: 333}
+  Guid: c1eae07b6d7e59a478e3996763bdc73d
+  Position: {x: -1146, y: 514.2245}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -642,12 +383,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Children:
-  - {fileID: -265884656323651599}
-  - {fileID: 2696003418007275328}
---- !u!114 &-2455610521345345254
+  Child: {fileID: 2936275731192045002}
+  restartOnSuccess: 0
+  restartOnFailure: 1
+  maxRepeats: 1000
+--- !u!114 &-6433332591865338790
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -656,13 +400,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4ed0157a1bf794fafe8eb6769926be, type: 3}
-  m_Name: MoveToDest
+  m_Script: {fileID: 11500000, guid: f5499c02487b75f45813179a152bf536, type: 3}
+  m_Name: RandomSelectorNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 57fdc15d25a81724d81c46596eb4b4db
-  Position: {x: 900, y: 359}
+  Guid: 8c1d3c5369c5eb543b3c28e6fe885e6e
+  Position: {x: -1326, y: 1907}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -671,241 +415,12 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  EnableRotation: 1
-  Speed: 7
-  RotationSpeed: 5
-  VariableSpeedForDist: 0
---- !u!114 &-2414103663951689702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 82bc95d5d120fbc4eba697aa05cf8e81
-  Position: {x: 809, y: -289}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: "\uAC70\uB9AC\uAC00 \uBA40\uB54C"
-  Children:
-  - {fileID: -3593776098529284501}
-  - {fileID: -7551565825373161039}
-  - {fileID: 3466146077439439528}
---- !u!114 &-2376317629835652694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 09aae6b9412cd3448890e0057151e1ae
-  Position: {x: -1495, y: 44.500084}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 6335136636351866084}
-  - {fileID: 3652095218212461011}
---- !u!114 &-2350322544448885262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: d54388c174f2642409f7bba8ce9ce98c
-  Position: {x: -530, y: -729}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: -2674179139984608339}
-  - {fileID: -7356419548608681423}
-  - {fileID: -2312332979834386906}
---- !u!114 &-2312332979834386906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: e9569817d2b174f4985ccf00a751c01c
-  Position: {x: -634.04535, y: -486.00003}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -6868549900092931513}
---- !u!114 &-1569329647580692522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 82f727ced0499f049af12408b0f9c224
-  Position: {x: -526.2744, y: -879}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -2350322544448885262}
---- !u!114 &-1054667690763421374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 0240a3cb9ed34424fa73a8391e200399
-  Position: {x: 908, y: -667}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 5341854477298665185}
-  - {fileID: 6021657887901996009}
-  - {fileID: 324760784771631872}
---- !u!114 &-721732279586929520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
-  m_Name: IsFaceToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 3554c979aa93f0746981d6b2192eef79
-  Position: {x: -1411.9996, y: -511.5}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minSimilarity: 0.99
---- !u!114 &-390113913647336409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
-  m_Name: SetRotationToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 845017b47afb6bb4d8d7d843c873da8c
-  Position: {x: -1515, y: -964.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  faceToPlayer: 0
-  faceRotationLerpTime: 2
---- !u!114 &-265884656323651599
+  Children: []
+--- !u!114 &-6014649351343040296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -919,8 +434,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: b04b5a251ee7d684b8e3bc82478736aa
-  Position: {x: -1512.0001, y: 537}
+  Guid: 6431fd674c19a2b488ce72b35c36bb3e
+  Position: {x: 293.00003, y: 2691}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -929,12 +444,761 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  AttackNum: 0
-  IsRandomAttack: 1
+  AttackNum: 3
+  IsRandomAttack: 0
   MinRandomIndex: 0
-  RandomLength: 2
+  RandomLength: 0
+--- !u!114 &-5710973995256376320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
+  m_Name: SucceedNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: fa0193cef3590234f9dc6e8f093ecdbc
+  Position: {x: 134.99966, y: 1944}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -8789859347594941322}
+--- !u!114 &-5610799417832798661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 65fc5b1dba513e149ac0037280cf35ab
+  Position: {x: 216.00008, y: 776}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -4692668094431931776}
+  - {fileID: -1908880003947460908}
+--- !u!114 &-5398636526289971145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
+  m_Name: SetNineTailHumanAnimation
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: df8ec0079eaf5ee44a2d5c1ce2932248
+  Position: {x: 380, y: 538}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  TransitionDuration: 0.1
+  PlayIdle: 0
+  PlayStrafe: 0
+  PlayDie: 0
+  SetRun: 0
+  SetWalk: 1
+  IsRun: 0
+  IsWalk: 0
+--- !u!114 &-5360488362849388099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: fa7400946e7efff43a4bbf9fe8d39f97
+  Position: {x: 219.00006, y: 645}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -5610799417832798661}
+  restartOnSuccess: 1
+  restartOnFailure: 0
+  maxRepeats: 0
+--- !u!114 &-4692668094431931776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 76ae33c264d7ea741adccdbd24f98195
+  Position: {x: 135.00003, y: 931.99994}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 4
+  maxDistance: 100
+  useRangeCheck: 0
+  rangeCheck: 999
+--- !u!114 &-4405800317841701576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
+  m_Name: IsFaceToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: c675d19489d77f447a83d49e40fe3e15
+  Position: {x: -1536, y: 372.2245}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minSimilarity: 0.95
+--- !u!114 &-4174501848947081501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
+  m_Name: FailureNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 110d6ff3beeb6614b8e61205ad021d24
+  Position: {x: -943, y: 1558.5}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -2667179674389061801}
+--- !u!114 &-4135914242751016691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: bb6970765fd5d3340b16e599d46c0d19
+  Position: {x: -1077, y: 1317.9542}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: "\uC2A4\uD0AC"
+  Children:
+  - {fileID: 4250078373672917875}
+  - {fileID: -4174501848947081501}
+--- !u!114 &-3576458939510429853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46900e9c5067eff49bfc3e278fa18b7f, type: 3}
+  m_Name: MoveToPlayer1
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: a1b9ddc1f05468f4ba5d31bc74e8c254
+  Position: {x: 1578.51, y: 708}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Speed: 24
+  StopDistance: 4
+  Offset: 2
+  EnableRotation: 1
+--- !u!114 &-3013270811331187219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 6037a54b19937cf44806dc1c452d9985
+  Position: {x: 843.193, y: 274}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: "\uB3CC\uC9C4"
+  Children:
+  - {fileID: 8421563870448077585}
+  - {fileID: 102122613125878905}
+  - {fileID: 361946504005081647}
+--- !u!114 &-2888109623071080032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 7f37f87b51aaf0f46885e906bef10249
+  Position: {x: -1334, y: 1684}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: "\uC911\uAC70\uB9AC"
+  Children:
+  - {fileID: 8502603631727450951}
+  - {fileID: -6433332591865338790}
+--- !u!114 &-2719194665276342398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: cef703994c88fd640b3ebb3d8dbf0612
+  Position: {x: 276, y: 2258}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 2816299730400231977}
+  - {fileID: 5860137978304470541}
+--- !u!114 &-2667179674389061801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: ea3ce7f6fd6bf924c8fef3f93c3d8e58
+  Position: {x: -823.3634, y: 1726.9999}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: "\uADFC\uAC70\uB9AC"
+  Children:
+  - {fileID: 1709563112527370004}
+  - {fileID: 624816327747977018}
+--- !u!114 &-2582110176121731978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 296dab02c02ccdb4992ba1f27e1733e0
+  Position: {x: 1416.51, y: 706.99994}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 4
+  maxDistance: 10
+  useRangeCheck: 0
+  rangeCheck: 999
+--- !u!114 &-2062706167207358310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: f32228cc934b6a34db3823f785797c8b
+  Position: {x: -386, y: 662.9999}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 8860247534274247898}
+  - {fileID: -8021746145534623750}
+  - {fileID: 1091035345559837658}
+--- !u!114 &-1908880003947460908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46900e9c5067eff49bfc3e278fa18b7f, type: 3}
+  m_Name: MoveToPlayer1
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: cc7435a77581c42438419ec4119acdd5
+  Position: {x: 299.00006, y: 935.99994}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Speed: 24
+  StopDistance: 4
+  Offset: 2
+  EnableRotation: 1
+--- !u!114 &-1716695008728482479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 0be38e28028da5348938e7e8cc1642f7
+  Position: {x: 11.9999695, y: 3.9999847}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 6502269791540809497}
+  - {fileID: -3013270811331187219}
+  - {fileID: 8320623556477029204}
+--- !u!114 &-1531969185876939531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd31f8c48b775934ca323e9168613216, type: 3}
+  m_Name: SetRotationToPlayerFalse
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 3248a656285882541b520d800a21469e
+  Position: {x: -1081.5002, y: 200.99995}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 0
+--- !u!114 &-1447349500943213773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
+  m_Name: SetRotationToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 5e2a4b0efc6adfd4ab3c26876c460920
+  Position: {x: -1378, y: 489.22452}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 1
+  faceRotationLerpTime: 3
+--- !u!114 &-1228520444602973566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
+  m_Name: SucceedNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: d4d8780231e70f140b936e328b982653
+  Position: {x: 222.00005, y: 530}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -5360488362849388099}
+--- !u!114 &-839017390127215170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd31f8c48b775934ca323e9168613216, type: 3}
+  m_Name: SetRotationToPlayerFalse
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: f07524c9b6c598e4fbf8b6596c365d24
+  Position: {x: 624.5289, y: 2690}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 0
+--- !u!114 &-638203536360772579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: db1669375ab4dc443b2c03a704827ad1
+  Position: {x: -551.99994, y: -4.208806}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 794353032825896662}
+  - {fileID: 3118339430748246635}
+  - {fileID: -1531969185876939531}
+  - {fileID: -2062706167207358310}
+--- !u!114 &-173534402381503744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be1a0258bfbba5c4b8f1a1c7f53aea1f, type: 3}
+  m_Name: EnemyAttack
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 9f04fa2345daabe40bd4836ee44892df
+  Position: {x: -2003, y: 2230}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: S0204
+  AttackNum: 2
+  IsRandomAttack: 0
+  MinRandomIndex: 0
+  RandomLength: 0
+--- !u!114 &-6786636598484907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
+  m_Name: ParallelNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 6a92faa3ffaf5ef4aab923f3838d8d1d
+  Position: {x: 1499.51, y: 543.99994}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -2582110176121731978}
+  - {fileID: -3576458939510429853}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,63 +1216,85 @@ MonoBehaviour:
   Nodes:
   - {fileID: 4579311270041099437}
   - {fileID: -6629019543597350499}
-  - {fileID: 7533039443331997008}
-  - {fileID: 8415526396489050958}
-  - {fileID: -3679306218845705168}
-  - {fileID: 7972944899104064160}
-  - {fileID: 3127103382632259601}
-  - {fileID: -6648857540161750439}
-  - {fileID: -5540754945912782548}
-  - {fileID: -8763083619909174564}
-  - {fileID: -3191617825148166587}
-  - {fileID: 9062046424340713318}
-  - {fileID: -721732279586929520}
-  - {fileID: -390113913647336409}
-  - {fileID: -2350322544448885262}
-  - {fileID: -1569329647580692522}
-  - {fileID: -4424790819043595908}
-  - {fileID: -4654984522364290257}
-  - {fileID: -1054667690763421374}
-  - {fileID: 5341854477298665185}
-  - {fileID: 6021657887901996009}
-  - {fileID: 324760784771631872}
-  - {fileID: -2414103663951689702}
-  - {fileID: 6773092375659025394}
-  - {fileID: -3593776098529284501}
-  - {fileID: -7551565825373161039}
-  - {fileID: 3466146077439439528}
-  - {fileID: 8683141465558041245}
-  - {fileID: 6518707255193269455}
-  - {fileID: 3064132283318985938}
-  - {fileID: -2455610521345345254}
-  - {fileID: -8587105003120704181}
-  - {fileID: -6100749454395417162}
-  - {fileID: 3072618659975117379}
-  - {fileID: 6047303822737138636}
-  - {fileID: 310004476240461778}
-  - {fileID: -8835944018907128438}
-  - {fileID: -2674179139984608339}
-  - {fileID: -7356419548608681423}
-  - {fileID: -2312332979834386906}
-  - {fileID: -6636166333830433143}
-  - {fileID: -2376317629835652694}
-  - {fileID: 6335136636351866084}
-  - {fileID: 3652095218212461011}
-  - {fileID: -2484665726281257301}
-  - {fileID: -265884656323651599}
-  - {fileID: 2696003418007275328}
-  - {fileID: 3084493238394813707}
-  - {fileID: -2601548927107849610}
-  - {fileID: 1066014735154186919}
-  - {fileID: 8699965043620115833}
-  - {fileID: -9144023704845362944}
-  - {fileID: -8495465810165076445}
-  - {fileID: -6868549900092931513}
-  - {fileID: -6402955437926887762}
-  - {fileID: 735048071721171887}
-  - {fileID: 4680013975436452972}
-  - {fileID: 920207416263487152}
-  - {fileID: 5829753508249944672}
+  - {fileID: 8756412124570333484}
+  - {fileID: -4135914242751016691}
+  - {fileID: 4250078373672917875}
+  - {fileID: -2888109623071080032}
+  - {fileID: -2667179674389061801}
+  - {fileID: 8502603631727450951}
+  - {fileID: 1709563112527370004}
+  - {fileID: 5493535217448358826}
+  - {fileID: 5451483903664675075}
+  - {fileID: 624816327747977018}
+  - {fileID: -6433332591865338790}
+  - {fileID: -173534402381503744}
+  - {fileID: 1890854356069920650}
+  - {fileID: -8151297948656086862}
+  - {fileID: 102122613125878905}
+  - {fileID: 6803227641387545258}
+  - {fileID: 1996761771641372275}
+  - {fileID: 6095677599982996189}
+  - {fileID: 361946504005081647}
+  - {fileID: -3013270811331187219}
+  - {fileID: 6749015067409651586}
+  - {fileID: -8885542161253328322}
+  - {fileID: 4176920228514618056}
+  - {fileID: 931271305687288745}
+  - {fileID: 377880473885165820}
+  - {fileID: 7938467220049002945}
+  - {fileID: -638203536360772579}
+  - {fileID: -8021746145534623750}
+  - {fileID: -8789859347594941322}
+  - {fileID: 8136182588609659080}
+  - {fileID: 4859274736034251665}
+  - {fileID: -5710973995256376320}
+  - {fileID: 3118339430748246635}
+  - {fileID: -4405800317841701576}
+  - {fileID: 1323451708371928054}
+  - {fileID: 5162685001821948759}
+  - {fileID: -1447349500943213773}
+  - {fileID: 2936275731192045002}
+  - {fileID: -6494827347744475839}
+  - {fileID: 8790707912942630147}
+  - {fileID: -9138334587311993550}
+  - {fileID: -2582110176121731978}
+  - {fileID: 6502269791540809497}
+  - {fileID: -4692668094431931776}
+  - {fileID: -1716695008728482479}
+  - {fileID: -5610799417832798661}
+  - {fileID: -6786636598484907}
+  - {fileID: -6495438391373211187}
+  - {fileID: -5360488362849388099}
+  - {fileID: -1228520444602973566}
+  - {fileID: 1091035345559837658}
+  - {fileID: 7906641899629074130}
+  - {fileID: 346922269436066849}
+  - {fileID: -1908880003947460908}
+  - {fileID: -3576458939510429853}
+  - {fileID: -6014649351343040296}
+  - {fileID: 6689752286715540507}
+  - {fileID: 5860137978304470541}
+  - {fileID: 8421563870448077585}
+  - {fileID: -2062706167207358310}
+  - {fileID: 8860247534274247898}
+  - {fileID: -4174501848947081501}
+  - {fileID: 2816299730400231977}
+  - {fileID: -2719194665276342398}
+  - {fileID: 3055283922170437765}
+  - {fileID: -839017390127215170}
+  - {fileID: -1531969185876939531}
+  - {fileID: 794353032825896662}
+  - {fileID: -6506594378735350333}
+  - {fileID: 2005318788141956099}
+  - {fileID: -9091137346738355540}
+  - {fileID: 1009868254230665797}
+  - {fileID: 387794137457488746}
+  - {fileID: 8320623556477029204}
+  - {fileID: -5398636526289971145}
+  - {fileID: 3989319070836406407}
+  - {fileID: -8855911335895034557}
+  - {fileID: 9121894948362904937}
+  - {fileID: -7700465058221151068}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1017,7 +1303,9 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
---- !u!114 &310004476240461778
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+--- !u!114 &102122613125878905
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1026,13 +1314,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
+  m_Script: {fileID: 11500000, guid: be1a0258bfbba5c4b8f1a1c7f53aea1f, type: 3}
+  m_Name: EnemyAttack
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 5d1010681f6298c44b37dfd998f641b3
-  Position: {x: 1464.3827, y: 311.99997}
+  Guid: 81db10450e2b7e345b429e5834364cf8
+  Position: {x: 886.193, y: 516}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1041,13 +1329,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 
-  minDistance: 4.5
-  maxDistance: 100
-  useRangeCheck: 1
-  rangeCheck: 2
---- !u!114 &324760784771631872
+  description: S0206
+  AttackNum: 4
+  IsRandomAttack: 0
+  MinRandomIndex: 0
+  RandomLength: 0
+--- !u!114 &346922269436066849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1056,13 +1346,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
-  m_Name: SelectorNode
+  m_Script: {fileID: 11500000, guid: 63ae3e44cbd111c4b937d53ba4f6676e, type: 3}
+  m_Name: CoolDownCheck
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: d53250c1e17fd204e905aae6868ad272
-  Position: {x: 916, y: -494}
+  Guid: 1867acd0d76325d4ab3d20c5a51c215d
+  Position: {x: -2200, y: 2233}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1071,98 +1361,13 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: -2414103663951689702}
-  - {fileID: 6773092375659025394}
---- !u!114 &735048071721171887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: d7799e5b31f8f7d45bdf1e37952edff8
-  Position: {x: -675, y: 6.5}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minDistance: 4
-  maxDistance: 5
-  useRangeCheck: 1
-  rangeCheck: 0
---- !u!114 &920207416263487152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 51603b6f37366db40ab7384d484258c3
-  Position: {x: -470, y: 146}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children: []
---- !u!114 &1066014735154186919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 7cd9abfb2fb06a5459bedd2bb859ef05
-  Position: {x: -1008, y: 325.35385}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 8699965043620115833}
-  - {fileID: -9144023704845362944}
---- !u!114 &2696003418007275328
+  description: S0204
+  ActionID: S0204
+  IsPreStartCooldown: 1
+--- !u!114 &361946504005081647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1176,8 +1381,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 2d145ed61157bd747880227e9cd5a714
-  Position: {x: -1329.0001, y: 537}
+  Guid: 5b682180e050a7c458af15aa5e6bcee3
+  Position: {x: 1072.193, y: 514}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1186,9 +1391,11 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
---- !u!114 &3064132283318985938
+--- !u!114 &377880473885165820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1197,13 +1404,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 15a2c315fee732e45ae6ea90897e4eae
-  Position: {x: 701, y: 351}
+  Guid: 20db70cca072e1e4ab3bf8cf32f6c3b7
+  Position: {x: 545, y: 1464}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1212,13 +1419,17 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 
-  minDistance: 20
-  maxDistance: 1000
-  useRangeCheck: 0
-  rangeCheck: 999
---- !u!114 &3072618659975117379
+  description: "\uC120\uD68C"
+  Children:
+  - {fileID: 3055283922170437765}
+  - {fileID: 7938467220049002945}
+  - {fileID: -9091137346738355540}
+  - {fileID: 931271305687288745}
+  - {fileID: -8855911335895034557}
+--- !u!114 &387794137457488746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1227,13 +1438,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
-  m_Name: RepeatNode
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: b091501038583ee42871952ad5e705b5
-  Position: {x: 1540.3827, y: 9.999956}
+  Guid: 5e1bc70b24ac4f34fa6c31c51eac456e
+  Position: {x: 204.91647, y: 407.39563}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1242,13 +1453,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: 6047303822737138636}
-  restartOnSuccess: 1
-  restartOnFailure: 0
-  maxRepeats: 0
---- !u!114 &3084493238394813707
+  Children:
+  - {fileID: 1009868254230665797}
+  - {fileID: -1228520444602973566}
+  - {fileID: -5398636526289971145}
+--- !u!114 &624816327747977018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1257,13 +1470,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
+  m_Script: {fileID: 11500000, guid: f5499c02487b75f45813179a152bf536, type: 3}
+  m_Name: RandomSelectorNode
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 2a28fee23f36b9249a732344cca836d7
-  Position: {x: -1190.7499, y: 181.49997}
+  Guid: 19e613605b91f864db16a4a1573b1a45
+  Position: {x: -732.19257, y: 1947}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1272,13 +1485,13 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 5
-  maxDistance: 12
-  useRangeCheck: 0
-  rangeCheck: 999
---- !u!114 &3127103382632259601
+  Children:
+  - {fileID: 4176920228514618056}
+--- !u!114 &794353032825896662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1287,13 +1500,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
-  m_Name: FailureNode
+  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
+  m_Name: SetNineTailHumanAnimation
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: e70100c707b652b4e82f2f7f4f840207
-  Position: {x: -1847, y: -796.0801}
+  Guid: 261b782f4cc2cff4dbe5cfb8fe2d0a92
+  Position: {x: -1563.9998, y: 209.00003}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1302,10 +1515,19 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: -5540754945912782548}
---- !u!114 &3466146077439439528
+  TransitionDuration: 0.1
+  PlayIdle: 0
+  PlayStrafe: 0
+  PlayDie: 0
+  SetRun: 0
+  SetWalk: 1
+  IsRun: 0
+  IsWalk: 0
+--- !u!114 &931271305687288745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1314,13 +1536,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
+  m_Script: {fileID: 11500000, guid: 88a92fb07d97f15489f4c6f052d8d945, type: 3}
+  m_Name: ActionStrafe
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 0cabfa2a8e96117428a0be3e0bc168e5
-  Position: {x: 809, y: -99}
+  Guid: 25edaab6c56726d4ea10c63926b7278e
+  Position: {x: 981.722, y: 1696.5001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1329,10 +1551,51 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: 8683141465558041245}
---- !u!114 &3652095218212461011
+  MinStrafeDuration: 1
+  MaxStrafeDuration: 2
+  MoveSpeed: 25
+  RotationSpeed: 270
+--- !u!114 &1009868254230665797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
+  m_Name: SetNineTailHumanAnimation
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 760fd7cabe03aca4f952753c86b285d9
+  Position: {x: -18.353855, y: 538}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  TransitionDuration: 0.1
+  PlayIdle: 0
+  PlayStrafe: 0
+  PlayDie: 0
+  SetRun: 0
+  SetWalk: 1
+  IsRun: 0
+  IsWalk: 1
+--- !u!114 &1091035345559837658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1346,8 +1609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 551f192e55bf1e34baae08c6549bc7ca
-  Position: {x: -1411.9999, y: 203.50009}
+  Guid: 6e1ee6262283ced4ca1f23fc2ae1f888
+  Position: {x: 465.99985, y: 1225}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1356,10 +1619,379 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: -2484665726281257301}
-  probability: 0.8
+  Child: {fileID: 377880473885165820}
+  probability: 0.5
+--- !u!114 &1323451708371928054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
+  m_Name: FailureNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 45d8c395550de6947a512267d71863dc
+  Position: {x: -1365, y: 372.2245}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -1447349500943213773}
+--- !u!114 &1709563112527370004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 1e92ccffe7e174d4a85c14847fcb0fe0
+  Position: {x: -951.19257, y: 1931}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 0
+  maxDistance: 5
+  useRangeCheck: 1
+  rangeCheck: 0
+--- !u!114 &1890854356069920650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
+  m_Name: IsAttackEnd
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 53ad6fe3edef0d641b72686b0a1cdc19
+  Position: {x: -1838, y: 2229}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+--- !u!114 &1996761771641372275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
+  m_Name: IsAttackEnd
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: de105ee1ff7495a4ea2118b8b5ecd9ce
+  Position: {x: -412.19254, y: 2346}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+--- !u!114 &2005318788141956099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: b0438b6bf35de6e4d84a148b5cac4472
+  Position: {x: -203.4852, y: 2675.0005}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -6506594378735350333}
+  - {fileID: 4859274736034251665}
+--- !u!114 &2816299730400231977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ba2762b88289b4588f69cc46556fa2, type: 3}
+  m_Name: ProbabilityNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 3ca428a5365ab0347b1d07f35250db70
+  Position: {x: -163.33594, y: 2519.833}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: 2005318788141956099}
+  probability: 0.3
+--- !u!114 &2936275731192045002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
+  m_Name: IsFaceToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 3e65f4f9531b12344b7bf5993e2df2d6
+  Position: {x: -1158, y: 671}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minSimilarity: 0.99
+--- !u!114 &3055283922170437765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
+  m_Name: SetRotationToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 9c30afac3b08126439df451a1f766781
+  Position: {x: 372, y: 1701.0002}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 0
+  faceRotationLerpTime: 2
+--- !u!114 &3118339430748246635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: b035d6efe86607843a91b412cc698bf1
+  Position: {x: -1298, y: 203.22449}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -4405800317841701576}
+  - {fileID: 1323451708371928054}
+  - {fileID: 5162685001821948759}
+--- !u!114 &3989319070836406407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
+  m_Name: SetNineTailHumanAnimation
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: ce9a19ab826f6a24fb71a915940c410c
+  Position: {x: 1263.7865, y: 439.00003}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  TransitionDuration: 0.1
+  PlayIdle: 0
+  PlayStrafe: 0
+  PlayDie: 0
+  SetRun: 0
+  SetWalk: 1
+  IsRun: 0
+  IsWalk: 1
+--- !u!114 &4176920228514618056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 732bf5d6eb3b55846a263d53959fd7f9
+  Position: {x: -498.1925, y: 2126}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -8151297948656086862}
+  - {fileID: 1996761771641372275}
+--- !u!114 &4250078373672917875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: a6e4e5eac1db70f4eae1bb41b5d5e873
+  Position: {x: -1896, y: 1692}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: "\uC6D0\uAC70\uB9AC"
+  Children:
+  - {fileID: 5493535217448358826}
+  - {fileID: 5451483903664675075}
 --- !u!114 &4579311270041099437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,7 +2007,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: d2477569b038a754a9d64d9782cf4fd8
-  Position: {x: -1212.9999, y: -1501.8608}
+  Position: {x: -233, y: -499.92004}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1384,10 +2016,195 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -6629019543597350499}
---- !u!114 &4680013975436452972
+--- !u!114 &4859274736034251665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c48c71dfd1a04846aa3535307407996, type: 3}
+  m_Name: ActionDodgeSide
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 71a62a943c09d5147a9a4b9f80ce011b
+  Position: {x: -120.35522, y: 2822.0005}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  DodgeSpeed: 20
+  DodgeDistance: 15
+--- !u!114 &5162685001821948759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
+  m_Name: SucceedNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: bf6ac8112b96a654387c19199ba77266
+  Position: {x: -1148, y: 380.22446}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -6494827347744475839}
+--- !u!114 &5451483903664675075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5499c02487b75f45813179a152bf536, type: 3}
+  m_Name: RandomSelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: defa69ed56351f14691cde21f7607a89
+  Position: {x: -1921, y: 1902}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -8885542161253328322}
+  - {fileID: 6749015067409651586}
+--- !u!114 &5493535217448358826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: a395ee39f085c4847851d8ddbab9ad29
+  Position: {x: -2079, y: 1856}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 0
+  maxDistance: 5
+  useRangeCheck: 1
+  rangeCheck: 2
+--- !u!114 &5860137978304470541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 61ae21bcb88c0734680cacae49e0427e
+  Position: {x: 368.99997, y: 2490.5}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 8790707912942630147}
+  - {fileID: -6014649351343040296}
+  - {fileID: 6689752286715540507}
+  - {fileID: -839017390127215170}
+--- !u!114 &6095677599982996189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
+  m_Name: IsAttackEnd
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 9e8d4e01bb7db8e4ea0253c4df663f74
+  Position: {x: -1485, y: 2344}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+--- !u!114 &6502269791540809497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1401,8 +2218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: d52d5a279c959ee4cb55aaa2ee303920
-  Position: {x: -469.99988, y: 14.999968}
+  Guid: acd505ed52c9b1f4c8d6d398ac58face
+  Position: {x: 159.00005, y: 248.62427}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1411,11 +2228,13 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: 920207416263487152}
-  probability: 0.2
---- !u!114 &5341854477298665185
+  Child: {fileID: 387794137457488746}
+  probability: 0.3
+--- !u!114 &6689752286715540507
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1424,13 +2243,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
+  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
+  m_Name: IsAttackEnd
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: a3ca12787cdb61840b1d893ceba35fe0
-  Position: {x: 500, y: -486}
+  Guid: dd6378813e2d403409e1e12af95cafaf
+  Position: {x: 451, y: 2691}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1439,158 +2258,11 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 4
-  maxDistance: 70
-  useRangeCheck: 0
-  rangeCheck: 999
---- !u!114 &5829753508249944672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: d6cab43ebf07fda4db9f27dd7bfb8d6a
-  Position: {x: 1050, y: -125}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minDistance: 0
-  maxDistance: 5
-  useRangeCheck: 1
-  rangeCheck: 2
---- !u!114 &6021657887901996009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665389cfbf74f8343b8a681821e31802, type: 3}
-  m_Name: WaitNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: a0ab308afb1e0624f9d51cfdd3470e2d
-  Position: {x: 710, y: -486}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  WaitTime: 0.15
---- !u!114 &6047303822737138636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
-  m_Name: ParallelNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: e00fbf4a6e2ef904f845d271f6e1153a
-  Position: {x: 1547.3827, y: 135.99992}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 310004476240461778}
-  - {fileID: -8835944018907128438}
---- !u!114 &6335136636351866084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: a19ed3c2243a8994c8a1414dd3858b29
-  Position: {x: -1598.3542, y: 212}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minDistance: 4
-  maxDistance: 5
-  useRangeCheck: 1
-  rangeCheck: 0
---- !u!114 &6518707255193269455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
-  m_Name: ParallelNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 2fc89b599874bf5478249d6045dc4eda
-  Position: {x: 817, y: 195}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 3064132283318985938}
-  - {fileID: -2455610521345345254}
---- !u!114 &6773092375659025394
+--- !u!114 &6749015067409651586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1604,8 +2276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: e876314e3d9de2445ac1fed32ac5babd
-  Position: {x: 1307.3827, y: -281.00003}
+  Guid: b8a84457428a76344aca75ded7fb3cac
+  Position: {x: -1553, y: 2162}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1614,132 +2286,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
-  tree: {fileID: 0}
-  description: "\uC6D0\uAC70\uB9AC \uC0AC\uAC70\uB9AC \uC77C\uB54C"
-  Children:
-  - {fileID: 5829753508249944672}
-  - {fileID: -8587105003120704181}
-  - {fileID: -6100749454395417162}
---- !u!114 &7533039443331997008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
-  m_Name: SequencerNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 7e7dc82d8e2287448b3301b2e073ae5d
-  Position: {x: -1221, y: -1184.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: 8415526396489050958}
-  - {fileID: -3679306218845705168}
-  - {fileID: -390113913647336409}
-  - {fileID: -1569329647580692522}
-  - {fileID: -4424790819043595908}
---- !u!114 &7972944899104064160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
-  m_Name: IsFaceToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: e7f40eb3151f7f940999dae936e099c6
-  Position: {x: -2051, y: -804.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minSimilarity: 0.95
---- !u!114 &8415526396489050958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
-  m_Name: IsPlayerInRange
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: d71ce22f915803e4484e7c725281c8e6
-  Position: {x: -1930, y: -980.0801}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  minDistance: 0
-  maxDistance: 50
-  useRangeCheck: 0
-  rangeCheck: 999
---- !u!114 &8683141465558041245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
-  m_Name: RepeatNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 0df47ddebf3b5324e8389d5838b827e6
-  Position: {x: 817, y: 42}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: 6518707255193269455}
-  restartOnSuccess: 1
-  restartOnFailure: 0
-  maxRepeats: 0
---- !u!114 &8699965043620115833
+  - {fileID: 7906641899629074130}
+  - {fileID: 6803227641387545258}
+  - {fileID: 6095677599982996189}
+--- !u!114 &6803227641387545258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1753,8 +2308,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 2cc23e8056676be4c8d25bbe9d3fc008
-  Position: {x: -1091, y: 529}
+  Guid: 70f7b56a4ec0d4c4484597914bec3103
+  Position: {x: -1655, y: 2336}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1763,13 +2318,15 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 
-  AttackNum: 0
-  IsRandomAttack: 1
-  MinRandomIndex: 2
-  RandomLength: 4
---- !u!114 &9062046424340713318
+  description: S0202
+  AttackNum: 1
+  IsRandomAttack: 0
+  MinRandomIndex: 0
+  RandomLength: 0
+--- !u!114 &7906641899629074130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1778,13 +2335,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec57ae1ce6eacc429902710e77695e7, type: 3}
-  m_Name: RepeatNode
+  m_Script: {fileID: 11500000, guid: 63ae3e44cbd111c4b937d53ba4f6676e, type: 3}
+  m_Name: CoolDownCheck
   m_EditorClassIdentifier: 
   mState: 0
   Started: 0
-  Guid: 5b97aee4b70138142b8bf83eb338fd90
-  Position: {x: -1411.9996, y: -635}
+  Guid: 95d4212ac4dfde04bb22b10848db1364
+  Position: {x: -1838, y: 2344}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1793,9 +2350,292 @@ MonoBehaviour:
     currentAnimationDuration: 0
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: S0202
+  ActionID: S0202
+  IsPreStartCooldown: 1
+--- !u!114 &7938467220049002945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: cfb433b91d1cd6745b186d3a19f2cbcb
+  Position: {x: 548.99976, y: 1703.0001}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: -721732279586929520}
-  restartOnSuccess: 0
-  restartOnFailure: 1
-  maxRepeats: 1000
+  minDistance: 8
+  maxDistance: 20
+  useRangeCheck: 0
+  rangeCheck: 999
+--- !u!114 &8136182588609659080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: e51af5a41f5fd634ca1c84dfcd08627b
+  Position: {x: 51.999702, y: 2250}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 0
+  maxDistance: 6
+  useRangeCheck: 0
+  rangeCheck: 0
+--- !u!114 &8320623556477029204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 32d9aa75098e7394a9d56484d2a06503
+  Position: {x: 1499.51, y: 282}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: 3989319070836406407}
+  - {fileID: -6495438391373211187}
+--- !u!114 &8421563870448077585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: a190bdc27a22c5547a77718410659faf
+  Position: {x: 722.193, y: 522}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 6
+  maxDistance: 100
+  useRangeCheck: 0
+  rangeCheck: 999
+--- !u!114 &8502603631727450951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a572e4c32ecd14e8b627de5773f131, type: 3}
+  m_Name: IsPlayerInRange
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 0d80467e941ac59438cf4f488e80ac24
+  Position: {x: -1506, y: 1872}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  minDistance: 0
+  maxDistance: 5
+  useRangeCheck: 1
+  rangeCheck: 1
+--- !u!114 &8756412124570333484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 483493389a8e2784fa12ea091475bc45
+  Position: {x: -254.41745, y: -179.81313}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -638203536360772579}
+  - {fileID: -1716695008728482479}
+--- !u!114 &8790707912942630147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
+  m_Name: SetRotationToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: ed9e702adf7679f4e873a35730385c5a
+  Position: {x: 113, y: 2682}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 1
+  faceRotationLerpTime: 20
+--- !u!114 &8860247534274247898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ba2762b88289b4588f69cc46556fa2, type: 3}
+  m_Name: ProbabilityNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: cc8c97f15fe53d7449af3780c1c84126
+  Position: {x: -718.0999, y: 991.55347}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -4135914242751016691}
+  probability: 0.85
+--- !u!114 &9121894948362904937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 707501e004f1fd545bcbdc284a858472, type: 3}
+  m_Name: MoveToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: be65361d969cc344fa8e24b2db3d1d71
+  Position: {x: 744.0001, y: 74.50001}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Speed: 5
+  StopDistance: 2
+  Offset: 2
+  EnableRotation: 1
+  EnableUseAnim: 0
