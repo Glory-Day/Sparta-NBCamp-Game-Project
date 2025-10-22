@@ -4997,8 +4997,11 @@ MonoBehaviour:
   <Target>k__BackingField: {fileID: 0}
   <Distance>k__BackingField: 0
   <StrafeSpeed>k__BackingField: 0
+  InitialPosition: {x: 0, y: 0, z: 0}
   FaceToPlayer: 0
   FaceLerpTime: 2
+  IsNormalMonster: 0
+  MoveRange: 10
 --- !u!114 &7043391714557343318
 MonoBehaviour:
   m_ObjectHideFlags: 0

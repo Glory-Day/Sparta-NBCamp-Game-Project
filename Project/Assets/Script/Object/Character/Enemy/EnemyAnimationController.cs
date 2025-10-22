@@ -113,12 +113,22 @@ namespace Backend.Object.Character.Enemy
             Animator.SetFloat(hash, value, dampTime, time);
         }
 
+        public void SetAnimationFloat(int name, float value)
+        {
+            Animator.SetFloat(name, value);
+        }
+
         public void SetAnimatorSpeed(float speed)
         {
             Animator.speed = speed;
         }
 
         public float GetAnimationFloat(string name)
+        {
+            return Animator.GetFloat(name);
+        }
+
+        public float GetAnimationFloat(int name)
         {
             return Animator.GetFloat(name);
         }
