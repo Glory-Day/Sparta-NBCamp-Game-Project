@@ -23,7 +23,6 @@ namespace Backend.Object.Character.Player
 
         public event Action<Vector3> OnJump;
         public event Action<Vector3> OnLand;
-        public event Action<Vector3> OnRoll;
 
         private void Move(InputAction.CallbackContext context)
         {
@@ -89,21 +88,7 @@ namespace Backend.Object.Character.Player
 
         private void Attack(InputAction.CallbackContext context)
         {
-            switch (_state)
-            {
-                case State.Grounded:
-                    _combatIndex = 0;
-                    break;
-                case State.Attacking:
-                    if (_isAttackButtonBuffered == false)
-                    {
-                        _isAttackButtonBuffered = true;
-                        _combatIndex = 1;
-                    }
-                    break;
-            }
-
-            _animationController.SetAnimationInteger("Combat Index", _combatIndex);
+            _animationController.SetAnimationTrigger("Attack");
         }
 
         private void Stop(InputAction.CallbackContext context)
@@ -155,13 +140,12 @@ namespace Backend.Object.Character.Player
             Debugger.LogProgress();
 
             _state = State.Attacking;
-            _isAttackButtonBuffered = false;
 
             _actions.Movement.Move.Disable();
             _actions.Movement.Jump.Disable();
             _actions.Movement.Roll.Disable();
 
-            _direction = _facing;
+            _direction = Vector3.zero;
         }
 
         public void OnAttackingStateExited()
@@ -174,15 +158,6 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Move.Enable();
             _actions.Movement.Jump.Enable();
             _actions.Movement.Roll.Enable();
-
-            _combatIndex = -1;
-
-            if (_isAttackButtonBuffered)
-            {
-                _combatIndex = 0;
-            }
-
-            _animationController.SetAnimationInteger("Combat Index", _combatIndex);
         }
 
         public void OnDamagedStateEntered()

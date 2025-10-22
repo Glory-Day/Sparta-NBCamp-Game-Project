@@ -46,8 +46,9 @@ namespace Backend.Object.Character.Player
             _animationController = GetComponent<PlayerAnimationController>();
             _actionController = GetComponent<AdvancedActionController>();
 
-            _damageSender = GetComponent<DamageSender>();
-            _damageSender.Damage = data.PhysicalDamage;
+            _damageSender = GetComponentInChildren<DamageSender>();
+            _damageSender.PhysicalDamagePoint = data.PhysicalDamage;
+            _damageSender.MagicalDamagePoint = data.MagicalDamage;
         }
 
         private void Start()
