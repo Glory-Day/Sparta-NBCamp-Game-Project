@@ -1,11 +1,10 @@
-﻿using Backend.Object.Character.Player;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Backend.Object.Animation
+namespace Backend.Object.Character.Player.Animation
 {
     public class AnimationMovementController : StateMachineBehaviour
     {
-        public AnimationCurve speed;
+        public AnimationCurve speed = AnimationCurve.Linear(0f, 1f, 1f, 1f);
 
         private AdvancedActionController _controller;
 

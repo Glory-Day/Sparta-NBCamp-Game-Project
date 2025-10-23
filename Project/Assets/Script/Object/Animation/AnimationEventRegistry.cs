@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Backend.Object.Animation
 {
-    public class AnimationEventRegister
+    public class AnimationEventRegistry
     {
         private readonly List<Action> _actions = new ();
 
