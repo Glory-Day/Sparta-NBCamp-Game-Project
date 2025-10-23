@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Backend.Util.Data
 {
-    [CreateAssetMenu(menuName = "Scriptable Object/Data/Player_Status_Data")]
+    [CreateAssetMenu(menuName = "Scriptable Object/Data/Player Status Data")]
     public class PlayerStatusData : StatusData, ISerializable
     {
         [field: SerializeField] public float StaminaPoint { get; set; }
