@@ -9883,8 +9883,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   shouldTrackTarget: 0
+  lookAtTargetOnInit: 1
   isCreateRangeProjectile: 1
-  rangeProjectilePrefab: {fileID: 4264509212131509058, guid: 9a9913dac6771b041a60954a915d3020, type: 3}
+  rangeProjectilePrefab: {fileID: 4264509212131509058, guid: 1877f61d85ba2c343a4cc3740e90ea84, type: 3}
 --- !u!65 &5281482369331546348
 BoxCollider:
   m_ObjectHideFlags: 0
