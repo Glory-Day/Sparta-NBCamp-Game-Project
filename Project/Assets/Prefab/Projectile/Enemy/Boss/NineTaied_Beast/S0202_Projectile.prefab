@@ -80,10 +80,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   makeObjs:
-  - {fileID: 7281159161875971371, guid: 1c7b4ba3f0ee646408fcc9ab68d375f8, type: 3}
+  - {fileID: 7281159161875971371, guid: a00513a5601b5fb4e923cdfdb2f6ce84, type: 3}
   startDelay: 0
   makeCount: 5
   makeDelay: 0.3
   randomPos: {x: 10, y: 10, z: 10}
   randomRot: {x: 0, y: 0, z: 0}
   randomScale: {x: 0, y: 0, z: 0}
+  lookAtTargetOnInit: 1
