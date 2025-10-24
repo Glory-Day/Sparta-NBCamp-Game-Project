@@ -510,10 +510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98454de5f3b51ba4f982368b6a666625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  padding: 1
   iconImage: {fileID: 4267533460467891567}
   highlightImage: {fileID: 3259081578689768664}
   amountText: {fileID: 3742807798828954962}
   equipmentText: {fileID: 2079099079268451781}
+  padding: 1
   alpha: 0.5
-  fadeDuration: 0.2
+  duration: 0.2

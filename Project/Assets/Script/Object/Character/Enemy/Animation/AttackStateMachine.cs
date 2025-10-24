@@ -46,6 +46,7 @@ namespace Backend.Object.Character.Enemy.Animation
             {
                 _combatController.StartAttack();
                 _isAttack = true;
+                Debug.Log("Enemy Attack Started");
             }
         }
 
@@ -55,6 +56,7 @@ namespace Backend.Object.Character.Enemy.Animation
             {
                 _combatController.EndAttack();
                 _isAttack = false;
+                Debug.Log("Enemy Attack End");
             }
         }
 
