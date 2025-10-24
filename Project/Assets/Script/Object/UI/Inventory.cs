@@ -1,80 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Test.Data;
-using Test.Data.Base;
-using Test.Item;
-using Test.Item.Base;
+﻿using System.Collections.Generic;
+using Backend.Util.Data;
 using UnityEngine;
-
-/*
-    [Item의 상속구조]
-    - Item
-        - CountableItem
-            - PortionItem : IUsableItem.Use() -> 사용 및 수량 1 소모
-        - EquipmentItem
-            - WeaponItem : IUsableItem.Use() -> 착용 및 해제
-            - ArmorItem : IUsableItem.Use() -> 착용 및 해제
-
-    [ItemData의 상속구조]
-      (ItemData는 해당 아이템이 공통으로 가질 데이터 필드 모음)
-      (개체마다 달라져야 하는 현재 내구도, 강화도 등은 Item 클래스에서 관리)
-
-    - ItemData
-        - CountableItemData
-            - PortionItemData : 효과량(Value : 회복량, 공격력 등에 사용)
-        - EquipmentItemData : 최대 내구도
-            - WeaponItemData : 기본 공격력
-            - ArmorItemData : 기본 방어력
-*/
-
-/*
-    [API]
-    - bool HasItem(int) : 해당 인덱스의 슬롯에 아이템이 존재하는지 여부
-    - bool IsCountableItem(int) : 해당 인덱스의 아이템이 셀 수 있는 아이템인지 여부
-    - int GetCurrentAmount(int) : 해당 인덱스의 아이템 수량
-        - -1 : 잘못된 인덱스
-        -  0 : 빈 슬롯
-        -  1 : 셀 수 없는 아이템이거나 수량 1
-    - ItemData GetItemData(int) : 해당 인덱스의 아이템 정보
-    - string GetItemName(int) : 해당 인덱스의 아이템 이름
-
-    - int Add(ItemData, int) : 해당 타입의 아이템을 지정한 개수만큼 인벤토리에 추가
-        - 자리 부족으로 못넣은 개수만큼 리턴(0이면 모두 추가 성공했다는 의미)
-    - void Remove(int) : 해당 인덱스의 슬롯에 있는 아이템 제거
-    - void Swap(int, int) : 두 인덱스의 아이템 위치 서로 바꾸기
-    - void SeparateAmount(int a, int b, int amount)
-        - a 인덱스의 아이템이 셀 수 있는 아이템일 경우, amount만큼 분리하여 b 인덱스로 복제
-    - void Use(int) : 해당 인덱스의 아이템 사용
-    - void UpdateSlot(int) : 해당 인덱스의 슬롯 상태 및 UI 갱신
-    - void UpdateAllSlot() : 모든 슬롯 상태 및 UI 갱신
-    - void UpdateAccessibleStatesAll() : 모든 슬롯 UI에 접근 가능 여부 갱신
-    - void TrimAll() : 앞에서부터 아이템 슬롯 채우기
-    - void SortAll() : 앞에서부터 아이템 슬롯 채우면서 정렬
-*/
-
-// 날짜 : 2021-03-07 PM 7:33:52
-// 작성자 : Rito
 
 namespace Backend.Object.UI
 {
-    /// <summary>
-    /// 캐릭터가 소유한 인벤토리 클래스
-    /// </summary>
     public class Inventory : MonoBehaviour
     {
-        /***********************************************************************
-        *                               Public Properties
-        ***********************************************************************/
-
         /// <summary> 아이템 수용 한도 </summary>
         public int Capacity { get; private set; }
-
-        // /// <summary> 현재 아이템 개수 </summary>
-        //public int ItemCount => _itemArray.Count;
-
-        /***********************************************************************
-        *                               Private Fields
-        ***********************************************************************/
 
         // 초기 수용 한도
         [SerializeField, Range(8, 81)]
@@ -89,10 +22,10 @@ namespace Backend.Object.UI
 
         /// <summary> 아이템 목록 </summary>
         [SerializeField]
-        private Item[] _items;
+        private ItemData[] items;
 
         /// <summary> 업데이트 할 인덱스 목록 </summary>
-        private readonly HashSet<int> _indexSetForUpdate = new HashSet<int>();
+        private readonly HashSet<int> _indexSetForUpdate = new ();
 
         // 아이템 장착 여부 및 슬롯 번호
         private bool _isArmorEquip = false;
@@ -100,32 +33,23 @@ namespace Backend.Object.UI
         private int _currentArmorEquip;
         private int _currentWeaponEquip;
 
-        /***********************************************************************
-        *                               Unity Events
-        ***********************************************************************/
-
 #if UNITY_EDITOR
+
         private void OnValidate()
         {
             if (_initalCapacity > _maxCapacity)
+            {
                 _initalCapacity = _maxCapacity;
+            }
         }
+
 #endif
         private void Awake()
         {
-            _items = new Item[_maxCapacity];
+            items = new ItemData[_maxCapacity];
             Capacity = _initalCapacity;
             inventoryView.SetInventoryReference(this);
         }
-
-        private void Start()
-        {
-            UpdateAccessibleStatesAll();
-        }
-
-        /***********************************************************************
-        *                               Private Methods
-        ***********************************************************************/
 
         /// <summary> 인덱스가 수용 범위 내에 있는지 검사 </summary>
         private bool IsValidIndex(int index)
@@ -133,97 +57,108 @@ namespace Backend.Object.UI
             return index >= 0 && index < Capacity;
         }
 
-        /// <summary> 앞에서부터 비어있는 슬롯 인덱스 탐색 </summary>
+        /// <summary>
+        /// 앞에서부터 비어있는 슬롯 인덱스를 탐색한다.
+        /// </summary>
         private int FindEmptySlotIndex(int startIndex = 0)
         {
             for (int i = startIndex; i < Capacity; i++)
-                if (_items[i] == null)
+            {
+                if (items[i] == null)
+                {
                     return i;
+                }
+            }
+
             return -1;
         }
 
-        /// <summary> 앞에서부터 개수 여유가 있는 Countable 아이템의 슬롯 인덱스 탐색 </summary>
-        private int FindCountableItemSlotIndex(CountableItemData target, int startIndex = 0)
+        /// <summary>
+        /// 앞에서부터 개수 여유가 있는 소모용 아이템의 슬롯 인덱스를 탐색한다.
+        /// </summary>
+        private int FindCountableItemSlotIndex(ItemData target, int startIndex = 0)
         {
             for (int i = startIndex; i < Capacity; i++)
             {
-                var current = _items[i];
+                var current = items[i];
                 if (current == null)
-                    continue;
-
-                // 아이템 종류 일치, 개수 여유 확인
-                if (current.Data == target && current is CountableItem ci)
                 {
-                    if (!ci.IsMax)
-                        return i;
+                    continue;
+                }
+
+                // 아이템 종류 일치 여부와 개수 여유를 확인하고 조건들을 만족할 경우에 해당 인덱스 번호를 반환한다.
+                if (current == target && current.IsCountable && current.IsFull == false)
+                {
+                    return i;
                 }
             }
 
             return -1;
         }
 
-        /// <summary> 해당하는 인덱스의 슬롯 상태 및 UI 갱신 </summary>
+        /// <summary>
+        /// 해당하는 인덱스의 슬롯 상태를 갱신한다.
+        /// </summary>
         private void UpdateSlot(int index)
         {
-            if (!IsValidIndex(index))
+            if (IsValidIndex(index) == false)
+            {
                 return;
+            }
 
-            Item item = _items[index];
+            var item = items[index];
 
-            // 1. 아이템이 슬롯에 존재하는 경우
+            // 아이템이 슬롯에 존재하는 경우에는 다음과 같다.
             if (item != null)
             {
                 // 아이콘 등록
-                inventoryView.SetItemIconImageByIndex(index, item.Data.IconSprite);
+                inventoryView.SetItemIconImageByIndex(index, item.IconImage);
 
-                // 1-1. 셀 수 있는 아이템
-                if (item is CountableItem ci)
+                // 셀 수 있는 아이템인 경우는 다음과 같다.
+                if (item.IsCountable)
                 {
-                    // 1-1-1. 수량이 0인 경우, 아이템 제거
-                    if (ci.IsEmpty)
+                    // 수량이 0인 경우, 아이템을 제거한다.
+                    if (item.IsEmpty)
                     {
-                        _items[index] = null;
-                        RemoveIcon();
+                        items[index] = null;
+                        RemoveIconImage(index);
                         return;
                     }
-                    // 1-1-2. 수량 텍스트 표시
-                    else
-                    {
-                        inventoryView.SetItemAmountTextByIndex(index, ci.Amount);
-                        inventoryView.SetEquipmentText(index, item.IsEquipped);
-                    }
+
+                    // 수량 텍스트를 표시한다.
+                    inventoryView.SetItemAmountTextByIndex(index, item.Count);
                 }
-                // 1-2. 셀 수 없는 아이템인 경우 수량 텍스트 제거
+                // 셀 수 없는 아이템인 경우 수량 텍스트 제거한다.
                 else
                 {
                     inventoryView.HideItemAmountText(index);
-                    inventoryView.SetEquipmentText(index, item.IsEquipped);
                 }
 
-                // 슬롯 필터 상태 업데이트
-                inventoryView.UpdateFilter(index, item.Data);
+                // 장착 가능 아이템일 경우에는 장착 여부를 표시한다.
+                inventoryView.SetEquipmentText(index, item is EquipableItemData { IsEquipped: true });
             }
-            // 2. 빈 슬롯인 경우 : 아이콘 제거
+            // 빈 슬롯인 경우에는 아이콘 이미지를 제거한다.
             else
             {
-                RemoveIcon();
-            }
-
-            // 로컬 : 아이콘 제거하기
-            void RemoveIcon()
-            {
-                inventoryView.RemoveItem(index);
-                inventoryView.HideItemAmountText(index); // 수량 텍스트 숨기기
-                inventoryView.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
+                RemoveIconImage(index);
             }
         }
 
-        /// <summary> 해당하는 인덱스의 슬롯들의 상태 및 UI 갱신 </summary>
-        private void UpdateSlot(params int[] indices)
+        private void RemoveIconImage(int index)
         {
-            foreach (var i in indices)
+            inventoryView.RemoveItem(index);
+            inventoryView.HideItemAmountText(index);      // 수량 텍스트 숨기기
+            inventoryView.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
+        }
+
+        /// <summary>
+        /// 해당하는 인덱스의 슬롯들의 상태를 갱신한다.
+        /// </summary>
+        private void UpdateSlot(params int[] indexes)
+        {
+            foreach (var index in indexes)
             {
-                UpdateSlot(i);
+                UpdateSlot(index);
             }
         }
 
@@ -236,20 +171,20 @@ namespace Backend.Object.UI
             }
         }
 
-        /***********************************************************************
-        *                               Check & Getter Methods
-        ***********************************************************************/
-
-        /// <summary> 해당 슬롯이 아이템을 갖고 있는지 여부 </summary>
+        /// <returns>
+        /// 해당 슬롯이 아이템을 갖고 있는지 여부.
+        /// </returns>
         public bool HasItem(int index)
         {
-            return IsValidIndex(index) && _items[index] != null;
+            return IsValidIndex(index) && items[index] != null;
         }
 
-        /// <summary> 해당 슬롯이 셀 수 있는 아이템인지 여부 </summary>
+        /// <returns>
+        /// 해당 슬롯이 셀 수 있는 아이템인지 여부.
+        /// </returns>
         public bool IsCountableItem(int index)
         {
-            return HasItem(index) && _items[index] is CountableItem;
+            return HasItem(index) && items[index].IsCountable;
         }
 
         /// <summary>
@@ -260,37 +195,30 @@ namespace Backend.Object.UI
         /// </summary>
         public int GetCurrentAmount(int index)
         {
-            if (!IsValidIndex(index))
+            if (IsValidIndex(index) == false)
             {
                 return -1;
             }
 
-            if (_items[index] == null)
+            if (items[index] == null)
             {
                 return 0;
             }
 
-            CountableItem ci = _items[index] as CountableItem;
-            if (ci == null)
-                return 1;
-
-            return ci.Amount;
+            return items[index].IsCountable == false ? 1 : items[index].Count;
         }
 
-        /// <summary> 해당 슬롯의 아이템 정보 리턴 </summary>
+        /// <returns>
+        /// 해당 슬롯의 아이템 데이터.
+        /// </returns>
         public ItemData GetItemData(int index)
         {
-            if (!IsValidIndex(index))
+            if (IsValidIndex(index) == false)
             {
                 return null;
             }
 
-            if (_items[index] == null)
-            {
-                return null;
-            }
-
-            return _items[index].Data;
+            return items[index] == null ? null : items[index];
         }
 
         /// <summary> 해당 슬롯의 아이템 이름 리턴 </summary>
@@ -298,344 +226,155 @@ namespace Backend.Object.UI
         {
             if (!IsValidIndex(index))
             {
-                return "";
+                return string.Empty;
             }
 
-            if (_items[index] == null)
-            {
-                return "";
-            }
-
-            return _items[index].Data.Name;
+            return items[index] == null ? string.Empty : items[index].Name;
         }
 
-        /***********************************************************************
-        *                               Public Methods
-        ***********************************************************************/
-
         /// <summary> 인벤토리 UI 연결 </summary>
-        public void ConnectUI(InventoryView inventoryView)
+        public void ConnectUI(InventoryView view)
         {
-            this.inventoryView = inventoryView;
-            this.inventoryView.SetInventoryReference(this);
+            inventoryView = view;
+            inventoryView.SetInventoryReference(this);
         }
 
         /// <summary> 인벤토리에 아이템 추가
         /// <para/> 넣는 데 실패한 잉여 아이템 개수 리턴
         /// <para/> 리턴이 0이면 넣는데 모두 성공했다는 의미
         /// </summary>
-        public int Add(ItemData itemData, int amount = 1)
+        public int Add(ItemData data, int count = 1)
         {
             int index;
 
-            // 1. 수량이 있는 아이템
-            if (itemData is CountableItemData ciData)
+            // 수량이 있는 아이템일 경우는 다음과 같다.
+            if (data.IsCountable == true)
             {
                 bool findNextCountable = true;
                 index = -1;
 
-                while (amount > 0)
+                while (count > 0)
                 {
-                    // 1-1. 이미 해당 아이템이 인벤토리 내에 존재하고, 개수 여유 있는지 검사
+                    // 이미 해당 아이템이 인벤토리 내에 존재하고, 개수 여유 있는지 검사한다.
                     if (findNextCountable)
                     {
-                        index = FindCountableItemSlotIndex(ciData, index + 1);
+                        index = FindCountableItemSlotIndex(data, index + 1);
 
-                        // 개수 여유있는 기존재 슬롯이 더이상 없다고 판단될 경우, 빈 슬롯부터 탐색 시작
+                        // 개수가 여유있는 존재하는 슬롯이 더이상 없다고 판단될 경우, 빈 슬롯부터 탐색을 시작한다.
                         if (index == -1)
                         {
                             findNextCountable = false;
                         }
-                        // 기존재 슬롯을 찾은 경우, 양 증가시키고 초과량 존재 시 amount에 초기화
+                        // 존재하는 슬롯을 찾은 경우, 양을 증가시키고 초과량 존재 시 수량을 초기화한다.
                         else
                         {
-                            CountableItem ci = _items[index] as CountableItem;
-                            amount = ci.AddAmountAndGetExcess(amount);
+                            count = items[index].Sum(count);
 
                             UpdateSlot(index);
                         }
                     }
-                    // 1-2. 빈 슬롯 탐색
+                    // 빈 슬롯을 탐색한다.
                     else
                     {
                         index = FindEmptySlotIndex(index + 1);
 
-                        // 빈 슬롯조차 없는 경우 종료
+                        // 빈 슬롯조차 없는 경우 종료한다.
                         if (index == -1)
                         {
                             break;
                         }
-                        // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량 계산
-                        else
-                        {
-                            // 새로운 아이템 생성
-                            CountableItem ci = ciData.CreateItem() as CountableItem;
-                            ci.SetAmount(amount);
 
-                            // 슬롯에 추가
-                            _items[index] = ci;
+                        // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량을 계산한다.
+                        data.Count = count;
 
-                            // 남은 개수 계산
-                            amount = (amount > ciData.MaxAmount) ? (amount - ciData.MaxAmount) : 0;
+                        // 슬롯에 추가한다.
+                        items[index] = data;
 
-                            UpdateSlot(index);
-                        }
+                        // 남은 개수 계산한다.
+                        count = count > ItemData.MaximumStackCount ? count - ItemData.MaximumStackCount : 0;
+
+                        UpdateSlot(index);
                     }
                 }
             }
-            // 2. 수량이 없는 아이템
+            // 수량이 없는 아이템일 경우는 다음과 같다.
             else
             {
-                // 2-1. 1개만 넣는 경우, 간단히 수행
-                if (amount == 1)
+                // 1개만 넣는 경우, 간단히 수행한다.
+                if (count == 1)
                 {
                     index = FindEmptySlotIndex();
                     if (index != -1)
                     {
-                        // 아이템을 생성하여 슬롯에 추가
-                        _items[index] = itemData.CreateItem();
-                        amount = 0;
+                        // 아이템을 생성하여 슬롯에 추가한다.
+                        items[index] = data;
+                        count = 0;
 
                         UpdateSlot(index);
                     }
                 }
 
-                // 2-2. 2개 이상의 수량 없는 아이템을 동시에 추가하는 경우
+                // 2개 이상의 수량 없는 아이템을 동시에 추가하는 경우는 다음과 같다.
                 index = -1;
-                for (; amount > 0; amount--)
+                for (; count > 0; count--)
                 {
-                    // 아이템 넣은 인덱스의 다음 인덱스부터 슬롯 탐색
+                    // 아이템 넣은 인덱스의 다음 인덱스부터 슬롯 탐색한다.
                     index = FindEmptySlotIndex(index + 1);
 
-                    // 다 넣지 못한 경우 루프 종료
+                    // 다 넣지 못한 경우에는 루프 종료한다.
                     if (index == -1)
                     {
                         break;
                     }
 
-                    // 아이템을 생성하여 슬롯에 추가
-                    _items[index] = itemData.CreateItem();
+                    // 아이템을 생성하여 슬롯에 추가한다.
+                    items[index] = data;
 
                     UpdateSlot(index);
                 }
             }
 
-            return amount;
+            return count;
         }
 
-        /// <summary> 해당 슬롯의 아이템 제거 </summary>
+        /// <summary>
+        /// 해당 슬롯의 아이템 제거한다.
+        /// </summary>
         public void Remove(int index)
         {
-            if (!IsValidIndex(index))
+            if (IsValidIndex(index) == false)
             {
                 return;
             }
 
-            _items[index] = null;
+            items[index] = null;
             inventoryView.RemoveItem(index);
         }
 
-        /// <summary> 두 인덱스의 아이템 위치를 서로 교체 </summary>
-        public void Swap(int indexA, int indexB)
+        /// <summary>
+        /// 두 슬롯의 아이템 위치를 서로 교체한다.
+        /// </summary>
+        public void Swap(int a, int b)
         {
-            if (!IsValidIndex(indexA))
+            if (IsValidIndex(a) == false)
             {
                 return;
             }
 
-            if (!IsValidIndex(indexB))
+            if (IsValidIndex(b) == false)
             {
                 return;
             }
 
-            Item itemA = _items[indexA];
-            Item itemB = _items[indexB];
+            (items[a], items[b]) = (items[b], items[a]);
 
-            // 1. 셀 수 있는 아이템이고, 동일한 아이템일 경우
-            //    indexA -> indexB로 개수 합치기
-            if (itemA != null && itemB != null &&
-                itemA.Data == itemB.Data &&
-                itemA is CountableItem ciA && itemB is CountableItem ciB)
-            {
-                int maxAmount = ciB.MaxAmount;
-                int sum = ciA.Amount + ciB.Amount;
-
-                if (sum <= maxAmount)
-                {
-                    ciA.SetAmount(0);
-                    ciB.SetAmount(sum);
-                }
-                else
-                {
-                    ciA.SetAmount(sum - maxAmount);
-                    ciB.SetAmount(maxAmount);
-                }
-            }
-            // 2. 일반적인 경우 : 슬롯 교체
-            else
-            {
-                // 현재 장착중인 장비 이동시 슬롯 번호 저장
-                if (_currentArmorEquip == indexA)
-                {
-                    _currentArmorEquip = indexB;
-                }
-                else if (_currentArmorEquip == indexB)
-                {
-                    _currentArmorEquip = indexA;
-                }
-
-                if (_currentWeaponEquip == indexA)
-                {
-                    _currentWeaponEquip = indexB;
-                }
-                else if (_currentWeaponEquip == indexB)
-                {
-                    _currentWeaponEquip = indexA;
-                }
-
-                _items[indexA] = itemB;
-                _items[indexB] = itemA;
-            }
-
-            // 두 슬롯 정보 갱신
-            UpdateSlot(indexA, indexB);
+            // 두 슬롯 정보 갱신한다.
+            UpdateSlot(a, b);
         }
-
-        /// <summary> 셀 수 있는 아이템의 수량 나누기(A -> B 슬롯으로) </summary>
-        public void SeparateAmount(int indexA, int indexB, int amount)
-        {
-            // amount : 나눌 목표 수량
-
-            if (!IsValidIndex(indexA))
-            {
-                return;
-            }
-
-            if (!IsValidIndex(indexB))
-            {
-                return;
-            }
-
-            Item _itemA = _items[indexA];
-            Item _itemB = _items[indexB];
-
-            CountableItem _ciA = _itemA as CountableItem;
-
-            // 조건 : A 슬롯 - 셀 수 있는 아이템 / B 슬롯 - Null
-            // 조건에 맞는 경우, 복제하여 슬롯 B에 추가
-            if (_ciA != null && _itemB == null)
-            {
-                _items[indexB] = _ciA.SeperateAndClone(amount);
-
-                UpdateSlot(indexA, indexB);
-            }
-        }
-
-        /// <summary> 해당 슬롯의 아이템 사용 </summary>
-        public void Use(int index)
-        {
-            if (!IsValidIndex(index))
-            {
-                return;
-            }
-
-            if (_items[index] == null)
-            {
-                return;
-            }
-
-            // 사용 가능한 아이템인 경우
-            if (_items[index] is IUsableItem uItem)
-            {
-                if (_items[index] is EquipmentItem)
-                {
-                    //테스트중
-                    EquipCheck(index, uItem);
-                }
-                else
-                {
-                    // 아이템 사용
-                    bool succeeded = uItem.Use();
-
-                    if (succeeded)
-                    {
-                        UpdateSlot(index);
-                    }
-                }
-            }
-        }
-
 
         /// <summary>
-        /// 아이템 타입의 따른 장착 여부 확인 및 착용/해제
+        /// 빈 슬롯 없이 앞에서부터 채운다.
         /// </summary>
-        /// <param name="index">착용/해제 할 아이템 슬롯 번호</param>
-        /// <param name="uItem">해당 아이템</param>
-        private void EquipCheck(int index, IUsableItem uItem)
-        {
-            if (_isArmorEquip && _currentArmorEquip != index && uItem is ArmorItem)
-            {
-                print("장착중인방어구교체");
-                IUsableItem currentEquip = _items[_currentArmorEquip] as IUsableItem;
-                bool isEquip = uItem.Use();
-                _ = currentEquip.Use();
-
-                inventoryView.SetEquipmentText(index, isEquip);
-                inventoryView.SetEquipmentText(_currentArmorEquip, !_isArmorEquip);
-
-                UpdateSlot(index);
-                UpdateSlot(_currentArmorEquip);
-
-                _isArmorEquip = isEquip;
-                _currentArmorEquip = index;
-            }
-            else if (_isWeaponEquip && _currentWeaponEquip != index && uItem is WeaponItem)
-            {
-                print("장착중인무기교체");
-                IUsableItem currentEquip = _items[_currentWeaponEquip] as IUsableItem;
-                bool isEquip = uItem.Use();
-                _ = currentEquip.Use();
-
-                inventoryView.SetEquipmentText(index, isEquip);
-                inventoryView.SetEquipmentText(_currentWeaponEquip, !_isWeaponEquip);
-
-                UpdateSlot(index);
-                UpdateSlot(_currentWeaponEquip);
-
-                _isWeaponEquip = isEquip;
-                _currentWeaponEquip = index;
-
-            }
-            else
-            {
-                bool isEquip = uItem.Use();
-
-                inventoryView.SetEquipmentText(index, isEquip);
-
-                UpdateSlot(index);
-
-                if (uItem is ArmorItem)
-                {
-                    print("아머아이템");
-                    _isArmorEquip = isEquip;
-                    _currentArmorEquip = index;
-                }
-                else if (uItem is WeaponItem)
-                {
-                    print("무기아이템");
-                    _isWeaponEquip = isEquip;
-                    _currentWeaponEquip = index;
-                }
-            }
-        }
-
-        /// <summary> 모든 슬롯 UI에 접근 가능 여부 업데이트 </summary>
-        public void UpdateAccessibleStatesAll()
-        {
-            inventoryView.SetAccessibleSlotRange(Capacity);
-        }
-
-        /// <summary> 빈 슬롯 없이 앞에서부터 채우기 </summary>
         public void TrimAll()
         {
             // 가장 빠른 배열 빈공간 채우기 알고리즘
@@ -651,14 +390,19 @@ namespace Backend.Object.UI
             _indexSetForUpdate.Clear();
 
             int i = -1;
-            while (_items[++i] != null)
+            while (items[++i] != null)
+            {
                 ;
+            }
+
             int j = i;
 
             while (true)
             {
-                while (++j < Capacity && _items[j] == null)
+                while (++j < Capacity && items[j] == null)
+                {
                     ;
+                }
 
                 if (j == Capacity)
                 {
@@ -668,31 +412,14 @@ namespace Backend.Object.UI
                 _indexSetForUpdate.Add(i);
                 _indexSetForUpdate.Add(j);
 
-                _items[i] = _items[j];
-                _items[j] = null;
+                items[i] = items[j];
+                items[j] = null;
                 i++;
             }
 
             foreach (var index in _indexSetForUpdate)
             {
                 UpdateSlot(index);
-            }
-            inventoryView.UpdateAllFilters();
-
-            // _currentEquip 재설정
-            _currentArmorEquip = -1; // 장착 아이템이 없으면 -1
-            _currentWeaponEquip = -1;
-            for (int k = 0; k < Capacity; k++)
-            {
-                if (_items[k] != null && _items[k].IsEquipped && _items[k] is ArmorItem)
-                {
-                    _currentArmorEquip = k;
-                }
-
-                if (_items[k] != null && _items[k].IsEquipped && _items[k] is WeaponItem)
-                {
-                    _currentWeaponEquip = k;
-                }
             }
         }
     }

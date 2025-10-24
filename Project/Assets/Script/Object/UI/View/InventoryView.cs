@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
+using Backend.Util.Data;
 using Backend.Util.Debug;
 using Backend.Util.Input;
-using Backend.Util.Presentation;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Test.Data.Base;
-using Test.Data;
 
 /*
     [기능 - 에디터 전용]
@@ -66,20 +63,7 @@ namespace Backend.Object.UI
         [Header("Connected Objects")]
         [SerializeField] private RectTransform _contentAreaRT;             // 슬롯들이 위치할 영역
         [SerializeField] private GameObject _slotUiPrefab;                 // 슬롯의 원본 프리팹
-        [SerializeField] private ItemInformationView _itemInformationView; // 아이템 정보를 보여줄 툴팁 UI
         [SerializeField] private InventoryPopupUI _popup;                  // 팝업 UI 관리 객체
-
-        [Header("Buttons")]
-        [SerializeField] private Button _trimButton;
-        [SerializeField] private Button _sortButton;
-
-        [Header("Filter Toggles")]
-        [SerializeField] private Toggle _toggleFilterAll;
-        [SerializeField] private Toggle _toggleFilterEquipments;
-        [SerializeField] private Toggle _toggleFilterPortions;
-
-        [Space(16)]
-        [SerializeField] private bool _mouseReversed = false; // 마우스 클릭 반전 여부
 
         #endregion
 
@@ -95,15 +79,6 @@ namespace Backend.Object.UI
 
         private UIControls.InventoryActions _controls;
 
-        /// <summary>
-        /// 인벤토리 UI 내 아이템 종류에 대한 필터링 옵션.
-        /// </summary>
-        private enum Filter
-        {
-            All, Equipment, Portion
-        }
-        private Filter _filter = Filter.All;
-
         private void Awake()
         {
             _controls = new UIControls().Inventory;
@@ -116,16 +91,6 @@ namespace Backend.Object.UI
 
             _pointerEventData = new PointerEventData(EventSystem.current);
             _raycastResults = new List<RaycastResult>(10);
-
-            if (_itemInformationView == null)
-            {
-                _itemInformationView = GetComponentInChildren<ItemInformationView>();
-
-                if (_showDebug)
-                {
-                    Debugger.LogMessage("인스펙터에서 아이템 정보 창 오브젝트 레퍼런스를 직접 지정하지 않아 자식에서 발견하여 초기화.");
-                }
-            }
 
             // 아이템 슬롯 뷰 프리팹을 설정한다.
             _slotUiPrefab.TryGetComponent<RectTransform>(out var rectTransform);
@@ -144,7 +109,7 @@ namespace Backend.Object.UI
 
             _slots = new List<ItemSlotView>(_verticalSlotCount * _horizontalSlotCount);
 
-            // 슬롯 들 동적 생성
+            // 슬롯들 동적 생성
             for (var i = 0; i < _verticalSlotCount; i++)
             {
                 for (var j = 0; j < _horizontalSlotCount; j++)
@@ -177,11 +142,7 @@ namespace Backend.Object.UI
                 Destroy(_slotUiPrefab);
             }
 
-            _trimButton.onClick.AddListener(() => _inventory.TrimAll());
-
-            _toggleFilterAll.onValueChanged.AddListener(flag => UpdateFilter(flag, Filter.All));
-            _toggleFilterEquipments.onValueChanged.AddListener(flag => UpdateFilter(flag, Filter.Equipment));
-            _toggleFilterPortions.onValueChanged.AddListener(flag => UpdateFilter(flag, Filter.Portion));
+            _inventory.TrimAll();
         }
 
         private void OnEnable()
@@ -190,20 +151,44 @@ namespace Backend.Object.UI
             _controls.Drag.performed += Drag;
             _controls.ClickLeftMouseButton.performed += PressLeftMouseButton;
             _controls.ClickLeftMouseButton.canceled += ReleaseLeftMouseButton;
-            _controls.ClickRightMouseButton.performed += PressRightMouseButton;
-            _controls.PressLeftControlButton.performed += PressLeftControlButton;
-            _controls.PressLeftControlButton.canceled += ReleaseLeftControlButton;
-            _controls.PressLeftShiftButton.performed += PressLeftShiftButton;
-            _controls.PressLeftShiftButton.canceled += ReleaseLeftShiftButton;
         }
 
         private void Update()
         {
-            OnPointerEnterAndExit();
+            // 이전 프레임의 슬롯.
+            var previous = _pointerOverSlot;
 
-            if (_showTooltip)
+            // 현재 프레임의 슬롯.
+            var current = _pointerOverSlot = Raycast<ItemSlotView>();
+
+            if (previous is null)
             {
-                ShowOrHideItemTooltip();
+                // 슬롯 위에 마우스 포인터가 있는 경우에는 다음과 같다.
+                if (current is null)
+                {
+                    return;
+                }
+
+                if (_showHighlight)
+                {
+                    current.IsHighlighted = true;
+                }
+            }
+            else
+            {
+                if (current is null)
+                {
+                    // 슬롯 위에 마우스 포인터가 없는 경우에는 다음과 같다.
+                    previous.IsHighlighted = false;
+                }
+                else if (previous != current)
+                {
+                    previous.IsHighlighted = false;
+                    if (_showHighlight)
+                    {
+                        current.IsHighlighted = true;
+                    }
+                }
             }
         }
 
@@ -212,11 +197,6 @@ namespace Backend.Object.UI
             _controls.Drag.performed -= Drag;
             _controls.ClickLeftMouseButton.performed -= PressLeftMouseButton;
             _controls.ClickLeftMouseButton.canceled -= ReleaseLeftMouseButton;
-            _controls.ClickRightMouseButton.performed -= PressRightMouseButton;
-            _controls.PressLeftControlButton.performed -= PressLeftControlButton;
-            _controls.PressLeftControlButton.canceled -= ReleaseLeftControlButton;
-            _controls.PressLeftShiftButton.performed -= PressLeftShiftButton;
-            _controls.PressLeftShiftButton.canceled -= ReleaseLeftShiftButton;
             _controls.Disable();
         }
 
@@ -230,18 +210,6 @@ namespace Backend.Object.UI
             return rectTransform;
         }
 
-        private void UpdateFilter(bool flag, Filter option)
-        {
-            if (flag == false)
-            {
-                return;
-            }
-
-            _filter = option;
-
-            UpdateAllFilters();
-        }
-
         /// <summary> 인벤토리 참조 등록 (인벤토리에서 직접 호출) </summary>
         public void SetInventoryReference(Inventory inventory)
         {
@@ -251,35 +219,20 @@ namespace Backend.Object.UI
         /// <summary> 슬롯에 아이템 아이콘 등록 </summary>
         public void SetItemIconImageByIndex(int index, Sprite icon)
         {
-            if (_showDebug)
-            {
-                Debugger.LogMessage($"Set Item Icon : Slot [{index}]");
-            }
-
-            _slots[index].ItemImage = icon;
+            _slots[index].IconImage = icon;
         }
 
         /// <summary> 해당 슬롯의 아이템 개수 텍스트 지정 </summary>
         public void SetItemAmountTextByIndex(int index, int amount)
         {
-            if (_showDebug)
-            {
-                Debugger.LogMessage($"Set Item Amount Text : Slot [{index}], Amount [{amount}]");
-            }
-
             // NOTE : amount가 1 이하일 경우 텍스트 미표시
-            _slots[index].Amount = amount;
+            _slots[index].Count = amount;
         }
 
         /// <summary> 해당 슬롯의 아이템 개수 텍스트 지정 </summary>
         public void HideItemAmountText(int index)
         {
-            if (_showDebug)
-            {
-                Debugger.LogMessage($"Hide Item Amount Text : Slot [{index}]");
-            }
-
-            _slots[index].Amount = 1;
+            _slots[index].Count = 1;
         }
 
         /// <summary>
@@ -296,53 +249,7 @@ namespace Backend.Object.UI
         /// <summary> 슬롯에서 아이템 아이콘 제거, 개수 텍스트 숨기기 </summary>
         public void RemoveItem(int index)
         {
-            if (_showDebug)
-            {
-                Debugger.LogMessage($"Remove Item : Slot [{index}]");
-            }
-
             _slots[index].Remove();
-        }
-
-        /// <summary> 접근 가능한 슬롯 범위 설정 </summary>
-        public void SetAccessibleSlotRange(int accessibleSlotCount)
-        {
-            for (int i = 0; i < _slots.Count; i++)
-            {
-                _slots[i].IsSlotAccessible = i < accessibleSlotCount;
-            }
-        }
-
-        /// <summary> 특정 슬롯의 필터 상태 업데이트 </summary>
-        public void UpdateFilter(int index, ItemData data)
-        {
-            bool isFiltered = true;
-
-            // null인 슬롯은 타입 검사 없이 필터 활성화
-            if (data != null)
-            {
-                isFiltered = _filter switch
-                {
-                    Filter.Equipment => data is EquipmentItemData,
-                    Filter.Portion => data is PortionItemData,
-                    _ => true
-                };
-            }
-
-            _slots[index].IsItemAccessible = isFiltered;
-        }
-
-        /// <summary> 모든 슬롯 필터 상태 업데이트 </summary>
-        public void UpdateAllFilters()
-        {
-            int capacity = _inventory.Capacity;
-
-            for (int i = 0; i < capacity; i++)
-            {
-                var data = _inventory.GetItemData(i);
-
-                UpdateFilter(i, data);
-            }
         }
     }
 }
