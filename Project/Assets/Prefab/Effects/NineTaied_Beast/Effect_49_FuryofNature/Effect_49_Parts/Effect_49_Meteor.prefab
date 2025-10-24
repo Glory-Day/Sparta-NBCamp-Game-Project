@@ -24699,4 +24699,4 @@ MonoBehaviour:
   shouldTrackTarget: 0
   lookAtTargetOnInit: 0
   isCreateRangeProjectile: 1
-  rangeProjectilePrefab: {fileID: 509133941378628043, guid: d423a7567137e7b47981e384a619a2e2, type: 3}
+  rangeProjectilePrefab: {fileID: 509133941378628043, guid: a0732a5013dfa0f46898f2e1044ae066, type: 3}

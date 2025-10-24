@@ -7,61 +7,48 @@ namespace Backend.Object.UI
 {
     public class ItemSlotView : MonoBehaviour
     {
-        [Header("Component References")]
+        [Header("Image References")]
         [Tooltip("아이템 아이콘 이미지")]
         [SerializeField] private Image iconImage;
 
         [Tooltip("슬롯이 포커스될 때 나타나는 하이라이트 이미지")]
         [SerializeField] private Image highlightImage;
 
-        [Tooltip("아이템 개수 텍스트")]
-        [SerializeField] private TextMeshProUGUI amountText;
-
         [Tooltip("장착 여부 텍스트")]
-        [SerializeField] private TextMeshProUGUI equipmentText;
+        [SerializeField] private Image equippedMarkImage;
+
+        [Header("Text References")]
+        [Tooltip("아이템 개수 텍스트")]
+        [SerializeField] private TextMeshProUGUI countText;
 
         [Header("Layout Settings")]
         [Tooltip("슬롯 내에서 아이콘과 슬롯 사이의 여백")]
         [SerializeField] private float padding = 1f;
 
-        [Header("Highlight Settings")]
+        [Header("View Settings")]
         [Tooltip("하이라이트 이미지 알파 값")]
         [SerializeField] private float alpha = 0.5f;
 
         [Tooltip("하이라이트 소요 시간")]
         [SerializeField] private float duration = 0.2f;
 
-        // 비활성화된 슬롯의 색상
-        private static readonly Color DisabledSlotImageColor = new (0.2f, 0.2f, 0.2f, 0.5f);
-        // 비활성화된 아이콘 색상
-        private static readonly Color DisabledIconImageColor = new (0.5f, 0.5f, 0.5f, 0.5f);
-
-        private Image _slotImage;
-
-        private GameObject _iconObject;
-        private GameObject _amountTextObject;
+        private GameObject _iconImageObject;
         private GameObject _highlightImageObject;
-        private GameObject _equipmentTextObject;
+        private GameObject _equippedMarkImageObject;
+        private GameObject _countTextObject;
 
         // 현재 하이라이트 알파값
         private float _alpha;
 
-        // 슬롯 접근가능 여부
-        private bool _isSlotAccessible = true;
-        // 아이템 접근가능 여부
-        private bool _isItemAccessible = true;
-
         private void Awake()
         {
-            _slotImage = GetComponent<Image>();
-            SlotImageRectTransform = GetComponent<RectTransform>();
             IconImageRectTransform = iconImage.rectTransform;
             HighlightImageRectTransform = highlightImage.rectTransform;
 
-            _iconObject = IconImageRectTransform.gameObject;
-            _amountTextObject = amountText.gameObject;
+            _iconImageObject = IconImageRectTransform.gameObject;
+            _countTextObject = countText.gameObject;
             _highlightImageObject = highlightImage.gameObject;
-            _equipmentTextObject = equipmentText.gameObject;
+            _equippedMarkImageObject = equippedMarkImage.gameObject;
 
             // 피벗을 중앙으로 설정한다.
             IconImageRectTransform.pivot = new Vector2(0.5f, 0.5f);
@@ -85,8 +72,8 @@ namespace Backend.Object.UI
             highlightImage.raycastTarget = false;
 
             // 아이콘 이미지들을 비활성화 한다.
-            _iconObject.SetActive(false);
-            _equipmentTextObject.SetActive(false);
+            _iconImageObject.SetActive(false);
+            _equippedMarkImageObject.SetActive(false);
             _highlightImageObject.SetActive(false);
         }
 
@@ -101,24 +88,19 @@ namespace Backend.Object.UI
                 return;
             }
 
-            if (IsAccessible == false || other.IsAccessible == false)
-            {
-                return;
-            }
-
             var sprite = iconImage.sprite;
 
-            // 대상에 아이템이 있으면 교환한다. 없으면 이동한다.
+            // 대상에 아이템이 있으면 교환하고 없으면 이동한다.
             if (other.HasItem)
             {
-                ItemImage = other.iconImage.sprite;
+                IconImage = other.iconImage.sprite;
             }
             else
             {
                 Remove();
             }
 
-            other.ItemImage = sprite;
+            other.IconImage = sprite;
         }
 
         /// <summary>
@@ -128,48 +110,44 @@ namespace Backend.Object.UI
         {
             iconImage.sprite = null;
 
-            _iconObject.SetActive(false);
-            _amountTextObject.SetActive(false);
-            _equipmentTextObject.SetActive(false);
+            _iconImageObject.SetActive(false);
+            _countTextObject.SetActive(false);
+            _equippedMarkImageObject.SetActive(false);
         }
 
         /// <summary>
         /// 하이라이트 이미지 색상의 알파 값을 서서히 증가시킨다.
         /// </summary>
-        private IEnumerator HighlightFadeInRoutine()
+        private IEnumerator FadingIn()
         {
-            StopCoroutine(nameof(HighlightFadeOutRoutine));
+            StopCoroutine(nameof(FadingIn));
 
             _highlightImageObject.SetActive(true);
-
-            float unit = alpha / duration;
 
             while (_alpha <= alpha)
             {
                 var color = highlightImage.color;
-
                 highlightImage.color = new Color(color.r, color.g, color.b, _alpha);
 
-                _alpha += unit * Time.deltaTime;
+                _alpha += alpha / duration * Time.deltaTime;
 
                 yield return null;
             }
         }
 
-        /// <summary> 하이라이트 알파값 0%까지 서서히 감소 </summary>
-        private IEnumerator HighlightFadeOutRoutine()
+        /// <summary>
+        /// 하이라이트 이미지의 알파 값을 0%까지 서서히 감소시킨다.
+        /// </summary>
+        private IEnumerator FadingOut()
         {
-            StopCoroutine(nameof(HighlightFadeInRoutine));
-
-            float unit = alpha / duration;
+            StopCoroutine(nameof(FadingOut));
 
             while (_alpha >= 0f)
             {
                 var color = highlightImage.color;
-
                 highlightImage.color = new Color(color.r, color.g, color.b, _alpha);
 
-                _alpha -= unit * Time.deltaTime;
+                _alpha -= alpha / duration * Time.deltaTime;
 
                 yield return null;
             }
@@ -185,7 +163,7 @@ namespace Backend.Object.UI
         /// <summary>
         /// 아이템 개수에 대한 텍스트. (단, 개수가 1 이하일 경우 텍스트 미표시)
         /// </summary>
-        public int Amount
+        public int Count
         {
             set
             {
@@ -193,21 +171,21 @@ namespace Backend.Object.UI
 
                 if (HasItem && value > 1)
                 {
-                    _amountTextObject.SetActive(true);
+                    _countTextObject.SetActive(true);
                 }
                 else
                 {
-                    _amountTextObject.SetActive(false);
+                    _countTextObject.SetActive(false);
                 }
 
-                amountText.text = value.ToString();
+                countText.text = value.ToString();
             }
         }
 
         /// <summary>
         /// 슬롯에 할당된 아이템 이미지.
         /// </summary>
-        public Sprite ItemImage
+        public Sprite IconImage
         {
             set
             {
@@ -215,7 +193,7 @@ namespace Backend.Object.UI
                 {
                     iconImage.sprite = value;
 
-                    _iconObject.SetActive(true);
+                    _iconImageObject.SetActive(true);
                 }
                 else
                 {
@@ -229,77 +207,12 @@ namespace Backend.Object.UI
         /// </summary>
         public bool HasItem => iconImage.sprite != null;
 
-        /// <summary>
-        /// 접근 가능한 슬롯인지 여부.
-        /// </summary>
-        public bool IsAccessible => _isSlotAccessible && _isItemAccessible;
-
-        /// <summary>
-        /// 슬롯 자체의 활성화/비활성화 여부.
-        /// </summary>
-        public bool IsSlotAccessible
-        {
-            set
-            {
-                // 중복 처리는 지양
-                if (_isSlotAccessible == value)
-                {
-                    return;
-                }
-
-                if (value)
-                {
-                    _slotImage.color = Color.black;
-                }
-                else
-                {
-                    _slotImage.color = DisabledSlotImageColor;
-
-                    _iconObject.SetActive(false);
-                    _amountTextObject.SetActive(false);
-                    _equipmentTextObject.SetActive(false);
-                }
-
-                _isSlotAccessible = value;
-            }
-        }
-
-        /// <summary>
-        /// 아이템 활성화/비활성화 여부.
-        /// </summary>
-        public bool IsItemAccessible
-        {
-            set
-            {
-                // 중복 처리는 제외한다.
-                if (_isItemAccessible == value)
-                {
-                    return;
-                }
-
-                if (value)
-                {
-                    iconImage.color = Color.white;
-                    amountText.color = Color.white;
-                }
-                else
-                {
-                    iconImage.color = DisabledIconImageColor;
-                    amountText.color = DisabledIconImageColor;
-                }
-
-                _isItemAccessible = value;
-            }
-        }
-
         //TODO: 해당 코드는 테스트 용도로 작성되어 있다.
         public bool IsEquipped
         {
             set
             {
-                print(value);
-
-                _equipmentTextObject.SetActive(value);
+                _equippedMarkImageObject.SetActive(value);
             }
         }
 
@@ -310,16 +223,9 @@ namespace Backend.Object.UI
         {
             set
             {
-                if (IsAccessible == false)
-                {
-                    return;
-                }
-
-                StartCoroutine(value ? nameof(HighlightFadeInRoutine) : nameof(HighlightFadeOutRoutine));
+                StartCoroutine(value ? nameof(FadingIn) : nameof(FadingOut));
             }
         }
-
-        public RectTransform SlotImageRectTransform { get; private set; }
 
         public RectTransform IconImageRectTransform { get; private set; }
 

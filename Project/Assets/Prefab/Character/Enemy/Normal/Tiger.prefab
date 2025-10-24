@@ -1693,6 +1693,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   visibleTargets: []
+  _keepTargetOutOfViewRadius: 1
 --- !u!1 &4952914496640629688
 GameObject:
   m_ObjectHideFlags: 0

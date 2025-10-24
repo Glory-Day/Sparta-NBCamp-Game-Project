@@ -5019,7 +5019,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c01efcb4260247645bf0ce9942978572, type: 2}
   - {fileID: 11400000, guid: 3688961b328f83f41ba011fd1d1759f2, type: 2}
   - {fileID: 11400000, guid: 89c6f17460cffdd46b61f32fa8d31f60, type: 2}
-  - {fileID: 11400000, guid: 5213588aa82879c4283acd7b178f8360, type: 2}
+  - {fileID: 11400000, guid: 9180b45968cb11844a5d300fc7392d54, type: 2}
   <ActionData>k__BackingField: {fileID: 0}
   _damageSender: {fileID: 0}
   _damageSenders: []
@@ -5053,21 +5053,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillParameter:
   - SkillData: {fileID: 11400000, guid: 696df1d6f6e3ec647b58115075c3cdf1, type: 2}
-    ProjectilePrefab: {fileID: 6352715123424040704, guid: 8f4f356061b1cfe44960301f532dd351, type: 3}
+    ProjectilePrefab: {fileID: 6352715123424040704, guid: f12ea58ae538de44f8e35ecba438d02b, type: 3}
     ProjectileTransform:
     - {fileID: 5433133751956874683}
     MovePosition: {fileID: 0}
     MoveDuration: 0
     IsPlayerTarget: 0
   - SkillData: {fileID: 11400000, guid: c01efcb4260247645bf0ce9942978572, type: 2}
-    ProjectilePrefab: {fileID: 2396454936313141767, guid: 4d8e7a35029539945a64260784383b21, type: 3}
+    ProjectilePrefab: {fileID: 2396454936313141767, guid: 0d981b051972f244c85a0910fc896480, type: 3}
     ProjectileTransform:
     - {fileID: 5219144737261579896}
     MovePosition: {fileID: 0}
     MoveDuration: 0
     IsPlayerTarget: 0
   - SkillData: {fileID: 11400000, guid: 3688961b328f83f41ba011fd1d1759f2, type: 2}
-    ProjectilePrefab: {fileID: 2873213410975290457, guid: b75f62eef35e263469f3a15b33993d1d, type: 3}
+    ProjectilePrefab: {fileID: 2873213410975290457, guid: 7ad51bbe8b3f7ff42b4f04697414c12d, type: 3}
     ProjectileTransform:
     - {fileID: 7804379666989266215}
     - {fileID: 5775056112233033693}
@@ -5076,14 +5076,14 @@ MonoBehaviour:
     MoveDuration: 0
     IsPlayerTarget: 1
   - SkillData: {fileID: 11400000, guid: 89c6f17460cffdd46b61f32fa8d31f60, type: 2}
-    ProjectilePrefab: {fileID: 3799606755267210070, guid: dc6655ae888c3684a83bbb21c18730ca, type: 3}
+    ProjectilePrefab: {fileID: 3799606755267210070, guid: 7584076332d579248933557c7b4469fd, type: 3}
     ProjectileTransform:
     - {fileID: 7940653117774992240}
     MovePosition: {fileID: 9007736946275184068}
     MoveDuration: 0.15
     IsPlayerTarget: 0
-  - SkillData: {fileID: 11400000, guid: 5213588aa82879c4283acd7b178f8360, type: 2}
-    ProjectilePrefab: {fileID: 5967844515003779013, guid: ea4f6f6aa46294d49baef5f8657762ff, type: 3}
+  - SkillData: {fileID: 11400000, guid: 9180b45968cb11844a5d300fc7392d54, type: 2}
+    ProjectilePrefab: {fileID: 5967844515003779013, guid: 54fbe09f89d32af48bfe88f8c31e246a, type: 3}
     ProjectileTransform:
     - {fileID: 3714614323399163564}
     MovePosition: {fileID: 0}
