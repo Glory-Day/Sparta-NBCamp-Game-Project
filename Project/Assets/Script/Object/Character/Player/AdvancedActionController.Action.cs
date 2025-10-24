@@ -145,7 +145,7 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Jump.Disable();
             _actions.Movement.Roll.Disable();
 
-            _direction = Vector3.zero;
+            _direction = _facing;
         }
 
         public void OnAttackingStateExited()

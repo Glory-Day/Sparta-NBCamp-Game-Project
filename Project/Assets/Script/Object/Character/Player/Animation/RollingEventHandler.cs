@@ -11,14 +11,14 @@ namespace Backend.Object.Character.Player.Animation
 
         private AdvancedActionController _controller;
 
-        private readonly AnimationEventRegister _register = new ();
+        private readonly AnimationEventRegistry _registry = new ();
         private readonly bool[] _triggers = new bool[1];
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             //TODO: 빈도 높은 고자원 메서드 사용 중임으로 차후에 수정해야 한다.
             _controller = animator.GetComponentInParent<AdvancedActionController>();
-            _register.Register(IsRollButtonBufferedValid);
+            _registry.Register(IsRollButtonBufferedValid);
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,13 +28,13 @@ namespace Backend.Object.Character.Player.Animation
             if (_triggers[0] == false && progress >= times[0])
             {
                 _triggers[0] = true;
-                _register.Invoke(0);
+                _registry.Invoke(0);
             }
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _register.Unregister(IsRollButtonBufferedValid);
+            _registry.Unregister(IsRollButtonBufferedValid);
             _controller.IsRollButtonBufferable = false;
             _triggers[0] = false;
         }
