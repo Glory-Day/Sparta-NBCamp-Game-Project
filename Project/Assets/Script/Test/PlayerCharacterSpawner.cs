@@ -1,6 +1,7 @@
 ﻿using System;
 using Backend.Object.Character.Player;
 using Backend.Object.Management;
+using Backend.Object.UI;
 using Script.Object.UI;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace Script.Test
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private PlayerConditionInformationBinder binder;
+        [SerializeField] private PlayerLevelStatusInformationBinder binder2;
 
         public override void Boot()
         {
@@ -23,6 +25,7 @@ namespace Script.Test
             Target = clone;
 
             binder.Bind(model);
+            binder2.Bind(model);
         }
 
         public GameObject Target { get; set; }
