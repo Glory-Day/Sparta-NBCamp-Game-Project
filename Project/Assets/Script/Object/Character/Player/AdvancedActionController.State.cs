@@ -98,27 +98,6 @@ namespace Backend.Object.Character.Player
                         Condition = () => _detector != null && _detector.WasDetected,
                         Transition = ContractCeiling
                     }
-                },
-                [State.Jumping] = new()
-                {
-                    new Node
-                    {
-                        Next = State.Rising,
-                        Condition = () => Time.time - _lastJumpButtonUsed > jumpDuration,
-                        Transition = null
-                    },
-                    new Node
-                    {
-                        Next = State.Rising,
-                        Condition = () => _actions.Movement.Jump.WasReleasedThisFrame(),
-                        Transition = null
-                    },
-                    new Node
-                    {
-                        Next = State.Falling,
-                        Condition = () => _detector != null && _detector.WasDetected,
-                        Transition = ContractCeiling
-                    }
                 }
             };
         }
@@ -192,8 +171,6 @@ namespace Backend.Object.Character.Player
         /// </returns>
         public bool IsGrounded => _state is State.Grounded or State.Sliding or State.Rolling or State.Attacking;
 
-        public bool IsDamageReactable => _state is State.Grounded or State.Sliding;
-
         /// <returns>
         /// True if controller is sliding.
         /// </returns>
@@ -209,7 +186,6 @@ namespace Backend.Object.Character.Player
             Sliding,
             Falling,
             Rising,
-            Jumping,
             Rolling,
             Attacking
         }

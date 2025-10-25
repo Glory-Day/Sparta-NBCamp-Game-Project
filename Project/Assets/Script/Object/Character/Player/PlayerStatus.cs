@@ -22,6 +22,10 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float regenAmount = 30.0f;
         [SerializeField] private float cost = 30f;
 
+        [Header("Damaged Point Settings")]
+        [SerializeField] private float lowDamagedPoint;
+        [SerializeField] private float highDamagedPoint;
+
         [Header("Damage Point Information")]
         [SerializeField] private float currentDamagePoint;
 
@@ -66,13 +70,19 @@ namespace Backend.Object.Character.Player
             }
         }
 
-        public override void TakeDamage(float damage)
+        public override void TakeDamage(float damage, Vector3? position = null)
         {
             base.TakeDamage(damage);
 
-            if (_actionController.IsDamageReactable)
+            var direction = (transform.position - position ?? Vector3.zero).normalized;
+
+            if (lowDamagedPoint < damage && damage < highDamagedPoint)
             {
-                _animationController.SetAnimationFloat("Damage", damage);
+                _animationController.SetAnimationTrigger("Low Damaged");
+            }
+            else if (highDamagedPoint < damage)
+            {
+                _animationController.SetAnimationTrigger("High Damaged");
             }
         }
 

@@ -43,7 +43,6 @@ namespace Backend.Object.Character.Player
         {
             // Connect events to controller events.
             _controller.OnLand += Land;
-            _controller.OnJump += Jump;
         }
 
         private void Update()
@@ -81,7 +80,6 @@ namespace Backend.Object.Character.Player
         {
             // Disconnect events to prevent calls to disabled instance.
             _controller.OnLand -= Land;
-            _controller.OnJump -= Jump;
         }
 
         private void Land(Vector3 velocity)

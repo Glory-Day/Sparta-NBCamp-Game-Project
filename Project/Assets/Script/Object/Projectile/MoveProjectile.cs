@@ -60,7 +60,7 @@ namespace Backend.Object.Projectile
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IDamagable>(out var target) && other.gameObject.layer == (int)Mathf.Log(HitLayer.value, 2))
+            if (other.TryGetComponent<IDamageable>(out var target) && other.gameObject.layer == (int)Mathf.Log(HitLayer.value, 2))
             {
                 target.TakeDamage(damage);
                 Debugger.LogProgress($"{damage}만큼 데미지를 가하였습니다.");
