@@ -25,6 +25,7 @@ namespace Backend.Object.Character.Enemy.Node
 
         protected override void Stop()
         {
+            agent.NavMeshAgent.ResetPath();
         }
 
         protected override State OnUpdate()
