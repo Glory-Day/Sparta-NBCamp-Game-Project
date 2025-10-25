@@ -54,7 +54,7 @@ namespace Backend.Object.Character
             }
 
             var status = other.GetComponent<Status>();
-            status.TakeDamage(PhysicalDamagePoint);
+            status.TakeDamage(PhysicalDamagePoint, null);
         }
 
         public void StartDetection()

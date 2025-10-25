@@ -95,7 +95,6 @@ namespace Backend.Object.Character.Player
             _actions.Enable();
             _actions.Movement.Move.performed += Move;
             _actions.Movement.Move.canceled += Stop;
-            _actions.Movement.Jump.performed += Jump;
             _actions.Movement.Roll.performed += Roll;
             _actions.Movement.Attack.performed += Attack;
         }
@@ -158,7 +157,6 @@ namespace Backend.Object.Character.Player
         {
             _actions.Movement.Move.performed -= Move;
             _actions.Movement.Move.canceled -= Stop;
-            _actions.Movement.Jump.performed -= Jump;
             _actions.Movement.Roll.performed -= Roll;
             _actions.Movement.Attack.performed -= Attack;
             _actions.Disable();
@@ -309,11 +307,6 @@ namespace Backend.Object.Character.Player
 
                     break;
                 }
-                // If controller is jumping, override vertical velocity with jump speed.
-                case State.Jumping:
-                    _momentum = _momentum.Reject(transform.up);
-                    _momentum += transform.up * jumpSpeed;
-                    break;
                 case State.Grounded:
                 case State.Falling:
                 case State.Rising:

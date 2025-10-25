@@ -15,48 +15,16 @@ namespace Backend.Object.Character.Player
         private bool _isRolling;
         private bool _isRollButtonBuffered;
 
-        private float _lastJumpButtonUsed;
-
         private int _combatIndex = -1;
         private bool _isAttacking;
         private bool _isAttackButtonBuffered;
 
-        public event Action<Vector3> OnJump;
         public event Action<Vector3> OnLand;
 
         private void Move(InputAction.CallbackContext context)
         {
             _direction = context.ReadValue<Vector3>().normalized;
             _facing = _direction == Vector3.zero ? _facing : _direction;
-        }
-
-        private void Jump(InputAction.CallbackContext context)
-        {
-            if (_state != State.Grounded)
-            {
-                return;
-            }
-
-            if (Time.time < _lastJumpButtonUsed + jumpDuration)
-            {
-                return;
-            }
-
-            TranslateToAirborne();
-
-            _momentum = ConvertMomentumToWorldSpace();
-
-            // Add jump force to momentum.
-            _momentum += transform.up * jumpSpeed;
-
-            // Set jump start time.
-            _lastJumpButtonUsed = Time.time;
-
-            OnJump?.Invoke(_momentum);
-
-            _momentum = ConvertMomentumToLocalSpace();
-
-            _state = State.Jumping;
         }
 
         private void Roll(InputAction.CallbackContext context)
@@ -79,7 +47,6 @@ namespace Backend.Object.Character.Player
                 case State.Sliding:
                 case State.Falling:
                 case State.Rising:
-                case State.Jumping:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

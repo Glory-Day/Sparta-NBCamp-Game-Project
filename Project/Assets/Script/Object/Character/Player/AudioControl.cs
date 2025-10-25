@@ -50,7 +50,6 @@ namespace Backend.Object.Character.Player
 
 			//Connecting events to controller events;
 			controller.OnLand += OnLand;
-			controller.OnJump += OnJump;
 
 			if(!animator)
 				useAnimationBasedFootsteps = false;

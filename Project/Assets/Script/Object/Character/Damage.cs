@@ -16,7 +16,7 @@ namespace Backend.Object.Character
         private void OnTriggerEnter(Collider other)
         {
             //적중 검사
-            if (other.TryGetComponent(out IDamagable target))
+            if (other.TryGetComponent(out IDamageable target))
             {
                 if (!_hitColliders.Contains(other) && other.gameObject.layer == (int)Mathf.Log(hitLayer.value, 2))
                 {

@@ -29,9 +29,9 @@ namespace Backend.Object.Character.Enemy
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
         }
 
-        public override void TakeDamage(float damage)
+        public override void TakeDamage(float damage, Vector3? position = null)
         {
-            base.TakeDamage(damage);
+            base.TakeDamage(damage, null);
 
             if (currentHealthPoint <= 0)
             {

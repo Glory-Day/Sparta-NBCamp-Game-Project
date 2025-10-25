@@ -73,7 +73,7 @@ namespace Backend.Object.Projectile
                     var id = _hitColliders[i].gameObject.GetInstanceID();
 
                     // 아직 공격하지 않은 대상이고, IDamagable 컴포넌트가 있다면 공격
-                    if (!_hits.Contains(id) && _hitColliders[i].TryGetComponent<IDamagable>(out var target))
+                    if (!_hits.Contains(id) && _hitColliders[i].TryGetComponent<IDamageable>(out var target))
                     {
                         target.TakeDamage(damage);
                         Debug.Log($"Player Hit! {gameObject.name}");

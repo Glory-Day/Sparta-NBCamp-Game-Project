@@ -77,7 +77,7 @@ namespace Backend.Object.Projectile
                     Debugger.LogError("HitEffectPrefab is Null");
                 }
 
-                if (other.TryGetComponent<IDamagable>(out var target))
+                if (other.TryGetComponent<IDamageable>(out var target))
                 {
                     target.TakeDamage(_damage);
                     Debugger.LogProgress($"{_damage}만큼 데미지를 가하였습니다.");

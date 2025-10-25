@@ -35,7 +35,7 @@ namespace Backend.Object.Projectile
                 {
                     var id = _hitColliders[i].gameObject.GetInstanceID();
 
-                    if (!_hits.Contains(id) && _hitColliders[i].TryGetComponent<IDamagable>(out var target))
+                    if (!_hits.Contains(id) && _hitColliders[i].TryGetComponent<IDamageable>(out var target))
                     {
                         target.TakeDamage(damage);
                         Debug.Log($"Player Hit! {gameObject.name}");
