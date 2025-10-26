@@ -24,8 +24,12 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float thickness = 1f;
         [SerializeField] private Vector3 offset = Vector3.zero;
 
+#if UNITY_EDITOR
+
         [Header("Debug Settings")]
         [SerializeField] private bool isDebugMode;
+
+#endif
 
         [Header("Detection Settings")]
         [SerializeField] public CastMode mode = CastMode.SingleRay;
@@ -88,10 +92,22 @@ namespace Backend.Object.Character.Player
             const float size = 0.2f;
             const float radius = 0.04f;
 
+#if UNITY_EDITOR
+
             if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
             {
                 return;
             }
+
+#else
+
+            if (_sensor == null || _sensor.IsDetected == false)
+            {
+                return;
+            }
+
+#endif
+
 
             var position = Vector3.zero;
             var distance = Vector3.zero;
@@ -242,7 +258,12 @@ namespace Backend.Object.Character.Player
             _sensor.Option.Rows = rows;
             _sensor.Option.Count = count;
             _sensor.Option.IsOffset = isOffset;
+
+#if UNITY_EDITOR
+
             _sensor.IsDebugMode = isDebugMode;
+
+#endif
 
             // Set sensor spherecast variables.
             _sensor.UseRealisticDistance = true;
