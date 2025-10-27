@@ -42,6 +42,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -9083373407938782723}
   - {fileID: 1089792737472227473}
+  - {fileID: -5642097731019238864}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -220,6 +221,33 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-5642097731019238864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de3211a51cdfc94e9da6734fa9cbe75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationEvents:
+  - Descript: 
+    TypeEvent: 8
+    NormalizeTime: 0.235
+    Index: 0
+    Value: 0.1
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
+  - Descript: 
+    TypeEvent: 8
+    NormalizeTime: 0.275
+    Index: 0
+    Value: 1
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!1101 &-5592587960888040338
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -409,6 +437,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -5014920308249417783}
   - {fileID: -9166037070573202872}
+  - {fileID: 4200369618062405323}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -768,6 +797,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &4200369618062405323
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de3211a51cdfc94e9da6734fa9cbe75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimationEvents:
+  - Descript: 
+    TypeEvent: 8
+    NormalizeTime: 0.22
+    Index: 0
+    Value: 0.8
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
+  - Descript: 
+    TypeEvent: 8
+    NormalizeTime: 0.33
+    Index: 0
+    Value: 1
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
 --- !u!206 &4404459704614979358
 BlendTree:
   m_ObjectHideFlags: 1
@@ -974,6 +1030,13 @@ MonoBehaviour:
     NormalizeTime: 0.15
     Index: 0
     Value: 3
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
+  - Descript: "\uC18D\uB3C4 \uC870\uC815 1"
+    TypeEvent: 8
+    NormalizeTime: 0.95
+    Index: 0
+    Value: 1
     IsBool: 0
     Pos: {x: 0, y: 0, z: 0}
 --- !u!1101 &6330800478956661641
