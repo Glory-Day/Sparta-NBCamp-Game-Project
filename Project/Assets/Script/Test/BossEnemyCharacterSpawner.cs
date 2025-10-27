@@ -9,7 +9,7 @@ namespace Script.Test
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private BossEnemyConditionInformationBinder binder;
-
+        [SerializeField] private PlayerCharacterSpawner playerSpawner;
         public override void Boot()
         {
             var position = transform.position;
@@ -17,7 +17,13 @@ namespace Script.Test
 
             var clone = ObjectPoolManager.SpawnPoolObject(prefab, position, rotation, null);
             var component = clone.GetComponent<EnemyMovementController>();
-            component.Target = GetComponent<PlayerCharacterSpawner>().Target;
+
+            if(playerSpawner.Target == null)
+            {
+                Debug.LogError("Player Target is Null");
+                return;
+            }
+            component.Target = playerSpawner.Target;
 
             var model = clone.GetComponent<EnemyStatus>();
 
