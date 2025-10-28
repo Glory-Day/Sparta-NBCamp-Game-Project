@@ -4,7 +4,7 @@ using Backend.Object.UI.View;
 using Backend.Util.Presentation;
 using UnityEngine;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
     public class HealthPointBarPresenter : Presenter<DelayedPointBarView, Status>
     {

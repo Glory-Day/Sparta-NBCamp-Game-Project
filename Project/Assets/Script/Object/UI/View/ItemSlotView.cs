@@ -37,6 +37,8 @@ namespace Backend.Object.UI
         private GameObject _equippedMarkImageObject;
         private GameObject _countTextObject;
 
+        private Coroutine _fadeCoroutine;
+
         // 현재 하이라이트 알파값
         private float _alpha;
 
@@ -133,6 +135,10 @@ namespace Backend.Object.UI
 
                 yield return null;
             }
+
+            _alpha = alpha;
+            var finalColor = highlightImage.color;
+            highlightImage.color = new Color(finalColor.r, finalColor.g, finalColor.b, _alpha);
         }
 
         /// <summary>
@@ -152,6 +158,9 @@ namespace Backend.Object.UI
                 yield return null;
             }
 
+            _alpha = 0f;
+            var finalColor = highlightImage.color;
+            highlightImage.color = new Color(finalColor.r, finalColor.g, finalColor.b, _alpha);
             _highlightImageObject.SetActive(false);
         }
 
@@ -223,7 +232,19 @@ namespace Backend.Object.UI
         {
             set
             {
-                StartCoroutine(value ? nameof(FadingIn) : nameof(FadingOut));
+                if(_fadeCoroutine != null)
+                {
+                    StopCoroutine(_fadeCoroutine);
+                }
+
+                if (value)
+                {
+                    _fadeCoroutine = StartCoroutine(FadingIn());
+                }
+                else
+                {
+                    _fadeCoroutine = StartCoroutine(FadingOut());
+                }
             }
         }
 

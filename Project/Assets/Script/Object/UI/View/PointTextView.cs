@@ -11,7 +11,7 @@ namespace Script.Object.UI.View
 
         public void Change(int point)
         {
-            CurrentPointText.text = point.ToString();
+            CurrentPointText.text = point.ToString() + " >";
         }
     }
 }

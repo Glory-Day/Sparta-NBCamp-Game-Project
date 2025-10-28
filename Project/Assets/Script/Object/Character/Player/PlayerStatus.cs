@@ -1,6 +1,8 @@
 ﻿using System;
 using Backend.Util.Data;
 using UnityEngine;
+using Backend.Object.UI;
+
 
 #if UNITY_EDITOR
 
@@ -40,9 +42,14 @@ namespace Backend.Object.Character.Player
         private float _regenRate;
         private float _lastUseTime;
 
+        //인벤토리
+        public Inventory inventory;
+
         protected override void Awake()
         {
             base.Awake();
+
+            PointChanged = new Action<int>[7];
 
             maximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
             currentStaminaPoint = maximumStaminaPoint;
@@ -100,7 +107,14 @@ namespace Backend.Object.Character.Player
             return currentStaminaPoint >= cost;
         }
 
+        public void TestFuction(int index, int point)
+        {
+            PointChanged[index].Invoke(point);
+        }
+
         public Action<float> StaminaPointChanged;
+        //액션 배열
+        public Action<int>[] PointChanged;
 
         private float NormalizedStaminaPoint => currentStaminaPoint / maximumStaminaPoint;
     }
