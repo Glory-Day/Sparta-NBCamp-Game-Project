@@ -103,7 +103,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65
   shouldTrackTarget: 0
-  lookAtTargetOnInit: 0
+  lookAtTargetOnInit: 1
   isCreateRangeProjectile: 0
   rangeProjectilePrefab: {fileID: 0}
 --- !u!1001 &5683206695824738249

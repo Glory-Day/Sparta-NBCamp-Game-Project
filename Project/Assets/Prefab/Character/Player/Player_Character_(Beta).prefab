@@ -3783,6 +3783,8 @@ MonoBehaviour:
   regenDuration: 3
   regenAmount: 30
   cost: 30
+  lowDamagedPoint: 0
+  highDamagedPoint: 0
   currentDamagePoint: 0
   currentDefensePoint: 0
 --- !u!114 &4246933426907511177

@@ -85,7 +85,7 @@ namespace Backend.Object.Projectile
         {
             if (target != null && lookAtTargetOnInit)
             {
-                Vector3 direction = (target.position - transform.position).normalized;
+                Vector3 direction = (target.position + Vector3.up - transform.position).normalized;
                 transform.rotation = Quaternion.LookRotation(direction);
             }
         }

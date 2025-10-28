@@ -482,7 +482,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: cc7435a77581c42438419ec4119acdd5
-  Position: {x: 305.00003, y: 978.5003}
+  Position: {x: 298.99994, y: 940.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0

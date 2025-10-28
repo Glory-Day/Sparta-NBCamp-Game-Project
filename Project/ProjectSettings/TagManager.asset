@@ -20,9 +20,9 @@ TagManager:
   - Projectile
   - Weapon
   - 
+  - NavMeshIgnore
   - 
-  - 
-  - 
+  - ColliderWall
   - 
   - 
   - 
