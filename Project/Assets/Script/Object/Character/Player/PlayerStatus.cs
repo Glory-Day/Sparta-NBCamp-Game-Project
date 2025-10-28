@@ -1,6 +1,8 @@
 ﻿using System;
 using Backend.Util.Data;
 using UnityEngine;
+using Backend.Object.UI;
+
 
 #if UNITY_EDITOR
 
@@ -35,6 +37,9 @@ namespace Backend.Object.Character.Player
 
         private float _regenRate;
         private float _lastUseTime;
+
+        //인벤토리
+        public Inventory inventory;
 
         protected override void Awake()
         {

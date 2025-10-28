@@ -4,15 +4,17 @@ using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
 using Script.Object.UI.View;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
-    public class EndurancePointDifferenceTextPresenter : PointDifferenceTextPresenter
+    public class LevelPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
         private Dispatcher _dispatcher;
-        public EndurancePointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        private int _totalLevel;
+        public LevelPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
         {
             _dispatcher = dispatcher;
             _dispatcher.Subscribe(this);
+            _totalLevel = 0;
         }
 
         public override void Clear()
@@ -23,18 +25,20 @@ namespace Backend.Object.UI
 
         public override void Receive<T>(T message)
         {
+            var statusData = (PlayerStatusData)Model.data;
+
             switch (message)
             {
                 case IncreasePointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).EndurancePoint, ((int)((PlayerStatusData)Model.data).EndurancePoint) + msg.Point);
+                    _totalLevel += msg.Point;
+                    View.Change(statusData.Level, statusData.Level + _totalLevel);
                     break;
                 case ConfirmMessage msg:
-                    ((PlayerStatusData)Model.data).EndurancePoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)((PlayerStatusData)Model.data).EndurancePoint);
+                    statusData.Level += _totalLevel;
+                    View.Change(statusData.Level);
+                    _totalLevel = 0;
                     break;
             }
-            _dispatcher.DispatchTo<StaminaPointDifferenceTextPresenter, T>(message);
         }
     }
 }
-

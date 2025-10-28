@@ -1,16 +1,18 @@
-﻿using Backend.Object.Character;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Backend.Object.Character.Player;
 using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
 using Script.Object.UI.View;
+using UnityEngine;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
-    public class HealthPointDifferenceTextPresenter : PointDifferenceTextPresenter
+    public class StaminaPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
         private Dispatcher _dispatcher;
-        public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
         {
             _dispatcher = dispatcher;
             _dispatcher.Subscribe(this);
@@ -27,11 +29,11 @@ namespace Backend.Object.UI
             switch (message)
             {
                 case IncreasePointMessage msg:
-                    View.Change((int)Model.maximumHealthPoint, (int)Model.maximumHealthPoint + msg.Point);
+                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint, ((int)((PlayerStatusData)Model.data).StaminaPoint) + msg.Point);
                     break;
                 case ConfirmMessage msg:
-                    Model.maximumHealthPoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)Model.maximumHealthPoint);
+                    ((PlayerStatusData)Model.data).StaminaPoint = float.Parse(View.UpdatedPointText.text);
+                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint);
                     break;
             }
             _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(message);

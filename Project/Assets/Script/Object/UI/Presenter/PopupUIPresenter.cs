@@ -6,7 +6,7 @@ using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
 using UnityEngine;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
     public class PopupUIPresenter : Presenter<PlayerLevelUpPopupUI, IModel>
     {

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Backend.Util.Data;
 using Backend.Util.Debug;
 using Backend.Util.Input;
+using Backend.Util.Presentation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -41,7 +43,7 @@ using UnityEngine.UI;
 
 namespace Backend.Object.UI
 {
-    public partial class InventoryView : MonoBehaviour
+    public partial class InventoryView : MonoBehaviour, IView
     {
         #region SERIALIZABLE FIELD API
 
@@ -67,21 +69,20 @@ namespace Backend.Object.UI
 
         #endregion
 
-        /// <summary> 연결된 인벤토리 </summary>
-        private Inventory _inventory;
-
-        private List<ItemSlotView> _slots = new ();
+        public List<ItemSlotView> Slots = new();
 
         private GraphicRaycaster _graphicRaycaster;
         private List<RaycastResult> _raycastResults;
 
         private PointerEventData _pointerEventData;
 
-        private UIControls.InventoryActions _controls;
+        private UIControls _controls;
+
+        public Action<int, int> invAction;
 
         private void Awake()
         {
-            _controls = new UIControls().Inventory;
+            _controls = new UIControls();
 
             TryGetComponent(out _graphicRaycaster);
             if (_graphicRaycaster == null)
@@ -107,7 +108,7 @@ namespace Backend.Object.UI
             var beginPos = new Vector2(_contentAreaPadding, -_contentAreaPadding);
             var anchoredPosition = beginPos;
 
-            _slots = new List<ItemSlotView>(_verticalSlotCount * _horizontalSlotCount);
+            Slots = new List<ItemSlotView>(_verticalSlotCount * _horizontalSlotCount);
 
             // 슬롯들 동적 생성
             for (var i = 0; i < _verticalSlotCount; i++)
@@ -125,7 +126,7 @@ namespace Backend.Object.UI
 
                     var slot = clone.GetComponent<ItemSlotView>();
                     slot.Index = index;
-                    _slots.Add(slot);
+                    Slots.Add(slot);
 
                     // Next X
                     anchoredPosition.x += _slotMargin + _slotSize;
@@ -141,63 +142,42 @@ namespace Backend.Object.UI
             {
                 Destroy(_slotUiPrefab);
             }
-
-            _inventory.TrimAll();
         }
 
         private void OnEnable()
         {
-            _controls.Enable();
-            _controls.Drag.performed += Drag;
-            _controls.ClickLeftMouseButton.performed += PressLeftMouseButton;
-            _controls.ClickLeftMouseButton.canceled += ReleaseLeftMouseButton;
+            _controls.Inventory.Enable();
+            _controls.Inventory.Drag.performed += Drag;
+            _controls.Inventory.ClickLeftMouseButton.performed += PressLeftMouseButton;
+            _controls.Inventory.ClickLeftMouseButton.canceled += ReleaseLeftMouseButton;
         }
 
         private void Update()
         {
-            // 이전 프레임의 슬롯.
-            var previous = _pointerOverSlot;
-
             // 현재 프레임의 슬롯.
             var current = _pointerOverSlot = Raycast<ItemSlotView>();
 
-            if (previous is null)
+            if (current != _pointerOverSlot)
             {
-                // 슬롯 위에 마우스 포인터가 있는 경우에는 다음과 같다.
-                if (current is null)
+                if (_pointerOverSlot != null)
                 {
-                    return;
+                    _pointerOverSlot.IsHighlighted = false;
                 }
-
-                if (_showHighlight)
+                if (current != null && _showHighlight)
                 {
                     current.IsHighlighted = true;
                 }
+                _pointerOverSlot = current;
             }
-            else
-            {
-                if (current is null)
-                {
-                    // 슬롯 위에 마우스 포인터가 없는 경우에는 다음과 같다.
-                    previous.IsHighlighted = false;
-                }
-                else if (previous != current)
-                {
-                    previous.IsHighlighted = false;
-                    if (_showHighlight)
-                    {
-                        current.IsHighlighted = true;
-                    }
-                }
-            }
+
         }
 
         private void OnDisable()
         {
-            _controls.Drag.performed -= Drag;
-            _controls.ClickLeftMouseButton.performed -= PressLeftMouseButton;
-            _controls.ClickLeftMouseButton.canceled -= ReleaseLeftMouseButton;
-            _controls.Disable();
+            _controls.Inventory.Drag.performed -= Drag;
+            _controls.Inventory.ClickLeftMouseButton.performed -= PressLeftMouseButton;
+            _controls.Inventory.ClickLeftMouseButton.canceled -= ReleaseLeftMouseButton;
+            _controls.Inventory.Disable();
         }
 
         private RectTransform Clone()
@@ -210,29 +190,23 @@ namespace Backend.Object.UI
             return rectTransform;
         }
 
-        /// <summary> 인벤토리 참조 등록 (인벤토리에서 직접 호출) </summary>
-        public void SetInventoryReference(Inventory inventory)
-        {
-            _inventory = inventory;
-        }
-
         /// <summary> 슬롯에 아이템 아이콘 등록 </summary>
         public void SetItemIconImageByIndex(int index, Sprite icon)
         {
-            _slots[index].IconImage = icon;
+            Slots[index].IconImage = icon;
         }
 
         /// <summary> 해당 슬롯의 아이템 개수 텍스트 지정 </summary>
         public void SetItemAmountTextByIndex(int index, int amount)
         {
             // NOTE : amount가 1 이하일 경우 텍스트 미표시
-            _slots[index].Count = amount;
+            Slots[index].Count = amount;
         }
 
         /// <summary> 해당 슬롯의 아이템 개수 텍스트 지정 </summary>
         public void HideItemAmountText(int index)
         {
-            _slots[index].Count = 1;
+            Slots[index].Count = 1;
         }
 
         /// <summary>
@@ -243,13 +217,13 @@ namespace Backend.Object.UI
         public void SetEquipmentText(int index, bool equip)
         {
             //테스트중
-            _slots[index].IsEquipped = equip;
+            Slots[index].IsEquipped = equip;
         }
 
         /// <summary> 슬롯에서 아이템 아이콘 제거, 개수 텍스트 숨기기 </summary>
         public void RemoveItem(int index)
         {
-            _slots[index].Remove();
+            Slots[index].Remove();
         }
     }
 }

@@ -5,7 +5,7 @@ using Backend.Util.Presentation;
 using Script.Object.UI.View;
 using UnityEngine;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
     public abstract class PointDifferenceTextPresenter : Presenter<PointDifferenceTextView, PlayerStatus>, ISubscriber
     {

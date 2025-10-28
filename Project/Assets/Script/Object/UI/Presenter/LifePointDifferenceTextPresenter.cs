@@ -7,7 +7,7 @@ using Backend.Util.Presentation.Message;
 using Script.Object.UI.View;
 using UnityEngine;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.Presenter
 {
     public class LifePointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
@@ -30,13 +30,17 @@ namespace Backend.Object.UI
             {
                 case IncreasePointMessage msg:
                     View.Change((int)((PlayerStatusData)Model.data).LifePoint, ((int)((PlayerStatusData)Model.data).LifePoint) + msg.Point);
+                    _dispatcher.DispatchTo<HealthPointDifferenceTextPresenter, T>(message);
+                    break;
+                case InventoryPointMessage msg:
+                    View.Change((int)((PlayerStatusData)Model.data).LifePoint, ((int)((PlayerStatusData)Model.data).LifePoint) + msg.Point);
                     break;
                 case ConfirmMessage msg:
                     ((PlayerStatusData)Model.data).LifePoint = float.Parse(View.UpdatedPointText.text);
                     View.Change((int)((PlayerStatusData)Model.data).LifePoint);
+                    _dispatcher.DispatchTo<HealthPointDifferenceTextPresenter, T>(message);
                     break;
             }
-            _dispatcher.DispatchTo<HealthPointDifferenceTextPresenter, T>(message);
         }
     }
 }

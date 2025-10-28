@@ -1,7 +1,5 @@
-﻿using System;
-using Backend.Object.Character;
-using Backend.Object.Character.Enemy;
-using Backend.Object.UI;
+﻿using Backend.Object.Character.Enemy;
+using Backend.Object.UI.Presenter;
 using Backend.Object.UI.View;
 using Backend.Util.Presentation;
 using UnityEngine;

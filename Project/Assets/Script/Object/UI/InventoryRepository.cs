@@ -1,60 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Backend.Util.Data;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.Port;
 
 namespace Backend.Object.UI
 {
-    public class Inventory : MonoBehaviour
+    public class InventoryRepository
     {
-        /// <summary> 아이템 수용 한도 </summary>
-        public int Capacity { get; private set; }
-
-        // 초기 수용 한도
-        [SerializeField, Range(8, 81)]
-        private int _initalCapacity = 32;
-
-        // 최대 수용 한도(아이템 배열 크기)
-        [SerializeField, Range(8, 81)]
-        private int _maxCapacity = 81;
-
-        [SerializeField]
-        private InventoryView inventoryView; // 연결된 인벤토리 UI
-
-        /// <summary> 아이템 목록 </summary>
-        [SerializeField]
-        private ItemData[] items;
+        private InventoryView _view;
+        private Inventory _model;
 
         /// <summary> 업데이트 할 인덱스 목록 </summary>
-        private readonly HashSet<int> _indexSetForUpdate = new ();
+        private readonly HashSet<int> _indexSetForUpdate = new();
 
-        // 아이템 장착 여부 및 슬롯 번호
-        private bool _isArmorEquip = false;
-        private bool _isWeaponEquip = false;
-        private int _currentArmorEquip;
-        private int _currentWeaponEquip;
-
-#if UNITY_EDITOR
-
-        private void OnValidate()
+        public InventoryRepository(InventoryView view, Inventory model)
         {
-            if (_initalCapacity > _maxCapacity)
-            {
-                _initalCapacity = _maxCapacity;
-            }
-        }
-
-#endif
-        private void Awake()
-        {
-            items = new ItemData[_maxCapacity];
-            Capacity = _initalCapacity;
-            inventoryView.SetInventoryReference(this);
+            _model = model;
+            _view = view;
         }
 
         /// <summary> 인덱스가 수용 범위 내에 있는지 검사 </summary>
         private bool IsValidIndex(int index)
         {
-            return index >= 0 && index < Capacity;
+            return index >= 0 && index < _model.Capacity;
         }
 
         /// <summary>
@@ -62,9 +31,9 @@ namespace Backend.Object.UI
         /// </summary>
         private int FindEmptySlotIndex(int startIndex = 0)
         {
-            for (int i = startIndex; i < Capacity; i++)
+            for (int i = startIndex; i < _model.Capacity; i++)
             {
-                if (items[i] == null)
+                if (_model.items[i] == null)
                 {
                     return i;
                 }
@@ -78,9 +47,9 @@ namespace Backend.Object.UI
         /// </summary>
         private int FindCountableItemSlotIndex(ItemData target, int startIndex = 0)
         {
-            for (int i = startIndex; i < Capacity; i++)
+            for (int i = startIndex; i < _model.Capacity; i++)
             {
-                var current = items[i];
+                var current = _model.items[i];
                 if (current == null)
                 {
                     continue;
@@ -96,6 +65,7 @@ namespace Backend.Object.UI
             return -1;
         }
 
+
         /// <summary>
         /// 해당하는 인덱스의 슬롯 상태를 갱신한다.
         /// </summary>
@@ -106,13 +76,13 @@ namespace Backend.Object.UI
                 return;
             }
 
-            var item = items[index];
+            var item = _model.items[index];
 
             // 아이템이 슬롯에 존재하는 경우에는 다음과 같다.
             if (item != null)
             {
                 // 아이콘 등록
-                inventoryView.SetItemIconImageByIndex(index, item.IconImage);
+                _view.SetItemIconImageByIndex(index, item.IconImage);
 
                 // 셀 수 있는 아이템인 경우는 다음과 같다.
                 if (item.IsCountable)
@@ -120,22 +90,22 @@ namespace Backend.Object.UI
                     // 수량이 0인 경우, 아이템을 제거한다.
                     if (item.IsEmpty)
                     {
-                        items[index] = null;
+                        _model.items[index] = null;
                         RemoveIconImage(index);
                         return;
                     }
 
                     // 수량 텍스트를 표시한다.
-                    inventoryView.SetItemAmountTextByIndex(index, item.Count);
+                    _view.SetItemAmountTextByIndex(index, item.Count);
                 }
                 // 셀 수 없는 아이템인 경우 수량 텍스트 제거한다.
                 else
                 {
-                    inventoryView.HideItemAmountText(index);
+                    _view.HideItemAmountText(index);
                 }
 
                 // 장착 가능 아이템일 경우에는 장착 여부를 표시한다.
-                inventoryView.SetEquipmentText(index, item is EquipableItemData { IsEquipped: true });
+                _view.SetEquipmentText(index, item is EquipableItemData { IsEquipped: true });
             }
             // 빈 슬롯인 경우에는 아이콘 이미지를 제거한다.
             else
@@ -146,9 +116,9 @@ namespace Backend.Object.UI
 
         private void RemoveIconImage(int index)
         {
-            inventoryView.RemoveItem(index);
-            inventoryView.HideItemAmountText(index);      // 수량 텍스트 숨기기
-            inventoryView.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
+            _view.RemoveItem(index);
+            _view.HideItemAmountText(index);      // 수량 텍스트 숨기기
+            _view.SetEquipmentText(index, false); // 장착 여부 텍스트 숨기기
         }
 
         /// <summary>
@@ -163,9 +133,9 @@ namespace Backend.Object.UI
         }
 
         /// <summary> 모든 슬롯들의 상태를 UI에 갱신 </summary>
-        private void UpdateAllSlot()
+        public void UpdateAllSlot()
         {
-            for (int i = 0; i < Capacity; i++)
+            for (int i = 0; i < _model.Capacity; i++)
             {
                 UpdateSlot(i);
             }
@@ -176,7 +146,7 @@ namespace Backend.Object.UI
         /// </returns>
         public bool HasItem(int index)
         {
-            return IsValidIndex(index) && items[index] != null;
+            return IsValidIndex(index) && _model.items[index] != null;
         }
 
         /// <returns>
@@ -184,7 +154,7 @@ namespace Backend.Object.UI
         /// </returns>
         public bool IsCountableItem(int index)
         {
-            return HasItem(index) && items[index].IsCountable;
+            return HasItem(index) && _model.items[index].IsCountable;
         }
 
         /// <summary>
@@ -200,12 +170,12 @@ namespace Backend.Object.UI
                 return -1;
             }
 
-            if (items[index] == null)
+            if (_model.items[index] == null)
             {
                 return 0;
             }
 
-            return items[index].IsCountable == false ? 1 : items[index].Count;
+            return _model.items[index].IsCountable == false ? 1 : _model.items[index].Count;
         }
 
         /// <returns>
@@ -218,7 +188,7 @@ namespace Backend.Object.UI
                 return null;
             }
 
-            return items[index] == null ? null : items[index];
+            return _model.items[index] == null ? null : _model.items[index];
         }
 
         /// <summary> 해당 슬롯의 아이템 이름 리턴 </summary>
@@ -229,14 +199,7 @@ namespace Backend.Object.UI
                 return string.Empty;
             }
 
-            return items[index] == null ? string.Empty : items[index].Name;
-        }
-
-        /// <summary> 인벤토리 UI 연결 </summary>
-        public void ConnectUI(InventoryView view)
-        {
-            inventoryView = view;
-            inventoryView.SetInventoryReference(this);
+            return _model.items[index] == null ? string.Empty : _model.items[index].Name;
         }
 
         /// <summary> 인벤토리에 아이템 추가
@@ -268,7 +231,7 @@ namespace Backend.Object.UI
                         // 존재하는 슬롯을 찾은 경우, 양을 증가시키고 초과량 존재 시 수량을 초기화한다.
                         else
                         {
-                            count = items[index].Sum(count);
+                            count = _model.items[index].Sum(count);
 
                             UpdateSlot(index);
                         }
@@ -288,7 +251,7 @@ namespace Backend.Object.UI
                         data.Count = count;
 
                         // 슬롯에 추가한다.
-                        items[index] = data;
+                        _model.items[index] = data;
 
                         // 남은 개수 계산한다.
                         count = count > ItemData.MaximumStackCount ? count - ItemData.MaximumStackCount : 0;
@@ -307,7 +270,7 @@ namespace Backend.Object.UI
                     if (index != -1)
                     {
                         // 아이템을 생성하여 슬롯에 추가한다.
-                        items[index] = data;
+                        _model.items[index] = data;
                         count = 0;
 
                         UpdateSlot(index);
@@ -328,7 +291,7 @@ namespace Backend.Object.UI
                     }
 
                     // 아이템을 생성하여 슬롯에 추가한다.
-                    items[index] = data;
+                    _model.items[index] = data;
 
                     UpdateSlot(index);
                 }
@@ -347,8 +310,8 @@ namespace Backend.Object.UI
                 return;
             }
 
-            items[index] = null;
-            inventoryView.RemoveItem(index);
+            _model.items[index] = null;
+            _view.RemoveItem(index);
         }
 
         /// <summary>
@@ -366,7 +329,7 @@ namespace Backend.Object.UI
                 return;
             }
 
-            (items[a], items[b]) = (items[b], items[a]);
+            (_model.items[a], _model.items[b]) = (_model.items[b], _model.items[a]);
 
             // 두 슬롯 정보 갱신한다.
             UpdateSlot(a, b);
@@ -390,7 +353,7 @@ namespace Backend.Object.UI
             _indexSetForUpdate.Clear();
 
             int i = -1;
-            while (items[++i] != null)
+            while (_model.items[++i] != null)
             {
                 ;
             }
@@ -399,12 +362,12 @@ namespace Backend.Object.UI
 
             while (true)
             {
-                while (++j < Capacity && items[j] == null)
+                while (++j < _model.Capacity && _model.items[j] == null)
                 {
                     ;
                 }
 
-                if (j == Capacity)
+                if (j == _model.Capacity)
                 {
                     break;
                 }
@@ -412,8 +375,8 @@ namespace Backend.Object.UI
                 _indexSetForUpdate.Add(i);
                 _indexSetForUpdate.Add(j);
 
-                items[i] = items[j];
-                items[j] = null;
+                _model.items[i] = _model.items[j];
+                _model.items[j] = null;
                 i++;
             }
 
@@ -424,3 +387,4 @@ namespace Backend.Object.UI
         }
     }
 }
+
