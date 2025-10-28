@@ -37,7 +37,7 @@ namespace Script.Test
 
             binder.Bind(model);
             binder2.Bind(model);
-            binder3.Bind(model2, model);
+            // binder3.Bind(model2, model);
         }
 
         public GameObject Target { get; set; }
