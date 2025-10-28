@@ -1,5 +1,8 @@
 ﻿using System;
+using Backend.Util.Debug;
+using Backend.Util.Input;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Backend.Object.Character.Player
 {
@@ -20,6 +23,7 @@ namespace Backend.Object.Character.Player
         [Header("Controller Reference")]
         public AdvancedActionController actionController;
         public ThirdPersonCameraController cameraController;
+        public PlayerAnimationController animationController;
 
         [Header("Controller Settings")]
         [Tooltip("Speed at which this instance turns toward the controller's velocity.\n\n" +
@@ -38,9 +42,23 @@ namespace Backend.Object.Character.Player
         private Transform _parent;
         private Transform _child;
 
+        private EnemyDetector _detector;
+
+        private PlayerControls _controls;
+
+        private void Awake()
+        {
+            _controls = new PlayerControls();
+
+            _detector = GetComponent<EnemyDetector>();
+        }
+
         private void OnEnable()
         {
             _yAxisAngle = transform.localEulerAngles.y;
+
+            _controls.Enable();
+            _controls.Perspective.LockOn.performed += LockOn;
         }
 
         private void Start()
@@ -71,6 +89,60 @@ namespace Backend.Object.Character.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private void OnDisable()
+        {
+            _controls.Perspective.LockOn.performed -= LockOn;
+            _controls.Disable();
+        }
+
+        private void OnDestroy()
+        {
+            _controls = null;
+        }
+
+        private void LockOn(InputAction.CallbackContext context)
+        {
+            switch (cameraController.Mode)
+            {
+                case PerspectiveMode.ThirdPerson:
+                    Focus();
+                    break;
+                case PerspectiveMode.LockOn:
+                    Cancel();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private void Focus()
+        {
+            Debugger.LogProgress();
+
+            animationController.SetAnimationBoolean("Is Focusing", true);
+
+            _detector.FidNearestEnemy();
+
+            var target = _detector.NearestEnemy;
+            if (target == null)
+            {
+                return;
+            }
+
+            cameraController.Target = target;
+
+            animationController.SetAnimationBoolean("Is Focusing", true);
+        }
+
+        private void Cancel()
+        {
+            Debugger.LogProgress();
+
+            cameraController.Target = null;
+
+            animationController.SetAnimationBoolean("Is Focusing", false);
         }
 
         private void TurnTowardByVelocity()
@@ -130,7 +202,7 @@ namespace Backend.Object.Character.Player
 
         private void TurnTowardByTarget()
         {
-            transform.LookAt(cameraController.target);
+            transform.LookAt(_detector.NearestEnemy);
         }
     }
 }

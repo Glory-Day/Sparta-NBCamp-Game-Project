@@ -34,6 +34,7 @@ namespace Backend.Object.Character.Player
 
         private PlayerAnimationController _animationController;
         private AdvancedActionController _actionController;
+        private PlayerMovementController _movementController;
 
         private DamageSender _damageSender;
 
@@ -49,6 +50,7 @@ namespace Backend.Object.Character.Player
 
             _animationController = GetComponent<PlayerAnimationController>();
             _actionController = GetComponent<AdvancedActionController>();
+            _movementController = GetComponent<PlayerMovementController>();
 
             _damageSender = GetComponentInChildren<DamageSender>();
             _damageSender.PhysicalDamagePoint = data.PhysicalDamage;
@@ -74,7 +76,14 @@ namespace Backend.Object.Character.Player
         {
             base.TakeDamage(damage);
 
-            var direction = (transform.position - position ?? Vector3.zero).normalized;
+            if (0f >= currentHealthPoint)
+            {
+                _animationController.SetAnimationTrigger("Dying");
+
+                return;
+            }
+
+            _actionController.Direction = (transform.position - position ?? Vector3.zero).normalized;
 
             if (lowDamagedPoint < damage && damage < highDamagedPoint)
             {

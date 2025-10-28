@@ -233,6 +233,15 @@ namespace Backend.Util.Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lock On"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f1da15f-6a47-44b2-b338-9a56134f982b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -244,6 +253,17 @@ namespace Backend.Util.Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c4f3f58-160f-4d0a-a63c-d0d68e9bc172"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock On"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -261,6 +281,7 @@ namespace Backend.Util.Input
             // Perspective
             m_Perspective = asset.FindActionMap("Perspective", throwIfNotFound: true);
             m_Perspective_Look = m_Perspective.FindAction("Look", throwIfNotFound: true);
+            m_Perspective_LockOn = m_Perspective.FindAction("Lock On", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -472,6 +493,7 @@ namespace Backend.Util.Input
         private readonly InputActionMap m_Perspective;
         private List<IPerspectiveActions> m_PerspectiveActionsCallbackInterfaces = new List<IPerspectiveActions>();
         private readonly InputAction m_Perspective_Look;
+        private readonly InputAction m_Perspective_LockOn;
         /// <summary>
         /// Provides access to input actions defined in input action map "Perspective".
         /// </summary>
@@ -487,6 +509,10 @@ namespace Backend.Util.Input
             /// Provides access to the underlying input action "Perspective/Look".
             /// </summary>
             public InputAction @Look => m_Wrapper.m_Perspective_Look;
+            /// <summary>
+            /// Provides access to the underlying input action "Perspective/LockOn".
+            /// </summary>
+            public InputAction @LockOn => m_Wrapper.m_Perspective_LockOn;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -516,6 +542,9 @@ namespace Backend.Util.Input
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
+                @LockOn.started += instance.OnLockOn;
+                @LockOn.performed += instance.OnLockOn;
+                @LockOn.canceled += instance.OnLockOn;
             }
 
             /// <summary>
@@ -530,6 +559,9 @@ namespace Backend.Util.Input
                 @Look.started -= instance.OnLook;
                 @Look.performed -= instance.OnLook;
                 @Look.canceled -= instance.OnLook;
+                @LockOn.started -= instance.OnLockOn;
+                @LockOn.performed -= instance.OnLockOn;
+                @LockOn.canceled -= instance.OnLockOn;
             }
 
             /// <summary>
@@ -613,6 +645,13 @@ namespace Backend.Util.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnLook(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Lock On" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnLockOn(InputAction.CallbackContext context);
         }
     }
 }
