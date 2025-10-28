@@ -2,6 +2,7 @@
 using Backend.Util.Debug;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
+using Ironcow.Synapse;
 
 namespace Backend.Object.UI.Presenter
 {
@@ -12,7 +13,6 @@ namespace Backend.Object.UI.Presenter
         public InventoryPresenter(InventoryView view, Inventory model, Dispatcher dispatcher) : base(view, model)
         {
             _repository = new(view, model);
-
             _repository.UpdateAllSlot();
 
             _dispatcher = dispatcher;
