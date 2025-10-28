@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550290075445983114}
   - component: {fileID: 5248343523577798622}
+  - component: {fileID: 7737496227040952236}
   m_Layer: 0
   m_Name: SK_DeathKnight_M_Lingerie Variant
   m_TagString: Untagged
@@ -90,6 +91,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7737496227040952236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102058864424047238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39c5478639d4163bfbcf3bdfdee782b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &112643581864335859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,12 +1028,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 512
-  center: {x: 0, y: -0.8, z: 0}
-  radius: 0.06
-  height: 1.13
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!1 &1686657153262963476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2523,10 +2530,6 @@ MonoBehaviour:
   turningTowardSpeed: 120
   maximumMovementSpeed: 7
   isTurningToward: 0
-  target: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &6835589968479238423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3744,7 +3747,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1.25, z: 0}
@@ -3801,7 +3804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepHeightRatio: 0.25
   height: 2
-  thickness: 1
+  thickness: 0.5
   offset: {x: 0, y: 0.5, z: 0}
   isDebugMode: 1
   mode: 1
@@ -3852,6 +3855,7 @@ GameObject:
   - component: {fileID: 6206253642189970515}
   - component: {fileID: 8012733953322356945}
   - component: {fileID: 1861259375928890727}
+  - component: {fileID: 804735100016995008}
   m_Layer: 0
   m_Name: Root_Model
   m_TagString: Untagged
@@ -3907,8 +3911,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionController: {fileID: 1969857033368978983}
   cameraController: {fileID: 2206131035689729515}
+  animationController: {fileID: 577979405784028665}
   turningSpeed: 1500
   isMomentumIgnored: 0
+--- !u!114 &804735100016995008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157476340549214637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35bdcb22b3645bf809c1fd69c542c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 10
+  layer:
+    serializedVersion: 2
+    m_Bits: 512
+  maximumCount: 20
 --- !u!1 &5192427715769696800
 GameObject:
   m_ObjectHideFlags: 0

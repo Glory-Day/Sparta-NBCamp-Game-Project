@@ -177,8 +177,8 @@ namespace Backend.Object.Character.Player
             // If no camera transform has been assigned, use the character's transform axes to calculate the movement direction.
             if (cameraTransform == null)
             {
-                direction += transform.right * _direction.x;
-                direction += transform.forward * _direction.z;
+                direction += transform.right * Direction.x;
+                direction += transform.forward * Direction.z;
             }
             else
             {
@@ -186,8 +186,8 @@ namespace Backend.Object.Character.Player
                 // Project movement direction so movement stays parallel to the ground.
                 var v = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
                 var h = Vector3.ProjectOnPlane(cameraTransform.right, transform.up).normalized;
-                direction += h * _direction.x;
-                direction += v * _direction.z;
+                direction += h * Direction.x;
+                direction += v * Direction.z;
             }
 
             // If necessary, clamp movement vector to magnitude of '1f'.

@@ -1,6 +1,7 @@
 ﻿using System;
+using Backend.Util.Debug;
+using Script.Util.Extension;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Backend.Object.Character.Player
 {
@@ -46,6 +47,12 @@ namespace Backend.Object.Character.Player
 
         private int _layer;
 
+#if UNITY_EDITOR
+
+        private Color _color = Color.green;
+
+#endif
+
         // Current upwards (or downwards) velocity necessary to keep the correct distance to the ground.
         private Vector3 _adjustmentVelocity = Vector3.zero;
 
@@ -85,7 +92,69 @@ namespace Backend.Object.Character.Player
 
         private void OnDrawGizmos()
         {
-            const float size = 0.2f;
+            DrawCapsuleCollider();
+            DrawSensor();
+            DrawPosition();
+        }
+
+        private void DrawCapsuleCollider()
+        {
+            var center = _capsuleCollider.center;
+            var axis = _capsuleCollider.GetDirection(transform);
+            var radius = _capsuleCollider.radius;
+            var point = transform.TransformPoint(center);
+            var delta = Mathf.Max(0f, (_capsuleCollider.height * 0.5f) - radius);
+
+            var a = point + (axis * delta);
+            var b = point - (axis * delta);
+
+            Gizmos.color = _color;
+            if (delta <= Mathf.Epsilon)
+            {
+                Gizmos.DrawWireSphere(point, radius);
+            }
+            else
+            {
+                DrawWireCapsule(a, b, radius, axis);
+            }
+        }
+
+        private void DrawWireCapsule(Vector3 a, Vector3 b, float r, Vector3 axis, int segments = 20)
+        {
+            var normal = axis.normalized;
+            var tangent = Vector3.Cross(normal, Vector3.up);
+            if (tangent.sqrMagnitude < 1e-6f)
+            {
+                tangent = Vector3.Cross(normal, Vector3.forward);
+            }
+
+            tangent.Normalize();
+            var bitangent = Vector3.Cross(normal, tangent);
+
+            var c1 = new Vector3[segments];
+            var c2 = new Vector3[segments];
+            for (int i = 0; i < segments; i++)
+            {
+                var angle = 2f * Mathf.PI * i / segments;
+                var delta = (tangent * Mathf.Cos(angle) * r) + (bitangent * Mathf.Sin(angle) * r);
+                c1[i] = a + delta;
+                c2[i] = b + delta;
+            }
+
+            for (int i = 0; i < segments; i++)
+            {
+                var ni = (i + 1) % segments;
+                Gizmos.DrawLine(c1[i], c1[ni]);
+                Gizmos.DrawLine(c2[i], c2[ni]);
+                Gizmos.DrawLine(c1[i], c2[i]);
+            }
+
+            Gizmos.DrawWireSphere(a, r);
+            Gizmos.DrawWireSphere(b, r);
+        }
+
+        private void DrawSensor()
+        {
             const float radius = 0.04f;
 
             if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
@@ -128,9 +197,19 @@ namespace Backend.Object.Character.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
 
-            position = _sensor.Position;
-            distance = _sensor.Normal;
+        private void DrawPosition()
+        {
+            if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
+            {
+                return;
+            }
+
+            const float size = 0.2f;
+
+            var position = _sensor.Position;
+            var distance = _sensor.Normal;
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size));
@@ -389,10 +468,30 @@ namespace Backend.Object.Character.Player
             }
         }
 
-        public bool IsColliderEnabled
+        public void EnableCollider()
         {
-            get => _capsuleCollider.enabled;
-            set => _capsuleCollider.enabled = value;
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.green;
+
+#endif
+
+            _capsuleCollider.enabled = true;
+        }
+
+        public void DisableCollider()
+        {
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.red;
+
+#endif
+
+            _capsuleCollider.enabled = false;
         }
 
         public float StopHeightRatio

@@ -2,7 +2,7 @@
 
 namespace Backend.Object.Character.Player.Animation
 {
-    public class AnimationMovementController : StateMachineBehaviour
+    public class PlayerMotionController : StateMachineBehaviour
     {
         public AnimationCurve speed = AnimationCurve.Linear(0f, 1f, 1f, 1f);
 
