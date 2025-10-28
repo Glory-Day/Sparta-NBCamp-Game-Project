@@ -10,7 +10,6 @@ namespace Backend.Object.Character.Player
     {
         private PlayerControls _actions;
         private Vector3 _facing = Vector3.zero;
-        private Vector3 _direction = Vector3.zero;
 
         private bool _isRolling;
         private bool _isRollButtonBuffered;
@@ -23,8 +22,8 @@ namespace Backend.Object.Character.Player
 
         private void Move(InputAction.CallbackContext context)
         {
-            _direction = context.ReadValue<Vector3>().normalized;
-            _facing = _direction == Vector3.zero ? _facing : _direction;
+            Direction = context.ReadValue<Vector3>().normalized;
+            _facing = Direction == Vector3.zero ? _facing : Direction;
         }
 
         private void Roll(InputAction.CallbackContext context)
@@ -60,7 +59,7 @@ namespace Backend.Object.Character.Player
 
         private void Stop(InputAction.CallbackContext context)
         {
-            _direction = Vector3.zero;
+            Direction = Vector3.zero;
         }
 
         public void OnRollingStateEntered()
@@ -72,13 +71,11 @@ namespace Backend.Object.Character.Player
 
             _status.UseStamina();
 
-            _movementController.IsColliderEnabled = false;
-
             _actions.Movement.Move.Disable();
             _actions.Movement.Jump.Disable();
             _actions.Movement.Attack.Disable();
 
-            _direction = _facing;
+            Direction = _facing;
         }
 
         public void OnRollingStateExited()
@@ -86,9 +83,7 @@ namespace Backend.Object.Character.Player
             Debugger.LogProgress();
 
             _state = State.Grounded;
-            _direction = Vector3.zero;
-
-            _movementController.IsColliderEnabled = true;
+            Direction = Vector3.zero;
 
             _actions.Movement.Move.Enable();
             _actions.Movement.Jump.Enable();
@@ -112,7 +107,7 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Jump.Disable();
             _actions.Movement.Roll.Disable();
 
-            _direction = _facing;
+            Direction = _facing;
         }
 
         public void OnAttackingStateExited()
@@ -120,7 +115,7 @@ namespace Backend.Object.Character.Player
             Debugger.LogProgress();
 
             _state = State.Grounded;
-            _direction = Vector3.zero;
+            Direction = Vector3.zero;
 
             _actions.Movement.Move.Enable();
             _actions.Movement.Jump.Enable();
@@ -148,6 +143,9 @@ namespace Backend.Object.Character.Player
 
             _animationController.SetAnimationFloat("Damage", 0f);
         }
+
+
+        public Vector3 Direction { get; set; } = Vector3.zero;
 
         public bool IsRollButtonBufferable { get; set; }
     }
