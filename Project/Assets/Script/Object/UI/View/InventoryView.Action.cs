@@ -156,7 +156,7 @@ namespace Backend.Object.UI
         /// </summary>
         private void Remove(int index)
         {
-            removeAction?.Invoke(index);
+            RemoveAction?.Invoke(index);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace Backend.Object.UI
 
             a.Move(b);
 
-            swapAction?.Invoke(a.Index, b.Index);
+            SwapAction?.Invoke(a.Index, b.Index);
         }
 
         private static bool IsPointerOverGameObject()
