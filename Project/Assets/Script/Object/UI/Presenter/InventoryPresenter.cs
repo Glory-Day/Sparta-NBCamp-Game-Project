@@ -13,14 +13,14 @@ namespace Backend.Object.UI.Presenter
         public InventoryPresenter(InventoryView view, Inventory model, Dispatcher dispatcher) : base(view, model)
         {
             _repository = new(view, model);
-            _repository.UpdateAllSlot();
 
             _dispatcher = dispatcher;
             _dispatcher.Subscribe(this);
 
-            View.removeAction += _repository.Remove;
-            View.swapAction += _repository.Swap;
+            View.RemoveAction += _repository.Remove;
+            View.SwapAction += _repository.Swap;
             View.InfoAction += OnAccept;
+            View.UpdateAction += OnUpdate;
 
             Reset(0);
         }
@@ -28,6 +28,11 @@ namespace Backend.Object.UI.Presenter
         public void Receive<T>(T message)
         {
 
+        }
+
+        public void OnUpdate()
+        {
+            _repository.UpdateAllSlot();
         }
 
         public void OnAccept(int slotIndex)
