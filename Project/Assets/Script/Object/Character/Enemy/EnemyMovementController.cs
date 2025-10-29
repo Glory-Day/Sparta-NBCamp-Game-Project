@@ -133,6 +133,8 @@ namespace Backend.Object.Character.Enemy
             _isDie = true;
         }
 
+#if UNITY_EDITOR
+
         // 씬화면에서만 가로로 보이는 범위
         private void OnDrawGizmosSelected()
         {
@@ -142,5 +144,7 @@ namespace Backend.Object.Character.Enemy
                 UnityEditor.Handles.DrawWireDisc(InitialPosition, Vector3.up, MoveRange);
             }
         }
+
+#endif
     }
 }

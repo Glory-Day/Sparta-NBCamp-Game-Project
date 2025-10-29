@@ -1,22 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Backend.Util.Data
 {
-    public static class AddressData
-    {
-        public const string Assets_Prefab_Sphere_Prefab = "Assets/Prefab/Sphere.prefab";
-        public const string Assets_Prefab_Capsule_Prefab = "Assets/Prefab/Capsule.prefab";
-        public const string Assets_Prefab_Plane_Prefab = "Assets/Prefab/Plane.prefab";
-        public const string Assets_Prefab_Cube_Prefab = "Assets/Prefab/Cube.prefab";
-        public const string Assets_Prefab_Cylinder_Prefab = "Assets/Prefab/Cylinder.prefab";
-        public const string Assets_Prefab_Quad_Prefab = "Assets/Prefab/Quad.prefab";
+	public static class AddressData
+	{
+		public const string Assets_Prefab_Character_Enemy_Normal_Skeleton_Sword_Prefab = "Assets/Prefab/Character/Enemy/Normal/Skeleton_Sword.prefab";
+		public const string Assets_Prefab_Character_Player_Player_Character_Beta_Prefab = "Assets/Prefab/Character/Player/Player_Character_(Beta).prefab";
+		public const string Assets_Prefab_Character_Enemy_Boss_NineTail_Human_NineTail_Human_Prefab = "Assets/Prefab/Character/Enemy/Boss/NineTail_Human/NineTail_Human.prefab";
+		public const string Assets_Prefab_Character_Enemy_Normal_Skeleton_Bow_Prefab = "Assets/Prefab/Character/Enemy/Normal/Skeleton_Bow.prefab";
 
-        public static Dictionary<string, HashSet<string>> Groups = new()
-        {
-            { "aaa", new HashSet<string> { "Assets/Prefab/Sphere.prefab","Assets/Prefab/Capsule.prefab","Assets/Prefab/Plane.prefab" } },
-            { "bbb", new HashSet<string> { "Assets/Prefab/Plane.prefab","Assets/Prefab/Cube.prefab","Assets/Prefab/Cylinder.prefab" } },
-            { "ccc", new HashSet<string> { "Assets/Prefab/Cylinder.prefab","Assets/Prefab/Quad.prefab" } },
-        };
-    }
+		public static Dictionary<string, HashSet<string>> Groups = new ()
+		{
+            { "Main_Scene", new HashSet<string>() },
+			{ "Forest_01_Scene", new HashSet<string> { "Assets/Prefab/Character/Enemy/Normal/Skeleton_Sword.prefab","Assets/Prefab/Character/Player/Player_Character_(Beta).prefab","Assets/Prefab/Character/Enemy/Normal/Skeleton_Bow.prefab" } },
+			{ "Village_01_Scene", new HashSet<string> { "Assets/Prefab/Character/Enemy/Normal/Skeleton_Sword.prefab","Assets/Prefab/Character/Player/Player_Character_(Beta).prefab","Assets/Prefab/Character/Enemy/Normal/Skeleton_Bow.prefab" } },
+			{ "Boss_01_Scene", new HashSet<string> { "Assets/Prefab/Character/Player/Player_Character_(Beta).prefab","Assets/Prefab/Character/Enemy/Boss/NineTail_Human/NineTail_Human.prefab" } },
+		};
+	}
 }

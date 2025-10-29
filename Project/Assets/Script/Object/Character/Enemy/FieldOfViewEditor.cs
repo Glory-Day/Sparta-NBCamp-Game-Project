@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+
+using UnityEditor;
 using UnityEngine;
 
 namespace Backend.Object.Character.Enemy
@@ -26,3 +28,4 @@ namespace Backend.Object.Character.Enemy
     }
 }
 
+#endif

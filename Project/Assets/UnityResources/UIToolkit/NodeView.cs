@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System;
 using UnityEngine;
 using UnityEditor.Experimental.GraphView;
@@ -53,7 +55,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     {
         if (node is ActionNode)
         {
-           
+
         }
         else if (node is CompositeNode)
         {
@@ -92,7 +94,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         }
         else if (node is RootNode)
         {
-            
+
         }
 
         if (Input != null)
@@ -159,3 +161,5 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     }
 }
+
+#endif

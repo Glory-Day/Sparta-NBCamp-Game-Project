@@ -28,7 +28,7 @@ namespace Backend.Util.Management
         private void Start()
         {
             // Call when initialization of a singleton instance is required in the changed scene.
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
             OnStart();
         }
@@ -39,7 +39,7 @@ namespace Backend.Util.Management
 
             if (isPersistent)
             {
-                SceneManager.sceneLoaded -= OnSceneLoaded;
+                UnityEngine.SceneManagement.SceneManager.sceneLoaded -= OnSceneLoaded;
             }
         }
 

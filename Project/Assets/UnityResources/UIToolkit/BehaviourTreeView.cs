@@ -1,8 +1,9 @@
+#if UNITY_EDITOR
+
 using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -179,3 +180,5 @@ public class BehaviourTreeView : GraphView
         });
     }
 }
+
+#endif

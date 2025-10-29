@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 3dfd7ffa309e43448a3be0d829fbc2ec
   m_currentHash:
     serializedVersion: 2
-    Hash: 8e91d1ccf4539a095cf35d2419ed7711
+    Hash: 1f59705eb37b5a813832c18692974d2d
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -57,19 +57,19 @@ MonoBehaviour:
       m_Id: 0bb195617f2f0ae47a39125a27712dd3
       m_ProfileName: Default
       m_Values:
-      - m_Id: f31493083e72c5141be98270555ea14f
-        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 05c1c2a4794d0e04e91c36d3434e6f75
+        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
       - m_Id: 75a944b1196b18046bc34ae6fe014b24
         m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
       - m_Id: 86e1f7ce3c340a74ea627fc806dc48db
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: e7d7f6952f986dd458ebebf5cc363b9c
         m_Value: ServerData/[BuildTarget]
-      - m_Id: 05c1c2a4794d0e04e91c36d3434e6f75
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+      - m_Id: f31493083e72c5141be98270555ea14f
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
     m_ProfileEntryNames:
-    - m_Id: f31493083e72c5141be98270555ea14f
-      m_Name: BuildTarget
+    - m_Id: 05c1c2a4794d0e04e91c36d3434e6f75
+      m_Name: Remote.LoadPath
       m_InlineUsage: 0
     - m_Id: 75a944b1196b18046bc34ae6fe014b24
       m_Name: Local.BuildPath
@@ -80,16 +80,17 @@ MonoBehaviour:
     - m_Id: e7d7f6952f986dd458ebebf5cc363b9c
       m_Name: Remote.BuildPath
       m_InlineUsage: 0
-    - m_Id: 05c1c2a4794d0e04e91c36d3434e6f75
-      m_Name: Remote.LoadPath
+    - m_Id: f31493083e72c5141be98270555ea14f
+      m_Name: BuildTarget
       m_InlineUsage: 0
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
-    - aaa
-    - bbb
-    - ccc
+    - Main_Scene
+    - Forest_01_Scene
+    - Village_01_Scene
+    - Boss_01_Scene
+    - Gwanghwamun_Scene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: dee68cad81622214bbde4f713ac92117, type: 2}

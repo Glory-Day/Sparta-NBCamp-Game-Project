@@ -19,10 +19,11 @@ namespace Backend.Object.UI
         private Vector2 _beginDragCursorPoint; // 드래그 시작 시 커서의 위치
         private int _selectedSlotSiblingIndex;
 
-        public Action<int> removeAction;
-        public Action<int, int> swapAction;
+        public Action<int> RemoveAction;
+        public Action<int, int> SwapAction;
 
         public Action<int> InfoAction;
+        public Action UpdateAction;
 
         private void PressLeftMouseButton(InputAction.CallbackContext context)
         {
@@ -155,7 +156,7 @@ namespace Backend.Object.UI
         /// </summary>
         private void Remove(int index)
         {
-            removeAction?.Invoke(index);
+            RemoveAction?.Invoke(index);
         }
 
         /// <summary>
@@ -170,7 +171,7 @@ namespace Backend.Object.UI
 
             a.Move(b);
 
-            swapAction?.Invoke(a.Index, b.Index);
+            SwapAction?.Invoke(a.Index, b.Index);
         }
 
         private static bool IsPointerOverGameObject()

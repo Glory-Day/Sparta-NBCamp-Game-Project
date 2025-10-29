@@ -16,6 +16,9 @@ namespace Backend.Object.Character.Player
                  "움직임 방향 계산에 사용되는 선택적 카메라 트렌스폼 레퍼런스. 할당된 경우 캐릭터 움직임이 카메라 시점을 고려한다.")]
         [SerializeField] private Transform cameraTransform;
 
+        [Header("Detection Settings")]
+        [SerializeField] private CapsuleCollider detectionCollider;
+
         [Header("Physics Settings")]
         [Tooltip("Movement speed.\n\n" +
                  "이동 속도.")]
@@ -76,6 +79,12 @@ namespace Backend.Object.Character.Player
 
         private Vector3 _momentum = Vector3.zero;
 
+#if UNITY_EDITOR
+
+        private Color _color = Color.green;
+
+#endif
+
         private void Awake()
         {
             _animationController = GetComponentInChildren<PlayerAnimationController>();
@@ -85,13 +94,12 @@ namespace Backend.Object.Character.Player
 
             _detector = GetComponent<CeilingDetector>();
 
-            _actions = new PlayerControls();
-
             InitializeStates();
         }
 
         private void OnEnable()
         {
+            _actions = new PlayerControls();
             _actions.Enable();
             _actions.Movement.Move.performed += Move;
             _actions.Movement.Move.canceled += Stop;
@@ -160,6 +168,7 @@ namespace Backend.Object.Character.Player
             _actions.Movement.Roll.performed -= Roll;
             _actions.Movement.Attack.performed -= Attack;
             _actions.Disable();
+            _actions = null;
         }
 
         /// <returns>
@@ -439,6 +448,32 @@ namespace Backend.Object.Character.Player
             {
                 _momentum = momentum;
             }
+        }
+
+        public void EnableCollider()
+        {
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.green;
+
+#endif
+
+            detectionCollider.enabled = true;
+        }
+
+        public void DisableCollider()
+        {
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.red;
+
+#endif
+
+            detectionCollider.enabled = false;
         }
 
         public Vector3 Velocity { get; private set; } = Vector3.zero;

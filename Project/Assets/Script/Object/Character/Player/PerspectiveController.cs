@@ -48,8 +48,6 @@ namespace Backend.Object.Character.Player
 
         private void Awake()
         {
-            _controls = new PlayerControls();
-
             _detector = GetComponent<EnemyDetector>();
         }
 
@@ -57,6 +55,7 @@ namespace Backend.Object.Character.Player
         {
             _yAxisAngle = transform.localEulerAngles.y;
 
+            _controls = new PlayerControls();
             _controls.Enable();
             _controls.Perspective.LockOn.performed += LockOn;
         }
@@ -95,10 +94,6 @@ namespace Backend.Object.Character.Player
         {
             _controls.Perspective.LockOn.performed -= LockOn;
             _controls.Disable();
-        }
-
-        private void OnDestroy()
-        {
             _controls = null;
         }
 
@@ -202,7 +197,14 @@ namespace Backend.Object.Character.Player
 
         private void TurnTowardByTarget()
         {
-            transform.LookAt(_detector.NearestEnemy);
+            var a = cameraController.Target.position;
+            var b = a - transform.position;
+            b.y = 0f;
+
+            if (b != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(b);
+            }
         }
     }
 }

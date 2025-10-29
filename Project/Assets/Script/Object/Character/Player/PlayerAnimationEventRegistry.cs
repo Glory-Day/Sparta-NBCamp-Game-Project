@@ -5,14 +5,12 @@ namespace Backend.Object.Character.Player
     public class PlayerAnimationEventRegistry : MonoBehaviour
     {
         private AdvancedActionController _actionController;
-        private PlayerMovementController _movementController;
 
         private DamageSender _sender;
 
         private void Awake()
         {
             _actionController = GetComponentInParent<AdvancedActionController>();
-            _movementController = GetComponentInParent<PlayerMovementController>();
 
             _sender = GetComponentInChildren<DamageSender>();
         }
@@ -34,12 +32,12 @@ namespace Backend.Object.Character.Player
 
         private void OnColliderEnabled()
         {
-            _movementController.EnableCollider();
+            _actionController.EnableCollider();
         }
 
         private void OnColliderDisabled()
         {
-            _movementController.DisableCollider();
+            _actionController.DisableCollider();
         }
     }
 }

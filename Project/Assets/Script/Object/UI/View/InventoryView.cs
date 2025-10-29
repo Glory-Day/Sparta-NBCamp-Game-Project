@@ -82,8 +82,6 @@ namespace Backend.Object.UI
 
         private void Awake()
         {
-            _controls = new UIControls();
-
             TryGetComponent(out _graphicRaycaster);
             if (_graphicRaycaster == null)
             {
@@ -146,6 +144,7 @@ namespace Backend.Object.UI
 
         private void OnEnable()
         {
+            _controls = new UIControls();
             _controls.Inventory.Enable();
             _controls.Inventory.Drag.performed += Drag;
             _controls.Inventory.ClickLeftMouseButton.performed += PressLeftMouseButton;
@@ -178,6 +177,7 @@ namespace Backend.Object.UI
             _controls.Inventory.ClickLeftMouseButton.performed -= PressLeftMouseButton;
             _controls.Inventory.ClickLeftMouseButton.canceled -= ReleaseLeftMouseButton;
             _controls.Inventory.Disable();
+            _controls = null;
         }
 
         private RectTransform Clone()

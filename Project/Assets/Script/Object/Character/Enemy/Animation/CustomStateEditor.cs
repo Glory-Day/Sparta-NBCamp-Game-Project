@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -52,3 +54,5 @@ namespace Backend.Object.Character.Enemy.Animation
         }
     }
 }
+
+#endif

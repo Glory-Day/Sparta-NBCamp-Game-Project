@@ -13,26 +13,29 @@ namespace Backend.Util.Management
     /// </summary>
     public class ResourceManager : Singleton<ResourceManager>
     {
-        private ResourceManager()
+        private readonly Dictionary<string, UnityEngine.Object> _assets = new();
+        private readonly List<Task> _tasks = new();
+
+        private ResourceManager() { }
+
+        private void LoadAssetsByLabelAsync_Internal(string previous, string next)
         {
-        }
+            // 로드 된 에셋과 로드 할 에셋의 합집합 차집합을 구한다.
+            // 현재 로드된 에셋. 즉, 로드할 에셋의 합집합이다.
+            var set = AddressData.Groups[previous].Intersect(AddressData.Groups[next]).ToList();
 
-        private Dictionary<string, UnityEngine.Object> _assets = new();
-        private List<Task> _tasks = new();
+            // 로드할 에셋의 차집합. 즉, 로드를 해제할 에셋의 집합이다.
+            var a = AddressData.Groups[previous].Except(set).ToList();
+            // 로드된 에셋의 차집합. 즉, 앞으로 로드를 할 에셋의 집합이다.
+            var b = AddressData.Groups[next].Except(set).ToList();
 
-        private void LoadAssetsByLabelAsync_Internal(string label, string nextLabel)
-        {
-            // 1. 로드 된 에셋과 로드 할 에셋의 합집합 차집합을 구한다.
-            var set = AddressData.Groups[label].Intersect(AddressData.Groups[nextLabel]);   // 현재 로드된 에셋, 로드할 에셋의 합집합
-            List<string> set2 = AddressData.Groups[label].Except(set).ToList<string>();   // 로드할 에셋의 차집합  (label - nextLabel): 언로드 목록
-            List<string> set3 = AddressData.Groups[nextLabel].Except(set).ToList<string>();   // 로드 된 에셋의 차집합 (nextLabel - label): 로드 목록
-
-            // 2. 언로드 목록에 포함이 되어 있으면 언로드 한다.
-            for (int i = set2.Count - 1; i >= 0; i--)
+            // 언로드 목록에 포함이 되어 있으면 언로드한다.
+            var count = a.Count;
+            for (var i = count - 1; i >= 0; i--)
             {
                 try
                 {
-                    Addressables.Release(_assets[set2[i]]);
+                    Addressables.Release(_assets[a[i]]);
                 }
                 catch
                 {
@@ -40,13 +43,15 @@ namespace Backend.Util.Management
                 }
             }
 
-            // 3. 로드목록을 순회하며 비동기 로드 후 _assets에 추가
-            for (int i = 0; i < set3.Count; i++)
+            // 로드 목록을 순회하며 비동기 로드 후에 추가한다.
+            count = b.Count;
+            for (var i = 0; i < count; i++)
             {
-                AsyncOperationHandle<UnityEngine.Object> handle = Addressables.LoadAssetAsync<UnityEngine.Object>(set3[i]);
+                var handle = Addressables.LoadAssetAsync<UnityEngine.Object>(b[i]);
 
-                Task task = SetTask(handle, set3[i]); //핸들 작업을 테스크로 보관
-                _tasks.Add(task);   //리스트에 추가
+                //핸들 작업을 테스크로 보관하여 리스트에 추가한다.
+                Task task = SetTask(handle, b[i]);
+                _tasks.Add(task);
             }
         }
 
@@ -58,6 +63,7 @@ namespace Backend.Util.Management
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 GetProgress_Internal();
+
                 _assets[key] = handle.Result;
             }
         }
@@ -69,19 +75,13 @@ namespace Backend.Util.Management
                 return 1f;
             }
 
-            int completed = 0;
-
-            // 로딩 중이라면 List 내부의 Task를 순회 하며 로딩 완료 된 Task 개수를 확인
-            for (int i = 0; i < _tasks.Count; i++)
-            {
-                if (_tasks[i].IsCompleted)
-                {
-                    completed++;
-                }
-            }
+            // 로딩 중이라면 목록 내부의 Task를 순회 하며 로딩 완료 된 Task 개수를 확인한다.
+            int completed = _tasks.Count(t => t.IsCompleted);
 
             // 로딩 완료된 갯수 / 총 갯수 를 나눠 반환 (퍼센트 구하는 공식)
-            Debugger.LogMessage(((float)completed / _tasks.Count).ToString());
+            var percentage = completed / (float)_tasks.Count;
+            Debugger.LogMessage($"{percentage:N2}");
+
             return (float)completed / _tasks.Count;
         }
 
@@ -91,29 +91,29 @@ namespace Backend.Util.Management
             {
                 try
                 {
-                    return (T)obj;  //변환 해보고 안되면 catch
+                    return (T)obj;
                 }
                 catch
                 {
                     Debugger.LogMessage($"{key} 주소를 가진 에셋을 {typeof(T).Name} 타입으로 변환할 수 없습니다.");
+
                     return null;
                 }
             }
-            else
-            {
-                Debugger.LogMessage($"{key} 주소를 가진 에셋이 없습니다.");
-                return null;
-            }
+
+            Debugger.LogMessage($"{key} 주소를 가진 에셋이 없습니다.");
+
+            return null;
         }
 
         /// <summary>
         /// 로드 할 씬에 필요한 에셋을 로드 하는 함수.
         /// </summary>
-        /// <param name="label">현재 로드 된 씬의 이름.</param>
-        /// <param name="nextLabel">로드 할 씬의 이름.</param>
-        public static void LoadAssetsByLabelAsync(string label, string nextLabel)
+        /// <param name="previous">현재 로드 된 씬의 이름.</param>
+        /// <param name="next">로드 할 씬의 이름.</param>
+        public static void LoadAssetsByLabelAsync(string previous, string next)
         {
-            Instance.LoadAssetsByLabelAsync_Internal(label, nextLabel);
+            Instance.LoadAssetsByLabelAsync_Internal(previous, next);
         }
 
         /// <summary>

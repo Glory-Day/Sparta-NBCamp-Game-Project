@@ -25,8 +25,12 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float thickness = 1f;
         [SerializeField] private Vector3 offset = Vector3.zero;
 
+#if UNITY_EDITOR
+
         [Header("Debug Settings")]
         [SerializeField] private bool isDebugMode;
+
+#endif
 
         [Header("Detection Settings")]
         [SerializeField] public CastMode mode = CastMode.SingleRay;
@@ -92,65 +96,8 @@ namespace Backend.Object.Character.Player
 
         private void OnDrawGizmos()
         {
-            DrawCapsuleCollider();
             DrawSensor();
             DrawPosition();
-        }
-
-        private void DrawCapsuleCollider()
-        {
-            var center = _capsuleCollider.center;
-            var axis = _capsuleCollider.GetDirection(transform);
-            var radius = _capsuleCollider.radius;
-            var point = transform.TransformPoint(center);
-            var delta = Mathf.Max(0f, (_capsuleCollider.height * 0.5f) - radius);
-
-            var a = point + (axis * delta);
-            var b = point - (axis * delta);
-
-            Gizmos.color = _color;
-            if (delta <= Mathf.Epsilon)
-            {
-                Gizmos.DrawWireSphere(point, radius);
-            }
-            else
-            {
-                DrawWireCapsule(a, b, radius, axis);
-            }
-        }
-
-        private void DrawWireCapsule(Vector3 a, Vector3 b, float r, Vector3 axis, int segments = 20)
-        {
-            var normal = axis.normalized;
-            var tangent = Vector3.Cross(normal, Vector3.up);
-            if (tangent.sqrMagnitude < 1e-6f)
-            {
-                tangent = Vector3.Cross(normal, Vector3.forward);
-            }
-
-            tangent.Normalize();
-            var bitangent = Vector3.Cross(normal, tangent);
-
-            var c1 = new Vector3[segments];
-            var c2 = new Vector3[segments];
-            for (int i = 0; i < segments; i++)
-            {
-                var angle = 2f * Mathf.PI * i / segments;
-                var delta = (tangent * Mathf.Cos(angle) * r) + (bitangent * Mathf.Sin(angle) * r);
-                c1[i] = a + delta;
-                c2[i] = b + delta;
-            }
-
-            for (int i = 0; i < segments; i++)
-            {
-                var ni = (i + 1) % segments;
-                Gizmos.DrawLine(c1[i], c1[ni]);
-                Gizmos.DrawLine(c2[i], c2[ni]);
-                Gizmos.DrawLine(c1[i], c2[i]);
-            }
-
-            Gizmos.DrawWireSphere(a, r);
-            Gizmos.DrawWireSphere(b, r);
         }
 
         private void DrawSensor()
@@ -321,7 +268,12 @@ namespace Backend.Object.Character.Player
             _sensor.Option.Rows = rows;
             _sensor.Option.Count = count;
             _sensor.Option.IsOffset = isOffset;
+
+#if UNITY_EDITOR
+
             _sensor.IsDebugMode = isDebugMode;
+
+#endif
 
             // Set sensor spherecast variables.
             _sensor.UseRealisticDistance = true;
@@ -466,32 +418,6 @@ namespace Backend.Object.Character.Player
 
                 RecalculateColliderDimensions();
             }
-        }
-
-        public void EnableCollider()
-        {
-            Debugger.LogProgress();
-
-#if UNITY_EDITOR
-
-            _color = Color.green;
-
-#endif
-
-            _capsuleCollider.enabled = true;
-        }
-
-        public void DisableCollider()
-        {
-            Debugger.LogProgress();
-
-#if UNITY_EDITOR
-
-            _color = Color.red;
-
-#endif
-
-            _capsuleCollider.enabled = false;
         }
 
         public float StopHeightRatio
