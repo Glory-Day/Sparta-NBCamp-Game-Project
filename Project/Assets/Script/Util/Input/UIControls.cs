@@ -196,6 +196,34 @@ namespace Backend.Util.Input
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Main"",
+            ""id"": ""ef816cf3-f7e4-4dc1-ac66-330a86e4fd8c"",
+            ""actions"": [
+                {
+                    ""name"": ""Open Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ba72cd5-0fbd-48b1-a016-be6693762a3d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cc59d776-5937-4cb3-aa39-47281e0be59c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -224,11 +252,15 @@ namespace Backend.Util.Input
             m_Inventory_Drag = m_Inventory.FindAction("Drag", throwIfNotFound: true);
             m_Inventory_PressLeftControlButton = m_Inventory.FindAction("Press Left Control Button", throwIfNotFound: true);
             m_Inventory_PressLeftShiftButton = m_Inventory.FindAction("Press Left Shift Button", throwIfNotFound: true);
+            // Main
+            m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
+            m_Main_OpenInventory = m_Main.FindAction("Open Inventory", throwIfNotFound: true);
         }
 
         ~@UIControls()
         {
             UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, UIControls.Inventory.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_Main.enabled, "This will cause a leak and performance issues, UIControls.Main.Disable() has not been called.");
         }
 
         /// <summary>
@@ -440,6 +472,102 @@ namespace Backend.Util.Input
         /// Provides a new <see cref="InventoryActions" /> instance referencing this action map.
         /// </summary>
         public InventoryActions @Inventory => new InventoryActions(this);
+
+        // Main
+        private readonly InputActionMap m_Main;
+        private List<IMainActions> m_MainActionsCallbackInterfaces = new List<IMainActions>();
+        private readonly InputAction m_Main_OpenInventory;
+        /// <summary>
+        /// Provides access to input actions defined in input action map "Main".
+        /// </summary>
+        public struct MainActions
+        {
+            private @UIControls m_Wrapper;
+
+            /// <summary>
+            /// Construct a new instance of the input action map wrapper class.
+            /// </summary>
+            public MainActions(@UIControls wrapper) { m_Wrapper = wrapper; }
+            /// <summary>
+            /// Provides access to the underlying input action "Main/OpenInventory".
+            /// </summary>
+            public InputAction @OpenInventory => m_Wrapper.m_Main_OpenInventory;
+            /// <summary>
+            /// Provides access to the underlying input action map instance.
+            /// </summary>
+            public InputActionMap Get() { return m_Wrapper.m_Main; }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+            public void Enable() { Get().Enable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+            public void Disable() { Get().Disable(); }
+            /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+            public bool enabled => Get().enabled;
+            /// <summary>
+            /// Implicitly converts an <see ref="MainActions" /> to an <see ref="InputActionMap" /> instance.
+            /// </summary>
+            public static implicit operator InputActionMap(MainActions set) { return set.Get(); }
+            /// <summary>
+            /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <param name="instance">Callback instance.</param>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+            /// </remarks>
+            /// <seealso cref="MainActions" />
+            public void AddCallbacks(IMainActions instance)
+            {
+                if (instance == null || m_Wrapper.m_MainActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_MainActionsCallbackInterfaces.Add(instance);
+                @OpenInventory.started += instance.OnOpenInventory;
+                @OpenInventory.performed += instance.OnOpenInventory;
+                @OpenInventory.canceled += instance.OnOpenInventory;
+            }
+
+            /// <summary>
+            /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+            /// </summary>
+            /// <remarks>
+            /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+            /// </remarks>
+            /// <seealso cref="MainActions" />
+            private void UnregisterCallbacks(IMainActions instance)
+            {
+                @OpenInventory.started -= instance.OnOpenInventory;
+                @OpenInventory.performed -= instance.OnOpenInventory;
+                @OpenInventory.canceled -= instance.OnOpenInventory;
+            }
+
+            /// <summary>
+            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MainActions.UnregisterCallbacks(IMainActions)" />.
+            /// </summary>
+            /// <seealso cref="MainActions.UnregisterCallbacks(IMainActions)" />
+            public void RemoveCallbacks(IMainActions instance)
+            {
+                if (m_Wrapper.m_MainActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            /// <summary>
+            /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+            /// </summary>
+            /// <remarks>
+            /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+            /// </remarks>
+            /// <seealso cref="MainActions.AddCallbacks(IMainActions)" />
+            /// <seealso cref="MainActions.RemoveCallbacks(IMainActions)" />
+            /// <seealso cref="MainActions.UnregisterCallbacks(IMainActions)" />
+            public void SetCallbacks(IMainActions instance)
+            {
+                foreach (var item in m_Wrapper.m_MainActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_MainActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        /// <summary>
+        /// Provides a new <see cref="MainActions" /> instance referencing this action map.
+        /// </summary>
+        public MainActions @Main => new MainActions(this);
         private int m_DesktopSchemeIndex = -1;
         /// <summary>
         /// Provides access to the input control scheme.
@@ -495,6 +623,21 @@ namespace Backend.Util.Input
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPressLeftShiftButton(InputAction.CallbackContext context);
+        }
+        /// <summary>
+        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Main" which allows adding and removing callbacks.
+        /// </summary>
+        /// <seealso cref="MainActions.AddCallbacks(IMainActions)" />
+        /// <seealso cref="MainActions.RemoveCallbacks(IMainActions)" />
+        public interface IMainActions
+        {
+            /// <summary>
+            /// Method invoked when associated input action "Open Inventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnOpenInventory(InputAction.CallbackContext context);
         }
     }
 }
