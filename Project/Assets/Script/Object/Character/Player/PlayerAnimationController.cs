@@ -23,8 +23,9 @@ namespace Backend.Object.Character.Player
 
         #endregion
 
-        private AdvancedActionController _controller;
-        private ThirdPersonCameraController _camera;
+        private AdvancedActionController _actionController;
+        private ThirdPersonCameraController _cameraController;
+
         private Animator _animator;
         private Transform _transform;
 
@@ -32,8 +33,8 @@ namespace Backend.Object.Character.Player
 
         protected override void Awake()
         {
-            _controller = GetComponent<AdvancedActionController>();
-            _camera = GetComponentInChildren<ThirdPersonCameraController>();
+            _actionController = GetComponent<AdvancedActionController>();
+            _cameraController = GetComponentInChildren<ThirdPersonCameraController>();
 
             Animator = GetComponentInChildren<Animator>();
             _transform = Animator.transform;
@@ -42,13 +43,13 @@ namespace Backend.Object.Character.Player
         private void OnEnable()
         {
             // Connect events to controller events.
-            _controller.OnLand += Land;
+            _actionController.OnLand += Land;
         }
 
         private void Update()
         {
             // Get controller velocity.
-            var velocity = _controller.Velocity;
+            var velocity = _actionController.Velocity;
 
             // Split up velocity.
             var h = velocity.Reject(transform.up);
@@ -58,28 +59,36 @@ namespace Backend.Object.Character.Player
             h = Vector3.Lerp(_cache, h, SmoothingFactor * Time.deltaTime);
             _cache = h;
 
-            SetAnimationFloat("Vertical Speed", v.magnitude * Vector3.Dot(v.normalized, transform.up.normalized));
-            SetAnimationFloat("Horizontal Speed", h.magnitude);
-
-            // If animator is strafing, split up horizontal velocity.
-            if (useStrafeAnimations)
+            if (_cameraController.Mode == PerspectiveMode.LockOn)
             {
-                Vector3 localVelocity = _transform.InverseTransformVector(h);
+                var localVelocity = _transform.InverseTransformVector(h);
                 localVelocity.Normalize();
 
-                SetAnimationFloat("Forward Speed", localVelocity.z);
-                SetAnimationFloat("Strafe Speed", localVelocity.x);
+                if (localVelocity.sqrMagnitude < 0.01f)
+                {
+                    SetAnimationBoolean("Is Moving", false);
+                }
+                else
+                {
+                    SetAnimationBoolean("Is Moving", true);
+                }
+
+                SetAnimationFloat("Vertical Speed", localVelocity.x);
+                SetAnimationFloat("Horizontal Speed", localVelocity.z);
+            }
+            else
+            {
+                SetAnimationFloat("Horizontal Speed", h.magnitude);
             }
 
             //Pass values to animator;
-            SetAnimationBoolean("Is Grounded", _controller.IsGrounded);
-            SetAnimationBoolean("Is Strafing", _camera.Mode == PerspectiveMode.LockOn);
+            SetAnimationBoolean("Is Grounded", _actionController.IsGrounded);
         }
 
         private void OnDisable()
         {
             // Disconnect events to prevent calls to disabled instance.
-            _controller.OnLand -= Land;
+            _actionController.OnLand -= Land;
         }
 
         private void Land(Vector3 velocity)
@@ -92,14 +101,5 @@ namespace Backend.Object.Character.Player
 
             SetAnimationTrigger("Land");
         }
-
-        private void Jump(Vector3 velocity)
-        {
-
-        }
-
-        public Vector3 DeltaPosition => _animator.deltaPosition;
-
-        public Quaternion DeltaRotation => _animator.deltaRotation;
     }
 }

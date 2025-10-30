@@ -8,11 +8,11 @@ namespace Backend.Object.Character
     public class Status : MonoBehaviour, IDamageable, IModel
     {
         [Header("Data References")]
-        [SerializeField] protected StatusData data;
+        [SerializeField] public StatusData data;
 
         [Header("Health Point Information")]
         [SerializeField] public float currentHealthPoint;
-        [SerializeField] private float maximumHealthPoint;
+        [SerializeField] public float maximumHealthPoint;
 
         protected virtual void Awake()
         {

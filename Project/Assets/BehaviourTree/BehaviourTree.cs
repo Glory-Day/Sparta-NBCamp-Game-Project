@@ -70,6 +70,9 @@ public class BehaviourTree : ScriptableObject
 #endif
 
         Nodes.Remove(node);
+
+#if UNITY_EDITOR
+
         //AssetDatabase.RemoveObjectFromAsset(node);
 
 #if UNITY_EDITOR
