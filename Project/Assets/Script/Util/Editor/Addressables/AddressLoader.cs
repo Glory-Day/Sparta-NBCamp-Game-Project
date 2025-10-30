@@ -22,32 +22,53 @@ namespace Backend.Util.Editor.Addressables
                 return;
             }
 
-            var entries = settings.groups.Where(group => IsDefaultAsset(group.Name)).SelectMany(group => group.entries);
-            foreach (var entry in entries)
+            foreach (var group in settings.groups)
             {
-                Addresses.Add(entry.address);
-
-                foreach (var label in entry.labels)
+                if (group == null)
                 {
-                    if (Groups.TryGetValue(label, out var list) == false)
-                    {
-                        list = new List<string>();
+                    continue;
+                }
 
-                        Groups[label] = list;
+                if (IsDefaultGroup(group.Name) == false)
+                {
+                    Groups.Add(group.Name, new Dictionary<string, List<string>>());
+                    foreach (var entry in group.entries)
+                    {
+                        if (IsDefaultAsset(entry.address) == false)
+                        {
+                            Addresses.Add(entry.address);
+                        }
+
+                        foreach (var label in entry.labels)
+                        {
+                            if (Groups[group.Name].TryGetValue(label, out var list) == false)
+                            {
+                                list = new List<string>();
+
+                                Groups[group.Name][label] = list;
+                            }
+                            list.Add(entry.address);
+                        }
                     }
-                    list.Add(entry.address);
                 }
             }
         }
 
         private bool IsDefaultAsset(string name)
         {
-            return name is "Default Local Group" or "EditorSceneList" or "Resources";
+            return name is  "EditorSceneList" or "Resources";
+        }
+
+        private bool IsDefaultGroup(string name)
+        {
+            return name is "Default Local Group" or "Built In Data";
         }
 
         public List<string> Addresses { get; } = new ();
 
-        public Dictionary<string, List<string>> Groups { get; } = new ();
+        public Dictionary<string, Dictionary<string, List<string>>> Groups { get; } = new ();
+
+        public Dictionary<string, List<string>> Labels { get; } = new ();
     }
 }
 

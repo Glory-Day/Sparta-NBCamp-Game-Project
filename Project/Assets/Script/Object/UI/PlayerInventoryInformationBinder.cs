@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Backend.Object.Character.Player;
+﻿using Backend.Object.Character.Player;
 using Backend.Object.UI.Presenter;
 using Backend.Object.UI.View;
 using Backend.Util.Presentation;

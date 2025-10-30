@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 namespace Backend.Object.UI
 {
-    public partial class InventoryView : MonoBehaviour, IView
+    public partial class InventoryView
     {
         private Vector2 _cursorPosition;
 

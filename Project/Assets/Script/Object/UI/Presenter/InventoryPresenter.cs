@@ -21,7 +21,7 @@ namespace Backend.Object.UI.Presenter
             View.InfoAction += OnAccept;
             View.UpdateAction += OnUpdate;
 
-            Reset(0);
+            // Reset(0);
         }
 
         public void Receive<T>(T message)

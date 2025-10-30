@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Backend.Object.Process;
 using Backend.Util.Debug;
 using Backend.Util.Management;
-using Script.Test;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,8 +21,6 @@ namespace Backend.Object.Management
         /// </summary>
         private AsyncOperation _asyncOperation;
 
-        private WaitUntil _delay;
-
         protected override void OnAwake()
         {
             Debugger.LogProgress();
@@ -35,20 +33,33 @@ namespace Backend.Object.Management
             }
 
             _currentSceneIndex = 0;
-
-            _delay = new WaitUntil(() => _asyncOperation.isDone);
         }
 
-        private IEnumerator LoadingScene_Internal(string sceneName)
+        private IEnumerator LoadingScene_Internal(int index)
         {
-            Debugger.LogProgress();
-            Debugger.LogMessage($"{sceneName} is loading...");
-
             IsSceneLoaded = false;
 
-            _asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            var previousSceneName = _sceneNames[_currentSceneIndex];
+            var nextSceneName = _sceneNames[index];
 
-            yield return _delay;
+            Debugger.LogProgress();
+            Debugger.LogMessage($"{nextSceneName} is loading...");
+
+            Util.Management.ResourceManager.LoadAssetsByLabelAsync(previousSceneName, nextSceneName);
+
+            while (Util.Management.ResourceManager.IsLoadedDone == false)
+            {
+                yield return null;
+            }
+
+            _asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
+
+            while (_asyncOperation?.isDone == false)
+            {
+                yield return null;
+            }
+
+            _currentSceneIndex = index;
 
             var bootstrap = FindObjectOfType<Bootstrap>();
             if (bootstrap == null)
@@ -58,11 +69,20 @@ namespace Backend.Object.Management
             else
             {
                 Debugger.LogSuccess("Bootstrap found in the scene.");
+
+                bootstrap.Run();
+
+                while (bootstrap.IsDone == false)
+                {
+                    yield return null;
+                }
             }
+
+            ApplicationManager.SwitchCursorMode(index == 0 ? CursorLockMode.None : CursorLockMode.Locked);
 
             IsSceneLoaded = true;
 
-            Debugger.LogSuccess($"<b>{sceneName}</b> is loaded.");
+            Debugger.LogSuccess($"<b>{nextSceneName}</b> is loaded.");
         }
 
         private void LoadSceneByIndex_Internal(int index)
@@ -71,20 +91,15 @@ namespace Backend.Object.Management
 
             try
             {
-                var previousSceneName = _sceneNames[_currentSceneIndex];
-                var nextSceneName = _sceneNames[index];
-
-                Util.Management.ResourceManager.LoadAssetsByLabelAsync(previousSceneName, nextSceneName);
-
-                StartCoroutine(LoadingScene_Internal(nextSceneName));
-
-                ApplicationManager.SwitchCursorMode(index == 0 ? CursorLockMode.None : CursorLockMode.Locked);
+                StartCoroutine(LoadingScene_Internal(index));
             }
             catch (IndexOutOfRangeException exception)
             {
                 Debugger.LogError(exception.Message);
             }
         }
+
+        private string CurrentSceneName_Internal => _sceneNames[_currentSceneIndex];
 
         #region STATIC METHOD API
 
@@ -104,6 +119,8 @@ namespace Backend.Object.Management
         public static bool IsSceneLoaded { get; private set; }
 
         public static int CurrentSceneIndex => Instance._currentSceneIndex;
+
+        public static string CurrentSceneName => Instance.CurrentSceneName_Internal;
 
         #endregion
     }
