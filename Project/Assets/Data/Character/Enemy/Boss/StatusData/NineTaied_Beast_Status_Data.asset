@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 002
   <Name>k__BackingField: "\uAD6C\uBBF8\uD638"
-  <HealthPoint>k__BackingField: 1000
+  <HealthPoint>k__BackingField: 100
   <Speed>k__BackingField: 7
-  <Damage>k__BackingField: 10
+  <PhysicalDamage>k__BackingField: 1
+  <MagicalDamage>k__BackingField: 1
+  <PhysicalDefense>k__BackingField: 1
+  <MagicalDefense>k__BackingField: 1
   <ChasingSpeed>k__BackingField: 7
   <TurnSpeed>k__BackingField: 90
   <AttackRange>k__BackingField:

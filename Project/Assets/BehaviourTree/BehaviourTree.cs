@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 using Backend.Object.Character.Enemy;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+#endif
 
 [CreateAssetMenu()]
 public class BehaviourTree : ScriptableObject
@@ -21,12 +26,28 @@ public class BehaviourTree : ScriptableObject
 
     public Node CreateNode(System.Type type)
     {
+#if UNITY_EDITOR
+
         var node = CreateInstance(type) as Node;
         node.name = type.Name;
         node.Guid = GUID.Generate().ToString();
 
+#else
+
+        var node = CreateInstance(type) as Node;
+        node.name = type.Name;
+
+#endif
+
+#if UNITY_EDITOR
+
         Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
+
+#endif
+
         Nodes.Add(node);
+
+#if UNITY_EDITOR
 
         if (!Application.isPlaying)
         {
@@ -35,16 +56,31 @@ public class BehaviourTree : ScriptableObject
         Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
         AssetDatabase.SaveAssets();
 
+#endif
+
         return node;
     }
 
     public void DeleteNode(Node node)
     {
+#if UNITY_EDITOR
+
         Undo.RecordObject(this, "Behaviour Tree (DeleteNode)");
+
+#endif
+
         Nodes.Remove(node);
+
+#if UNITY_EDITOR
+
         //AssetDatabase.RemoveObjectFromAsset(node);
+
+#if UNITY_EDITOR
+
         Undo.DestroyObjectImmediate(node);
         AssetDatabase.SaveAssets();
+
+#endif
     }
 
     public void AddChild(Node parent, Node child)
@@ -52,17 +88,37 @@ public class BehaviourTree : ScriptableObject
         var decorator = parent as DecoratorNode;
         if (decorator)
         {
+#if UNITY_EDITOR
+
             Undo.RecordObject(decorator, "Behaviour Tree (AddChild)");
+
+#endif
+
             decorator.Child = child;
+
+#if UNITY_EDITOR
+
             EditorUtility.SetDirty(decorator);
+
+#endif
         }
 
         var rootNode = parent as RootNode;
         if (rootNode)
         {
+#if UNITY_EDITOR
+
             Undo.RecordObject(rootNode, "Behaviour Tree (AddChild)");
+
+#endif
+
             rootNode.Child = child;
+
+#if UNITY_EDITOR
+
             EditorUtility.SetDirty(rootNode);
+
+#endif
         }
 
         var composite = parent as CompositeNode;
@@ -71,9 +127,19 @@ public class BehaviourTree : ScriptableObject
             return;
         }
 
+#if UNITY_EDITOR
+
         Undo.RecordObject(composite, "Behaviour Tree (AddChild)");
+
+#endif
+
         composite.Children.Add(child);
+
+#if UNITY_EDITOR
+
         EditorUtility.SetDirty(composite);
+
+#endif
     }
 
     public void RemoveChild(Node parent, Node child)
@@ -81,25 +147,55 @@ public class BehaviourTree : ScriptableObject
         DecoratorNode decorator = parent as DecoratorNode;
         if (decorator)
         {
+#if UNITY_EDITOR
+
             Undo.RecordObject(decorator, "Behaviour Tree (RemoveChild)");
+
+#endif
+
             decorator.Child = null;
+
+#if UNITY_EDITOR
+
             EditorUtility.SetDirty(decorator);
+
+#endif
         }
 
         RootNode rootNode = parent as RootNode;
         if (rootNode)
         {
+#if UNITY_EDITOR
+
             Undo.RecordObject(rootNode, "Behaviour Tree (RemoveChild)");
+
+#endif
+
             rootNode.Child = null;
+
+#if UNITY_EDITOR
+
             EditorUtility.SetDirty(rootNode);
+
+#endif
         }
 
         CompositeNode composite = parent as CompositeNode;
         if (composite)
         {
+#if UNITY_EDITOR
+
             Undo.RecordObject(composite, "Behaviour Tree (RemoveChild)");
+
+#endif
+
             composite.Children.Remove(child);
+
+#if UNITY_EDITOR
+
             EditorUtility.SetDirty(composite);
+
+#endif
         }
     }
 

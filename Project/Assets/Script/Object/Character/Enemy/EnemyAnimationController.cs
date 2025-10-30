@@ -113,9 +113,76 @@ namespace Backend.Object.Character.Enemy
             Animator.SetFloat(hash, value, dampTime, time);
         }
 
+        public void SetAnimationFloat(int name, float value)
+        {
+            Animator.SetFloat(name, value);
+        }
+
         public void SetAnimatorSpeed(float speed)
         {
             Animator.speed = speed;
+        }
+
+        public float GetAnimationFloat(string name)
+        {
+            return Animator.GetFloat(name);
+        }
+
+        public float GetAnimationFloat(int name)
+        {
+            return Animator.GetFloat(name);
+        }
+
+        private bool _isHit = false;
+
+        public void PlayHitCoroutine()
+        {
+            if (!_isHit)
+            {
+                StartCoroutine(HitCoroutine());
+            }
+        }
+
+        public IEnumerator HitCoroutine()
+        {
+            _isHit = true;
+
+            Animator.SetTrigger("Hit");
+
+            float timer = 0f;
+            float WeightUpDuration = 0.1f;
+            while (timer < WeightUpDuration)
+            {
+                float weight = Mathf.Lerp(0, 1, timer / WeightUpDuration);
+                Animator.SetLayerWeight(1, weight);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            Animator.SetLayerWeight(1, 1f);
+
+            //wait 필요
+            yield return new WaitForEndOfFrame();
+
+            yield return new WaitForSeconds(0.15f);
+
+            timer = 0f;
+            float WeightDownDuration = 0.2f;
+            while(timer < WeightDownDuration)
+            {
+                float weight = Mathf.Lerp(1, 0, timer / WeightDownDuration);
+                Animator.SetLayerWeight(1, weight);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            Animator.SetLayerWeight(1, 0f);
+
+            _isHit = false;
+        }
+
+        // 몬스터가 죽었을때 죽음 애니메이션 실행
+        public void PlayDeathAnimation()
+        {
+            Animator.SetTrigger("IsDie");
         }
     }
 }

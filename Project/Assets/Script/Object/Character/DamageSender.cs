@@ -1,203 +1,140 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Backend.Util.Debug;
+﻿using Script.Util.Extension;
 using UnityEngine;
 
 namespace Backend.Object.Character
 {
     public class DamageSender : MonoBehaviour
     {
-        [Header("Capsule (local space)")] [SerializeField]
-        private Vector3 center = Vector3.zero;
+        [Header("Data Information")]
+        [SerializeField] private float physicalDamagePoint;
+        [SerializeField] private float magicalDamagePoint;
 
-        [SerializeField] private float radius = 0.5f;
-        [SerializeField] private float height = 1.8f;
-        [SerializeField] private Vector3 up = Vector3.up;
+        [Header("Detection Settings")]
+        [SerializeField] private LayerMask layerMask = ~0;
 
-        [Header("Detection")] [SerializeField] private LayerMask layerMask = ~0;
-        [SerializeField] private QueryTriggerInteraction queryTrigger = QueryTriggerInteraction.UseGlobal;
+        private CapsuleCollider _collider;
 
-        [Header("Gizmos")] [SerializeField] private bool drawWhenSelectedOnly = true;
-        [SerializeField] private Color shapeColor = new (0f, 0.6f, 1f, 1f);
-        [SerializeField] private Color hitColor = new (1f, 0.2f, 0.2f, 1f);
-        [SerializeField] private int circleSegments = 20;
+#if UNITY_EDITOR
 
-        private Collider[] _lastHits = Array.Empty<Collider>();
-        private Coroutine _detectCoroutine = null;
-        private float _detectInterval = 0.1f;
-        private bool _useRealtime = false;
+        private Color _color = new (0f, 0.6f, 1f, 1f);
 
-        private HashSet<int> _hits = new HashSet<int>();
+#endif
 
-        private void OnValidate()
+        private void Awake()
         {
-            if (radius < 0f)
-            {
-                radius = 0f;
-            }
-
-            if (height < 0f)
-            {
-                height = 0f;
-            }
+            _collider = GetComponent<CapsuleCollider>();
+            _collider.enabled = false;
         }
 
-        // Runtime API
-        public void StartDetection(float intervalSec = 0.1f, bool realtime = false)
+        private void OnTriggerEnter(Collider other)
         {
-            if (!Application.isPlaying)
+            if ((layerMask.value & (1 << other.gameObject.layer)) == 0)
             {
-                Debug.LogWarning("StartDetection only works in Play mode.");
-
                 return;
             }
 
-            _detectInterval = Mathf.Max(0.01f, intervalSec);
-            _useRealtime = realtime;
-            if (_detectCoroutine != null)
-            {
-                StopCoroutine(_detectCoroutine);
-            }
+            var status = other.GetComponent<Status>();
+            status.TakeDamage(PhysicalDamagePoint, null);
+        }
 
-            _detectCoroutine = StartCoroutine(DetectionRoutine());
+        public void StartDetection()
+        {
+            _collider.enabled = true;
+
+#if UNITY_EDITOR
+
+            _color = Color.red;
+
+#endif
         }
 
         public void StopDetection()
         {
-            if (_detectCoroutine == null)
-            {
-                return;
-            }
+            _collider.enabled = false;
 
-            StopCoroutine(_detectCoroutine);
-            _detectCoroutine = null;
-            _hits.Clear();
+#if UNITY_EDITOR
+
+            _color = new Color(0f, 0.6f, 1f, 1f);
+
+#endif
         }
 
-        public void RefreshOverlap()
-        {
-            Vector3 worldCenter = transform.TransformPoint(center);
-            Vector3 axis = (up == Vector3.zero) ? transform.up : transform.TransformDirection(up.normalized);
-            float halfOffset = Mathf.Max(0f, (height * 0.5f) - radius);
-            Vector3 p1 = worldCenter + (axis * halfOffset);
-            Vector3 p2 = worldCenter - (axis * halfOffset);
-
-            _lastHits = Physics.OverlapCapsule(p1, p2, radius, layerMask, queryTrigger);
-
-            for (var i = 0; i < _lastHits.Length; i++)
-            {
-                var id = _lastHits[i].gameObject.GetInstanceID();
-
-                _hits.Add(id);
-            }
-
-            if (_lastHits.Length > 0)
-            {
-                Debugger.LogMessage($"Detected: {_lastHits.Length} is hit!");
-            }
-        }
-
-        private IEnumerator DetectionRoutine()
-        {
-            while (true)
-            {
-                RefreshOverlap();
-                if (_useRealtime)
-                {
-                    yield return new WaitForSecondsRealtime(_detectInterval);
-                }
-                else
-                {
-                    yield return new WaitForSeconds(_detectInterval);
-                }
-            }
-        }
+#if UNITY_EDITOR
 
         private void OnDrawGizmos()
         {
-            if (drawWhenSelectedOnly && !UnityEditor.Selection.Contains(gameObject))
+            if (_collider == null)
             {
                 return;
             }
 
-            DrawVisualization();
-        }
+            var center = _collider.center;
+            var axis = _collider.GetDirection(transform);
+            var height = _collider.height;
+            var radius = _collider.radius;
+            var point = transform.TransformPoint(center);
+            var offset = Mathf.Max(0f, (height * 0.5f) - radius);
 
-        private void OnDrawGizmosSelected()
-        {
-            if (!drawWhenSelectedOnly)
+            var a = point + (axis * offset);
+            var b = point - (axis * offset);
+
+            Gizmos.color = _color;
+            if (offset <= Mathf.Epsilon)
             {
-                DrawVisualization();
-            }
-        }
-
-        private void DrawVisualization()
-        {
-            Vector3 worldCenter = transform.TransformPoint(center);
-            Vector3 axis = (up == Vector3.zero) ? transform.up : transform.TransformDirection(up.normalized);
-            float halfOffset = Mathf.Max(0f, (height * 0.5f) - radius);
-            Vector3 p1 = worldCenter + axis * halfOffset;
-            Vector3 p2 = worldCenter - axis * halfOffset;
-
-            Gizmos.color = shapeColor;
-            if (halfOffset <= Mathf.Epsilon)
-            {
-                Gizmos.DrawWireSphere(worldCenter, radius);
+                Gizmos.DrawWireSphere(point, radius);
             }
             else
             {
-                DrawWireCapsule(p1, p2, radius, axis, circleSegments);
-            }
-
-            if (_lastHits == null || _lastHits.Length <= 0)
-            {
-                return;
-            }
-
-            Gizmos.color = hitColor;
-            foreach (var c in _lastHits)
-            {
-                if (c == null) continue;
-                Vector3 closest = c.ClosestPoint(worldCenter);
-                Gizmos.DrawSphere(closest, Mathf.Max(0.02f, radius * 0.08f));
-                Gizmos.DrawLine(closest, worldCenter);
+                DrawWireCapsule(a, b, radius, axis);
             }
         }
 
-        // 간단한 wire-capsule 렌더러
-        private void DrawWireCapsule(Vector3 p1, Vector3 p2, float r, Vector3 axis, int segments)
+        private void DrawWireCapsule(Vector3 a, Vector3 b, float r, Vector3 axis, int segments = 20)
         {
-            Vector3 a = axis.normalized;
-            Vector3 tangent = Vector3.Cross(a, Vector3.up);
+            var normal = axis.normalized;
+            var tangent = Vector3.Cross(normal, Vector3.up);
             if (tangent.sqrMagnitude < 1e-6f)
             {
-                tangent = Vector3.Cross(a, Vector3.forward);
+                tangent = Vector3.Cross(normal, Vector3.forward);
             }
 
             tangent.Normalize();
-            Vector3 bitangent = Vector3.Cross(a, tangent);
+            var bitangent = Vector3.Cross(normal, tangent);
 
-            Vector3[] c1 = new Vector3[segments];
-            Vector3[] c2 = new Vector3[segments];
+            var c1 = new Vector3[segments];
+            var c2 = new Vector3[segments];
             for (int i = 0; i < segments; i++)
             {
-                float ang = (2f * Mathf.PI * i) / segments;
-                Vector3 offset = tangent * Mathf.Cos(ang) * r + bitangent * Mathf.Sin(ang) * r;
-                c1[i] = p1 + offset;
-                c2[i] = p2 + offset;
+                var angle = 2f * Mathf.PI * i / segments;
+                var delta = (tangent * Mathf.Cos(angle) * r) + (bitangent * Mathf.Sin(angle) * r);
+                c1[i] = a + delta;
+                c2[i] = b + delta;
             }
 
             for (int i = 0; i < segments; i++)
             {
-                int ni = (i + 1) % segments;
+                var ni = (i + 1) % segments;
                 Gizmos.DrawLine(c1[i], c1[ni]);
                 Gizmos.DrawLine(c2[i], c2[ni]);
                 Gizmos.DrawLine(c1[i], c2[i]);
             }
 
-            Gizmos.DrawWireSphere(p1, r);
-            Gizmos.DrawWireSphere(p2, r);
+            Gizmos.DrawWireSphere(a, r);
+            Gizmos.DrawWireSphere(b, r);
+        }
+
+#endif
+
+        public float PhysicalDamagePoint
+        {
+            get => physicalDamagePoint;
+            set => physicalDamagePoint = value;
+        }
+
+        public float MagicalDamagePoint
+        {
+            get => magicalDamagePoint;
+            set => magicalDamagePoint = value;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Backend.Util.Debug
             return $"PROGRESS|{className}|{methodName}()";
         }
 
-        private static string Build(LogMessageType type, string className, string methodName, string message)
+        private static string Build(LogType type, string className, string methodName, string message)
         {
             return $"{type.GetName()}|{className}|{methodName}()|{message}";
         }

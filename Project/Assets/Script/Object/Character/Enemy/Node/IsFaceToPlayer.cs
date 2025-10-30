@@ -20,6 +20,11 @@ namespace Backend.Object.Character.Enemy.Node
         // 노드가 실행되는 동안 매 프레임 호출됩니다.
         protected override State OnUpdate()
         {
+            if(agent.MovementController.Target == null)
+            {
+                return State.Failure;
+            }
+
             Vector3 dir = agent.MovementController.GetDirection();
             dir.y = 0f;
 

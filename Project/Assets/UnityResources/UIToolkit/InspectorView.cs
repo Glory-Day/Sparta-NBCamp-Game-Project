@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System;
 using UnityEngine.UIElements;
 using UnityEditor;
@@ -14,13 +16,16 @@ public class InspectorView : VisualElement
 
         UnityEngine.Object.DestroyImmediate(editor);
         editor = Editor.CreateEditor(nodeView.node);
-        IMGUIContainer container = new IMGUIContainer(() => 
-        { 
+        IMGUIContainer container = new IMGUIContainer(() =>
+        {
             if (editor.target)
             {
-                editor.OnInspectorGUI(); 
+                editor.OnInspectorGUI();
             }
         });
+
         Add(container);
     }
 }
+
+#endif

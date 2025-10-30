@@ -1,6 +1,7 @@
 ﻿using System;
+using Backend.Util.Debug;
+using Script.Util.Extension;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Backend.Object.Character.Player
 {
@@ -24,8 +25,12 @@ namespace Backend.Object.Character.Player
         [SerializeField] private float thickness = 1f;
         [SerializeField] private Vector3 offset = Vector3.zero;
 
+#if UNITY_EDITOR
+
         [Header("Debug Settings")]
         [SerializeField] private bool isDebugMode;
+
+#endif
 
         [Header("Detection Settings")]
         [SerializeField] public CastMode mode = CastMode.SingleRay;
@@ -45,6 +50,12 @@ namespace Backend.Object.Character.Player
         private float _extendedRange;
 
         private int _layer;
+
+#if UNITY_EDITOR
+
+        private Color _color = Color.green;
+
+#endif
 
         // Current upwards (or downwards) velocity necessary to keep the correct distance to the ground.
         private Vector3 _adjustmentVelocity = Vector3.zero;
@@ -85,13 +96,30 @@ namespace Backend.Object.Character.Player
 
         private void OnDrawGizmos()
         {
-            const float size = 0.2f;
+            DrawSensor();
+            DrawPosition();
+        }
+
+        private void DrawSensor()
+        {
             const float radius = 0.04f;
+
+#if UNITY_EDITOR
 
             if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
             {
                 return;
             }
+
+#else
+
+            if (_sensor == null || _sensor.IsDetected == false)
+            {
+                return;
+            }
+
+#endif
+
 
             var position = Vector3.zero;
             var distance = Vector3.zero;
@@ -128,9 +156,19 @@ namespace Backend.Object.Character.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
 
-            position = _sensor.Position;
-            distance = _sensor.Normal;
+        private void DrawPosition()
+        {
+            if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
+            {
+                return;
+            }
+
+            const float size = 0.2f;
+
+            var position = _sensor.Position;
+            var distance = _sensor.Normal;
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size));
@@ -242,7 +280,12 @@ namespace Backend.Object.Character.Player
             _sensor.Option.Rows = rows;
             _sensor.Option.Count = count;
             _sensor.Option.IsOffset = isOffset;
+
+#if UNITY_EDITOR
+
             _sensor.IsDebugMode = isDebugMode;
+
+#endif
 
             // Set sensor spherecast variables.
             _sensor.UseRealisticDistance = true;
@@ -387,12 +430,6 @@ namespace Backend.Object.Character.Player
 
                 RecalculateColliderDimensions();
             }
-        }
-
-        public bool IsColliderEnabled
-        {
-            get => _capsuleCollider.enabled;
-            set => _capsuleCollider.enabled = value;
         }
 
         public float StopHeightRatio

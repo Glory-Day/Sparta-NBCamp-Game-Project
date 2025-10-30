@@ -8,17 +8,42 @@ namespace Backend.Object.Character.Enemy
         [field: SerializeField] public float Distance { get; private set; }
         [field: SerializeField] public float StrafeSpeed { get; private set; }
 
+        // 몬스터 처음 생성 위치
+        public Vector3 InitialPosition;
 
         public bool FaceToPlayer;
         public float FaceLerpTime = 2f;
 
+        // 일반 몬스터 인지
+        public bool IsNormalMonster = false;
+        // 몬스터 움직임 범위
+        public float MoveRange = 10f;
+
+        private bool _isDie = false;
+
         protected override void Awake()
         {
             base.Awake();
+
+        }
+
+        private void OnEnable()
+        {
+            InitialPosition = transform.position;
         }
 
         private void Update()
         {
+            if (_isDie)
+            {
+                return;
+            }
+
+            if (Target == null)
+            {
+                return;
+            }
+
             Distance = GetDistance();
 
             if (FaceToPlayer)
@@ -26,6 +51,8 @@ namespace Backend.Object.Character.Enemy
                 SetLerpRotation(FaceLerpTime);
             }
         }
+
+
 
         public void MoveToTarget(float speed, float speedFactor = 1)
         {
@@ -99,5 +126,25 @@ namespace Backend.Object.Character.Enemy
             }
             return false;
         }
+
+        // 몬스터가 죽었을 때 호출
+        public void OnEnemyDeath()
+        {
+            _isDie = true;
+        }
+
+#if UNITY_EDITOR
+
+        // 씬화면에서만 가로로 보이는 범위
+        private void OnDrawGizmosSelected()
+        {
+            if (!_isDie && IsNormalMonster)
+            {
+                UnityEditor.Handles.color = Color.red;
+                UnityEditor.Handles.DrawWireDisc(InitialPosition, Vector3.up, MoveRange);
+            }
+        }
+
+#endif
     }
 }

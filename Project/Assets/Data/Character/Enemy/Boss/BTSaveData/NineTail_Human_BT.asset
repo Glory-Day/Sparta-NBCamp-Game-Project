@@ -25,7 +25,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -47,7 +47,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: fafe394535d632b4a8804f9bcb53ec63
-  Position: {x: 1726, y: 963}
+  Position: {x: 1702, y: 954}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: LongLength Attack
   Child: {fileID: -4276195094700390624}
@@ -118,7 +118,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: 7837282814814943857}
@@ -147,7 +147,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: 4178337039563730154}
@@ -176,7 +176,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -205,12 +205,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
   - {fileID: 7526137388316297143}
-  - {fileID: -8015751274255624431}
   - {fileID: 3024539317388691480}
   - {fileID: 7026122694591909381}
   - {fileID: -8421429603922920274}
@@ -218,39 +217,6 @@ MonoBehaviour:
   - {fileID: -1198992939318154608}
   - {fileID: 5505066126621014693}
   - {fileID: 5233441416888986238}
---- !u!114 &-8015751274255624431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
-  m_Name: SelectorNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 7befacdeb669b0243a5a34253cf976fc
-  Position: {x: -1324.0149, y: -15.580019}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 4832608096766674576}
-  - {fileID: 7296300056138591411}
-  - {fileID: 954658268660197832}
-  - {fileID: 1541383534366023433}
 --- !u!114 &-7973213361870217918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,13 +242,44 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
   - {fileID: -4603045119568924869}
   - {fileID: -5146481821277186646}
   - {fileID: 5095688498518359521}
+--- !u!114 &-7921080943375965468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a95d4c8869f6943bdfe49b6db6f511, type: 3}
+  m_Name: SequencerNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: c1cae0093b9d4c34fa836a1984233e7a
+  Position: {x: 182.45009, y: -370.1001}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -2960684876693161237}
+  - {fileID: 3147088453187696173}
 --- !u!114 &-7881696742356237389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +305,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -329,7 +326,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: bea62ef4d9ec5504db12443c26b72fd0
-  Position: {x: -1683.9998, y: 800}
+  Position: {x: -2060.6782, y: 1144.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -339,42 +336,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
   faceRotationLerpTime: 2
---- !u!114 &-7636400421222842428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
-  m_Name: ParallelNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: ed3153820e385ab489cc9bea536b9195
-  Position: {x: 88, y: 1309}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 1711669806161104602}
-  - {fileID: -4008462548159180549}
 --- !u!114 &-7216550933711581919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +366,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -2871859711533766674}
@@ -419,7 +385,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: a77fc71a1f6a0b1438ac6e1d4c10a72f
-  Position: {x: -27, y: -583.04004}
+  Position: {x: 65, y: -864}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -429,7 +395,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: 8228998882334389856}
@@ -458,7 +424,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -491,42 +457,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 40 Percent
   Child: {fileID: 3252167318922827858}
   probability: 0.4
---- !u!114 &-6358433520164823119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4fd7779fb325345a4dfec84f75cd54, type: 3}
-  m_Name: ParallelNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 8a3f8c2e430cf7943bfc043f09a89064
-  Position: {x: -792, y: 1248}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Children:
-  - {fileID: 4720881530534865213}
-  - {fileID: 1171384853451539354}
 --- !u!114 &-6057640512761574562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,7 +487,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   ActionID: S0103
@@ -582,46 +517,10 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: 1217796976436968837}
---- !u!114 &-5456584929735401027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: dc5032f322fb92b47a53f1bf9a45a02d
-  Position: {x: 1648, y: 438}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 0
-  IsRun: 0
-  IsWalk: 0
 --- !u!114 &-5146481821277186646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +546,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -3335139785924217894}
@@ -676,7 +575,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -705,45 +604,9 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
---- !u!114 &-4662626354756941682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c09fefd2058bfa4cabcac4152f43042, type: 3}
-  m_Name: SetNineTailHumanAnimation
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 308143c1eca36cf47bde90ce26d5c80f
-  Position: {x: -1447.0149, y: 354.42}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  TransitionDuration: 0.1
-  PlayIdle: 0
-  PlayStrafe: 0
-  PlayDie: 0
-  SetRun: 0
-  SetWalk: 0
-  IsRun: 0
-  IsWalk: 0
 --- !u!114 &-4603045119568924869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -759,7 +622,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 2b9253d038bab324d86bd127768e960b
-  Position: {x: 718.0001, y: 415}
+  Position: {x: 691.0001, y: 412}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -769,7 +632,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   minDistance: 0
@@ -801,7 +664,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -832,12 +695,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
   - {fileID: 960418261994843873}
-  - {fileID: -7815997508426770790}
   - {fileID: -5585575479859930473}
 --- !u!114 &-4015314173987743893
 MonoBehaviour:
@@ -864,7 +726,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -894,7 +756,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: ComboAttack Sequence
   Children:
@@ -915,7 +777,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 135d3d92ec65caf49bae5c9a617cd2cb
-  Position: {x: 194, y: 1537.5}
+  Position: {x: 77.684715, y: 1302.5}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -925,7 +787,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   LayerNum: 0
@@ -955,7 +817,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -987,7 +849,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -4011844537385484231}
@@ -1006,7 +868,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: fb655c3e1a141164a9e6987c8017c50e
-  Position: {x: 2029, y: 614}
+  Position: {x: 2045, y: 611}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1016,15 +878,13 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: 'Min Distance not Used
-
-'
+  description: 
   StrafeSpeed: 1.5
-  ForwardBackwardSpeed: 1
+  ForwardBackwardSpeed: 2
   MaxDistance: 3.5
-  MinDistance: 0
+  MinDistance: 3.2
 --- !u!114 &-3451212145976078872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,7 +900,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 7f9a39b5dbd04aa4ba875b39e7155fff
-  Position: {x: -1222, y: 1144}
+  Position: {x: -1291.0002, y: 1151.9999}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1050,7 +910,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   SkillId: S0106
@@ -1079,7 +939,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: "\t\t\t\t"
   Children:
@@ -1100,7 +960,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 092910af9b475164ba38f4b846007278
-  Position: {x: -1441, y: 1144}
+  Position: {x: -1472.6754, y: 1152}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1110,9 +970,39 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
+--- !u!114 &-2960684876693161237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
+  m_Name: SetRotationToPlayer
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: d3b88509caca20f4b86495a98a8079b1
+  Position: {x: 166.70006, y: -211.99995}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  faceToPlayer: 0
+  faceRotationLerpTime: 2
 --- !u!114 &-2871859711533766674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,14 +1028,14 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Sting Sequence
   Children:
   - {fileID: -6057640512761574562}
   - {fileID: 8386342788006701630}
   - {fileID: 181721589247664366}
-  - {fileID: -7636400421222842428}
+  - {fileID: -4008462548159180549}
   - {fileID: 584257691640861492}
 --- !u!114 &-2789634550323934002
 MonoBehaviour:
@@ -1162,7 +1052,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 452cc45809f7f8946ad5626747524b3c
-  Position: {x: 2047, y: 954}
+  Position: {x: 2029, y: 954}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1172,7 +1062,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 0
@@ -1201,12 +1091,41 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
   - {fileID: 7473508277015187844}
   - {fileID: -6970962932173325234}
+--- !u!114 &-2542192109091407985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a415de8cfbf2ab498278b655ca2b384, type: 3}
+  m_Name: ConditionAbort
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 2617d085cf682144cafff6bf008cdaef
+  Position: {x: -77, y: -368}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Child: {fileID: -8022844229400373636}
 --- !u!114 &-2449528605685768979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1232,7 +1151,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
 --- !u!114 &-2134505852709630021
@@ -1250,7 +1169,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 84054c374650fea4f914f99a4a9041ff
-  Position: {x: -1661, y: 1141}
+  Position: {x: -1654, y: 1152}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1260,7 +1179,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Projectile: {fileID: 1801832409821887468, guid: cdd220dc076f0ff4b9695bafcac032a1, type: 3}
@@ -1269,7 +1188,7 @@ MonoBehaviour:
   - {x: 1.5, y: 3, z: 0}
   - {x: -1.5, y: 3, z: 0}
   Delay: 0.2
-  Speed: 15
+  Speed: 30
   Duration: 10
   ChasingTime: 1.9
   SpawnDelay: 1.5
@@ -1298,7 +1217,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -1327019705708857543}
@@ -1327,7 +1246,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -2600514874059813964}
@@ -1356,7 +1275,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Slash Sequence
   Children:
@@ -1377,7 +1296,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 98f4dc28785e18d4fba61ec200e83562
-  Position: {x: 1192, y: 954}
+  Position: {x: 1197.775, y: 962}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1387,7 +1306,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -1417,39 +1336,10 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Close Attack
   Child: {fileID: -7973213361870217918}
---- !u!114 &-865392500505012858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
-  m_Name: IsFaceToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 79df9b16c48ce284ea89f9927349f6eb
-  Position: {x: -1211.0149, y: 354.42}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  minSimilarity: 0.99
 --- !u!114 &-763387646480340218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1475,7 +1365,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -1494,7 +1384,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: d069ce567fabfdb4cb696b9ad807cd08
-  Position: {x: 1034, y: 954}
+  Position: {x: 1024.8075, y: 962}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1504,7 +1394,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Close Range
   minDistance: 0
@@ -1531,18 +1421,9 @@ MonoBehaviour:
   - {fileID: -8022844229400373636}
   - {fileID: 3024539317388691480}
   - {fileID: 7526137388316297143}
-  - {fileID: -8015751274255624431}
-  - {fileID: 954658268660197832}
-  - {fileID: 7296300056138591411}
-  - {fileID: 1541383534366023433}
-  - {fileID: 4832608096766674576}
-  - {fileID: 2273972576164154844}
-  - {fileID: -4662626354756941682}
-  - {fileID: -865392500505012858}
   - {fileID: 8681559250679208753}
   - {fileID: 6285781711267574053}
   - {fileID: 6844052323505393716}
-  - {fileID: 7872367704738802823}
   - {fileID: -1630506721818058669}
   - {fileID: -2600514874059813964}
   - {fileID: 7473508277015187844}
@@ -1574,7 +1455,6 @@ MonoBehaviour:
   - {fileID: -8602030299021604700}
   - {fileID: 5505066126621014693}
   - {fileID: 1251324351453558181}
-  - {fileID: -5456584929735401027}
   - {fileID: -4321031764820177962}
   - {fileID: 3825609654391106043}
   - {fileID: -3470952870832028242}
@@ -1610,18 +1490,19 @@ MonoBehaviour:
   - {fileID: -6057640512761574562}
   - {fileID: 9186142308647492302}
   - {fileID: 1171384853451539354}
-  - {fileID: 4720881530534865213}
-  - {fileID: -6358433520164823119}
   - {fileID: 8386342788006701630}
-  - {fileID: 1711669806161104602}
   - {fileID: 181721589247664366}
   - {fileID: -4008462548159180549}
-  - {fileID: -7636400421222842428}
   - {fileID: -1213632093041044059}
   - {fileID: 2681928238116268197}
   - {fileID: 4601917796139099062}
   - {fileID: 8253595544172869629}
   - {fileID: -2789634550323934002}
+  - {fileID: -2542192109091407985}
+  - {fileID: 6435612513936422924}
+  - {fileID: 3147088453187696173}
+  - {fileID: -7921080943375965468}
+  - {fileID: -2960684876693161237}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1631,7 +1512,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
 --- !u!114 &167325235828605754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1647,7 +1528,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 9415c7e987c3d214bb81bf6e1cc81a70
-  Position: {x: -2104.36, y: 1133}
+  Position: {x: -2250.3557, y: 1149.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1657,7 +1538,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   ActionID: S0106
@@ -1687,7 +1568,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Sting
   AttackNum: 2
@@ -1717,39 +1598,10 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   SkillId: S0103
---- !u!114 &954658268660197832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
-  m_Name: FailureNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: b72484e280c29454d810727f2dbdc552
-  Position: {x: -1398.015, y: 174.42001}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -4662626354756941682}
 --- !u!114 &960418261994843873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1765,7 +1617,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 641731c38ad713e46a1e2e0d913cffec
-  Position: {x: -1900.0215, y: 800}
+  Position: {x: -1653.0002, y: 800}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1775,7 +1627,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Range LongRange
   minDistance: 0
@@ -1797,7 +1649,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: b7e9faec79fde7946a2b1af52c2f75c9
-  Position: {x: -607, y: 1256}
+  Position: {x: -630, y: 1258.71}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1807,7 +1659,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   SkillId: S0104
@@ -1836,7 +1688,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -1856,7 +1708,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 2ea601080ec27b5409c2fa56c1793ce2
-  Position: {x: 606, y: 1084}
+  Position: {x: 623.00006, y: 1098.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1866,7 +1718,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 1
@@ -1886,7 +1738,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 44f63d200e58ec34983e49dc943dc4db
-  Position: {x: -698, y: 1422}
+  Position: {x: -804.9998, y: 1264.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1896,7 +1748,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   LayerNum: 0
@@ -1926,11 +1778,12 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: FoxFireBall Sequence
   Children:
   - {fileID: 167325235828605754}
+  - {fileID: -7815997508426770790}
   - {fileID: 6482572739651556139}
   - {fileID: -2134505852709630021}
   - {fileID: -3210874482422250282}
@@ -1960,75 +1813,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
-  - {fileID: -5456584929735401027}
   - {fileID: -4321031764820177962}
---- !u!114 &1541383534366023433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee443bbc997d69649b14bf63f1000021, type: 3}
-  m_Name: SucceedNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 2e07c149cbffb9a409138131bbbe340b
-  Position: {x: -1202.0149, y: 169.42}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: -865392500505012858}
---- !u!114 &1711669806161104602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95d3a61aa829da41b603345a1adef5c, type: 3}
-  m_Name: SetAttackAnimSpeed
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: b171e61cb4335fd4d9cfdfe84ad99b38
-  Position: {x: -8.5, y: 1537.5}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  HashTag: Sting
-  LayerNum: 0
-  ChangeSpeed: 0.4
-  ReturnSpeed: 2
-  ChangePoint: 0.1
-  ReturnPoint: 0.2
 --- !u!114 &1961806028789682678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,7 +1843,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -2090,36 +1879,6 @@ MonoBehaviour:
   DestinationPosition: {x: 0, y: 0, z: -10}
   PlayerDestination: 0
   Offset: 2
---- !u!114 &2273972576164154844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
-  m_Name: SetRotationToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 35a83816adc6eda4ba69196c60a1115c
-  Position: {x: -1645.0149, y: 353.42004}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  faceToPlayer: 1
-  faceRotationLerpTime: 2
 --- !u!114 &2611671948994998535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,7 +1904,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: 6386906560035937883}
@@ -2164,7 +1923,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: d47ca5ed3138ae648ae33222fc5389dc
-  Position: {x: 1885, y: 962}
+  Position: {x: 1863.0002, y: 954.0001}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2174,7 +1933,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   faceToPlayer: 0
@@ -2204,11 +1963,40 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  faceToPlayer: 0
+  faceToPlayer: 1
   faceRotationLerpTime: 1
+--- !u!114 &3147088453187696173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc1a865b188a234998167113d40cfac, type: 3}
+  m_Name: ParryCheck
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: bf3a68c33ff649e4e931215d1d9e6a97
+  Position: {x: 349, y: -212}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  grogyTimer: 5
 --- !u!114 &3252167318922827858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2234,7 +2022,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -2268,7 +2056,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   minDistance: 12
@@ -2290,7 +2078,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 3300251bf6a566f4c9745f249d47fca3
-  Position: {x: 1821, y: 611}
+  Position: {x: 1821, y: 608}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2300,9 +2088,9 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
-  description: Range 0~12
+  description: Range 0~15
   minDistance: 0
   maxDistance: 15
   useRangeCheck: 0
@@ -2332,7 +2120,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -2354,7 +2142,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: cce10cb58d9d1124fbe0d7b27d041b3b
-  Position: {x: 1426, y: 1283}
+  Position: {x: 1432.6775, y: 1289}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2364,7 +2152,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Slash
   AttackNum: 1
@@ -2386,7 +2174,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: b197f0bf6eb0e7649925e9a24b8412f1
-  Position: {x: 2205, y: 954}
+  Position: {x: 2187, y: 954}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2396,74 +2184,45 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  StepSpeed: 12
   StepDistance: 10
---- !u!114 &4720881530534865213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95d3a61aa829da41b603345a1adef5c, type: 3}
-  m_Name: SetAttackAnimSpeed
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 4bc3d55d1a9e1054ba5c9108efcc313c
-  Position: {x: -887, y: 1424}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  HashTag: Energy
-  LayerNum: 0
-  ChangeSpeed: 0.2
-  ReturnSpeed: 1
-  ChangePoint: 0.1
-  ReturnPoint: 0.18
---- !u!114 &4832608096766674576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78855d7a78f9874ea1d9ef8245d34f1, type: 3}
-  m_Name: IsFaceToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 3db2725d9a91fe8438779d0d548cdd59
-  Position: {x: -1803.015, y: 168.42001}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  minSimilarity: 0.99
+  JumpDuration: 0.8
+  JumpHeight: 0.9
+  JumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &5002724454680542697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,7 +2238,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 17b1cb17d2868cb488dbc2636f6ec8d3
-  Position: {x: -1160, y: 1248}
+  Position: {x: -1155.9675, y: 1264}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2489,7 +2248,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   ActionID: S0104
@@ -2519,7 +2278,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -6698346766732218813}
@@ -2548,7 +2307,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Child: {fileID: -7881696742356237389}
@@ -2577,7 +2336,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Use Strafe
   Child: {fileID: 1251324351453558181}
@@ -2606,7 +2365,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -2635,12 +2394,11 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
   - {fileID: 6844052323505393716}
-  - {fileID: 7872367704738802823}
   - {fileID: -1630506721818058669}
 --- !u!114 &6386906560035937883
 MonoBehaviour:
@@ -2667,14 +2425,45 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: EnergyExplosion Sequence
   Children:
   - {fileID: 5002724454680542697}
   - {fileID: 9186142308647492302}
-  - {fileID: -6358433520164823119}
+  - {fileID: 1171384853451539354}
   - {fileID: 968261291201453236}
+--- !u!114 &6435612513936422924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ca6bf78e12bd74e935634a17631d73, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: c3ffe7ea01445634aafcc917bbc50b78
+  Position: {x: 38, y: -562}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Children:
+  - {fileID: -2542192109091407985}
+  - {fileID: -7921080943375965468}
 --- !u!114 &6482572739651556139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,7 +2479,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 387001cd20ca1634197e3fcdb7463005
-  Position: {x: -1892, y: 1136}
+  Position: {x: -1869.4529, y: 1149}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2700,7 +2489,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   AttackNum: 5
@@ -2722,7 +2511,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 97ce395bae124da4eb83d173c1ca2e7f
-  Position: {x: -659, y: 338}
+  Position: {x: -567.9998, y: 341}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2732,7 +2521,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Range 4.5~12
   minDistance: 4.5
@@ -2754,7 +2543,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 439d8a2a3483914439e94003e33cbea5
-  Position: {x: -876.36, y: -13}
+  Position: {x: -915.1502, y: -16.000002}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2764,7 +2553,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   TransitionDuration: 0.1
@@ -2775,35 +2564,6 @@ MonoBehaviour:
   SetWalk: 1
   IsRun: 0
   IsWalk: 0
---- !u!114 &7296300056138591411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb83904a941767844981263d75b99f83, type: 3}
-  m_Name: FailureNode
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 9a7965f07ba5f4c4cad07ee463b2dcff
-  Position: {x: -1595.015, y: 166.42}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  Child: {fileID: 2273972576164154844}
 --- !u!114 &7473508277015187844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2829,7 +2589,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Children:
@@ -2850,7 +2610,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 3ba7957853596334e9dcb4b1b826b186
-  Position: {x: -1548.015, y: -23.579998}
+  Position: {x: -1299, y: -22}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2860,7 +2620,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   minDistance: 0
@@ -2882,7 +2642,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: f08896691c67aa04293a6d7016f0ac5b
-  Position: {x: 2856.0974, y: 970.0001}
+  Position: {x: 2870, y: 986}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2892,7 +2652,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Speed: 5
@@ -2900,36 +2660,6 @@ MonoBehaviour:
   Offset: 0
   EnableRotation: 1
   EnableUseAnim: 1
---- !u!114 &7872367704738802823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e801ff7e34488b4c9ba0c70acf965ee, type: 3}
-  m_Name: SetRotationToPlayer
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: e0a38e17cbecfbd4497f2a585aec7997
-  Position: {x: -493, y: 341}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    IsParry: 0
-  tree: {fileID: 0}
-  description: 
-  faceToPlayer: 0
-  faceRotationLerpTime: 2
 --- !u!114 &8094174945041349549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2955,7 +2685,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: "\uCF64\uBCF4"
   AttackNum: 0
@@ -2977,7 +2707,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 0ccd5afedcc346c4baac0e8f6531e277
-  Position: {x: -77, y: -444.04004}
+  Position: {x: 65, y: -727}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -2987,10 +2717,10 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Child: {fileID: -8022844229400373636}
+  Child: {fileID: 6435612513936422924}
   restartOnSuccess: 1
   restartOnFailure: 1
   maxRepeats: 0
@@ -3009,7 +2739,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 22938c1f8e4d1a64bad7f974aef85f9d
-  Position: {x: 2363, y: 954}
+  Position: {x: 2345, y: 954}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -3019,7 +2749,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   IsNavMesh: 1
@@ -3048,7 +2778,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
   Speed: 30
@@ -3081,7 +2811,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: Middle Attack
   Child: {fileID: 6285781711267574053}
@@ -3100,7 +2830,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 708f6c007dff25f44abefa23769e66fc
-  Position: {x: -978, y: 1248}
+  Position: {x: -982.00006, y: 1264}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -3110,7 +2840,7 @@ MonoBehaviour:
     moveDestination: {x: 0, y: 0, z: 0}
     RangeCheck: 999
     IsBackstepping: 0
-    IsParry: 0
+    <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: EnergyExplosion
   AttackNum: 3

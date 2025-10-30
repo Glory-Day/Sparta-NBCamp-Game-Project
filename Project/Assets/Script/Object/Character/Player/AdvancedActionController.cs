@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using Backend.Util.Input;
 using UnityEngine;
+using Debugger = Backend.Util.Debug.Debugger;
 
 namespace Backend.Object.Character.Player
 {
@@ -13,6 +15,9 @@ namespace Backend.Object.Character.Player
         [Tooltip("Optional camera transform used for calculating movement direction. If assigned, character movement will take camera view into account.\n\n" +
                  "움직임 방향 계산에 사용되는 선택적 카메라 트렌스폼 레퍼런스. 할당된 경우 캐릭터 움직임이 카메라 시점을 고려한다.")]
         [SerializeField] private Transform cameraTransform;
+
+        [Header("Detection Settings")]
+        [SerializeField] private CapsuleCollider detectionCollider;
 
         [Header("Physics Settings")]
         [Tooltip("Movement speed.\n\n" +
@@ -74,26 +79,30 @@ namespace Backend.Object.Character.Player
 
         private Vector3 _momentum = Vector3.zero;
 
+#if UNITY_EDITOR
+
+        private Color _color = Color.green;
+
+#endif
+
         private void Awake()
         {
-            _animationController = GetComponent<PlayerAnimationController>();
+            _animationController = GetComponentInChildren<PlayerAnimationController>();
             _movementController = GetComponent<PlayerMovementController>();
 
             _status = GetComponent<PlayerStatus>();
 
             _detector = GetComponent<CeilingDetector>();
 
-            _actions = new PlayerControls();
-
             InitializeStates();
         }
 
         private void OnEnable()
         {
+            _actions = new PlayerControls();
             _actions.Enable();
             _actions.Movement.Move.performed += Move;
             _actions.Movement.Move.canceled += Stop;
-            _actions.Movement.Jump.performed += Jump;
             _actions.Movement.Roll.performed += Roll;
             _actions.Movement.Attack.performed += Attack;
         }
@@ -156,10 +165,10 @@ namespace Backend.Object.Character.Player
         {
             _actions.Movement.Move.performed -= Move;
             _actions.Movement.Move.canceled -= Stop;
-            _actions.Movement.Jump.performed -= Jump;
             _actions.Movement.Roll.performed -= Roll;
             _actions.Movement.Attack.performed -= Attack;
             _actions.Disable();
+            _actions = null;
         }
 
         /// <returns>
@@ -177,8 +186,8 @@ namespace Backend.Object.Character.Player
             // If no camera transform has been assigned, use the character's transform axes to calculate the movement direction.
             if (cameraTransform == null)
             {
-                direction += transform.right * _direction.x;
-                direction += transform.forward * _direction.z;
+                direction += transform.right * Direction.x;
+                direction += transform.forward * Direction.z;
             }
             else
             {
@@ -186,8 +195,8 @@ namespace Backend.Object.Character.Player
                 // Project movement direction so movement stays parallel to the ground.
                 var v = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
                 var h = Vector3.ProjectOnPlane(cameraTransform.right, transform.up).normalized;
-                direction += h * _direction.x;
-                direction += v * _direction.z;
+                direction += h * Direction.x;
+                direction += v * Direction.z;
             }
 
             // If necessary, clamp movement vector to magnitude of '1f'.
@@ -307,11 +316,6 @@ namespace Backend.Object.Character.Player
 
                     break;
                 }
-                // If controller is jumping, override vertical velocity with jump speed.
-                case State.Jumping:
-                    _momentum = _momentum.Reject(transform.up);
-                    _momentum += transform.up * jumpSpeed;
-                    break;
                 case State.Grounded:
                 case State.Falling:
                 case State.Rising:
@@ -444,6 +448,32 @@ namespace Backend.Object.Character.Player
             {
                 _momentum = momentum;
             }
+        }
+
+        public void EnableCollider()
+        {
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.green;
+
+#endif
+
+            detectionCollider.enabled = true;
+        }
+
+        public void DisableCollider()
+        {
+            Debugger.LogProgress();
+
+#if UNITY_EDITOR
+
+            _color = Color.red;
+
+#endif
+
+            detectionCollider.enabled = false;
         }
 
         public Vector3 Velocity { get; private set; } = Vector3.zero;

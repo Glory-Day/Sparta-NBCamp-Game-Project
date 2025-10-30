@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Backend.Util.Data.Base;
+using Test.Data.Base;
 using UnityEngine;
 
-namespace Backend.Util.Item.Base
+namespace Test.Item.Base
 {
     /// <summary> 수량을 셀 수 있는 아이템 </summary>
     public abstract class CountableItem : Item

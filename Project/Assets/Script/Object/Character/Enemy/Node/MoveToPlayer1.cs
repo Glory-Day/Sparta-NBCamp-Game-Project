@@ -25,11 +25,13 @@ namespace Backend.Object.Character.Enemy.Node
 
         protected override void Stop()
         {
+            agent.NavMeshAgent.ResetPath();
         }
 
         protected override State OnUpdate()
         {
-            if (playerTransform == null)
+
+            if (playerTransform == null || agent.MovementController.Target == null)
             {
                 return State.Failure;
             }

@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <BossStatus>k__BackingField: {fileID: 11400000, guid: 1893d547d8497d14095477721d60e7fc, type: 2}
+  IsParryable: 0
 --- !u!114 &8796696555846192344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2159,6 +2160,8 @@ MonoBehaviour:
   <StrafeSpeed>k__BackingField: 0
   FaceToPlayer: 0
   FaceLerpTime: 2
+  IsNormalMonster: 0
+  MoveRange: 10
 --- !u!114 &4199181037784287085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2178,8 +2181,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89c6f17460cffdd46b61f32fa8d31f60, type: 2}
   - {fileID: 11400000, guid: 9180b45968cb11844a5d300fc7392d54, type: 2}
   <ActionData>k__BackingField: {fileID: 0}
-  _weapon: {fileID: 0}
-  _weapons: []
+  _damageSender: {fileID: 0}
+  _damageSenders: []
   _effect: {fileID: 0}
   _effects: []
 --- !u!114 &276975767771538641
