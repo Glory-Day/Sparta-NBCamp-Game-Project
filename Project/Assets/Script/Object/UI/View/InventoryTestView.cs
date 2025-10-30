@@ -1,47 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Backend.Object.Management;
 using Backend.Util.Input;
 using Backend.Util.Presentation;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
-/*
-    [기능 - 에디터 전용]
-    - 게임 시작 시 동적으로 생성될 슬롯 미리보기(개수, 크기 미리보기 가능)
-
-    [기능 - 유저 인터페이스]
-    - 슬롯에 마우스 올리기
-      - 사용 가능 슬롯 : 하이라이트 이미지 표시
-      - 아이템 존재 슬롯 : 아이템 정보 툴팁 표시
-
-    - 드래그 앤 드롭
-      - 아이템 존재 슬롯 -> 아이템 존재 슬롯 : 두 아이템 위치 교환
-      - 아이템 존재 슬롯 -> 아이템 미존재 슬롯 : 아이템 위치 변경
-        - Shift 또는 Ctrl 누른 상태일 경우 : 셀 수 있는 아이템 수량 나누기
-      - 아이템 존재 슬롯 -> UI 바깥 : 아이템 버리기
-
-    - 슬롯 우클릭
-      - 사용 가능한 아이템일 경우 : 아이템 사용
-
-    - 기능 버튼(좌측 상단)
-      - Trim : 앞에서부터 빈 칸 없이 아이템 채우기
-      - Sort : 정해진 가중치대로 아이템 정렬
-
-    - 필터 버튼(우측 상단)
-      - [A] : 모든 아이템 필터링
-      - [E] : 장비 아이템 필터링
-      - [P] : 소비 아이템 필터링
-
-      * 필터링에서 제외된 아이템 슬롯들은 조작 불가
-
-    [기능 - 기타]
-    - InvertMouse(bool) : 마우스 좌클릭/우클릭 반전 여부 설정
-*/
 
 namespace Backend.Object.UI
 {
-    public partial class InventoryView : MonoBehaviour, IView
+    public partial class InventoryTestView : MonoBehaviour, IView
     {
         #region SERIALIZABLE FIELD API
 
@@ -55,15 +23,9 @@ namespace Backend.Object.UI
         [Range(32, 64)]
         [SerializeField] private float _slotSize = 64f;      // 각 슬롯의 크기
 
-        [Space]
-        [SerializeField] private bool _showTooltip = true;
-        [SerializeField] private bool _showHighlight = true;
-        [SerializeField] private bool _showRemovingPopup = true;
-
         [Header("Connected Objects")]
         [SerializeField] private RectTransform _contentAreaRT;             // 슬롯들이 위치할 영역
         [SerializeField] private GameObject _slotUiPrefab;                 // 슬롯의 원본 프리팹
-        [SerializeField] private InventoryPopupUI _popup;                  // 팝업 UI 관리 객체
 
         #endregion
 
@@ -76,12 +38,24 @@ namespace Backend.Object.UI
 
         private UIControls _controls;
 
-        public Action<int, int> invAction;
+        private void OnEnable()
+        {
+            _controls = new UIControls();
+            _controls.Inventory.Enable();
+            _controls.Inventory.ClickLeftMouseButton.performed += PressLeftMouseButton;
+        }
+
+        private void OnDisable()
+        {
+            _controls.Inventory.Disable();
+            _controls.Inventory.ClickLeftMouseButton.performed -= PressLeftMouseButton;
+            _controls = null;
+        }
 
         private void Awake()
         {
             TryGetComponent(out _graphicRaycaster);
-            if (_graphicRaycaster == null)
+            if(_graphicRaycaster == null)
             {
                 _graphicRaycaster = gameObject.AddComponent<GraphicRaycaster>();
             }
@@ -89,23 +63,27 @@ namespace Backend.Object.UI
             _pointerEventData = new PointerEventData(EventSystem.current);
             _raycastResults = new List<RaycastResult>(10);
 
-            // 아이템 슬롯 뷰 프리팹을 설정한다.
+            //슬롯당 크기 지정
             _slotUiPrefab.TryGetComponent<RectTransform>(out var rectTransform);
             rectTransform.sizeDelta = new Vector2(_slotSize, _slotSize);
 
             _slotUiPrefab.TryGetComponent<ItemSlotView>(out var itemSlotView);
-            if (itemSlotView == null)
+            if(itemSlotView == null)
             {
                 _slotUiPrefab.AddComponent<ItemSlotView>();
             }
-
             _slotUiPrefab.SetActive(false);
 
-            var beginPos = new Vector2(_contentAreaPadding, -_contentAreaPadding);
-            var anchoredPosition = beginPos;
+            var slotbeginPos = new Vector2(_contentAreaPadding, -_contentAreaPadding);
+            var anchoredPos = slotbeginPos;
 
             Slots = new List<ItemSlotView>(_verticalSlotCount * _horizontalSlotCount);
 
+            CreateSlot(anchoredPos, slotbeginPos);
+        }
+
+        private void CreateSlot(Vector2 anchoredPos, Vector2 slotBeginPos)
+        {
             // 슬롯들 동적 생성
             for (var i = 0; i < _verticalSlotCount; i++)
             {
@@ -116,7 +94,7 @@ namespace Backend.Object.UI
                     // 생성한 슬롯 인스턴스의 피벗을 좌상단으로 설정한다.
                     var clone = Clone();
                     clone.pivot = new Vector2(0f, 1f);
-                    clone.anchoredPosition = anchoredPosition;
+                    clone.anchoredPosition = anchoredPos;
                     clone.gameObject.SetActive(true);
                     clone.gameObject.name = $"Item Slot [{index}]";
 
@@ -125,12 +103,12 @@ namespace Backend.Object.UI
                     Slots.Add(slot);
 
                     // Next X
-                    anchoredPosition.x += _slotMargin + _slotSize;
+                    anchoredPos.x += _slotMargin + _slotSize;
                 }
 
                 // Next Line
-                anchoredPosition.x = beginPos.x;
-                anchoredPosition.y -= _slotMargin + _slotSize;
+                anchoredPos.x = slotBeginPos.x;
+                anchoredPos.y -= _slotMargin + _slotSize;
             }
 
             // 슬롯 프리팹 - 프리팹이 아닌 경우 파괴
@@ -140,55 +118,14 @@ namespace Backend.Object.UI
             }
         }
 
-        private void OnEnable()
-        {
-            _controls = new UIControls();
-            _controls.Inventory.Enable();
-            _controls.Inventory.Drag.performed += Drag;
-            _controls.Inventory.ClickLeftMouseButton.performed += PressLeftMouseButton;
-            _controls.Inventory.ClickLeftMouseButton.canceled += ReleaseLeftMouseButton;
-        }
-
-        private void Update()
-        {
-            // 현재 프레임의 슬롯.
-            var current = _pointerOverSlot = Raycast<ItemSlotView>();
-
-            if (current != _pointerOverSlot)
-            {
-                if (_pointerOverSlot != null)
-                {
-                    _pointerOverSlot.IsHighlighted = false;
-                }
-                if (current != null && _showHighlight)
-                {
-                    current.IsHighlighted = true;
-                }
-                _pointerOverSlot = current;
-            }
-
-        }
-
-        private void OnDisable()
-        {
-            _controls.Inventory.Drag.performed -= Drag;
-            _controls.Inventory.ClickLeftMouseButton.performed -= PressLeftMouseButton;
-            _controls.Inventory.ClickLeftMouseButton.canceled -= ReleaseLeftMouseButton;
-            _controls.Inventory.Disable();
-            _controls = null;
-        }
-
         private RectTransform Clone()
         {
-            //TODO: Object Pool Manager를 사용한 인스턴스 생성 방법으로 교체해야 한다.
-            var rectTransform = Instantiate(_slotUiPrefab).GetComponent<RectTransform>();
-            rectTransform.SetParent(_contentAreaRT);
-            rectTransform.transform.localScale = Vector3.one;
+            var instance = ObjectPoolManager.SpawnPoolObject(_slotUiPrefab, null, null, _contentAreaRT).GetComponent<RectTransform>();
+            instance.transform.localScale = Vector3.one;
 
-            return rectTransform;
+            return instance;
         }
 
-        /// <summary> 슬롯에 아이템 아이콘 등록 </summary>
         public void SetItemIconImageByIndex(int index, Sprite icon)
         {
             Slots[index].IconImage = icon;
