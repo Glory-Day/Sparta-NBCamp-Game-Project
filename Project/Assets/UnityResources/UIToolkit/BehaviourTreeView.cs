@@ -1,12 +1,13 @@
 #if UNITY_EDITOR
 
 using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using UnityEditor.Experimental.GraphView;
+using UnityEditor;
 
 public class BehaviourTreeView : GraphView
 {

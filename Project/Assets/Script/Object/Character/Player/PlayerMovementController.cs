@@ -104,10 +104,22 @@ namespace Backend.Object.Character.Player
         {
             const float radius = 0.04f;
 
+#if UNITY_EDITOR
+
             if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
             {
                 return;
             }
+
+#else
+
+            if (_sensor == null || _sensor.IsDetected == false)
+            {
+                return;
+            }
+
+#endif
+
 
             var position = Vector3.zero;
             var distance = Vector3.zero;

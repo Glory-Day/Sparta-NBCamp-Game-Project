@@ -1,7 +1,12 @@
 ﻿using System.Collections.Generic;
 using Backend.Object.Character.Enemy;
-using UnityEditor;
 using UnityEngine;
+
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+#endif
 
 [CreateAssetMenu()]
 public class BehaviourTree : ScriptableObject
@@ -37,9 +42,10 @@ public class BehaviourTree : ScriptableObject
 #if UNITY_EDITOR
 
         Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
-        Nodes.Add(node);
 
 #endif
+
+        Nodes.Add(node);
 
 #if UNITY_EDITOR
 
@@ -68,6 +74,9 @@ public class BehaviourTree : ScriptableObject
 #if UNITY_EDITOR
 
         //AssetDatabase.RemoveObjectFromAsset(node);
+
+#if UNITY_EDITOR
+
         Undo.DestroyObjectImmediate(node);
         AssetDatabase.SaveAssets();
 
