@@ -1,4 +1,6 @@
-﻿using Backend.Util.Debug;
+﻿using System;
+using Backend.Util.Debug;
+using Backend.Util.Presentation;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -17,6 +19,12 @@ namespace Backend.Object.UI
         private Vector2 _beginDragCursorPoint; // 드래그 시작 시 커서의 위치
         private int _selectedSlotSiblingIndex;
 
+        public Action<int> RemoveAction;
+        public Action<int, int> SwapAction;
+
+        public Action<int> InfoAction;
+        public Action UpdateAction;
+
         private void PressLeftMouseButton(InputAction.CallbackContext context)
         {
             _pointerEventData.position = _cursorPosition;
@@ -26,6 +34,8 @@ namespace Backend.Object.UI
             // 아이템을 가지고 있는 슬롯인 경우에 다음과 같다.
             if (_selectedSlot != null && _selectedSlot.HasItem)
             {
+                Debugger.LogProgress("Use LeftMouseButton Function Inner");
+
                 // 위치 및 슬롯 관련 값를 저장한다.
                 _selectedSlotTransform = _selectedSlot.IconImageRectTransform.transform;
                 _selectedSlotPosition = _selectedSlotTransform.position;
@@ -37,6 +47,8 @@ namespace Backend.Object.UI
 
                 // 해당 슬롯의 하이라이트 이미지를 아이콘 이미지보다 뒤에 위치시킨다.
                 _selectedSlot.HighlightImageRectTransform.SetAsFirstSibling();
+
+                InfoAction?.Invoke(_selectedSlot.Index);
             }
             else
             {
@@ -101,23 +113,23 @@ namespace Backend.Object.UI
 
             // 확인 팝업 띄우고 콜백을 위임한다.
             var index = _selectedSlot.Index;
-            var itemName = _inventory.GetItemName(index);
-            var count = _inventory.GetCurrentAmount(index);
+            //var itemName = _inventory.GetItemName(index);
+            //var count = _inventory.GetCurrentAmount(index);
 
-            // 셀 수 있는 아이템의 경우에 수량을 표시한다.
-            if (count > 1)
-            {
-                itemName += $"{count}";
-            }
+            //// 셀 수 있는 아이템의 경우에 수량을 표시한다.
+            //if (count > 1)
+            //{
+            //    itemName += $"{count}";
+            //}
 
-            if (_showRemovingPopup)
-            {
-                _popup.OpenConfirmationPopup(() => Remove(index), itemName);
-            }
-            else
-            {
-                Remove(index);
-            }
+            //if (_showRemovingPopup)
+            //{
+            //    _popup.OpenConfirmationPopup(() => Remove(index), itemName);
+            //}
+            //else
+            //{
+            //    Remove(index);
+            //}
         }
 
         /// <summary>
@@ -144,7 +156,7 @@ namespace Backend.Object.UI
         /// </summary>
         private void Remove(int index)
         {
-            _inventory.Remove(index);
+            RemoveAction?.Invoke(index);
         }
 
         /// <summary>
@@ -159,7 +171,7 @@ namespace Backend.Object.UI
 
             a.Move(b);
 
-            _inventory.Swap(a.Index, b.Index);
+            SwapAction?.Invoke(a.Index, b.Index);
         }
 
         private static bool IsPointerOverGameObject()

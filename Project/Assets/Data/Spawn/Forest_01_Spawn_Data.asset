@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 608a58df4bdd4b128e4201ba94d55563, type: 3}
+  m_Name: Forest_01_Spawn_Data
+  m_EditorClassIdentifier: 
+  data:
+  - <Position>k__BackingField: {x: 531.2633, y: 0.24, z: 69.6268}
+    <Rotation>k__BackingField: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
+    <Type>k__BackingField: 0
+  - <Position>k__BackingField: {x: 453.88434, y: 0.004388809, z: 74.9409}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 1
+  - <Position>k__BackingField: {x: 371.87463, y: 12.519171, z: 104.31567}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 1
+  - <Position>k__BackingField: {x: 372.22913, y: 12.2746105, z: 107.45621}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 1
+  - <Position>k__BackingField: {x: 190.72134, y: 0.6190491, z: 96.8183}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 1
+  - <Position>k__BackingField: {x: 188.74876, y: 0.26769924, z: 92.06792}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 1
+  - <Position>k__BackingField: {x: 452.03333, y: -0.000023841858, z: 73.24}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 369.18338, y: 13.106556, z: 102.48313}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 349.19534, y: 8.818263, z: 179.5253}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 350.29065, y: 9.19359, z: 175.17317}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 316.59134, y: 12.125139, z: 179.61078}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 316.53815, y: 10.599263, z: 173.78175}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 187.15471, y: 0.48096848, z: 99.666664}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 184.15091, y: 0.053159714, z: 94.22402}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 2
+  - <Position>k__BackingField: {x: 30.463743, y: 0, z: 136.17358}
+    <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+    <Type>k__BackingField: 3

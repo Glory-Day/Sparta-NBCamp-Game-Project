@@ -27,12 +27,14 @@ namespace Backend.Util.Management
         [Alias("Voice")]
         [SerializeField] private AudioSource voiceAudioSource;
         #endregion
+
         private void PlayBackgroundAudioSource_Internal(AudioClip clip)
         {
             backgroundAudioSource.clip = clip;
             backgroundAudioSource.Play();
             Debugger.LogMessage($"Play <b>{clip.name}</b>");
         }
+
         private void StopBackgroundAudioSource_Internal()
         {
             if (backgroundAudioSource.isPlaying)
@@ -40,6 +42,7 @@ namespace Backend.Util.Management
                 backgroundAudioSource.Stop();
             }
         }
+
         private void PlayEffectAudioSource_Internal(AudioClip clip)
         {
             if (clip == null)
@@ -48,6 +51,7 @@ namespace Backend.Util.Management
             }
             effectAudioSource.PlayOneShot(clip);
         }
+
         private void PlayVoiceAudioSource_Internal(AudioClip clip)
         {
             if (clip == null)
@@ -56,18 +60,22 @@ namespace Backend.Util.Management
             }
             voiceAudioSource.PlayOneShot(clip);
         }
+
         private void SetBackgroundAudioSourceVolume_Internal(float volume)
         {
             masterAudioMixer.SetFloat(backgroundAudioMixerGroup.name, volume);
         }
+
         private void SetEffectAudioSourceVolume_Internal(float volume)
         {
             masterAudioMixer.SetFloat(effectAudioMixerGroup.name, volume);
         }
+
         private void SetVoiceAudioSourceVolume_Internal(float volume)
         {
             masterAudioMixer.SetFloat(voiceAudioMixerGroup.name, volume);
         }
+
         private bool IsBackgroundAudioSourcePlaying_Internal(string name)
         {
             if (backgroundAudioSource == null)
@@ -76,6 +84,7 @@ namespace Backend.Util.Management
             }
             return backgroundAudioSource.isPlaying && backgroundAudioSource.clip.name == name;
         }
+
         #region STATIC METHOD API
         /// <summary>
         /// Play the background audio source with the given audio clip.
@@ -130,6 +139,7 @@ namespace Backend.Util.Management
             return Instance.IsBackgroundAudioSourcePlaying_Internal(name);
         }
         #endregion
+
         #region STATIC PROPERTIES API
         public static bool IsBackgroundAudioSourceMute
         {

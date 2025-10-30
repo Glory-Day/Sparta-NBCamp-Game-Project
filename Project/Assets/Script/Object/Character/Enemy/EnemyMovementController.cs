@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 namespace Backend.Object.Character.Enemy
 {
@@ -25,6 +24,11 @@ namespace Backend.Object.Character.Enemy
         protected override void Awake()
         {
             base.Awake();
+
+        }
+
+        private void OnEnable()
+        {
             InitialPosition = transform.position;
         }
 

@@ -16,6 +16,8 @@ namespace Backend.Object.Character.Player.Animation
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _controller.OnRollingStateExited();
+
+            _controller.IsRollButtonBufferable = false;
         }
     }
 }

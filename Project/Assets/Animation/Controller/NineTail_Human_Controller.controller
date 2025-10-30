@@ -973,7 +973,14 @@ MonoBehaviour:
     TypeEvent: 8
     NormalizeTime: 0.15
     Index: 0
-    Value: 3
+    Value: 2
+    IsBool: 0
+    Pos: {x: 0, y: 0, z: 0}
+  - Descript: "\uC18D\uB3C4 \uC870\uC815 1"
+    TypeEvent: 8
+    NormalizeTime: 0.95
+    Index: 0
+    Value: 1
     IsBool: 0
     Pos: {x: 0, y: 0, z: 0}
 --- !u!1101 &6330800478956661641
@@ -1037,10 +1044,10 @@ AnimatorStateMachine:
     m_Position: {x: -140, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3332379728140550617}
-    m_Position: {x: -60, y: -10, z: 0}
+    m_Position: {x: -30, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2110967135687181397}
-    m_Position: {x: 110, y: 110, z: 0}
+    m_Position: {x: 100, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7295641948624248043}
     m_Position: {x: 190, y: -10, z: 0}

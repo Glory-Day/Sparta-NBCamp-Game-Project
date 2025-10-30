@@ -9,7 +9,7 @@ namespace Backend.Object.Character.Player
         [Header("Controller Reference")]
         [SerializeField] private AdvancedActionController controller;
 
-        [Header("3th Person Settings")]
+        [Header("3th Person Mode Settings")]
         [Tooltip("The general rate at which the camera turns toward the movement direction.\n\n" +
                  "카메라가 움직임 방향으로 회전하는 일반적인 속도.")]
         [SerializeField] private float turningTowardSpeed = 120f;
@@ -28,18 +28,15 @@ namespace Backend.Object.Character.Player
                  "카메라가 컨트롤러의 이동 방향을 향하는지 여부.")]
         [SerializeField] private bool isTurningToward = true;
 
-        [SerializeField] public Transform target;
-        [SerializeField] private LayerMask layerMask;
-
         #endregion
 
         protected override void Update()
         {
             base.Update();
 
-            if (target != null)
+            if (Target != null)
             {
-                RotateTowardPosition(target.position, turningTowardSpeed);
+                RotateTowardPosition(Target.position, turningTowardSpeed);
             }
         }
 
@@ -107,6 +104,8 @@ namespace Backend.Object.Character.Player
             Angles = new Vector2(Angles.x, Angles.y + difference);
         }
 
-        public PerspectiveMode Mode => target != null ? PerspectiveMode.LockOn : PerspectiveMode.ThirdPerson;
+        public PerspectiveMode Mode => Target != null ? PerspectiveMode.LockOn : PerspectiveMode.ThirdPerson;
+
+        public Transform Target { get; set; }
     }
 }
