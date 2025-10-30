@@ -1,4 +1,6 @@
-﻿namespace Backend.Object.Character.Enemy.Node
+﻿using GloryDay.BehaviourTree;
+
+namespace Backend.Object.Character.Enemy.Node
 {
     public class SetRotationToPlayerFalse : ActionNode
     {
