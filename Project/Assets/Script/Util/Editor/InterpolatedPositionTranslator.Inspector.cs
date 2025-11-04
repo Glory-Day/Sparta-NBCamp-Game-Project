@@ -27,13 +27,13 @@ namespace Backend.Util.Editor
                 return;
             }
 
-            switch (component.interpolationMode)
+            switch (component.InterpolationMode)
             {
-                case InterpolatedPositionTranslator.InterpolationMode.Lerp:
-                    component.speed = EditorGUILayout.FloatField(FieldLabel01, component.speed);
+                case InterpolationMode.Lerp:
+                    component.Speed = EditorGUILayout.FloatField(FieldLabel01, component.Speed);
                     break;
-                case InterpolatedPositionTranslator.InterpolationMode.SmoothDamp:
-                    component.time =  EditorGUILayout.FloatField(FieldLabel02, component.time);
+                case InterpolationMode.SmoothDamp:
+                    component.Time =  EditorGUILayout.FloatField(FieldLabel02, component.Time);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

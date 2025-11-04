@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using Backend.Object.Process;
+using Backend.Object.UI;
+using Backend.Object.UI.View;
+using Backend.Util.Data;
 using Backend.Util.Debug;
 using Backend.Util.Management;
+using Script.Util.Extension;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Path = System.IO.Path;
 
 namespace Backend.Object.Management
 {
@@ -45,21 +49,59 @@ namespace Backend.Object.Management
             Debugger.LogProgress();
             Debugger.LogMessage($"{nextSceneName} is loading...");
 
-            Util.Management.ResourceManager.LoadAssetsByLabelAsync(previousSceneName, nextSceneName);
+            UIManager.CloseAllDefaultWindows();
+            UIManager.Clear();
 
-            while (Util.Management.ResourceManager.IsLoadedDone == false)
+            Debugger.LogMessage($"All user interfaces are closed.");
+
+            var value = UIManager.GetDefaultWindow(AddressData.Assets_Prefab_UI_Loading_Window_Prefab);
+            var window = value.GetComponent<Window>();
+            window.Open();
+
+            var view = window.GetComponentInChildren<PointBarView>();
+            view.Change(0f);
+
+            Debugger.LogMessage($"Loading screen is opening.");
+
+            ResourceManager.LoadAssetsByLabelAsync(previousSceneName, nextSceneName);
+
+            var percentage = 0f;
+            while (ResourceManager.IsLoadedDone == false)
             {
-                yield return null;
+                if (percentage < 0.3f)
+                {
+                    percentage = Mathf.Lerp(view.Percentage, ResourceManager.GetProgress() * 0.3f, 0.1f);
+                    view.Change(percentage);
+
+                    yield return null;
+                }
             }
 
-            _asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName, LoadSceneMode.Single);
+            Debugger.LogMessage($"All assets are loaded.");
 
-            while (_asyncOperation?.isDone == false)
+            _asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
+            if (_asyncOperation == null)
             {
-                yield return null;
+                Debugger.LogError($"{CurrentSceneName_Internal} loading failed.");
+
+                yield break;
+            }
+
+            percentage = 0.3f;
+            while (_asyncOperation.isDone == false)
+            {
+                if (percentage < 0.9f)
+                {
+                    percentage = Mathf.Lerp(view.Percentage, 0.3f + (_asyncOperation.progress * 0.6f), 0.1f);
+                    view.Change(percentage);
+
+                    yield return null;
+                }
             }
 
             _currentSceneIndex = index;
+
+            Debugger.LogMessage($"{CurrentSceneName_Internal} are loaded.");
 
             var bootstrap = FindObjectOfType<Bootstrap>();
             if (bootstrap == null)
@@ -68,7 +110,8 @@ namespace Backend.Object.Management
             }
             else
             {
-                Debugger.LogSuccess("Bootstrap found in the scene.");
+                Debugger.LogMessage("Bootstrap found in the scene.");
+                Debugger.LogMessage("Bootstrap is running.");
 
                 bootstrap.Run();
 
@@ -78,22 +121,26 @@ namespace Backend.Object.Management
                 }
             }
 
+            view.Change(1f);
+
             ApplicationManager.SwitchCursorMode(index == 0 ? CursorLockMode.None : CursorLockMode.Locked);
+
+            window.Close();
 
             IsSceneLoaded = true;
 
-            Debugger.LogSuccess($"<b>{nextSceneName}</b> is loaded.");
+            Debugger.LogSuccess($"<b>{nextSceneName}</b> is loaded completely.");
         }
 
-        private void LoadSceneByIndex_Internal(int index)
+        private async void LoadSceneByIndex_Internal(int index)
         {
-            Debugger.LogProgress();
-
             try
             {
-                StartCoroutine(LoadingScene_Internal(index));
+                Debugger.LogProgress();
+
+                await LoadingScene_Internal(index).AsTask(this);
             }
-            catch (IndexOutOfRangeException exception)
+            catch (Exception exception)
             {
                 Debugger.LogError(exception.Message);
             }

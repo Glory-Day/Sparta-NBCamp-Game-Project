@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Backend.Object.Character.Player;
 using Backend.Object.Management;
 using Backend.Object.UI;
@@ -11,7 +12,7 @@ namespace Backend.Object.Process
     [Serializable]
     public class BindingPlayerCharacterProcess : IProcessable
     {
-        public void Run()
+        public IEnumerator Running()
         {
             var currentSceneIndex = SceneManager.CurrentSceneIndex;
             var key = currentSceneIndex switch
@@ -32,20 +33,20 @@ namespace Backend.Object.Process
             var model = clone.GetComponent<PlayerStatus>();
 
             key = AddressData.Assets_Prefab_UI_Battle_Interface_Window_Prefab;
-            origin = UIManager.GetValue(key);
+            origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder01 = origin.GetComponentInChildren<PlayerConditionInformationBinder>();
             binder01.Bind(model);
             origin.SetActive(true);
 
             key = AddressData.Assets_Prefab_UI_Level_Up_Window_Prefab;
-            origin = UIManager.GetValue(key);
+            origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder02 = origin.GetComponent<PlayerLevelStatusInformationBinder>();
             binder02.Bind(model);
 
             key = AddressData.Assets_Prefab_UI_Inventory_Window_Prefab;
-            origin = UIManager.GetValue(key);
+            origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder03 = origin.GetComponent<PlayerInventoryInformationBinder>();
             binder03.Bind(new Inventory(32, 81), model);
@@ -54,6 +55,8 @@ namespace Backend.Object.Process
             key = AddressData.Assets_Prefab_UI_Equipment_Window_Prefab;
 
             Target = clone;
+
+            yield return null;
         }
 
         public GameObject Target { get; set; }

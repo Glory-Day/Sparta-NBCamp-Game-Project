@@ -45,12 +45,12 @@ namespace Backend.Object.Character.Player
             _excluder.Apply();
 
             // Depending on the chosen mode of detection, call different functions to check for colliders.
-            switch (CastMode)
+            switch (SensorMode)
             {
-                case CastMode.SingleRay:
+                case SensorMode.SingleRay:
                     CastBySingleRay(origin, direction);
                     break;
-                case CastMode.MultipleRay:
+                case SensorMode.MultipleRay:
                     CastByMultipleRay(origin, direction);
                     break;
                 default:
@@ -216,7 +216,7 @@ namespace Backend.Object.Character.Player
             };
         }
 
-        public CastMode CastMode { get; set; } = CastMode.SingleRay;
+        public SensorMode SensorMode { get; set; } = SensorMode.SingleRay;
         public LayerMask LayerMask { get; set; } = 255;
 
         public float MaximumDistance { get; set; } = 1f;

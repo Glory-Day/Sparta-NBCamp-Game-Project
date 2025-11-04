@@ -15,14 +15,14 @@ namespace Backend.Util.Editor
 
             var component = (PlayerMovementController)target;
 
-            if (component.mode != CastMode.MultipleRay)
+            if (component.Mode != SensorMode.MultipleRay)
             {
                 return;
             }
 
-            component.rows = EditorGUILayout.IntField("Rows", component.rows);
-            component.count = EditorGUILayout.IntField("Count", component.count);
-            component.isOffset = EditorGUILayout.Toggle("Is Offset", component.isOffset);
+            component.Rows = EditorGUILayout.IntField("Rows", component.Rows);
+            component.Count = EditorGUILayout.IntField("Count", component.Count);
+            component.IsOffset = EditorGUILayout.Toggle("Is Offset", component.IsOffset);
 
             DrawRaycastArrayPreview(component);
 
@@ -48,7 +48,7 @@ namespace Backend.Util.Editor
             Rect background = new (x, y, width, height);
             EditorGUI.DrawRect(background, GUI.skin.settings.selectionColor);
 
-            var positions = component.multipleRayPositions;
+            var positions = component.MultipleRayPositions;
             var center = new Vector2(background.x + (background.width / 2f), background.y + (background.height / 2f));
 
             if (positions != null && positions.Length != 0)
