@@ -93,7 +93,8 @@ namespace Backend.Object.Character.Player
 
         private void Update()
         {
-            if (Controls.Movement.Run.IsPressed())
+            var isThirdPersonMode = Composer.ThirdPersonCameraController.Mode == PerspectiveMode.ThirdPerson;
+            if (isThirdPersonMode && Controls.Movement.Run.IsPressed())
             {
                 _status.IsStaminaPointRegenerable = false;
 
@@ -106,7 +107,7 @@ namespace Backend.Object.Character.Player
             {
                 _status.IsStaminaPointRegenerable = true;
 
-                MovementSpeed = _status.Data.Speed;
+                MovementSpeed = State == State.Rolling ? _status.Data.RunningSpeed : _status.Data.Speed;
                 Composer.AnimationController.SetAnimationBoolean("Is Running", false);
             }
         }
@@ -204,8 +205,6 @@ namespace Backend.Object.Character.Player
                 var h = Vector3.ProjectOnPlane(CameraTransform.right, transform.up).normalized;
                 direction = (h * direction.x) + (v * direction.z);
             }
-
-            Debug.Log(Composer.ThirdPersonCameraController.Mode);
 
             // If necessary, clamp movement vector to magnitude of '1f'.
             if (direction.magnitude > 1f)
