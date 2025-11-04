@@ -1,7 +1,11 @@
 ﻿using System;
-using Backend.Util.Debug;
-using Script.Util.Extension;
 using UnityEngine;
+
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+#endif
 
 namespace Backend.Object.Character.Player
 {
@@ -15,35 +19,36 @@ namespace Backend.Object.Character.Player
 
         #endregion
 
-        #region SERIALIZABLE FIELD API
+        #region SERIALIZABLE PROPERTIES API
 
-        [Header("Movement Settings")] [Range(0f, 1f)]
-        [SerializeField] private float stepHeightRatio = 0.25f;
+        [field: Header("Movement Settings")]
+        [field: Range(0f, 1f)]
+        [field: SerializeField] public float StepHeightRatio { get; private set; } = 0.25f;
 
-        [Header("Collider Settings")]
-        [SerializeField] private float height = 2f;
-        [SerializeField] private float thickness = 1f;
-        [SerializeField] private Vector3 offset = Vector3.zero;
+        [field: Header("Collider Settings")]
+        [field: SerializeField] public CapsuleCollider Collider { get; private set; }
+        [field: SerializeField] public float Height { get; private set; } = 2f;
+        [field: SerializeField] public float Thickness { get; private set; } = 1f;
+        [field: SerializeField] public Vector3 Offset { get; private set; } = Vector3.zero;
 
 #if UNITY_EDITOR
 
-        [Header("Debug Settings")]
-        [SerializeField] private bool isDebugMode;
+        [field: Header("Debug Settings")]
+        [field: SerializeField] public bool IsDebugMode { get; set; }
 
 #endif
 
-        [Header("Detection Settings")]
-        [SerializeField] public CastMode mode = CastMode.SingleRay;
-        [HideInInspector] public int rows = 1;
-        [HideInInspector] public int count = 6;
-        [HideInInspector] public bool isOffset;
+        [field: Header("Detection Settings")]
+        [field: SerializeField] public SensorMode Mode { get; set; } = SensorMode.SingleRay;
 
-        [HideInInspector] public Vector3[] multipleRayPositions;
+        public int Rows { get; set; } = 1;
+        public int Count { get; set; } = 6;
+        public bool IsOffset { get; set; }
+
+        public Vector3[] MultipleRayPositions { get; private set; }
 
         #endregion
 
-        private Collider _collider;
-        private CapsuleCollider _capsuleCollider;
         private Sensor _sensor;
 
         private bool _useExtendedRange = true;
@@ -66,7 +71,7 @@ namespace Backend.Object.Character.Player
 
             SetUp();
 
-            _sensor = new Sensor(transform, _collider);
+            _sensor = new Sensor(transform, Collider);
 
             RecalculateColliderDimensions();
             RecalibrateSensor();
@@ -88,9 +93,9 @@ namespace Backend.Object.Character.Player
             }
 
             // Recalculate raycast array preview positions.
-            if (mode == CastMode.MultipleRay)
+            if (Mode == SensorMode.MultipleRay)
             {
-                multipleRayPositions = Sensor.GetRaycastOriginPositions(rows, 1f, count, isOffset);
+                MultipleRayPositions = Sensor.GetRaycastOriginPositions(Rows, 1f, Count, IsOffset);
             }
         }
 
@@ -106,7 +111,7 @@ namespace Backend.Object.Character.Player
 
 #if UNITY_EDITOR
 
-            if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
+            if (_sensor == null || _sensor.IsDetected == false || IsDebugMode == false)
             {
                 return;
             }
@@ -124,31 +129,31 @@ namespace Backend.Object.Character.Player
             var position = Vector3.zero;
             var distance = Vector3.zero;
 
-            switch (mode)
+            switch (Mode)
             {
-                case CastMode.SingleRay:
+                case SensorMode.SingleRay:
                 {
                     position = _sensor.Position;
                     distance = _sensor.Normal;
 
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawLine(position, position + distance);
-                    Gizmos.DrawSphere(position, radius);
-                    Gizmos.DrawSphere(position + distance, radius);
+                    Handles.color = Color.red;
+                    Handles.DrawLine(position, position + distance);
+                    Handles.SphereHandleCap(0, position, Quaternion.identity, radius * 2f, EventType.Repaint);
+                    Handles.SphereHandleCap(0, position + distance, Quaternion.identity, radius * 2f, EventType.Repaint);
 
                     break;
                 }
-                case CastMode.MultipleRay:
+                case SensorMode.MultipleRay:
                 {
                     for (var i = 0; i < _sensor.Hits.Count; i++)
                     {
                         position = _sensor.Hits[i].Position;
                         distance = _sensor.Hits[i].Normal;
 
-                        Gizmos.color = Color.red;
-                        Gizmos.DrawLine(position, position + distance);
-                        Gizmos.DrawSphere(position, radius);
-                        Gizmos.DrawSphere(position + distance, radius);
+                        Handles.color = Color.red;
+                        Handles.DrawLine(position, position + distance);
+                        Handles.SphereHandleCap(0, position, Quaternion.identity, radius * 2f, EventType.Repaint);
+                        Handles.SphereHandleCap(0, position + distance, Quaternion.identity, radius * 2f, EventType.Repaint);
                     }
 
                     break;
@@ -160,7 +165,7 @@ namespace Backend.Object.Character.Player
 
         private void DrawPosition()
         {
-            if (_sensor == null || _sensor.IsDetected == false || isDebugMode == false)
+            if (_sensor == null || _sensor.IsDetected == false || IsDebugMode == false)
             {
                 return;
             }
@@ -170,36 +175,16 @@ namespace Backend.Object.Character.Player
             var position = _sensor.Position;
             var distance = _sensor.Normal;
 
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size));
-            Gizmos.DrawLine(position + (Vector3.right * size), position - (Vector3.right * size));
-            Gizmos.DrawLine(position + (Vector3.forward * size), position - (Vector3.forward * size));
+            Handles.color = Color.green;
+            Handles.DrawLine(position + (Vector3.up * size), position - (Vector3.up * size));
+            Handles.DrawLine(position + (Vector3.right * size), position - (Vector3.right * size));
+            Handles.DrawLine(position + (Vector3.forward * size), position - (Vector3.forward * size));
         }
 
 #endif
 
         private void SetUp()
         {
-            _collider = GetComponent<Collider>();
-
-            // If no collider is attached to this instance, add a collider.
-            if (_collider == null)
-            {
-                transform.gameObject.AddComponent<CapsuleCollider>();
-
-                _collider = GetComponent<Collider>();
-            }
-
-            // If no rigidbody is attached to this instance, add a rigidbody.
-            if (Rigidbody == null)
-            {
-                transform.gameObject.AddComponent<Rigidbody>();
-
-                Rigidbody = GetComponent<Rigidbody>();
-            }
-
-            _capsuleCollider = GetComponent<CapsuleCollider>();
-
             // Freeze rigidbody rotation and disable rigidbody gravity.
             Rigidbody.freezeRotation = true;
             Rigidbody.useGravity = false;
@@ -210,26 +195,16 @@ namespace Backend.Object.Character.Player
         /// </summary>
         private void RecalculateColliderDimensions()
         {
-            // Check if a collider is attached to this instance.
-            if (_collider == null)
+            Collider.height = Height;
+            Collider.center = Offset * Height;
+            Collider.radius = Thickness / 2f;
+
+            Collider.center += new Vector3(0f, StepHeightRatio * Collider.height / 2f, 0f);
+            Collider.height *= 1f - StepHeightRatio;
+
+            if (Collider.height / 2f < Collider.radius)
             {
-                // Try to get a reference to the attached collider by calling set up.
-                SetUp();
-            }
-
-            if (_capsuleCollider)
-            {
-                _capsuleCollider.height = height;
-                _capsuleCollider.center = offset * height;
-                _capsuleCollider.radius = thickness / 2f;
-
-                _capsuleCollider.center += new Vector3(0f, stepHeightRatio * _capsuleCollider.height / 2f, 0f);
-                _capsuleCollider.height *= 1f - stepHeightRatio;
-
-                if (_capsuleCollider.height / 2f < _capsuleCollider.radius)
-                {
-                    _capsuleCollider.radius = _capsuleCollider.height / 2f;
-                }
+                Collider.radius = Collider.height / 2f;
             }
 
             // Recalibrate sensor variables to fit new collider dimensions.
@@ -252,18 +227,18 @@ namespace Backend.Object.Character.Player
             RecalculateSensorLayerMask();
 
             // Set sensor cast type;
-            _sensor.CastMode = mode;
+            _sensor.SensorMode = Mode;
 
             // Calculate sensor radius/width.
-            var radius = thickness / 2f * RadiusModifier;
+            var radius = Thickness / 2f * RadiusModifier;
 
             // Multiply all sensor lengths with distance factor to compensate for floating point errors.
             const float factor = 0.001f;
 
             // Fit collider height to sensor radius.
-            if (_capsuleCollider)
+            if (Collider)
             {
-                radius = Mathf.Clamp(radius, factor, _capsuleCollider.height / 2f * (1f - factor));
+                radius = Mathf.Clamp(radius, factor, Collider.height / 2f * (1f - factor));
             }
 
             // Set sensor radius.
@@ -271,19 +246,19 @@ namespace Backend.Object.Character.Player
 
             // Calculate and set sensor length.
             var length = 0f;
-            length += height * (1f - stepHeightRatio) * 0.5f;
-            length += height * stepHeightRatio;
+            length += Height * (1f - StepHeightRatio) * 0.5f;
+            length += Height * StepHeightRatio;
             _extendedRange = length * (1f + factor) * transform.localScale.x;
             _sensor.MaximumDistance = length * transform.localScale.x;
 
             // Set sensor array variables.
-            _sensor.Option.Rows = rows;
-            _sensor.Option.Count = count;
-            _sensor.Option.IsOffset = isOffset;
+            _sensor.Option.Rows = Rows;
+            _sensor.Option.Count = Count;
+            _sensor.Option.IsOffset = IsOffset;
 
 #if UNITY_EDITOR
 
-            _sensor.IsDebugMode = isDebugMode;
+            _sensor.IsDebugMode = IsDebugMode;
 
 #endif
 
@@ -345,7 +320,7 @@ namespace Backend.Object.Character.Player
             // Set sensor length.
             if (_useExtendedRange)
             {
-                _sensor.MaximumDistance = _extendedRange + (height * transform.localScale.x * stepHeightRatio);
+                _sensor.MaximumDistance = _extendedRange + (Height * transform.localScale.x * StepHeightRatio);
             }
             else
             {
@@ -369,8 +344,8 @@ namespace Backend.Object.Character.Player
             var distance = _sensor.Distance;
 
             // Calculate how much mover needs to be moved up or down.
-            var length = height * transform.localScale.x * (1f - stepHeightRatio) * 0.5f;
-            var middle = length + (height * transform.localScale.x * stepHeightRatio);
+            var length = Height * transform.localScale.x * (1f - StepHeightRatio) * 0.5f;
+            var middle = length + (Height * transform.localScale.x * StepHeightRatio);
             var difference = middle - distance;
 
             // Set new ground adjustment velocity for the next frame.
@@ -391,10 +366,10 @@ namespace Backend.Object.Character.Player
 
         public float ColliderHeight
         {
-            get => height;
+            get => Height;
             set
             {
-                height = value;
+                Height = value;
 
                 RecalculateColliderDimensions();
             }
@@ -403,22 +378,11 @@ namespace Backend.Object.Character.Player
         /// <returns>
         /// The collider's center in world coordinates system.
         /// </returns>
-        private Vector3 ColliderCenter
-        {
-            get
-            {
-                if (_collider == null)
-                {
-                    SetUp();
-                }
-
-                return _collider.bounds.center;
-            }
-        }
+        private Vector3 ColliderCenter => Collider.bounds.center;
 
         public float ColliderThickness
         {
-            get => thickness;
+            get => Thickness;
             set
             {
                 if (value < 0f)
@@ -426,7 +390,7 @@ namespace Backend.Object.Character.Player
                     value = 0f;
                 }
 
-                thickness = value;
+                Thickness = value;
 
                 RecalculateColliderDimensions();
             }
@@ -438,7 +402,7 @@ namespace Backend.Object.Character.Player
             {
                 value = Mathf.Clamp(value, 0f, 1f);
 
-                stepHeightRatio = value;
+                StepHeightRatio = value;
 
                 RecalculateColliderDimensions();
             }

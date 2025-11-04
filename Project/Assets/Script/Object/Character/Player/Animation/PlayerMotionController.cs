@@ -17,12 +17,12 @@ namespace Backend.Object.Character.Player.Animation
         {
             var normalized = stateInfo.normalizedTime % 1f;
 
-            _controller.deltaSpeed = speed.Evaluate(normalized);
+            _controller.DeltaSpeed = speed.Evaluate(normalized);
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
-            _controller.deltaSpeed = 1f;
+            _controller.DeltaSpeed = 1f;
         }
     }
 }

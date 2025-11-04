@@ -7096,15 +7096,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 7946796221158239751}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0.35, z: 0}
-  radius: 0.15
-  height: 2.5
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!136 &7946796221158239751
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7722,15 +7717,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 238207556546068290}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0, z: 0}
-  radius: 6
-  height: 1
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!136 &238207556546068290
 CapsuleCollider:
   m_ObjectHideFlags: 0

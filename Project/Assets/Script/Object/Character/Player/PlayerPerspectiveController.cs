@@ -1,12 +1,21 @@
 ﻿using System;
+using System.Collections;
+using Backend.Object.Character.Enemy;
 using Backend.Util.Debug;
 using Backend.Util.Input;
+using Script.Object.Character.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+#if UNITY_EDITOR
+
+using UnityEditor;
+
+#endif
+
 namespace Backend.Object.Character.Player
 {
-    public class PerspectiveController : MonoBehaviour
+    public class PlayerPerspectiveController : MonoBehaviour
     {
         #region CONSTANT FIELD API
 
@@ -18,37 +27,34 @@ namespace Backend.Object.Character.Player
 
         #endregion
 
-        #region SERIALIZABLE FIELD API
+        #region SERIALIZABLE PROPERTIES API
 
-        [Header("Controller Reference")]
-        public AdvancedActionController actionController;
-        public ThirdPersonCameraController cameraController;
-        public PlayerAnimationController animationController;
+        [field: Header("Composition Reference")]
+        [field: SerializeField] public PlayerCharacterComposer Composer { get; private set; }
 
-        [Header("Controller Settings")]
-        [Tooltip("Speed at which this instance turns toward the controller's velocity.\n\n" +
-                 "해당 인스턴스가 컨트롤러의 속도를 향해 회전하는 속도.")]
-        [SerializeField] private float turningSpeed = 500f;
+        [field: Header("Controller Settings")]
+        [field: Tooltip("Speed at which this instance turns toward the controller's velocity.\n\n" +
+                        "해당 인스턴스가 컨트롤러의 속도를 향해 회전하는 속도.")]
+        [field: SerializeField] public float TurningSpeed { get; private set; } = 500f;
 
-        [Tooltip("When calculating a new direction, ignore the current controller's momentum if true. Otherwise, false.\n\n" +
-                 "새로운 방향을 계산할 때 현재 컨트롤러의 운동량을 무시해야 하는지 여부.")]
-        [SerializeField] private bool isMomentumIgnored;
+        [field: Tooltip("When calculating a new direction, ignore the current controller's momentum if true. Otherwise, false.\n\n" +
+                        "새로운 방향을 계산할 때 현재 컨트롤러의 운동량을 무시해야 하는지 여부.")]
+        [field: SerializeField] public bool IsMomentumIgnored { get; private set; }
 
         #endregion
+
+        private EnemyCharacterFinder _finder;
+
+        private PlayerControls _controls;
+
+        private EnemyStatus _target;
 
         // Current local rotation around the local y-axis of this instance.
         private float _yAxisAngle;
 
-        private Transform _parent;
-        private Transform _child;
-
-        private EnemyDetector _detector;
-
-        private PlayerControls _controls;
-
         private void Awake()
         {
-            _detector = GetComponent<EnemyDetector>();
+            _finder = GetComponent<EnemyCharacterFinder>();
         }
 
         private void OnEnable()
@@ -60,24 +66,9 @@ namespace Backend.Object.Character.Player
             _controls.Perspective.LockOn.performed += LockOn;
         }
 
-        private void Start()
-        {
-            _parent = transform.parent;
-
-            // Throw warning if no controller has been assigned.
-            if (actionController != null)
-            {
-                return;
-            }
-
-            Debug.LogWarning("No controller script has been assigned to this component.", this);
-
-            enabled = false;
-        }
-
         private void LateUpdate()
         {
-            switch (cameraController.Mode)
+            switch (Composer.ThirdPersonCameraController.Mode)
             {
                 case PerspectiveMode.ThirdPerson:
                     TurnTowardByVelocity();
@@ -97,53 +88,84 @@ namespace Backend.Object.Character.Player
             _controls = null;
         }
 
+#if UNITY_EDITOR
+
+        private void OnDrawGizmos()
+        {
+            const float size = 0.2f;
+
+            var position = transform.position;
+            var point = transform.forward * 10f;
+
+            Handles.color = Color.yellow;
+            Handles.DrawLine(position, position + point);
+            Handles.SphereHandleCap(0, position + point, Quaternion.identity, size, EventType.Repaint);
+            Handles.Label(position + point, "Forward");
+        }
+
+#endif
+
         private void LockOn(InputAction.CallbackContext context)
         {
-            switch (cameraController.Mode)
+            _target = _finder.FindNearestEnemyStatus();
+
+            var mode = Composer.ThirdPersonCameraController.Mode;
+            var target = _target?.transform;
+            if (target == null || mode == PerspectiveMode.LockOn)
             {
-                case PerspectiveMode.ThirdPerson:
-                    Focus();
-                    break;
-                case PerspectiveMode.LockOn:
-                    Cancel();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Cancel();
+            }
+            else
+            {
+                Focus(target);
             }
         }
 
-        private void Focus()
+        private void Focus(Transform target)
         {
             Debugger.LogProgress();
 
-            animationController.SetAnimationBoolean("Is Focusing", true);
+            Composer.ThirdPersonCameraController.InputSystem.Disable();
+            Composer.ThirdPersonCameraController.Mode = PerspectiveMode.LockOn;
+            Composer.ThirdPersonCameraController.Target = target;
 
-            _detector.FidNearestEnemy();
+            StartCoroutine(Focusing());
 
-            var target = _detector.NearestEnemy;
-            if (target == null)
-            {
-                return;
-            }
-
-            cameraController.Target = target;
-
-            animationController.SetAnimationBoolean("Is Focusing", true);
+            Composer.AnimationController.SetAnimationBoolean("Is Focusing", true);
         }
 
         private void Cancel()
         {
             Debugger.LogProgress();
 
-            cameraController.Target = null;
+            _finder.Clear();
 
-            animationController.SetAnimationBoolean("Is Focusing", false);
+            StopAllCoroutines();
+
+            Composer.ThirdPersonCameraController.InputSystem.Enable();
+            Composer.ThirdPersonCameraController.Mode = PerspectiveMode.ThirdPerson;
+            Composer.ThirdPersonCameraController.Target = null;
+
+            Composer.AnimationController.SetAnimationBoolean("Is Focusing", false);
+        }
+
+        private IEnumerator Focusing()
+        {
+            while (true)
+            {
+                if (_target.IsDead)
+                {
+                    Cancel();
+                }
+
+                yield return null;
+            }
         }
 
         private void TurnTowardByVelocity()
         {
             // Get controller velocity.
-            var velocity = isMomentumIgnored ? actionController.MovementVelocity : actionController.Velocity;
+            var velocity = IsMomentumIgnored ? Composer.AdvancedActionController.MovementVelocity : Composer.AdvancedActionController.Velocity;
 
             // Project velocity onto a plane defined by the upside direction of the parent transform.
             velocity = Vector3.ProjectOnPlane(velocity, transform.parent.up);
@@ -167,7 +189,7 @@ namespace Backend.Object.Character.Player
             var factor = Mathf.InverseLerp(0f, Threshold, Mathf.Abs(difference));
 
             // Calculate this frame's step.
-            var step = Mathf.Sign(difference) * factor * Time.deltaTime * turningSpeed;
+            var step = Mathf.Sign(difference) * factor * Time.deltaTime * TurningSpeed;
 
             switch (difference)
             {
@@ -197,7 +219,7 @@ namespace Backend.Object.Character.Player
 
         private void TurnTowardByTarget()
         {
-            var a = cameraController.Target.position;
+            var a = Composer.ThirdPersonCameraController.Target.position;
             var b = a - transform.position;
             b.y = 0f;
 
@@ -206,5 +228,7 @@ namespace Backend.Object.Character.Player
                 transform.rotation = Quaternion.LookRotation(b);
             }
         }
+
+        public Vector3 Forward => transform.forward.normalized;
     }
 }

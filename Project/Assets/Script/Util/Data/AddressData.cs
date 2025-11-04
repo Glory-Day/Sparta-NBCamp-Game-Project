@@ -4,16 +4,18 @@ namespace Backend.Util.Data
 {
 	public static class AddressData
 	{
+		public const string Assets_Data_Spawn_Boss_01_Spawn_Data_Asset = "Assets/Data/Spawn/Boss_01_Spawn_Data.asset";
 		public const string Assets_Data_Spawn_Village_01_Spawn_Data_Asset = "Assets/Data/Spawn/Village_01_Spawn_Data.asset";
 		public const string Assets_Data_Spawn_Forest_01_Spawn_Data_Asset = "Assets/Data/Spawn/Forest_01_Spawn_Data.asset";
-		public const string Assets_Data_Spawn_Boss_01_Spawn_Data_Asset = "Assets/Data/Spawn/Boss_01_Spawn_Data.asset";
 		public const string Assets_Prefab_UI_Level_Up_Window_Prefab = "Assets/Prefab/UI/Level_Up_Window.prefab";
 		public const string Assets_Prefab_UI_Status_Window_Prefab = "Assets/Prefab/UI/Status_Window.prefab";
 		public const string Assets_Prefab_UI_Setting_Window_Prefab = "Assets/Prefab/UI/Setting_Window.prefab";
 		public const string Assets_Prefab_UI_Shop_Window_Prefab = "Assets/Prefab/UI/Shop_Window.prefab";
+		public const string Assets_Prefab_UI_Loading_Window_Prefab = "Assets/Prefab/UI/Loading_Window.prefab";
 		public const string Assets_Prefab_UI_Equipment_Window_Prefab = "Assets/Prefab/UI/Equipment_Window.prefab";
 		public const string Assets_Prefab_UI_Battle_Interface_Window_Prefab = "Assets/Prefab/UI/Battle_Interface_Window.prefab";
 		public const string Assets_Prefab_UI_Inventory_Window_Prefab = "Assets/Prefab/UI/Inventory_Window.prefab";
+		public const string Assets_Prefab_UI_Main_Window_Prefab = "Assets/Prefab/UI/Main_Window.prefab";
 		public const string Assets_Prefab_Character_Enemy_Normal_Tiger_Prefab = "Assets/Prefab/Character/Enemy/Normal/Tiger.prefab";
 		public const string Assets_Prefab_Character_Enemy_Normal_Skeleton_Sword_Prefab = "Assets/Prefab/Character/Enemy/Normal/Skeleton_Sword.prefab";
 		public const string Assets_Prefab_Character_Player_Player_Character_Beta_Prefab = "Assets/Prefab/Character/Player/Player_Character_(Beta).prefab";
@@ -28,20 +30,20 @@ namespace Backend.Util.Data
 				{
 					{ "Gwanghwamun_Scene", new HashSet<string> { } },
 					{ "Main_Scene", new HashSet<string> { } },
+					{ "Boss_01_Scene", new HashSet<string> { "Assets/Data/Spawn/Boss_01_Spawn_Data.asset" } },
 					{ "Village_01_Scene", new HashSet<string> { "Assets/Data/Spawn/Village_01_Spawn_Data.asset" } },
 					{ "Forest_01_Scene", new HashSet<string> { "Assets/Data/Spawn/Forest_01_Spawn_Data.asset" } },
-					{ "Boss_01_Scene", new HashSet<string> { "Assets/Data/Spawn/Boss_01_Spawn_Data.asset" } },
 				}
 			},
 			{
 				"UI",
 				new Dictionary<string, HashSet<string>>()
 				{
-					{ "Boss_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
-					{ "Forest_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
-					{ "Gwanghwamun_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
-					{ "Village_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
-					{ "Main_Scene", new HashSet<string> { "Assets/Prefab/UI/Setting_Window.prefab" } },
+					{ "Boss_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Loading_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
+					{ "Forest_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Loading_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
+					{ "Gwanghwamun_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Loading_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
+					{ "Village_01_Scene", new HashSet<string> { "Assets/Prefab/UI/Level_Up_Window.prefab","Assets/Prefab/UI/Status_Window.prefab","Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Shop_Window.prefab","Assets/Prefab/UI/Loading_Window.prefab","Assets/Prefab/UI/Equipment_Window.prefab","Assets/Prefab/UI/Battle_Interface_Window.prefab","Assets/Prefab/UI/Inventory_Window.prefab" } },
+					{ "Main_Scene", new HashSet<string> { "Assets/Prefab/UI/Setting_Window.prefab","Assets/Prefab/UI/Loading_Window.prefab","Assets/Prefab/UI/Main_Window.prefab" } },
 				}
 			},
 			{
@@ -68,9 +70,9 @@ namespace Backend.Util.Data
 
 		public struct Label
 		{
+			public const string Boss_01_Scene = "Boss_01_Scene";
 			public const string Village_01_Scene = "Village_01_Scene";
 			public const string Forest_01_Scene = "Forest_01_Scene";
-			public const string Boss_01_Scene = "Boss_01_Scene";
 			public const string Gwanghwamun_Scene = "Gwanghwamun_Scene";
 			public const string Main_Scene = "Main_Scene";
 		}

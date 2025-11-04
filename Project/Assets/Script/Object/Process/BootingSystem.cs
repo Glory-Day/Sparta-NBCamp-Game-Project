@@ -32,8 +32,13 @@ namespace Backend.Object.Process
             for (var i = 0; i < names.Length; i++)
             {
                 var asset = Util.Management.ResourceManager.GetUIAsset<GameObject>(names[i]);
-                UIManager.Add(names[i], asset.GetComponent<Window>());
+                UIManager.AddAsDefault(names[i], asset.GetComponent<Window>());
             }
+
+            var value = UIManager.GetDefaultWindow(AddressData.Assets_Prefab_UI_Main_Window_Prefab);
+            var window = value.GetComponent<Window>();
+
+            window.Open();
         }
     }
 }

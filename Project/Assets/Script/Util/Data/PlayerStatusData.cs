@@ -6,10 +6,15 @@ namespace Backend.Util.Data
     [CreateAssetMenu(menuName = "Scriptable Object/Data/Player Status Data")]
     public class PlayerStatusData : StatusData, ISerializable
     {
+        [field: Header("Additional Settings")]
+        [field: Header("Speed Settings")]
+        [field: SerializeField] public float RunningSpeed { get; set; }
+
+        [field: Header("Stamina Settings")]
         [field: SerializeField] public float StaminaPoint { get; set; }
 
+        [field: Header("Status Settings")]
         [field: SerializeField] public int Level { get; set; }
-
         [field: SerializeField] public float LifePoint { get; set; }
         [field: SerializeField] public float ConcentrationPoint { get; set; }
         [field: SerializeField] public float EndurancePoint { get; set; }

@@ -15,11 +15,12 @@ MonoBehaviour:
   <ID>k__BackingField: 
   <Name>k__BackingField: 
   <HealthPoint>k__BackingField: 100
-  <Speed>k__BackingField: 0
+  <Speed>k__BackingField: 3
   <PhysicalDamage>k__BackingField: 5
   <MagicalDamage>k__BackingField: 0
   <PhysicalDefense>k__BackingField: 0
   <MagicalDefense>k__BackingField: 0
+  <RunningSpeed>k__BackingField: 7
   <StaminaPoint>k__BackingField: 100
   <Level>k__BackingField: 1
   <LifePoint>k__BackingField: 0
