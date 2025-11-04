@@ -16,7 +16,7 @@ namespace Backend.Object.Character
 
 #if UNITY_EDITOR
 
-        private Color _color = new (0f, 0.6f, 1f, 1f);
+        private Color _color = new(0f, 0.6f, 1f, 1f);
 
 #endif
 
@@ -34,7 +34,7 @@ namespace Backend.Object.Character
             }
 
             var status = other.GetComponent<Status>();
-            status.TakeDamage(PhysicalDamagePoint, null);
+            status?.TakeDamage(PhysicalDamagePoint, null);
         }
 
         public void StartDetection()

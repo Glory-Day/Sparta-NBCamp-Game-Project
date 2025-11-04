@@ -20,15 +20,30 @@ namespace Backend.Object.Character.Enemy
         [field: SerializeField] public StatusBossData BossStatus { get; private set; }
         private EnemyAnimationController _enemyAnimationController;
 
+        [Header("Sound")]
+        [SerializeField] private int[] takeDamageSfxIndex;
+        [SerializeField] private int deathSfxIndex = -1;
+
+        // 일반 몬스터 인지
+        public bool IsNormalMonster = false;
+
         // 플레이어가 죽었을 때 이벤트
         public event Action OnEnemyDeath;
+        public event Action OnEnemyHit;
         public bool IsParryable = false;
+
+        // 히트 후 움직이기까지 시간
+        public float HitStunTime = 0.5f;
+
+        private bool _isHitAnimationPlaying = false;
+        private EffectSoundPlayer _effectSoundPlayer;
 
         protected override void Awake()
         {
             base.Awake();
 
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
+            _effectSoundPlayer = GetComponent<EffectSoundPlayer>();
         }
 
         public override void TakeDamage(float damage, Vector3? position = null)
@@ -40,7 +55,28 @@ namespace Backend.Object.Character.Enemy
                 currentHealthPoint = 0;
                 OnEnemyDeath?.Invoke();
                 OnEnemyDeath = null;
+                OnEnemyHit = null;
+                if (_effectSoundPlayer != null && deathSfxIndex > 0)
+                {
+                    _effectSoundPlayer.Play(deathSfxIndex);
+                }
+
+                // 플레이어에게 소울 지급
+                // GetComponent<EnemyMovementController>().Target.GetComponent<>().SetSoul(BossStatus.SoulPoint);
+
                 StartCoroutine(FadeOutAndDestroy(5f));
+                return;
+            }
+
+            if (_effectSoundPlayer != null && takeDamageSfxIndex.Length != 0)
+            {
+                _effectSoundPlayer.Play(takeDamageSfxIndex[UnityEngine.Random.Range(0, takeDamageSfxIndex.Length)]);
+            }
+
+            if (IsNormalMonster && !_isHitAnimationPlaying)
+            {
+                StartCoroutine(HitCoroutine());
+                OnEnemyHit?.Invoke();
             }
 
             if (_enemyAnimationController != null)
@@ -59,39 +95,16 @@ namespace Backend.Object.Character.Enemy
         private IEnumerator FadeOutAndDestroy(float delay)
         {
             yield return new WaitForSeconds(delay);
-
-            //// 모든 렌더러를 가져옵니다.
-            //var renderers = GetComponentsInChildren<Renderer>();
-            //float fadeDuration = 2f; // 2초 동안 사라짐
-            //float elapsedTime = 0f;
-
-            //// Dissolve 효과나 투명도 조절을 위한 초기 설정 (Shader에 따라 다름)
-            //// 예: "_Fade" 라는 프로퍼티를 가진 셰이더를 사용한다고 가정
-            //// foreach (var rend in renderers)
-            //// {
-            ////     rend.material.SetFloat("_Fade", 1f);
-            //// }
-
-            //while (elapsedTime < fadeDuration)
-            //{
-            //    elapsedTime += Time.deltaTime;
-            //    float fadeValue = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
-
-            //    foreach (var rend in renderers)
-            //    {
-            //        // 사용하는 셰이더의 프로퍼티에 맞게 수정해야 합니다.
-            //        // 예: rend.material.SetFloat("_Fade", fadeValue);
-
-            //        // 간단한 투명도 조절 예시 (Transparent 셰이더 필요)
-            //        Color color = rend.material.color;
-            //        color.a = fadeValue;
-            //        rend.material.color = color;
-            //    }
-
-            //    yield return null;
-            //}
             // 오브젝트 풀에 반환
             ObjectPoolManager.Release(gameObject);
+        }
+
+        // 히트 애니메이션 중복 방지용 코루틴
+        private IEnumerator HitCoroutine()
+        {
+            _isHitAnimationPlaying = true;
+            yield return new WaitForSeconds(HitStunTime);
+            _isHitAnimationPlaying = false;
         }
     }
 }
