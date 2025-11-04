@@ -7,6 +7,7 @@
         Falling,
         Rising,
         Rolling,
-        Attacking
+        Attacking,
+        Stunned,
     }
 }

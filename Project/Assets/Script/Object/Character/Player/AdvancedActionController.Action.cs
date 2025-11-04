@@ -47,11 +47,12 @@ namespace Backend.Object.Character.Player
                 case State.Grounded:
                 case State.Attacking when IsButtonBufferable:
                 case State.Rolling when IsButtonBufferable:
+                case State.Stunned when IsButtonBufferable:
                 {
                     Debug.Log("Now rolling...");
 
                     //TODO: Fix this code. This code in comment for test.
-                    //_status.UseStamina(0);
+                    _status.UseStamina(0);
 
                     Direction[1] = IsMoving ? Direction[0] : Composer.PerspectiveController.Forward;
                     IsButtonBufferable = false;
@@ -80,6 +81,7 @@ namespace Backend.Object.Character.Player
                 case State.Grounded:
                 case State.Attacking when IsButtonBufferable:
                 case State.Rolling when IsButtonBufferable:
+                case State.Stunned when IsButtonBufferable:
                 {
                     //TODO: Fix this code. This code in comment for test.
                     _status.UseStamina(1);
