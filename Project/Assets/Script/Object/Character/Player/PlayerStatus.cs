@@ -121,6 +121,11 @@ namespace Backend.Object.Character.Player
             return CurrentStaminaPoint >= Costs[index];
         }
 
+        public void TakeSoul(float soul)
+        {
+            Data.Soul += soul;
+        }
+
         public void TestFuction(int index, int point)
         {
             PointChanged[index].Invoke(point);
