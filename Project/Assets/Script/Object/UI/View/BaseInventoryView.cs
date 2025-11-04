@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Backend.Object.Management;
+using Backend.Util.Debug;
 using Backend.Util.Input;
 using Backend.Util.Presentation;
+using Backend.Util.Presentation.Message;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -9,23 +12,25 @@ using UnityEngine.UI;
 
 namespace Backend.Object.UI
 {
-    public partial class InventoryTestView : MonoBehaviour, IView
+    public partial class BaseInventoryView : MonoBehaviour, IView
     {
         #region SERIALIZABLE FIELD API
 
         [Header("Layout Settings")]
-        [Range(0, 10)]
-        [SerializeField] private int _horizontalSlotCount = 8;  // 슬롯 가로 개수
-        [Range(0, 10)]
-        [SerializeField] private int _verticalSlotCount = 8;      // 슬롯 세로 개수
+        [Range(0, 10)] public int _horizontalSlotCount = 8;  // 슬롯 가로 개수
+        [Range(0, 10)] public int _verticalSlotCount = 8;      // 슬롯 세로 개수
         [SerializeField] private float _slotMargin = 8f;          // 한 슬롯의 상하좌우 여백
         [SerializeField] private float _contentAreaPadding = 20f; // 인벤토리 영역의 내부 여백
-        [Range(32, 64)]
-        [SerializeField] private float _slotSize = 64f;      // 각 슬롯의 크기
+
+        [Range(32, 256), SerializeField] private float _slotSizeX = 64f;     // 각 슬롯의 크기
+        [Range(32, 256), SerializeField] private float _slotSizeY = 64f;
 
         [Header("Connected Objects")]
         [SerializeField] private RectTransform _contentAreaRT;             // 슬롯들이 위치할 영역
         [SerializeField] private GameObject _slotUiPrefab;                 // 슬롯의 원본 프리팹
+
+        public InventoryType inventoryType;
+        public Action UpdateAction;
 
         #endregion
 
@@ -34,26 +39,37 @@ namespace Backend.Object.UI
         private GraphicRaycaster _graphicRaycaster;
         private List<RaycastResult> _raycastResults;
 
-        private PointerEventData _pointerEventData;
+        protected PointerEventData _pointerEventData;
 
-        private UIControls _controls;
+        protected UIControls _controls;
 
-        private void OnEnable()
+        protected void OnEnable()
         {
             _controls = new UIControls();
             _controls.Inventory.Enable();
             _controls.Inventory.ClickLeftMouseButton.performed += PressLeftMouseButton;
+            _controls.Inventory.OnMouseMove.performed += OnMouseMove;
+
+            //화면 갱신
+            UpdateAction?.Invoke();
         }
 
-        private void OnDisable()
+        protected void OnDisable()
         {
             _controls.Inventory.Disable();
             _controls.Inventory.ClickLeftMouseButton.performed -= PressLeftMouseButton;
+            _controls.Inventory.OnMouseMove.performed -= OnMouseMove;
             _controls = null;
         }
 
         private void Awake()
         {
+            if(ObjectPoolManager.GetPoolObjectCount(_slotUiPrefab) <= 0)
+            {
+                //부모 설정 어디로 해야할지 모르겠음.
+                ObjectPoolManager.CreatePoolObject(_slotUiPrefab, 20, null);
+            }
+
             TryGetComponent(out _graphicRaycaster);
             if(_graphicRaycaster == null)
             {
@@ -62,10 +78,6 @@ namespace Backend.Object.UI
 
             _pointerEventData = new PointerEventData(EventSystem.current);
             _raycastResults = new List<RaycastResult>(10);
-
-            //슬롯당 크기 지정
-            _slotUiPrefab.TryGetComponent<RectTransform>(out var rectTransform);
-            rectTransform.sizeDelta = new Vector2(_slotSize, _slotSize);
 
             _slotUiPrefab.TryGetComponent<ItemSlotView>(out var itemSlotView);
             if(itemSlotView == null)
@@ -103,12 +115,12 @@ namespace Backend.Object.UI
                     Slots.Add(slot);
 
                     // Next X
-                    anchoredPos.x += _slotMargin + _slotSize;
+                    anchoredPos.x += _slotMargin + _slotSizeX;
                 }
 
                 // Next Line
                 anchoredPos.x = slotBeginPos.x;
-                anchoredPos.y -= _slotMargin + _slotSize;
+                anchoredPos.y -= _slotMargin + _slotSizeY;
             }
 
             // 슬롯 프리팹 - 프리팹이 아닌 경우 파괴
@@ -120,8 +132,11 @@ namespace Backend.Object.UI
 
         private RectTransform Clone()
         {
-            var instance = ObjectPoolManager.SpawnPoolObject(_slotUiPrefab, null, null, _contentAreaRT).GetComponent<RectTransform>();
+            var instance = ObjectPoolManager.SpawnPoolObject(_slotUiPrefab, null, null, null).GetComponent<RectTransform>();
+            instance.SetParent(_contentAreaRT);
             instance.transform.localScale = Vector3.one;
+
+            instance.sizeDelta = new Vector2(_slotSizeX, _slotSizeY);
 
             return instance;
         }
@@ -158,6 +173,7 @@ namespace Backend.Object.UI
         /// <summary> 슬롯에서 아이템 아이콘 제거, 개수 텍스트 숨기기 </summary>
         public void RemoveItem(int index)
         {
+            //Debugger.LogMessage($"RemoveItem Index : {index}, RemoveItemSlot Count and Capacity : {Slots.Count}, {Slots.Capacity}");
             Slots[index].Remove();
         }
     }

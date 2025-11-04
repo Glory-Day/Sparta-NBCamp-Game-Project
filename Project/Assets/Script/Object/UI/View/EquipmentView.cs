@@ -1,18 +1,21 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+using Backend.Util.Debug;
 using UnityEngine.InputSystem;
 
-namespace Backend.Object.UI
+namespace Backend.Object.UI.View
 {
-    public class EquipmentView : InventoryTestView
+    public class EquipmentView : BaseInventoryView
     {
-        private Action EquipAction;
-        private void PressLeftMouseButton(InputAction.CallbackContext context)
+        public Action<int> EquipAction;
+        public Action PopupAction;
+        protected sealed override void PressLeftMouseButton(InputAction.CallbackContext context)
         {
             base.PressLeftMouseButton(context);
+            if(_selectedSlot != null)
+            {
+                Debugger.LogMessage($"EmptySlot Select. You Can Choose Item. Slot : {_selectedSlot}");
+                EquipAction.Invoke(_selectedSlot.Index);
+            }
         }
     }
 }

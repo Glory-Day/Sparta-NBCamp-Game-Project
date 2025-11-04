@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OnMouseMove",
+                    "type": "Value",
+                    "id": "5ad9533d-4380-48c2-b536-6b066712f6f2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -104,6 +113,17 @@
                     "processors": "",
                     "groups": ";Desktop",
                     "action": "Press Left Shift Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5bce34cd-2700-4ab8-84cc-748a81e2a057",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OnMouseMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

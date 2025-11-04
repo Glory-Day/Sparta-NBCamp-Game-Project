@@ -27,10 +27,10 @@ namespace Backend.Object.UI.Presenter
             switch (index)
             {
                 case 0:
-                    _dispatcher.DispatchTo<LifePointDifferenceTextPresenter, IncreasePointMessage>(message);
+                    _dispatcher.DispatchTo<LifePointDifferenceTextPresenter, IncreasePointMessage>(0, message);
                     break;
                 case 2:
-                    _dispatcher.DispatchTo<EndurancePointDifferenceTextPresenter, IncreasePointMessage>(message);
+                    _dispatcher.DispatchTo<EndurancePointDifferenceTextPresenter, IncreasePointMessage>(0, message);
                     break;
             }
         }

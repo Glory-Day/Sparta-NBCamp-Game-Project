@@ -11,32 +11,30 @@ namespace Backend.Object.UI.Presenter
 {
     public class StaminaPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
+            var status = (PlayerStatusData)((PlayerStatus)Model).data;
+
             switch (message)
             {
                 case IncreasePointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint, ((int)((PlayerStatusData)Model.data).StaminaPoint) + msg.Point);
+                    View.Change((int)status.StaminaPoint, (int)status.StaminaPoint + msg.Point);
                     break;
                 case ConfirmMessage msg:
-                    ((PlayerStatusData)Model.data).StaminaPoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint);
+                    status.StaminaPoint = float.Parse(View.UpdatedPointText.text);
+                    View.Change((int)status.StaminaPoint);
                     break;
             }
-            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(message);
+            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(0, message);
         }
     }
 }

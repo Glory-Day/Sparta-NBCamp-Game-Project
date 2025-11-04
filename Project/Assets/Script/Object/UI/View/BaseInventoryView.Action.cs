@@ -7,29 +7,40 @@ using UnityEngine.InputSystem;
 
 namespace Backend.Object.UI
 {
-    public partial class InventoryTestView
+    public partial class BaseInventoryView
     {
-        private Vector2 _cursorPos;
+        protected Vector2 _cursorPos;
 
-        private ItemSlotView _selectedSlot;
+        protected ItemSlotView _selectedSlot;
 
         public Action<int> RemoveAction;
         public Action<int> InfoAction;
-        public Action UpdateAction;
 
-        protected void PressLeftMouseButton(InputAction.CallbackContext context)
+        protected virtual void PressLeftMouseButton(InputAction.CallbackContext context)
         {
             _pointerEventData.position = _cursorPos;
             _selectedSlot = Raycast<ItemSlotView>();
 
-            if(_selectedSlot != null && _selectedSlot.HasItem)
+            Debugger.LogMessage($"LeftMouseButton Activated");
+            if (_selectedSlot != null && _selectedSlot.HasItem)
             {
-                Debugger.LogMessage($"LefT MouseButton Used Selected : {_selectedSlot}");
+                Debugger.LogMessage($"Left MouseButton Used Selected : {_selectedSlot}");
                 InfoAction?.Invoke(_selectedSlot.Index);
             }
         }
 
-        private T Raycast<T>() where T : Component
+        private void OnMouseMove(InputAction.CallbackContext context)
+        {
+            _cursorPos = context.ReadValue<Vector2>();
+            _pointerEventData.position = _cursorPos;
+
+            if (_selectedSlot == null)
+            {
+                return;
+            }
+        }
+
+        protected T Raycast<T>() where T : Component
         {
             _raycastResults.Clear();
             _graphicRaycaster.Raycast(_pointerEventData, _raycastResults);
