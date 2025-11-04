@@ -54,8 +54,8 @@ namespace GloryDay.BehaviourTree.Editor
                     "Assets/Script/Util/Tool/BehaviourTree/Style/BehaviourTreeEditor.uss");
             root.styleSheets.Add(styleSheet);
 
-            _treeView = root.Q<BehaviourTreeView>();
-            _inspectorView = root.Q<InspectorView>();
+            _treeView = root.Q<GloryDay.BehaviourTree.Editor.BehaviourTreeView>();
+            _inspectorView = root.Q<GloryDay.BehaviourTree.Editor.InspectorView>();
             _blackboardView = root.Q<IMGUIContainer>();
             _blackboardView.onGUIHandler = () =>
                                            {
