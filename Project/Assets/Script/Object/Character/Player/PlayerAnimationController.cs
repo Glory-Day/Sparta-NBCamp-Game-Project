@@ -119,6 +119,13 @@ namespace Backend.Object.Character.Player
             Composer.AdvancedActionController.IsButtonBufferable = true;
         }
 
+        private void OnButtonBufferedInvalid()
+        {
+            Debugger.LogProgress();
+
+            Composer.AdvancedActionController.IsButtonBufferable = false;
+        }
+
         private void OnColliderEnabled()
         {
             Debugger.LogProgress();
