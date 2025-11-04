@@ -546,15 +546,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 112883513961828727}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0, z: 0}
-  radius: 0.5
-  height: 0.5
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!136 &112883513961828727
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1134,15 +1129,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 346299516534654324}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0, z: 0}
-  radius: 0.5
-  height: 0.5
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!136 &346299516534654324
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1213,15 +1203,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 3503127299253397909}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0, z: 0}
-  radius: 0.5
-  height: 0.5
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20
 --- !u!136 &3503127299253397909
 CapsuleCollider:
   m_ObjectHideFlags: 0

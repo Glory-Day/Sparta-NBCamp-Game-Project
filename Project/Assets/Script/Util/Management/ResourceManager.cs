@@ -187,9 +187,9 @@ namespace Backend.Util.Management
 
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                GetProgress_Internal();
-
                 _gameObjectAssets[key] = handle.Result;
+
+                Debugger.LogSuccess($"{_gameObjectAssets[key].name} is loaded.");
             }
         }
 
@@ -199,9 +199,9 @@ namespace Backend.Util.Management
 
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                GetProgress_Internal();
-
                 _uiAssets[key] = handle.Result;
+
+                Debugger.LogSuccess($"{_uiAssets[key].name} is loaded.");
             }
         }
 
@@ -211,25 +211,16 @@ namespace Backend.Util.Management
 
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                GetProgress_Internal();
-
                 _dataAssets[key] = handle.Result;
+
+                Debugger.LogSuccess($"{_dataAssets[key].name} is loaded.");
             }
         }
 
         private float GetProgress_Internal()
         {
-            if (_tasks.Count == 0)
-            {
-                return 1f;
-            }
-
             // 로딩 중이라면 목록 내부의 Task를 순회 하며 로딩 완료 된 Task 개수를 확인한다.
-            int completed = _tasks.Count(t => t.IsCompleted);
-
-            // 로딩 완료된 갯수 / 총 갯수 를 나눠 반환 (퍼센트 구하는 공식)
-            var percentage = completed / (float)_tasks.Count;
-            Debugger.LogMessage($"{percentage:N2}");
+            int completed = _tasks.Count(task => task.IsCompleted);
 
             return (float)completed / _tasks.Count;
         }
@@ -297,10 +288,16 @@ namespace Backend.Util.Management
             return null;
         }
 
+        private void Clear_Internal()
+        {
+            _tasks.Clear();
+        }
+
         public bool IsLoadedDone_Internal => _tasks.All(task => task.IsCompleted);
 
         public static void LoadAssetsByLabelAsync(string current)
         {
+            Instance.Clear_Internal();
             Instance.LoadGameObjectAssetsByLabelAsync_Internal(current);
             Instance.LoadUIAssetsByLabelAsync_Internal(current);
             Instance.LoadDataAssetsByLabelAsync_Internal(current);

@@ -31,5 +31,7 @@ namespace Backend.Object.Character
         public event Action<float> HealthPointChanged;
 
         private float NormalizedHealthPoint => currentHealthPoint / maximumHealthPoint;
+
+        public bool IsDead => currentHealthPoint == 0f;
     }
 }

@@ -8,7 +8,6 @@ namespace Backend.Object.Character.Player
     public partial class AdvancedActionController
     {
         private Dictionary<State, List<Node>> _states;
-        private State _state = State.Falling;
 
         private void InitializeStates()
         {
@@ -19,7 +18,7 @@ namespace Backend.Object.Character.Player
                     new Node
                     {
                         Next = State.Rising,
-                        Condition = ShouldRise,
+                        Condition = IsRising,
                         Transition = TranslateToAirborne
                     },
                     new Node
@@ -40,7 +39,7 @@ namespace Backend.Object.Character.Player
                     new Node
                     {
                         Next = State.Rising,
-                        Condition = ShouldRise,
+                        Condition = IsRising,
                         Transition = TranslateToAirborne
                     },
                     new Node
@@ -52,7 +51,7 @@ namespace Backend.Object.Character.Player
                     new Node
                     {
                         Next = State.Grounded,
-                        Condition = () => _movementController.IsGrounded && ShouldSlide() == false,
+                        Condition = () => Composer.MovementController.IsGrounded && ShouldSlide() == false,
                         Transition = TranslateToGrounded
                     }
                 },
@@ -61,13 +60,13 @@ namespace Backend.Object.Character.Player
                     new Node
                     {
                         Next = State.Rising,
-                        Condition = ShouldRise,
+                        Condition = IsRising,
                         Transition = null
                     },
                     new Node
                     {
                         Next = State.Grounded,
-                        Condition = () => _movementController.IsGrounded && ShouldSlide() == false,
+                        Condition = () => Composer.MovementController.IsGrounded && ShouldSlide() == false,
                         Transition = TranslateToGrounded
                     },
                     new Node { Next = State.Sliding, Condition = ShouldSlide }
@@ -77,25 +76,25 @@ namespace Backend.Object.Character.Player
                     new Node
                     {
                         Next = State.Grounded,
-                        Condition = () => ShouldRise() == false && _movementController.IsGrounded && ShouldSlide() == false,
+                        Condition = () => IsRising() == false && Composer.MovementController.IsGrounded && ShouldSlide() == false,
                         Transition = TranslateToGrounded
                     },
                     new Node
                     {
                         Next = State.Sliding,
-                        Condition = () => ShouldRise() == false && ShouldSlide(),
+                        Condition = () => IsRising() == false && ShouldSlide(),
                         Transition = null
                     },
                     new Node
                     {
                         Next = State.Falling,
-                        Condition = () => ShouldRise() == false && ShouldFall(),
+                        Condition = () => IsRising() == false && ShouldFall(),
                         Transition = null
                     },
                     new Node
                     {
                         Next = State.Falling,
-                        Condition = () => _detector != null && _detector.WasDetected,
+                        Condition = () => false,
                         Transition = ContractCeiling
                     }
                 }
@@ -107,19 +106,19 @@ namespace Backend.Object.Character.Player
         /// </summary>
         private State DetermineState()
         {
-            if (_states.ContainsKey(_state) == false)
+            if (_states.ContainsKey(State) == false)
             {
-                return _state;
+                return State;
             }
 
-            foreach (Node transition in _states[_state].Where(transition => transition.Condition()))
+            foreach (Node transition in _states[State].Where(transition => transition.Condition()))
             {
                 transition.Transition?.Invoke();
 
                 return transition.Next;
             }
 
-            return _state;
+            return State;
         }
 
         /// <returns>
@@ -143,64 +142,52 @@ namespace Backend.Object.Character.Player
         /// </returns>
         private bool IsGroundTooSteep()
         {
-            if (_movementController.IsGrounded == false)
+            if (Composer.MovementController.IsGrounded == false)
             {
                 return true;
             }
 
-            return Vector3.Angle(_movementController.GetGroundNormal(), transform.up) > slopeLimit;
+            return Vector3.Angle(Composer.MovementController.GetGroundNormal(), transform.up) > SlopeLimit;
         }
 
-        private bool ShouldRise()
+        private bool IsRising()
         {
             return IsAirborne() && Vector3.Dot(ConvertMomentumToWorldSpace(), transform.up.normalized) > 0f;
         }
 
         private bool ShouldSlide()
         {
-            return _movementController.IsGrounded && IsGroundTooSteep();
+            return Composer.MovementController.IsGrounded && IsGroundTooSteep();
         }
 
         private bool ShouldFall()
         {
-            return _movementController.IsGrounded == false;
+            return Composer.MovementController.IsGrounded == false;
         }
+
+        public State State { get; set; } = State.Falling;
 
         /// <returns>
         /// True if controller is grounded (or sliding down a slope).
         /// </returns>
-        public bool IsGrounded => _state is State.Grounded or State.Sliding or State.Rolling or State.Attacking;
+        public bool IsGrounded => State is State.Grounded or State.Sliding or State.Rolling or State.Attacking;
 
         /// <returns>
         /// True if controller is sliding.
         /// </returns>
-        public bool IsSliding() => _state == State.Sliding;
+        public bool IsSliding() => State == State.Sliding;
 
-        public bool IsRolling => _state is State.Rolling;
-
-        #region NESTED ENUMERATION API
-
-        private enum State
-        {
-            Grounded,
-            Sliding,
-            Falling,
-            Rising,
-            Rolling,
-            Attacking
-        }
-
-        #endregion
+        public bool IsRolling => State is State.Rolling;
 
         #region NESTED STRUCTURE API
 
         private class Node
         {
-            public State Next { get; set; }
+            public State Next { get; init; }
 
-            public Func<bool> Condition { get; set; }
+            public Func<bool> Condition { get; init; }
 
-            public Action Transition { get; set; }
+            public Action Transition { get; init; }
         }
 
         #endregion

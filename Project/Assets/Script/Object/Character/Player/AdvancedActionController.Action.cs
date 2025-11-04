@@ -8,11 +8,7 @@ namespace Backend.Object.Character.Player
 {
     public partial class AdvancedActionController
     {
-        private PlayerControls _actions;
-        private Vector3 _facing = Vector3.zero;
-
         private bool _isRolling;
-        private bool _isRollButtonBuffered;
 
         private int _combatIndex = -1;
         private bool _isAttacking;
@@ -20,133 +16,100 @@ namespace Backend.Object.Character.Player
 
         public event Action<Vector3> OnLand;
 
-        private void Move(InputAction.CallbackContext context)
+        private void OnMoveStarted(InputAction.CallbackContext context)
         {
-            Direction = context.ReadValue<Vector3>().normalized;
-            _facing = Direction == Vector3.zero ? _facing : Direction;
+            IsMoving = true;
+            Composer.AnimationController.SetAnimationBoolean("Is Moving", true);
         }
 
-        private void Roll(InputAction.CallbackContext context)
+        private void OnMovePerformed(InputAction.CallbackContext context)
+        {
+            Direction[0] = context.ReadValue<Vector3>().normalized;
+        }
+
+        private void OnMoveCanceled(InputAction.CallbackContext context)
+        {
+            IsMoving = false;
+            Composer.AnimationController.SetAnimationBoolean("Is Moving", false);
+
+            Direction[0] = Vector3.zero;
+        }
+
+        private void OnRollPerformed(InputAction.CallbackContext context)
         {
             Debugger.LogProgress();
 
-            if (_status.IsUsingStaminaAvailable() == false)
+            if (_status.IsUsingStaminaAvailable(0) == false)
             {
                 return;
             }
 
-            switch (_state)
+            switch (State)
             {
-                case State.Grounded when _state != State.Rolling:
-                    _animationController.SetAnimationBoolean("Is Rolling", true);
+                case State.Grounded:
+                case State.Attacking when IsButtonBufferable:
+                case State.Rolling when IsButtonBufferable:
+                {
+                    //TODO: Fix this code. This code in comment for test.
+                    _status.UseStamina(0);
+
+                    Direction[1] = IsMoving ? Direction[0] : Composer.PerspectiveController.Forward;
+                    IsButtonBufferable = false;
+
+                    Composer.AnimationController.SetAnimationTrigger("Rolled");
+
                     break;
-                case State.Rolling:
-                    _isRollButtonBuffered = IsRollButtonBufferable;
-                    break;
+                }
                 case State.Sliding:
                 case State.Falling:
                 case State.Rising:
-                    break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
 
-        private void Attack(InputAction.CallbackContext context)
+        private void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            _animationController.SetAnimationTrigger("Attack");
-        }
-
-        private void Stop(InputAction.CallbackContext context)
-        {
-            Direction = Vector3.zero;
-        }
-
-        public void OnRollingStateEntered()
-        {
-            Debugger.LogProgress();
-
-            _state = State.Rolling;
-            _isRollButtonBuffered = false;
-
-            _status.UseStamina();
-
-            _actions.Movement.Move.Disable();
-            _actions.Movement.Jump.Disable();
-            _actions.Movement.Attack.Disable();
-
-            Direction = _facing;
-        }
-
-        public void OnRollingStateExited()
-        {
-            Debugger.LogProgress();
-
-            _state = State.Grounded;
-            Direction = Vector3.zero;
-
-            _actions.Movement.Move.Enable();
-            _actions.Movement.Jump.Enable();
-            _actions.Movement.Attack.Enable();
-
-            _animationController.SetAnimationBoolean("Is Rolling", false);
-
-            if (_isRollButtonBuffered)
+            if (_status.IsUsingStaminaAvailable(1) == false)
             {
-                _animationController.SetAnimationBoolean("Is Rolling", true);
+                return;
+            }
+
+            switch (State)
+            {
+                case State.Grounded:
+                case State.Attacking when IsButtonBufferable:
+                case State.Rolling when IsButtonBufferable:
+                {
+                    //TODO: Fix this code. This code in comment for test.
+                    _status.UseStamina(1);
+
+                    Direction[1] = IsMoving ? Direction[0] : Composer.PerspectiveController.Forward;
+                    IsButtonBufferable = false;
+
+                    Composer.AnimationController.SetAnimationTrigger("Attacked");
+                    break;
+                }
+                case State.Sliding:
+                case State.Falling:
+                case State.Rising:
+                default:
+                    break;
             }
         }
 
-        public void OnAttackingStateEntered()
-        {
-            Debugger.LogProgress();
+        public PlayerControls Controls { get; private set; }
 
-            _state = State.Attacking;
+        public Vector3[] Direction { get; set; } = new Vector3[2];
 
-            _actions.Movement.Move.Disable();
-            _actions.Movement.Jump.Disable();
-            _actions.Movement.Roll.Disable();
+        public Vector3 Forward { get; set; }
 
-            Direction = _facing;
-        }
+        public bool IsMoving { get; private set; }
 
-        public void OnAttackingStateExited()
-        {
-            Debugger.LogProgress();
+        public bool IsAttackButtonBufferable { get; set; }
 
-            _state = State.Grounded;
-            Direction = Vector3.zero;
+        public bool IsRollButtonBuffered { get; set; }
 
-            _actions.Movement.Move.Enable();
-            _actions.Movement.Jump.Enable();
-            _actions.Movement.Roll.Enable();
-        }
-
-        public void OnDamagedStateEntered()
-        {
-            Debugger.LogProgress();
-
-            _actions.Movement.Move.Disable();
-            _actions.Movement.Jump.Disable();
-            _actions.Movement.Roll.Disable();
-            _actions.Movement.Attack.Disable();
-        }
-
-        public void OnDamagedStateExited()
-        {
-            Debugger.LogProgress();
-
-            _actions.Movement.Move.Enable();
-            _actions.Movement.Jump.Enable();
-            _actions.Movement.Roll.Enable();
-            _actions.Movement.Attack.Enable();
-
-            _animationController.SetAnimationFloat("Damage", 0f);
-        }
-
-
-        public Vector3 Direction { get; set; } = Vector3.zero;
-
-        public bool IsRollButtonBufferable { get; set; }
+        public bool IsButtonBufferable { get; set; }
     }
 }
