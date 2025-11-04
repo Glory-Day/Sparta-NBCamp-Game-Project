@@ -189,7 +189,7 @@ namespace Backend.Object.Character.Player
             // If a camera transform has been assigned, use the assigned transform's axes for movement direction.
             // Project movement direction so movement stays parallel to the ground.
             var isLockedOn = Composer.ThirdPersonCameraController.Mode == PerspectiveMode.LockOn;
-            if (isLockedOn)
+            if (isLockedOn && State == State.Grounded)
             {
                 var target = Composer.ThirdPersonCameraController.Target;
                 var forward = target.position - transform.position;
