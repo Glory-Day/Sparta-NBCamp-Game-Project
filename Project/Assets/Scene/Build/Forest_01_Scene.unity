@@ -20,10 +20,10 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 10
   m_LinearFogEnd: 200
-  m_AmbientSkyColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
-  m_AmbientEquatorColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
-  m_AmbientGroundColor: {r: 0.6032093, g: 0.4570546, b: 0.41468316, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientSkyColor: {r: 0.047837317, g: 0.08896488, b: 0.23584908, a: 1}
+  m_AmbientEquatorColor: {r: 0.047837317, g: 0.08896488, b: 0.23584908, a: 1}
+  m_AmbientGroundColor: {r: 0.047837317, g: 0.08896488, b: 0.23584908, a: 1}
+  m_AmbientIntensity: 0.25
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.6901961, g: 0.76862746, b: 0.87058824, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: af73272e223d9ad4e962d490f46402c1, type: 2}
@@ -869,52 +869,80 @@ PrefabInstance:
       value: AzureCoreSystem
       objectReference: {fileID: 0}
     - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_timeSystem.m_hour
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_timeSystem.m_minute
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_timeSystem.m_timeLoop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_timeSystem.m_timeline
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_timeSystem.m_dayLength
-      value: 10
+      value: 100000
       objectReference: {fileID: 0}
     - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_timeSystem.m_startTime
-      value: 17.5
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_timeSystem.m_timeOfDay
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_timeSystem.m_evaluationTime
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_timeSystem.m_minLightAltitude
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_evaluationTime
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_evaluationTimeGradient
+      value: 0.7916667
+      objectReference: {fileID: 0}
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7055929
+      value: 0.092295974
       objectReference: {fileID: 0}
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.046247
+      value: -0.7010575
       objectReference: {fileID: 0}
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.70559275
+      value: -0.09229596
       objectReference: {fileID: 0}
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.046246994
+      value: -0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: 4103551949178911760, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.70559293
+      value: 0.092295974
       objectReference: {fileID: 0}
     - target: {fileID: 4103551949178911760, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.046247
+      value: -0.7010575
       objectReference: {fileID: 0}
     - target: {fileID: 4103551949178911760, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7055928
+      value: -0.09229596
       objectReference: {fileID: 0}
     - target: {fileID: 4103551949178911760, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.046246994
+      value: -0.7010574
       objectReference: {fileID: 0}
     - target: {fileID: 4791347190383301350, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -925,8 +953,20 @@ PrefabInstance:
       value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_Color.b
+      value: 0.46226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_Color.g
+      value: 0.27900153
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_Color.r
+      value: 0.15917587
+      objectReference: {fileID: 0}
+    - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_Intensity
-      value: 1
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_Shadows.m_Type
@@ -934,19 +974,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6255840395601179683, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7055928
+      value: -0.09229596
       objectReference: {fileID: 0}
     - target: {fileID: 6255840395601179683, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.046246994
+      value: -0.7010573
       objectReference: {fileID: 0}
     - target: {fileID: 6255840395601179683, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.70559293
+      value: -0.092295974
       objectReference: {fileID: 0}
     - target: {fileID: 6255840395601179683, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.046247
+      value: 0.70105755
       objectReference: {fileID: 0}
     - target: {fileID: 7953403546012018190, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalScale.x
@@ -1009,12 +1049,20 @@ PrefabInstance:
       value: 0.496
       objectReference: {fileID: 0}
     - target: {fileID: 9063230162086782788, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000016152688
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063230162086782788, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0000000028588611
+      value: -0.000000021265416
+      objectReference: {fileID: 0}
+    - target: {fileID: 9063230162086782788, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9914449
       objectReference: {fileID: 0}
     - target: {fileID: 9063230162086782788, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.06540312
+      value: -0.13052617
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
