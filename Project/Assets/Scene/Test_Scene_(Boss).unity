@@ -191,7 +191,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progresses:
-  - {fileID: 40510954}
+  - rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &74521501
 GameObject:
   m_ObjectHideFlags: 0
@@ -12675,6 +12680,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6109725761331555252}
     m_Modifications:
+    - target: {fileID: 321224502094227773, guid: 535260bad50503f44bce3923b5c59971, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3782619014347022786, guid: 535260bad50503f44bce3923b5c59971, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -12758,6 +12767,10 @@ PrefabInstance:
     - target: {fileID: 4891545338524098419, guid: 535260bad50503f44bce3923b5c59971, type: 3}
       propertyPath: m_Name
       value: Equipment_Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891545338524098419, guid: 535260bad50503f44bce3923b5c59971, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13520,7 +13533,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1072476909066783432
 GameObject:
   m_ObjectHideFlags: 0
@@ -26059,6 +26072,10 @@ PrefabInstance:
     - target: {fileID: 1661770950382899053, guid: 9162f09b2fb818a4897f7f618c0d75a6, type: 3}
       propertyPath: m_Name
       value: Status_Window
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661770950382899053, guid: 9162f09b2fb818a4897f7f618c0d75a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6523329496624442406, guid: 9162f09b2fb818a4897f7f618c0d75a6, type: 3}
       propertyPath: m_Pivot.x
