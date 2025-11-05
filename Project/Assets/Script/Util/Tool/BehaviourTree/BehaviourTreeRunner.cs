@@ -37,12 +37,16 @@ namespace GloryDay.BehaviourTree
 
             _hitStunTime = component.Status.HitStunTime;
 
-            if (component.MovementController.IsGetUp)
+            
+        }
+        private void OnEnable()
+        {
+            EnemyMovementController movementController = GetComponent<EnemyMovementController>();
+            if (movementController.IsGetUp)
             {
-                StartCoroutine(GetUpAfterDelay(0.1f));
+                StartCoroutine(GetUpAfterDelay(1f));
             }
         }
-
         private void Update()
         {
             if (stop)
@@ -82,11 +86,12 @@ namespace GloryDay.BehaviourTree
             yield return wait;
             EnemyAnimationController animationController = GetComponent<EnemyAnimationController>();
             EnemyMovementController movementController = GetComponent<EnemyMovementController>();
-            int SkillName = Animator.StringToHash("GetUp");
+            //int SkillName = Animator.StringToHash("GetUp");
 
-            animationController.SetCrossFadeInFixedTime(SkillName, 0f); // 공격 애니메이션 재생
+            //animationController.SetCrossFadeInFixedTime(SkillName, 0f);
+            animationController.SetAnimationTrigger("IsGetUp");
             animationController.SetAnimatorSpeed(0f);
-
+            Debug.Log("GetUp Animation Start");
             while (movementController.Target == null)
             {
                 yield return wait;
