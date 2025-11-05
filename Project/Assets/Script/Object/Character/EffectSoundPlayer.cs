@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Backend.Util.Debug;
 using Backend.Util.Management;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 namespace Backend.Object.Character
 {
@@ -31,9 +32,9 @@ namespace Backend.Object.Character
                 Debugger.LogError($"유효한 인덱스 번호가 아닙니다 -> {index}");
                 return;
             }
-
-            _source.clip = _clips[index];
-            _source.Play();
+            //_source.Stop();
+            //_source.clip = _clips[index];
+            _source.PlayOneShot(_clips[index]);
         }
 
 #if UNITY_EDITOR

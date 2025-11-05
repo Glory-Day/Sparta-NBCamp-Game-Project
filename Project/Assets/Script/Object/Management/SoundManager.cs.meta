@@ -3,7 +3,14 @@ guid: 1a28c1b076b27f84982461809c0998cb
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - masterAudioMixer: {fileID: 24100000, guid: 8ce4f89812f7de5439ce5ec27224fdfb, type: 2}
+  - backgroundAudioMixerGroup: {fileID: -9045471983816107458, guid: 8ce4f89812f7de5439ce5ec27224fdfb, type: 2}
+  - effectAudioMixerGroup: {fileID: -8814013328129135118, guid: 8ce4f89812f7de5439ce5ec27224fdfb, type: 2}
+  - voiceAudioMixerGroup: {fileID: 2959401642530211019, guid: 8ce4f89812f7de5439ce5ec27224fdfb, type: 2}
+  - backgroundAudioSource: {instanceID: 0}
+  - effectAudioSource: {instanceID: 0}
+  - voiceAudioSource: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
