@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Backend.Object.UI.Presenter
 {
-    public abstract class LayoutGroupPresenter : Presenter<ActiveView, Inventory>, ISubscriber
+    public class LayoutGroupPresenter : Presenter<ActiveView, Inventory>, ISubscriber
     {
         private Dispatcher _dispatcher;
         public LayoutGroupPresenter(ActiveView view, Inventory model, Dispatcher dispatcher) : base(view, model)
@@ -23,6 +23,15 @@ namespace Backend.Object.UI.Presenter
             _dispatcher.Unsubscribe(this);
         }
 
-        public abstract void Receive<T>(T message);
+        public void Receive<T>(T message)
+        {
+            if(message is LayoutActiveMessage msg)
+            {
+                if (msg.Layout == View.layoutType)
+                {
+                    View.Change(msg.Value);
+                }
+            }
+        }
     }
 }

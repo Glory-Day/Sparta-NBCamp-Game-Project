@@ -8,36 +8,34 @@ namespace Backend.Object.UI.Presenter
 {
     public class LevelPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
         private int _totalLevel;
-        public LevelPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public LevelPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
             _totalLevel = 0;
         }
 
         public override void Clear()
         {
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
-            var statusData = (PlayerStatusData)Model.data;
-
-            switch (message)
+            if(Model is PlayerStatus playerStatus)
             {
-                case IncreasePointMessage msg:
-                    _totalLevel += msg.Point;
-                    View.Change(statusData.Level, statusData.Level + _totalLevel);
-                    break;
-                case ConfirmMessage msg:
-                    statusData.Level += _totalLevel;
-                    View.Change(statusData.Level);
-                    _totalLevel = 0;
-                    break;
+                var status = (PlayerStatusData)playerStatus.data;
+                switch (message)
+                {
+                    case IncreasePointMessage msg:
+                        _totalLevel += msg.Point;
+                        View.Change(status.Level, status.Level + _totalLevel);
+                        break;
+                    case ConfirmMessage msg:
+                        status.Level += _totalLevel;
+                        View.Change(status.Level);
+                        _totalLevel = 0;
+                        break;
+                }
             }
         }
     }

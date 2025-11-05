@@ -57,8 +57,6 @@ namespace Backend.Object.Character.Player
         {
             base.Awake();
 
-            PointChanged = new Action<int>[7];
-
             MaximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
             CurrentStaminaPoint = MaximumStaminaPoint;
 
@@ -126,14 +124,7 @@ namespace Backend.Object.Character.Player
             Data.Soul += soul;
         }
 
-        public void TestFuction(int index, int point)
-        {
-            PointChanged[index].Invoke(point);
-        }
-
         public Action<float> StaminaPointChanged;
-        //액션 배열
-        public Action<int>[] PointChanged;
 
         public bool IsStaminaPointRegenerable { get; set; } = true;
 
