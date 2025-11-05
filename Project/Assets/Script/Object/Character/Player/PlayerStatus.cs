@@ -57,8 +57,6 @@ namespace Backend.Object.Character.Player
         {
             base.Awake();
 
-            PointChanged = new Action<int>[7];
-
             MaximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
             CurrentStaminaPoint = MaximumStaminaPoint;
 

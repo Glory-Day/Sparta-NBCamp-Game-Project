@@ -55,7 +55,7 @@ namespace Backend.Object.UI.Presenter
                         View.Change(playerStatus.maximumHealthPoint.ToString());
                         break;
                     case StatusPointMessage msg when msg.StatusType == StatusType.MaximumStamina:
-                        View.Change(playerStatus.maximumStaminaPoint.ToString());
+                        View.Change(playerStatus.MaximumStaminaPoint.ToString());
                         break;
                 }
             }
@@ -97,7 +97,7 @@ namespace Backend.Object.UI.Presenter
                         View.Change(playerStatus.maximumHealthPoint.ToString());
                         break;
                     case StatusType.MaximumStamina:
-                        View.Change(playerStatus.maximumStaminaPoint.ToString());
+                        View.Change(playerStatus.MaximumStaminaPoint.ToString());
                         break;
                 }
             }

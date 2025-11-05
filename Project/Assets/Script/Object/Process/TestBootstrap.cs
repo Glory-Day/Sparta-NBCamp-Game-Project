@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Backend.Object.Process
 {
-    public class TestBootstrap : Process
+    public class TestBootstrap : MonoBehaviour
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private PlayerConditionInformationBinder binder;
@@ -20,7 +20,7 @@ namespace Backend.Object.Process
         [SerializeField] private PlayerStatusInformationBinder binder5;
 
         [SerializeField] private ItemData[] testItem = new ItemData[4];
-        public override void Run()
+        public void Run()
         {
             var position = transform.position;
             var rotation = transform.rotation;
