@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Backend.Object.Character.Enemy
@@ -91,7 +90,7 @@ namespace Backend.Object.Character.Enemy
         public bool IsStatePlayingByTag(int tagHash, int layer)
         {
             var currentStateInfo = Animator.GetCurrentAnimatorStateInfo(layer);
-            if(currentStateInfo.tagHash == tagHash)
+            if (currentStateInfo.tagHash == tagHash)
             {
                 return true;
             }
@@ -99,7 +98,7 @@ namespace Backend.Object.Character.Enemy
             if (Animator.IsInTransition(layer))
             {
                 var nextStateInfo = Animator.GetNextAnimatorStateInfo(layer);
-                if(nextStateInfo.tagHash == tagHash)
+                if (nextStateInfo.tagHash == tagHash)
                 {
                     return true;
                 }
@@ -167,7 +166,7 @@ namespace Backend.Object.Character.Enemy
 
             timer = 0f;
             float WeightDownDuration = 0.2f;
-            while(timer < WeightDownDuration)
+            while (timer < WeightDownDuration)
             {
                 float weight = Mathf.Lerp(1, 0, timer / WeightDownDuration);
                 Animator.SetLayerWeight(1, weight);
@@ -183,6 +182,11 @@ namespace Backend.Object.Character.Enemy
         public void PlayDeathAnimation()
         {
             Animator.SetTrigger("IsDie");
+        }
+
+        public void PlayHitAnimation()
+        {
+            Animator.SetTrigger("IsHit");
         }
     }
 }
