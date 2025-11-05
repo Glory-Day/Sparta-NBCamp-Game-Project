@@ -39,20 +39,20 @@ namespace Backend.Object.Process
             binder01.Bind(model);
             origin.SetActive(true);
 
-            key = AddressData.Assets_Prefab_UI_Level_Up_Window_Prefab;
+            key = AddressData.Assets_Prefab_UI_Level_Up_Window_1_Prefab;
             origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder02 = origin.GetComponent<PlayerLevelStatusInformationBinder>();
             binder02.Bind(model);
 
-            key = AddressData.Assets_Prefab_UI_Inventory_Window_Prefab;
+            key = AddressData.Assets_Prefab_UI_Inventory_Window_1_Prefab;
             origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder03 = origin.GetComponent<PlayerInventoryInformationBinder>();
             binder03.Bind(new Inventory(32, 81), model);
 
-            key = AddressData.Assets_Prefab_UI_Status_Window_Prefab;
-            key = AddressData.Assets_Prefab_UI_Equipment_Window_Prefab;
+            key = AddressData.Assets_Prefab_UI_Status_Window_1_Prefab;
+            key = AddressData.Assets_Prefab_UI_Equipment_Window_1_Prefab;
 
             Target = clone;
 

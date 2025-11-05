@@ -36,6 +36,14 @@ namespace Backend.Object.Character.Enemy
             StartCoroutine(FindTargetsWithDelay(0.2f));
         }
 
+        private void OnEnable()
+        {
+            if (_movementController.IsGetUp)
+            {
+                viewAngle = 360f;
+            }
+        }
+
         private IEnumerator FindTargetsWithDelay(float delay)
         {
             WaitForSeconds wait = new WaitForSeconds(delay);

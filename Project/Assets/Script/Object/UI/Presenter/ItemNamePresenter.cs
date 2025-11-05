@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Backend.Object.Character.Player;
+using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
 using Script.Object.UI;
@@ -15,11 +17,14 @@ namespace Backend.Object.UI.Presenter
 
         public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is Inventory inventory)
             {
-                case InventoryPointMessage msg:
-                    View.Change(Model.items[msg.Index].Name);
-                    break;
+                switch (message)
+                {
+                    case InventoryPointMessage msg:
+                        View.Change(inventory.items[msg.Index].Name);
+                        break;
+                }
             }
         }
     }

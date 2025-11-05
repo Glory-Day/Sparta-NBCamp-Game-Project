@@ -52,9 +52,33 @@ namespace Backend.Object.Character.Player
                     Debug.Log("Now rolling...");
 
                     //TODO: Fix this code. This code in comment for test.
-                    _status.UseStamina(0);
+                    if (IsMoving)
+                    {
+                        // 입력(Direction[0])을 카메라 기준 월드 방향으로 변환해서 저장
+                        if (CameraTransform != null)
+                        {
+                            var v = Vector3.ProjectOnPlane(CameraTransform.forward, transform.up).normalized;
+                            var h = Vector3.ProjectOnPlane(CameraTransform.right, transform.up).normalized;
 
-                    Direction[1] = IsMoving ? Direction[0] : Composer.PerspectiveController.Forward;
+                            var input = Direction[0];
+                            var worldDir = (h * input.x) + (v * input.z);
+
+                            Direction[1] = worldDir.sqrMagnitude > 0f ? worldDir.normalized : transform.forward;
+                        }
+                        else
+                        {
+                            // 카메라가 없으면 로컬 forward를 사용
+                            Direction[1] = transform.forward;
+                        }
+                    }
+                    else
+                    {
+                        // 정지 상태에서의 롤은 카메라(또는 시점)의 forward를 기준으로 롤
+                        var fwd = Composer.PerspectiveController.Forward;
+                        fwd.y = 0f;
+                        Direction[1] = fwd.sqrMagnitude > 0f ? fwd.normalized : transform.forward;
+                    }
+
                     IsButtonBufferable = false;
 
                     Composer.AnimationController.SetAnimationTrigger("Rolled");
@@ -86,7 +110,31 @@ namespace Backend.Object.Character.Player
                     //TODO: Fix this code. This code in comment for test.
                     _status.UseStamina(1);
 
-                    Direction[1] = IsMoving ? Direction[0] : Composer.PerspectiveController.Forward;
+                    // 동일한 방식으로 공격 시에도 Direction[1]을 월드 방향으로 저장
+                    if (IsMoving)
+                    {
+                        if (CameraTransform != null)
+                        {
+                            var v = Vector3.ProjectOnPlane(CameraTransform.forward, transform.up).normalized;
+                            var h = Vector3.ProjectOnPlane(CameraTransform.right, transform.up).normalized;
+
+                            var input = Direction[0];
+                            var worldDir = (h * input.x) + (v * input.z);
+
+                            Direction[1] = worldDir.sqrMagnitude > 0f ? worldDir.normalized : transform.forward;
+                        }
+                        else
+                        {
+                            Direction[1] = transform.forward;
+                        }
+                    }
+                    else
+                    {
+                        var fwd = Composer.PerspectiveController.Forward;
+                        fwd.y = 0f;
+                        Direction[1] = fwd.sqrMagnitude > 0f ? fwd.normalized : transform.forward;
+                    }
+
                     IsButtonBufferable = false;
 
                     Composer.AnimationController.SetAnimationTrigger("Attacked");

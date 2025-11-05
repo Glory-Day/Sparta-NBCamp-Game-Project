@@ -8,20 +8,22 @@ using UnityEngine;
 
 namespace Backend.Object.UI.Presenter
 {
-    public class PointTextPresenter : Presenter<PointTextView, PlayerStatus>
+    public abstract class PointTextPresenter : Presenter<PointTextView, PlayerStatus>, ISubscriber
     {
-        private int _index;
-        public PointTextPresenter(PointTextView view, PlayerStatus model, int index) : base(view, model)
+        Dispatcher _dispatcher;
+        public PointTextPresenter(PointTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model)
         {
-            _index = index;
-            Model.PointChanged[index] += OnPointChanged;
+            _dispatcher = dispatcher;
+            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
-            Model.PointChanged[_index] -= OnPointChanged;
             base.Clear();
+            _dispatcher.Unsubscribe(this);
         }
+
+        public abstract void Receive<T>(T message);
 
         private void OnPointChanged(int point)
         {

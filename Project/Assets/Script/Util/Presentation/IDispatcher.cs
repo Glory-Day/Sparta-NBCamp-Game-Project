@@ -6,8 +6,8 @@
 
         public void Unsubscribe(ISubscriber subscriber);
 
-        public void DispatchTo<TSubscriber, TMessage>(TMessage message) where TSubscriber : ISubscriber;
+        public void DispatchTo<TSubscriber, TMessage>(int index, TMessage message) where TSubscriber : ISubscriber;
 
-        public void DispatchToAll<T>(T message, bool isReversed);
+        public void DispatchToAll<T>(T message);
     }
 }
