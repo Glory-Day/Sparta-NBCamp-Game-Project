@@ -14,18 +14,26 @@ namespace Backend.Object.UI.View
         [Header("UI References")]
         [SerializeField] protected Image foregroundImage;
 
-        private float _cache;
-
         protected virtual void Awake()
         {
             foregroundImage.fillAmount = percentage;
-            _cache = percentage;
         }
+
+#if UNITY_EDITOR
+
+        private void OnValidate()
+        {
+            foregroundImage.fillAmount = percentage;
+        }
+
+#endif
 
         public virtual void Change(float value)
         {
-            _cache = foregroundImage.fillAmount;
-            foregroundImage.fillAmount = value;
+            percentage = value;
+            foregroundImage.fillAmount = percentage;
         }
+
+        public float Percentage => percentage;
     }
 }

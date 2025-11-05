@@ -1,4 +1,5 @@
-﻿using Backend.Object.Character.Enemy;
+﻿using System.Collections;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
 using Backend.Util.Data;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Backend.Object.Process
 {
     public class BindingEnemyCharacterProcess : IProcessable
     {
-        public void Run()
+        public IEnumerator Running()
         {
             var currentSceneIndex = SceneManager.CurrentSceneIndex;
             var key = currentSceneIndex switch
@@ -19,7 +20,7 @@ namespace Backend.Object.Process
 
             if (key == string.Empty)
             {
-                return;
+                yield break;
             }
 
             var asset = Util.Management.ResourceManager.GetDataAsset<SpawnData>(key);

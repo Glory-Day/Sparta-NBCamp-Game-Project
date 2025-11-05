@@ -1761,6 +1761,8 @@ GameObject:
   - component: {fileID: 410985337505004467}
   - component: {fileID: 6609131909922984301}
   - component: {fileID: 3593358996641326547}
+  - component: {fileID: 6067381553088491492}
+  - component: {fileID: 6859505024972847657}
   m_Layer: 9
   m_Name: Skeleton_Sword
   m_TagString: Untagged
@@ -1870,7 +1872,11 @@ MonoBehaviour:
   currentHealthPoint: 0
   maximumHealthPoint: 0
   <BossStatus>k__BackingField: {fileID: 11400000, guid: 9e040e5b1e0ebbe4f87ee8debd2c9b91, type: 2}
+  takeDamageSfxIndex: 02000000
+  deathSfxIndex: 3
+  IsNormalMonster: 1
   IsParryable: 0
+  HitStunTime: 0.5
 --- !u!114 &2920769733435118040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,6 +1909,7 @@ MonoBehaviour:
   FaceLerpTime: 2
   IsNormalMonster: 1
   MoveRange: 12
+  IsGetUp: 1
 --- !u!136 &3294489545097934519
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1994,6 +2001,120 @@ MonoBehaviour:
     m_Bits: 64
   visibleTargets: []
   _keepTargetOutOfViewRadius: 0
+--- !u!82 &6067381553088491492
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555816991802883271}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6859505024972847657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555816991802883271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7ccfeec03a3824080a22e4fe1c027f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: a625feac82db1a14a8585f3686320c42, type: 3}
+  - {fileID: 8300000, guid: 5fbbe888c29e76240ba2ddec74aeada0, type: 3}
+  - {fileID: 8300000, guid: e75ef3bae53c4b0469402d158bde49e7, type: 3}
+  - {fileID: 8300000, guid: d8cd68e6b549f9541a59c13d8696654a, type: 3}
+  _maximumDistance: 0
 --- !u!1 &7728563242212444745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,12 +2469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 5817578640117646675}
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  center: {x: 0, y: 0.71, z: 0}
-  radius: 0.1
-  height: 1.33
-  up: {x: 0, y: 1, z: 0}
-  color: {r: 0, g: 0.6, b: 1, a: 1}
-  segment: 20

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Boss_01_Spawn_Data
   m_EditorClassIdentifier: 
   data:
-  - <Position>k__BackingField: {x: 13473, y: 0, z: 12374.4}
+  - <Position>k__BackingField: {x: 13201.6, y: 0, z: 12377}
     <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
     <Type>k__BackingField: 0
-  - <Position>k__BackingField: {x: 13177.75, y: 0, z: 12374.4}
+  - <Position>k__BackingField: {x: 13177.8, y: 0, z: 12377}
     <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
     <Type>k__BackingField: 4

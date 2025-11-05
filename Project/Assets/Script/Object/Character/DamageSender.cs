@@ -1,4 +1,5 @@
 ﻿using Script.Util.Extension;
+using UnityEditor;
 using UnityEngine;
 
 namespace Backend.Object.Character
@@ -9,6 +10,9 @@ namespace Backend.Object.Character
         [SerializeField] private float physicalDamagePoint;
         [SerializeField] private float magicalDamagePoint;
 
+        [Header("Detection References")]
+        [SerializeField] private CapsuleCollider detector;
+
         [Header("Detection Settings")]
         [SerializeField] private LayerMask layerMask = ~0;
 
@@ -16,7 +20,7 @@ namespace Backend.Object.Character
 
 #if UNITY_EDITOR
 
-        private Color _color = new (0f, 0.6f, 1f, 1f);
+        private Color _color = Color.blue;
 
 #endif
 
@@ -34,7 +38,7 @@ namespace Backend.Object.Character
             }
 
             var status = other.GetComponent<Status>();
-            status.TakeDamage(PhysicalDamagePoint, null);
+            status?.TakeDamage(PhysicalDamagePoint, null);
         }
 
         public void StartDetection()
@@ -54,7 +58,7 @@ namespace Backend.Object.Character
 
 #if UNITY_EDITOR
 
-            _color = new Color(0f, 0.6f, 1f, 1f);
+            _color = Color.blue;
 
 #endif
         }
@@ -63,34 +67,29 @@ namespace Backend.Object.Character
 
         private void OnDrawGizmos()
         {
-            if (_collider == null)
-            {
-                return;
-            }
-
-            var center = _collider.center;
-            var axis = _collider.GetDirection(transform);
-            var height = _collider.height;
-            var radius = _collider.radius;
-            var point = transform.TransformPoint(center);
-            var offset = Mathf.Max(0f, (height * 0.5f) - radius);
-
-            var a = point + (axis * offset);
-            var b = point - (axis * offset);
-
-            Gizmos.color = _color;
-            if (offset <= Mathf.Epsilon)
-            {
-                Gizmos.DrawWireSphere(point, radius);
-            }
-            else
-            {
-                DrawWireCapsule(a, b, radius, axis);
-            }
+            DrawWireCapsuleCollider();
         }
 
-        private void DrawWireCapsule(Vector3 a, Vector3 b, float r, Vector3 axis, int segments = 20)
+        private void DrawWireCapsuleCollider()
         {
+            var local = detector.transform;
+            var center = local.TransformPoint(detector.center);
+            var radius = detector.radius;
+            var height = detector.height;
+            var axis = detector.GetDirection(transform);
+            var offset = Mathf.Max(0f, (height * 0.5f) - radius);
+
+            var top = center + (axis * offset);
+            var bottom = center - (axis * offset);
+
+            Handles.color = _color;
+            if (offset <= Mathf.Epsilon)
+            {
+                Handles.DrawWireDisc(center, transform.up, radius);
+                Handles.DrawWireDisc(center, transform.right, radius);
+                Handles.DrawWireDisc(center, transform.forward, radius);
+            }
+
             var normal = axis.normalized;
             var tangent = Vector3.Cross(normal, Vector3.up);
             if (tangent.sqrMagnitude < 1e-6f)
@@ -101,26 +100,38 @@ namespace Backend.Object.Character
             tangent.Normalize();
             var bitangent = Vector3.Cross(normal, tangent);
 
-            var c1 = new Vector3[segments];
-            var c2 = new Vector3[segments];
+            const int segments = 36;
+            var a = new Vector3[segments];
+            var b = new Vector3[segments];
             for (int i = 0; i < segments; i++)
             {
                 var angle = 2f * Mathf.PI * i / segments;
-                var delta = (tangent * Mathf.Cos(angle) * r) + (bitangent * Mathf.Sin(angle) * r);
-                c1[i] = a + delta;
-                c2[i] = b + delta;
+                var delta = (tangent * Mathf.Cos(angle) * radius) + (bitangent * Mathf.Sin(angle) * radius);
+
+                a[i] = top + delta;
+                b[i] = bottom + delta;
             }
 
+            Handles.color = _color;
             for (int i = 0; i < segments; i++)
             {
-                var ni = (i + 1) % segments;
-                Gizmos.DrawLine(c1[i], c1[ni]);
-                Gizmos.DrawLine(c2[i], c2[ni]);
-                Gizmos.DrawLine(c1[i], c2[i]);
+                var j = (i + 1) % segments;
+                Handles.DrawLine(a[i], a[j]);
+                Handles.DrawLine(b[i], b[j]);
+                Handles.DrawLine(a[i], b[i]);
             }
 
-            Gizmos.DrawWireSphere(a, r);
-            Gizmos.DrawWireSphere(b, r);
+            Handles.DrawWireArc(top, tangent, -normal, 180f, radius);
+            Handles.DrawWireArc(top, bitangent, -normal, 180f, radius);
+            Handles.DrawWireArc(top, tangent, normal, 180f, radius);
+            Handles.DrawWireArc(top, bitangent, normal, 180f, radius);
+            Handles.DrawWireDisc(top, normal, radius);
+
+            Handles.DrawWireArc(bottom, tangent, -normal, 180f, radius);
+            Handles.DrawWireArc(bottom, bitangent, -normal, 180f, radius);
+            Handles.DrawWireArc(bottom, tangent, normal, 180f, radius);
+            Handles.DrawWireArc(bottom, bitangent, normal, 180f, radius);
+            Handles.DrawWireDisc(bottom, -normal, radius);
         }
 
 #endif

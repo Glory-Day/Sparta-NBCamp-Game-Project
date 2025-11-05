@@ -27,13 +27,13 @@ namespace Backend.Util.Editor
                 return;
             }
 
-            switch (component.castMode)
+            switch (component.CastMode)
             {
-                case CameraDistanceRaycaster.CastMode.Raycast:
-                    component.minimumCastingDistance = EditorGUILayout.FloatField(FieldLabel01, component.minimumCastingDistance);
+                case CastMode.Raycast:
+                    component.MinimumCastingDistance = EditorGUILayout.FloatField(FieldLabel01, component.MinimumCastingDistance);
                     break;
-                case CameraDistanceRaycaster.CastMode.SphereCast:
-                    component.radius =  EditorGUILayout.FloatField(FieldLabel02, component.radius);
+                case CastMode.SphereCast:
+                    component.Radius =  EditorGUILayout.FloatField(FieldLabel02, component.Radius);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -1,4 +1,5 @@
-﻿using Backend.Object.Character.Enemy;
+﻿using System.Collections;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
 using Backend.Util.Data;
 using Script.Object.UI;
@@ -8,7 +9,7 @@ namespace Backend.Object.Process
 {
     public class BindingBossEnemyCharacterProcess : IProcessable
     {
-        public void Run()
+        public IEnumerator Running()
         {
             var currentSceneIndex = SceneManager.CurrentSceneIndex;
             var key = currentSceneIndex switch
@@ -19,7 +20,7 @@ namespace Backend.Object.Process
 
             if (key == string.Empty)
             {
-                return;
+                yield break;
             }
 
             var asset = Util.Management.ResourceManager.GetDataAsset<SpawnData>(key);
@@ -41,7 +42,7 @@ namespace Backend.Object.Process
             controller.Target = Target;
 
             key = AddressData.Assets_Prefab_UI_Battle_Interface_Window_Prefab;
-            origin = UIManager.GetValue(key);
+            origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder = origin.GetComponentInChildren<BossEnemyConditionInformationBinder>();
             binder.Bind(model);

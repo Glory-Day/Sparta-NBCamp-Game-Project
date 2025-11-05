@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using Backend.Util.Input;
+using Script.Object.Character.Player;
 using UnityEngine;
 using Debugger = Backend.Util.Debug.Debugger;
 
@@ -9,125 +9,130 @@ namespace Backend.Object.Character.Player
     [RequireComponent(typeof(PlayerMovementController))]
     public partial class AdvancedActionController : MonoBehaviour
     {
-        #region SERIALIZABLE FIELD API
+        #region SERIALIZABLE PROPERTIES API
 
-        [Header("Target Reference")]
-        [Tooltip("Optional camera transform used for calculating movement direction. If assigned, character movement will take camera view into account.\n\n" +
-                 "움직임 방향 계산에 사용되는 선택적 카메라 트렌스폼 레퍼런스. 할당된 경우 캐릭터 움직임이 카메라 시점을 고려한다.")]
-        [SerializeField] private Transform cameraTransform;
+        [field: Header("Composition References")]
+        [field: SerializeField] public PlayerCharacterComposer Composer { get; private set; }
 
-        [Header("Detection Settings")]
-        [SerializeField] private CapsuleCollider detectionCollider;
+        [field: Header("Target References")]
+        [field: Tooltip("Optional camera transform used for calculating movement direction. If assigned, character movement will take camera view into account.\n\n" +
+                        "움직임 방향 계산에 사용되는 선택적 카메라 트렌스폼 레퍼런스. 할당된 경우 캐릭터 움직임이 카메라 시점을 고려한다.")]
+        [field: SerializeField] public Transform CameraTransform { get; private set; }
 
-        [Header("Physics Settings")]
-        [Tooltip("Movement speed.\n\n" +
-                 "이동 속도.")]
-        [SerializeField] private float movementSpeed = 7f;
+        [field: Header("Collider References")]
+        [field: SerializeField] public CapsuleCollider Body { get; private set; }
+        [field: SerializeField] public CapsuleCollider Detector { get; private set; }
 
-        [Tooltip("The speed at which a character descends a steep slope.\n\n" +
-                 "캐릭터가 가파른 경사면을 내려갈 때의 속도.")]
-        [SerializeField] private float slidingSpeed = 5f;
+        [field: Header("Physics Settings")]
+        [field: Tooltip("Additional speed for any animation or any effective direction.\n\n" +
+                        "임의의 애니메이션이나 임의의 효과적인 연출을 위한 추가적인 속도.")]
+        [field: SerializeField] public float DeltaSpeed { get; set; } = 1f;
 
-        [Tooltip("Acceptable slope angle limit.\n\n" +
-                 "허용 가능한 경사각 한계")]
-        [SerializeField] private float slopeLimit = 80f;
+        [field: Tooltip("Movement speed.\n\n" +
+                        "이동 속도.")]
+        [field: SerializeField] public float MovementSpeed { get; private set; } = 7f;
 
-        [Tooltip("How fast the controller can change direction while in the air. Higher values result in more air control.\n\n" +
-                 "공중에 있을 때 컨트롤러가 방향을 전환할 수 있는 속도. 더 높은 값은 더 많은 제어력를 가진다.")]
-        [SerializeField] private float airControlRate = 2f;
+        [field: Tooltip("The speed at which a character descends a steep slope.\n\n" +
+                        "캐릭터가 가파른 경사면을 내려갈 때의 속도.")]
+        [field: SerializeField] public float SlidingSpeed { get; private set; } = 5f;
 
-        [Tooltip("Amount of downward gravity.\n\n" +
-                 "하향 중력의 양.")]
-        [SerializeField] private float gravity = 30f;
+        [field: Tooltip("Acceptable slope angle limit.\n\n" +
+                        "허용 가능한 경사각 한계")]
+        [field: SerializeField] public float SlopeLimit { get; private set; } = 80f;
 
-        [Tooltip("Jump speed.\n\n" +
-                 "점프 속도.")]
-        [SerializeField] private float jumpSpeed = 10f;
+        [field: Tooltip("How fast the controller can change direction while in the air. Higher values result in more air control.\n\n" +
+                        "공중에 있을 때 컨트롤러가 방향을 전환할 수 있는 속도. 더 높은 값은 더 많은 제어력를 가진다.")]
+        [field: SerializeField] public float AirControlRate { get; private set; } = 2f;
 
-        [Tooltip("Jump duration variables.\n\n" +
-                 "점프 지속 시간")]
-        [SerializeField] private float jumpDuration = 0.2f;
+        [field: Tooltip("Amount of downward gravity.\n\n" +
+                        "하향 중력의 양.")]
+        [field: SerializeField] public float Gravity { get; private set; } = 30f;
 
-        [Tooltip("Rolling speed.\n\n" +
-                 "구르기 속도")]
-        [SerializeField] public float deltaSpeed = 1f;
+        [field: Tooltip("Air friction determines how fast the controller loses its momentum while in the air.\n\n" +
+                        "공기 마찰은 컨트롤러가 공중에 있을 때 운동량을 얼마나 빨리 잃는지를 결정한다.")]
+        [field: SerializeField] public float AirFriction { get; private set; } = 0.5f;
 
-        [Tooltip("rolling duration variables.\n\n" +
-                 "구르기 지속 시간")]
-        [SerializeField] private float rollingDuration = 0.2f;
+        [field: Tooltip("Ground friction is used instead, if the controller is grounded.\n\n" +
+                        "컨트롤러가 접지된 경우 접지 마찰이 대신 사용된다.")]
+        [field: SerializeField] public float GroundFriction { get; private set; } = 100f;
 
-        [Tooltip("Air friction determines how fast the controller loses its momentum while in the air.\n\n" +
-                 "공기 마찰은 컨트롤러가 공중에 있을 때 운동량을 얼마나 빨리 잃는지를 결정한다.")]
-        [SerializeField] private float airFriction = 0.5f;
-
-        [Tooltip("Ground friction is used instead, if the controller is grounded.\n\n" +
-                 "컨트롤러가 접지된 경우 접지 마찰이 대신 사용된다.")]
-        [SerializeField] private float groundFriction = 100f;
-
-        [Tooltip("If true calculate and apply momentum relative to the controller's transform.\n\n" +
-                 "컨트롤러의 변환에 대한 상대적 운동량을 계산하고 적용할지 여부.")]
-        [SerializeField] private bool useLocalSpace;
+        [field: Tooltip("If true calculate and apply momentum relative to the controller's transform.\n\n" +
+                        "컨트롤러의 변환에 대한 상대적 운동량을 계산하고 적용할지 여부.")]
+        [field: SerializeField] public bool UseLocalSpace { get; private set; }
 
         #endregion
 
-        private PlayerAnimationController _animationController;
-        private PlayerMovementController _movementController;
-
         private PlayerStatus _status;
-
-        private CeilingDetector _detector;
 
         private Vector3 _momentum = Vector3.zero;
 
-#if UNITY_EDITOR
-
-        private Color _color = Color.green;
-
-#endif
-
         private void Awake()
         {
-            _animationController = GetComponentInChildren<PlayerAnimationController>();
-            _movementController = GetComponent<PlayerMovementController>();
-
             _status = GetComponent<PlayerStatus>();
-
-            _detector = GetComponent<CeilingDetector>();
 
             InitializeStates();
         }
 
         private void OnEnable()
         {
-            _actions = new PlayerControls();
-            _actions.Enable();
-            _actions.Movement.Move.performed += Move;
-            _actions.Movement.Move.canceled += Stop;
-            _actions.Movement.Roll.performed += Roll;
-            _actions.Movement.Attack.performed += Attack;
+            Controls = new PlayerControls();
+            Controls.Enable();
+            Controls.Movement.Move.started += OnMoveStarted;
+            Controls.Movement.Move.performed += OnMovePerformed;
+            Controls.Movement.Move.canceled += OnMoveCanceled;
+            Controls.Movement.Roll.performed += OnRollPerformed;
+            Controls.Movement.Attack.performed += OnAttackPerformed;
+        }
+
+        private void Start()
+        {
+            Forward = Composer.PerspectiveController.Forward;
+
+            MovementSpeed = _status.Data.Speed;
+        }
+
+        private void Update()
+        {
+            var isThirdPersonMode = Composer.ThirdPersonCameraController.Mode == PerspectiveMode.ThirdPerson;
+            if (isThirdPersonMode && Controls.Movement.Run.IsPressed())
+            {
+                _status.IsStaminaPointRegenerable = false;
+
+                MovementSpeed = _status.Data.RunningSpeed;
+                Composer.AnimationController.SetAnimationBoolean("Is Running", true);
+
+                _status.UseStamina(2);
+            }
+            else
+            {
+                _status.IsStaminaPointRegenerable = true;
+
+                MovementSpeed = State == State.Rolling ? _status.Data.RunningSpeed : _status.Data.Speed;
+                Composer.AnimationController.SetAnimationBoolean("Is Running", false);
+            }
         }
 
         private void FixedUpdate()
         {
             // Check if mover is grounded.
-            _movementController.Check();
+            Composer.MovementController.Check();
 
             // Determine controller state.
-            _state = DetermineState();
+            State = DetermineState();
 
             // Apply friction and gravity to momentum.
             ApplyPhysicalForces();
 
             // Calculate movement velocity.
             var velocity = Vector3.zero;
-            if (_state is State.Grounded or State.Rolling or State.Attacking)
+            if (State is State.Grounded or State.Rolling or State.Attacking)
             {
                 velocity = CalculateMovementVelocity();
             }
 
             // If local momentum is used, transform momentum into world space first.
             var momentum = _momentum;
-            if (useLocalSpace)
+            if (UseLocalSpace)
             {
                 momentum = transform.localToWorldMatrix * _momentum;
             }
@@ -137,10 +142,10 @@ namespace Backend.Object.Character.Player
 
             // If player is grounded or sliding on a slope, extend mover's sensor range.
             // This enables the player to walk up/downstairs and slopes without losing ground contact.
-            _movementController.UseExtendedRange = IsGrounded;
+            Composer.MovementController.UseExtendedRange = IsGrounded;
 
             // Set mover velocity.
-            _movementController.Velocity = velocity;
+            Composer.MovementController.Velocity = velocity;
 
             // Store velocity for next frame.
             Velocity = velocity;
@@ -148,14 +153,11 @@ namespace Backend.Object.Character.Player
             // Save controller movement velocity.
             MovementVelocity = CalculateMovementVelocity();
 
-            // Reset ceiling detector, if one is attached to this instance.
-            _detector?.Refresh();
-
 #if UNITY_EDITOR
 
-            if (_movementController.Velocity.magnitude > 1f)
+            if (Composer.MovementController.Velocity.magnitude > 1f)
             {
-                _velocity = _movementController.Velocity;
+                _velocity = Composer.MovementController.Velocity;
             }
 
 #endif
@@ -163,12 +165,13 @@ namespace Backend.Object.Character.Player
 
         private void OnDisable()
         {
-            _actions.Movement.Move.performed -= Move;
-            _actions.Movement.Move.canceled -= Stop;
-            _actions.Movement.Roll.performed -= Roll;
-            _actions.Movement.Attack.performed -= Attack;
-            _actions.Disable();
-            _actions = null;
+            Controls.Movement.Move.started -= OnMoveStarted;
+            Controls.Movement.Move.performed -= OnMovePerformed;
+            Controls.Movement.Move.canceled -= OnMoveCanceled;
+            Controls.Movement.Roll.performed -= OnRollPerformed;
+            Controls.Movement.Attack.performed -= OnAttackPerformed;
+            Controls.Disable();
+            Controls = null;
         }
 
         /// <returns>
@@ -176,27 +179,32 @@ namespace Backend.Object.Character.Player
         /// </returns>
         private Vector3 CalculateMovementDirection()
         {
-            if (_actions == null)
+            if (Controls == null)
             {
                 return Vector3.zero;
             }
 
-            var direction = Vector3.zero;
+            var direction = State == State.Grounded ? Direction[0] : Direction[1];
 
-            // If no camera transform has been assigned, use the character's transform axes to calculate the movement direction.
-            if (cameraTransform == null)
+            // If a camera transform has been assigned, use the assigned transform's axes for movement direction.
+            // Project movement direction so movement stays parallel to the ground.
+            var isLockedOn = Composer.ThirdPersonCameraController.Mode == PerspectiveMode.LockOn;
+            if (isLockedOn && State == State.Grounded)
             {
-                direction += transform.right * Direction.x;
-                direction += transform.forward * Direction.z;
+                var target = Composer.ThirdPersonCameraController.Target;
+                var forward = target.position - transform.position;
+                forward.y = 0f;
+                forward.Normalize();
+
+                var right = Vector3.Cross(Vector3.up, forward).normalized;
+                direction = ((right * direction.x) + (forward * direction.z)).normalized;
             }
-            else
+            else if (State == State.Grounded && IsMoving)
             {
-                // If a camera transform has been assigned, use the assigned transform's axes for movement direction.
-                // Project movement direction so movement stays parallel to the ground.
-                var v = Vector3.ProjectOnPlane(cameraTransform.forward, transform.up).normalized;
-                var h = Vector3.ProjectOnPlane(cameraTransform.right, transform.up).normalized;
-                direction += h * Direction.x;
-                direction += v * Direction.z;
+                var v = Vector3.ProjectOnPlane(CameraTransform.forward, transform.up).normalized;
+                var h = Vector3.ProjectOnPlane(CameraTransform.right, transform.up).normalized;
+
+                direction = (h * direction.x) + (v * direction.z);
             }
 
             // If necessary, clamp movement vector to magnitude of '1f'.
@@ -215,7 +223,7 @@ namespace Backend.Object.Character.Player
         {
             // Calculate normalized movement direction and multiply normalized velocity with movement speed.
             var direction = CalculateMovementDirection();
-            direction *= movementSpeed * deltaSpeed;
+            direction *= MovementSpeed * DeltaSpeed;
 
             return direction;
         }
@@ -240,10 +248,10 @@ namespace Backend.Object.Character.Player
             }
 
             // Add gravity to vertical momentum.
-            v -= transform.up * (gravity * Time.deltaTime);
+            v -= transform.up * (Gravity * Time.deltaTime);
 
             // Remove any downward force if the controller is grounded.
-            if (_state is State.Grounded or State.Rolling or State.Attacking && Vector3.Dot(v, transform.up.normalized) < 0f)
+            if (State is State.Grounded or State.Rolling or State.Attacking && Vector3.Dot(v, transform.up.normalized) < 0f)
             {
                 v = Vector3.zero;
             }
@@ -254,7 +262,7 @@ namespace Backend.Object.Character.Player
                 var velocity = CalculateMovementVelocity();
 
                 // If controller has received additional momentum from somewhere else.
-                if (h.magnitude > movementSpeed)
+                if (h.magnitude > MovementSpeed)
                 {
                     // Prevent unwanted accumulation of speed in the direction of the current momentum.
                     if (Vector3.Dot(velocity, h.normalized) > 0f)
@@ -264,22 +272,22 @@ namespace Backend.Object.Character.Player
 
                     // Lower air control slightly with a multiplier to add some 'weight' to any momentum applied to the controller.
                     const float multiplier = 0.25f;
-                    h += velocity * (airControlRate * multiplier * Time.deltaTime);
+                    h += velocity * (AirControlRate * multiplier * Time.deltaTime);
                 }
                 // If controller has not received additional momentum.
                 else
                 {
                     // Clamp _horizontal velocity to prevent accumulation of speed.
-                    h += velocity * (airControlRate * Time.deltaTime);
-                    h = Vector3.ClampMagnitude(h, movementSpeed);
+                    h += velocity * (AirControlRate * Time.deltaTime);
+                    h = Vector3.ClampMagnitude(h, MovementSpeed);
                 }
             }
 
             // Steer controller on slopes.
-            if (_state == State.Sliding)
+            if (State == State.Sliding)
             {
                 // Calculate vector pointing away from slope.
-                var direction = Vector3.ProjectOnPlane(_movementController.GetGroundNormal(), transform.up).normalized;
+                var direction = Vector3.ProjectOnPlane(Composer.MovementController.GetGroundNormal(), transform.up).normalized;
 
                 // Calculate movement velocity and remove all velocity that is pointing up the slope.
                 var velocity = CalculateMovementVelocity();
@@ -290,19 +298,19 @@ namespace Backend.Object.Character.Player
             }
 
             // Apply friction to horizontal momentum based on whether the controller is grounded;
-            var friction = _state is State.Grounded or State.Rolling or State.Attacking ? groundFriction : airFriction;
+            var friction = State is State.Grounded or State.Rolling or State.Attacking ? GroundFriction : AirFriction;
             h = Vector3.MoveTowards(h, Vector3.zero, friction * Time.deltaTime);
 
             // Add horizontal and vertical momentum back together.
             _momentum = h + v;
 
-            switch (_state)
+            switch (State)
             {
                 // Additional momentum calculations for sliding.
                 case State.Sliding:
                 {
                     // Project the current momentum onto the current ground normal if the controller is sliding down a slope.
-                    _momentum = Vector3.ProjectOnPlane(_momentum, _movementController.GetGroundNormal());
+                    _momentum = Vector3.ProjectOnPlane(_momentum, Composer.MovementController.GetGroundNormal());
 
                     // Remove any upwards momentum when sliding.
                     if (Vector3.Dot(_momentum, transform.up.normalized) > 0f)
@@ -311,8 +319,8 @@ namespace Backend.Object.Character.Player
                     }
 
                     // Apply additional slide gravity.
-                    var direction = Vector3.ProjectOnPlane(-transform.up, _movementController.GetGroundNormal()).normalized;
-                    _momentum += direction * (slidingSpeed * Time.deltaTime);
+                    var direction = Vector3.ProjectOnPlane(-transform.up, Composer.MovementController.GetGroundNormal()).normalized;
+                    _momentum += direction * (SlidingSpeed * Time.deltaTime);
 
                     break;
                 }
@@ -379,7 +387,7 @@ namespace Backend.Object.Character.Player
             var momentum = _momentum;
 
             // If local momentum is used, transform momentum into world coordinates first.
-            if (useLocalSpace)
+            if (UseLocalSpace)
             {
                 momentum = transform.localToWorldMatrix * momentum;
             }
@@ -405,7 +413,7 @@ namespace Backend.Object.Character.Player
             var momentum = _momentum;
 
             // If local momentum is used, transform momentum into world coordinates system first.
-            if (useLocalSpace)
+            if (UseLocalSpace)
             {
                 momentum = transform.localToWorldMatrix * _momentum;
             }
@@ -417,7 +425,7 @@ namespace Backend.Object.Character.Player
         {
             var momentum = _momentum;
 
-            if (useLocalSpace)
+            if (UseLocalSpace)
             {
                 momentum = transform.worldToLocalMatrix * _momentum;
             }
@@ -440,7 +448,7 @@ namespace Backend.Object.Character.Player
         /// <param name="momentum">Controller momentum directly.</param>
         public void SetMomentum(Vector3 momentum)
         {
-            if (useLocalSpace)
+            if (UseLocalSpace)
             {
                 _momentum = transform.worldToLocalMatrix * momentum;
             }
@@ -450,20 +458,20 @@ namespace Backend.Object.Character.Player
             }
         }
 
-        public void EnableCollider()
+        public void EnableDetection()
         {
             Debugger.LogProgress();
 
 #if UNITY_EDITOR
 
-            _color = Color.green;
+            _color = Color.blue;
 
 #endif
 
-            detectionCollider.enabled = true;
+            Detector.enabled = true;
         }
 
-        public void DisableCollider()
+        public void DisableDetection()
         {
             Debugger.LogProgress();
 
@@ -473,7 +481,7 @@ namespace Backend.Object.Character.Player
 
 #endif
 
-            detectionCollider.enabled = false;
+            Detector.enabled = false;
         }
 
         public Vector3 Velocity { get; private set; } = Vector3.zero;
