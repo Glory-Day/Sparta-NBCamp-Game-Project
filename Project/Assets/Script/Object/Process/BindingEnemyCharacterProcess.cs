@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
+using Backend.Object.UI;
 using Backend.Util.Data;
 using UnityEngine;
 
@@ -37,6 +38,9 @@ namespace Backend.Object.Process
 
                 var clone = ObjectPoolManager.SpawnPoolObject(origin, position, rotation, null);
                 var model = clone.GetComponent<EnemyStatus>();
+                var binder = clone.GetComponentInChildren<MonsterGaugeBinder>();
+
+                binder.Bind(model);
             }
 
             key = AddressData.Assets_Prefab_Character_Enemy_Normal_Skeleton_Bow_Prefab;
@@ -51,6 +55,9 @@ namespace Backend.Object.Process
 
                 var clone = ObjectPoolManager.SpawnPoolObject(origin, position, rotation, null);
                 var model = clone.GetComponent<EnemyStatus>();
+                var binder = clone.GetComponentInChildren<MonsterGaugeBinder>();
+
+                binder.Bind(model);
             }
 
             key = AddressData.Assets_Prefab_Character_Enemy_Normal_Tiger_Prefab;
@@ -65,6 +72,9 @@ namespace Backend.Object.Process
 
                 var clone = ObjectPoolManager.SpawnPoolObject(origin, position, rotation, null);
                 var model = clone.GetComponent<EnemyStatus>();
+                var binder = clone.GetComponentInChildren<MonsterGaugeBinder>();
+
+                binder.Bind(model);
             }
         }
     }
