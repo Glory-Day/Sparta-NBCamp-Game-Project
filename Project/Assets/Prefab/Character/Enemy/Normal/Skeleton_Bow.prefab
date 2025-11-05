@@ -1200,7 +1200,7 @@ MonoBehaviour:
   FaceLerpTime: 2
   IsNormalMonster: 1
   MoveRange: 10
-  IsGetUp: 1
+  IsGetUp: 0
 --- !u!136 &7959884989088187179
 CapsuleCollider:
   m_ObjectHideFlags: 0
