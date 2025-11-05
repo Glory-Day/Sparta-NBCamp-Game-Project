@@ -229,7 +229,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 444e0bb1ce3c5094d8b1eb777499f18c
-  Position: {x: 174.70993, y: 2130}
+  Position: {x: 183.33331, y: 2138}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -242,7 +242,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  WaitTime: 0.5
+  WaitTime: 2
 --- !u!114 &-3576458939510429853
 MonoBehaviour:
   m_ObjectHideFlags: 0
