@@ -1,5 +1,6 @@
 ﻿using Backend.Object.Character.Player;
 using Backend.Object.UI.Presenter;
+using Backend.Object.UI.View;
 using Backend.Util.Presentation;
 using Script.Object.UI.View;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Backend.Object.UI
     public class PlayerLevelStatusInformationBinder : MonoBehaviour
     {
         [Header("View References")]
-        [SerializeField] private PointDifferenceTextView[] pointDifferenceTextView;
+        [SerializeField] private StatusDifferenceTextView[] pointDifferenceTextView;
         [SerializeField] private PlayerLevelUpPopupUI levelUpPopupUI;
         [SerializeField] private PlayerMainStatusUI mainStatusUI;
 
@@ -18,6 +19,7 @@ namespace Backend.Object.UI
         private StatusUIPresenter _statusUIPresenter;
 
         private Dispatcher _dispatcher = new();
+
 
         public void Bind(PlayerStatus model)
         {
@@ -28,6 +30,7 @@ namespace Backend.Object.UI
             _pointDifferenceTextPresenter[2] = PresenterFactory.Create<EndurancePointDifferenceTextPresenter>(pointDifferenceTextView[2], model, _dispatcher);
             _pointDifferenceTextPresenter[3] = PresenterFactory.Create<StaminaPointDifferenceTextPresenter>(pointDifferenceTextView[3], model, _dispatcher);
             _pointDifferenceTextPresenter[4] = PresenterFactory.Create<LevelPointDifferenceTextPresenter>(pointDifferenceTextView[4], model, _dispatcher);
+            _pointDifferenceTextPresenter[5] = PresenterFactory.Create<SoulPointDifferencetTextPresenter>(pointDifferenceTextView[5], model, _dispatcher);
 
             _popupUIPresenter = PresenterFactory.Create<PopupUIPresenter>(levelUpPopupUI, null, _dispatcher);
             _statusUIPresenter = PresenterFactory.Create<StatusUIPresenter>(mainStatusUI, null, _dispatcher);

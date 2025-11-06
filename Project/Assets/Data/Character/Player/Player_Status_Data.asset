@@ -21,13 +21,13 @@ MonoBehaviour:
   <PhysicalDefense>k__BackingField: 0
   <MagicalDefense>k__BackingField: 0
   <RunningSpeed>k__BackingField: 7
-  <StaminaPoint>k__BackingField: 100
-  <Level>k__BackingField: 1
-  <LifePoint>k__BackingField: 0
-  <ConcentrationPoint>k__BackingField: 0
-  <EndurancePoint>k__BackingField: 0
-  <PhysicalPoint>k__BackingField: 0
-  <StrengthPoint>k__BackingField: 0
-  <IntelligencePoint>k__BackingField: 0
-  <LuckPoint>k__BackingField: 0
-  <Soul>k__BackingField: 0
+  <StaminaPoint>k__BackingField: 122
+  <Level>k__BackingField: 9
+  <LifePoint>k__BackingField: 11
+  <ConcentrationPoint>k__BackingField: 1
+  <EndurancePoint>k__BackingField: 9
+  <PhysicalPoint>k__BackingField: 1
+  <StrengthPoint>k__BackingField: 1
+  <IntelligencePoint>k__BackingField: 1
+  <LuckPoint>k__BackingField: 1
+  <Soul>k__BackingField: 1000
