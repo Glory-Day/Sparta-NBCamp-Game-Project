@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Backend.Object.Character.Player;
 using Backend.Object.Management;
 using Backend.Util.Data.StatusDatas;
 using Backend.Util.Debug;
@@ -27,23 +28,19 @@ namespace Backend.Object.Character.Enemy
         // 일반 몬스터 인지
         public bool IsNormalMonster = false;
 
-        // 플레이어가 죽었을 때 이벤트
-        public event Action OnEnemyDeath;
-        public event Action OnEnemyHit;
         public bool IsParryable = false;
 
         // 히트 후 움직이기까지 시간
         public float HitStunTime = 0.5f;
 
         private bool _isHitAnimationPlaying = false;
-        private EffectSoundPlayer _effectSoundPlayer;
 
         protected override void Awake()
         {
             base.Awake();
 
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
-            _effectSoundPlayer = GetComponent<EffectSoundPlayer>();
+
         }
 
         public override void TakeDamage(float damage, Vector3? position = null)
@@ -53,16 +50,15 @@ namespace Backend.Object.Character.Enemy
             if (currentHealthPoint <= 0)
             {
                 currentHealthPoint = 0;
-                OnEnemyDeath?.Invoke();
-                OnEnemyDeath = null;
-                OnEnemyHit = null;
+                OnDeath?.Invoke();
+
                 if (_effectSoundPlayer != null && deathSfxIndex > 0)
                 {
                     _effectSoundPlayer.Play(deathSfxIndex);
                 }
 
                 // 플레이어에게 소울 지급
-                // GetComponent<EnemyMovementController>().Target.GetComponent<>().SetSoul(BossStatus.SoulPoint);
+                GetComponent<EnemyMovementController>().Target.GetComponent<PlayerStatus>().TakeSoul(BossStatus.SoulPoint);
 
                 StartCoroutine(FadeOutAndDestroy(5f));
                 return;
@@ -76,7 +72,7 @@ namespace Backend.Object.Character.Enemy
             if (IsNormalMonster && !_isHitAnimationPlaying)
             {
                 StartCoroutine(HitCoroutine());
-                OnEnemyHit?.Invoke();
+                OnHit?.Invoke();
             }
 
             if (_enemyAnimationController != null)
