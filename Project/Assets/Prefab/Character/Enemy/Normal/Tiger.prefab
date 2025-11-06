@@ -1840,7 +1840,7 @@ MonoBehaviour:
   <BossStatus>k__BackingField: {fileID: 11400000, guid: 9d776fb5090132b4db673d301fef71f7, type: 2}
   takeDamageSfxIndex: 0200000003000000
   deathSfxIndex: 4
-  IsNormalMonster: 0
+  IsNormalMonster: 1
   IsParryable: 0
   HitStunTime: 0.5
 --- !u!114 &1010898988118994740
@@ -1941,13 +1941,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9ba1848a4be13439d0f99022f3f4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewRadius: 16.45
+  viewRadius: 40
   viewAngle: 360
   targetMask:
     serializedVersion: 2
     m_Bits: 64
   visibleTargets: []
-  _keepTargetOutOfViewRadius: 1
+  _keepTargetOutOfViewRadius: 0
 --- !u!136 &4190338381420855127
 CapsuleCollider:
   m_ObjectHideFlags: 0
