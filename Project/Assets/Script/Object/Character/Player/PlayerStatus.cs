@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Backend.Object.Management;
 using Backend.Object.UI;
 using Backend.Util.Data;
@@ -120,6 +121,7 @@ namespace Backend.Object.Character.Player
             if (0f >= currentHealthPoint)
             {
                 Composer.AnimationController.SetAnimationTrigger("Died");
+                Composer.PerspectiveController.Cancel();
                 PlayerDie();
                 return;
             }

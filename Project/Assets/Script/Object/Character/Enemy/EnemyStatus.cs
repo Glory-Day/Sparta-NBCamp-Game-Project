@@ -45,10 +45,16 @@ namespace Backend.Object.Character.Enemy
 
         public override void TakeDamage(float damage, Vector3? position = null)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             base.TakeDamage(damage, null);
 
             if (currentHealthPoint <= 0)
             {
+                isDead = true;
                 currentHealthPoint = 0;
                 OnDeath?.Invoke();
 
@@ -57,9 +63,25 @@ namespace Backend.Object.Character.Enemy
                     _effectSoundPlayer.Play(deathSfxIndex);
                 }
 
-                // 플레이어에게 소울 지급
-                GetComponent<EnemyMovementController>().Target.GetComponent<PlayerStatus>().TakeSoul(BossStatus.SoulPoint);
-
+                var movementController = GetComponent<EnemyMovementController>();
+                if (movementController != null && movementController.Target != null)
+                {
+                    var playerStatus = movementController.Target.GetComponent<PlayerStatus>();
+                    if (playerStatus != null)
+                    {
+                        // 모든 것이 정상이면 소울 지급
+                        playerStatus.TakeSoul(BossStatus.SoulPoint);
+                        Debug.Log(BossStatus.SoulPoint + " 지급");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("대상의 PlayerStatus 컴포넌트를 찾을 수 없습니다.", movementController.Target);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("EnemyMovementController 또는 Target을 찾을 수 없습니다.");
+                }
                 StartCoroutine(FadeOutAndDestroy(5f));
                 return;
             }

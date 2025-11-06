@@ -25,8 +25,8 @@ namespace GloryDay.BehaviourTree
             Tree.Bind(component);
 
             component.Status.OnDeath += EnemyDeath;
-            component.Status.OnDeath += component.AnimationController.PlayDeathAnimation;
             component.Status.OnDeath += component.MovementController.OnEnemyDeath;
+            component.Status.OnDeath += component.AnimationController.PlayDeathAnimation;
 
             component.Status.OnHit += EnemyHit;
             component.Status.OnHit += component.AnimationController.PlayHitAnimation;
@@ -61,7 +61,6 @@ namespace GloryDay.BehaviourTree
             stop = true;
             GetComponent<NavMeshAgent>().isStopped = true;
             GetComponent<Collider>().enabled = false;
-            GetComponent<EnemyMovementController>().Target = null;
         }
 
         public void EnemyHit()

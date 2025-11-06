@@ -134,7 +134,7 @@ namespace Backend.Object.Character.Player
             Composer.AnimationController.SetAnimationBoolean("Is Focusing", true);
         }
 
-        private void Cancel()
+        public void Cancel()
         {
             Debugger.LogProgress();
 
