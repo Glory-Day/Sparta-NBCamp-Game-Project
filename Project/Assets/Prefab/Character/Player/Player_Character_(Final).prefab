@@ -6412,6 +6412,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sainchamsa_geom
       objectReference: {fileID: 0}
+    - target: {fileID: 8842740372295318968, guid: 4c8d7bd522f59ae4d8c855682233b7dc, type: 3}
+      propertyPath: m_Height
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842740372295318968, guid: 4c8d7bd522f59ae4d8c855682233b7dc, type: 3}
+      propertyPath: m_Radius
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
