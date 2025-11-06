@@ -33,6 +33,7 @@ namespace Backend.Object.Character.Enemy
         private void OnEnable()
         {
             InitialPosition = transform.position;
+            _isDie = false;
         }
 
         private void Update()

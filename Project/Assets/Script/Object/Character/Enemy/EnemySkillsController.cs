@@ -19,7 +19,7 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
         public bool IsPlayerTarget; // 플레이어를 타겟으로 하는지 여부
     }
 
-    public class NineTaiedBeastSkills : MonoBehaviour
+    public class EnemySkillsController : MonoBehaviour
     {
         public SkillParameter[] SkillParameter;
 
@@ -42,6 +42,11 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _enemyStatus = GetComponent<EnemyStatus>();
             _movementController = GetComponent<EnemyMovementController>();
+
+        }
+
+        private void OnEnable()
+        {
             _projectilePoolObject = new GameObject("ProjectilePool");
         }
 

@@ -8,11 +8,11 @@ namespace Backend.Object.Character.Enemy.Animation
     [CustomAttribute(AnimationEvent.EventType.PlaySkill, AnimationEvent.EventType.MovePos)]
     public class SkillStateMachine : StateMachineBase
     {
-        private NineTaiedBeastSkills _nineTaiedBeastSkills;
+        private EnemySkillsController _nineTaiedBeastSkills;
         public override void InitializeComponents(Animator animator)
         {
             base.InitializeComponents(animator);
-            _nineTaiedBeastSkills = animator.GetComponent<NineTaiedBeastSkills>();
+            _nineTaiedBeastSkills = animator.GetComponent<EnemySkillsController>();
         }
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
