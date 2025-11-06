@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Backend.Object.Process
 {
-    public class TestBootstrap : MonoBehaviour
+    public class TestBootstrap : TestProcess
     {
         [SerializeField] private GameObject prefab;
         [SerializeField] private PlayerConditionInformationBinder binder;
@@ -18,15 +18,23 @@ namespace Backend.Object.Process
         [SerializeField] private PlayerLevelStatusInformationBinder binder3;
         [SerializeField] private PlayerInventoryInformationBinder binder4;
         [SerializeField] private PlayerStatusInformationBinder binder5;
+        [SerializeField] private PlayerBattleSlotInformationBinder binder6;
+
+        [SerializeField] private SettingInformationBinder binder7;
 
         [SerializeField] private ItemData[] testItem = new ItemData[4];
-        public void Run()
+        public override void Run()
         {
             var position = transform.position;
             var rotation = transform.rotation;
 
             var clone = ObjectPoolManager.SpawnPoolObject(prefab, position, rotation, null);
             var model = clone.GetComponent<PlayerStatus>();
+
+            //_inventory[0] = 플레이어 인벤토리
+            //_inventory[1] = 무기 아이템 인벤토리
+            //_inventory[2] = 방어구 아이템 인벤토리
+            //_inventory[3] = 소모품 아이템 인벤토리
 
             Inventory[] _inventory = new Inventory[4];
             _inventory[0] = new Inventory(25, 25);
@@ -47,6 +55,8 @@ namespace Backend.Object.Process
             binder3.Bind(model);
             binder4.Bind(_inventory[0], model);
             binder5.Bind(_inventory, model);
+            binder6.Binder(_inventory);
+            binder7.Bind();
         }
 
         public GameObject Target { get; set; }

@@ -169,7 +169,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 91ac8598a5510c347bb49e6356fb3830
-  Position: {x: -398.99994, y: 2045}
+  Position: {x: -389.4794, y: 2061}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -288,7 +288,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: a1b9ddc1f05468f4ba5d31bc74e8c254
-  Position: {x: 202.99995, y: 726.0001}
+  Position: {x: 201.99998, y: 726}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -301,8 +301,8 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Speed: 7
-  StopDistance: 1.2
+  Speed: 5
+  StopDistance: 1.9
   Offset: 1
   EnableRotation: 1
 --- !u!114 &-2667179674389061801
@@ -365,7 +365,7 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 1.2
+  minDistance: 1.9
   maxDistance: 11
   useRangeCheck: 0
   rangeCheck: 1
