@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Backend.Object.Management;
+using Backend.Object.NPC;
 using Backend.Util.Debug;
+using Script.Object.Character.Player;
 using Script.Util.Extension;
 using UnityEngine;
 
@@ -17,7 +19,7 @@ namespace Backend.Object.Process
             new BindingBossEnemyCharacterProcess()
         };
 
-        public async void Run()
+        public async void Run(int id)
         {
             try
             {
@@ -34,8 +36,16 @@ namespace Backend.Object.Process
 
                 Debugger.LogMessage("Binding user interface process is completed.");
 
+                var hub = FindAnyObjectByType<PlayerCharacterSpawnerHub>();
+                var data = hub.GetSpawnData(id);
+
+                ((BindingPlayerCharacterProcess)_progresses[1]).Data = data;
+
                 await _progresses[1].Running().AsTask(this);
+
                 var target = ((BindingPlayerCharacterProcess)_progresses[1]).Target;
+                var composer = target.GetComponent<PlayerCharacterComposer>();
+                hub.Bind(composer);
 
                 Debugger.LogMessage("Binding player character process is completed.");
 

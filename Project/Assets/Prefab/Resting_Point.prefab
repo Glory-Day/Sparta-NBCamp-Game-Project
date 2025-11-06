@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6071098676489364336}
   - component: {fileID: 8995546894856778313}
   - component: {fileID: 6907786891412745916}
+  - component: {fileID: 4357891985575572521}
   m_Layer: 0
   m_Name: Resting_Point
   m_TagString: Untagged
@@ -114,7 +115,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eda16e6babd4fb7b362a314db517b69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  composer: {fileID: 0}
+  <Composer>k__BackingField: {fileID: 0}
+--- !u!114 &4357891985575572521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343860885521957719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bfb887e5f944d818220866a9a6fdfb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Data>k__BackingField: {fileID: 0}
+  <Identifier>k__BackingField: 0
 --- !u!1 &7966550169085621385
 GameObject:
   m_ObjectHideFlags: 0

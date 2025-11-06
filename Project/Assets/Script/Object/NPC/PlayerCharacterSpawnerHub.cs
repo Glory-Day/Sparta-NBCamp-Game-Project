@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Backend.Util.Data;
+using Script.Object.Character.Player;
 using UnityEngine;
 
 namespace Backend.Object.NPC
@@ -24,6 +25,16 @@ namespace Backend.Object.NPC
         {
             _spawners.Clear();
             _spawners = null;
+        }
+
+        public void Bind(PlayerCharacterComposer composer)
+        {
+            var length = _spawners.Count;
+            for (var i = 0; i < length; i++)
+            {
+                var trigger = _spawners[i].GetComponent<PlayerAnimationTrigger>();
+                trigger.Composer = composer;
+            }
         }
 
         public SpawnData GetSpawnData(int id)

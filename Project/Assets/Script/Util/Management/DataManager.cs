@@ -35,21 +35,21 @@ namespace Backend.Util.Management
 
         private void LoadUserData_Internal()
         {
-            var data = JsonSerializer.Deserialize<UserData>(UserDataPath);
+            var data = JsonSerializer.Deserialize<UserData>(Application.persistentDataPath + UserDataPath);
 
             _userData = data;
         }
 
         private void LoadSettingData_Internal()
         {
-            var data = JsonSerializer.Deserialize<SettingData>(SettingDataPath);
+            var data = JsonSerializer.Deserialize<SettingData>(Application.persistentDataPath + SettingDataPath);
 
             _settingData = data;
         }
 
         private void LoadStatusData_Internal()
         {
-            var data = JsonSerializer.Deserialize<PlayerStatusData>(StatusDataPath);
+            var data = JsonSerializer.Deserialize<PlayerStatusData>(Application.persistentDataPath + StatusDataPath);
 
             _statusData = data;
         }

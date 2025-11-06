@@ -507,6 +507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   index: 0
+  id: 0
 --- !u!1 &4013810660026933793
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +947,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   index: 1
+  id: 0
 --- !u!1 &7973301807318730593
 GameObject:
   m_ObjectHideFlags: 0

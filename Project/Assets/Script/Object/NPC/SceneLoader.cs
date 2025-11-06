@@ -10,16 +10,18 @@ namespace Backend.Object.NPC
         [Header("Scene Settings")]
         [SerializeField] private Mode mode;
         [SerializeField] public int index;
+        [SerializeField] public int id;
 
         public void Load()
         {
             switch (mode)
             {
                 case Mode.Index:
-                    SceneManager.LoadSceneByIndex(index);
+                    SceneManager.LoadSceneByIndex(index, id);
                     break;
                 case Mode.Json:
-                    SceneManager.LoadSceneByIndex(DataManager.UserData.SceneIndex);
+                    DataManager.LoadUserData();
+                    SceneManager.LoadSceneByIndex(DataManager.UserData.SceneIndex, DataManager.UserData.SpawnerIndex);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

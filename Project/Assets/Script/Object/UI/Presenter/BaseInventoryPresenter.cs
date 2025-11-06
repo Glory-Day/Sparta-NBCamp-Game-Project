@@ -4,7 +4,6 @@ using Backend.Util.Data;
 using Backend.Util.Debug;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
-using static UnityEditor.Progress;
 
 namespace Backend.Object.UI.Presenter
 {
