@@ -6,6 +6,12 @@ namespace Backend.Util.Data
     [CreateAssetMenu(menuName = "Scriptable Object/Data/Player Status Data")]
     public class PlayerStatusData : StatusData, ISerializable
     {
+        #region CONSTANTS FIELD API
+
+        public const string FileName = "Data/status.json";
+
+        #endregion
+
         [field: Header("Additional Settings")]
         [field: Header("Speed Settings")]
         [field: SerializeField] public float RunningSpeed { get; set; }
@@ -24,8 +30,6 @@ namespace Backend.Util.Data
         [field: SerializeField] public float LuckPoint { get; set; }
 
         [field: SerializeField] public float Soul { get;  set; }
-
-        private const string FileName = "/Data/status.json";
 
         public void Load()
         {

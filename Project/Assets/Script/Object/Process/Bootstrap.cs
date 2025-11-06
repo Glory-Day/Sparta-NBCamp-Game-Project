@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Backend.Object.Management;
-using Backend.Util.Data;
 using Backend.Util.Debug;
 using Script.Util.Extension;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using SceneManager = Backend.Object.Management.SceneManager;
 
 namespace Backend.Object.Process
 {

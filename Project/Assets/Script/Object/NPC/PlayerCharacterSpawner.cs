@@ -9,6 +9,6 @@ namespace Backend.Object.NPC
         [field: SerializeField] public SpawnData Data { get; private set; }
 
         [field: Header("Identifier Settings")]
-        [field: SerializeField] public string Identifier { get; private set; }
+        [field: SerializeField] public int Identifier { get; private set; }
     }
 }

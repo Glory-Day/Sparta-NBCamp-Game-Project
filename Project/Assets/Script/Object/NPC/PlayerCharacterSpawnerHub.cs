@@ -26,7 +26,7 @@ namespace Backend.Object.NPC
             _spawners = null;
         }
 
-        public SpawnData GetSpawnData(string id)
+        public SpawnData GetSpawnData(int id)
         {
             return (from spawner in _spawners where spawner.Identifier == id select spawner.Data).FirstOrDefault();
         }
