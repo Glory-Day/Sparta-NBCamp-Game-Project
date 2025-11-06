@@ -6,32 +6,32 @@ using Script.Object.UI.View;
 
 namespace Backend.Object.UI.Presenter
 {
-    public class MagicalPointDifferenceTextPresenter : Presenter<PointDifferenceTextView, PlayerStatus>, ISubscriber
+    public class MagicalPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public MagicalPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model)
+        public MagicalPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
-        public void Receive<T>(T message)
+        public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is PlayerStatus playerStatus)
             {
-                case InventoryPointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).MagicalDamage, ((int)((PlayerStatusData)Model.data).MagicalDamage) + msg.Point);
-                    break;
-                case ConfirmMessage msg:
-                    ((PlayerStatusData)Model.data).MagicalDamage = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)((PlayerStatusData)Model.data).MagicalDamage);
-                    break;
+                var status = ((PlayerStatusData)playerStatus.data).MagicalDamage;
+                switch (message)
+                {
+                    case InventoryPointMessage msg:
+                        View.Change((int)status, (int)status + msg.Point);
+                        break;
+                    case ConfirmMessage msg:
+                        status = float.Parse(View.UpdatedPointText.text);
+                        View.Change((int)status);
+                        break;
+                }
             }
         }
     }

@@ -15,11 +15,14 @@ namespace Backend.Object.UI.Presenter
 
         public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is Inventory inventory)
             {
-                case InventoryPointMessage msg:
-                    View.Change(Model.items[msg.Index].Description);
-                    break;
+                switch (message)
+                {
+                    case InventoryPointMessage msg:
+                        View.Change(inventory.items[msg.Index].Description);
+                        break;
+                }
             }
         }
     }

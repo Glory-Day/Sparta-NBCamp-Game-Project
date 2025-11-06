@@ -7,18 +7,18 @@ using UnityEngine;
 
 namespace Backend.Object.UI.Presenter
 {
-    public abstract class PointDifferenceTextPresenter : Presenter<PointDifferenceTextView, PlayerStatus>, ISubscriber
+    public abstract class PointDifferenceTextPresenter : Presenter<PointDifferenceTextView, IModel>, ISubscriber
     {
-        private int _index;
-        public PointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index) : base(view, model)
+        protected Dispatcher _dispatcher;
+        public PointDifferenceTextPresenter(PointDifferenceTextView view, IModel model, Dispatcher dispatcher) : base(view, model)
         {
-            _index = index;
-            Model.PointChanged[index] += OnPointChanged;
+            _dispatcher = dispatcher;
+            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
-            Model.PointChanged[_index] -= OnPointChanged;
+            _dispatcher.Unsubscribe(this);
             base.Clear();
         }
 

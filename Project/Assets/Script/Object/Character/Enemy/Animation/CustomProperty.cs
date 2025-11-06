@@ -74,6 +74,7 @@ namespace Backend.Object.Character.Enemy.Animation
                 switch (currentSelectedType)
                 {
                     case AnimationEvent.EventType.SetWeapon:
+                    case AnimationEvent.EventType.PlaySfx:
                         EditorGUI.PropertyField(currentPos, indexProp);
                         currentPos.y += EditorGUIUtility.singleLineHeight * VerticalSpacing;
                         break;
@@ -120,6 +121,7 @@ namespace Backend.Object.Character.Enemy.Animation
                 switch (currentSelectedType)
                 {
                     case AnimationEvent.EventType.SetWeapon:
+                    case AnimationEvent.EventType.PlaySfx:
                     case AnimationEvent.EventType.SetSpeed:
                     case AnimationEvent.EventType.SetParry:
                         totalHeight += EditorGUIUtility.singleLineHeight * VerticalSpacing;

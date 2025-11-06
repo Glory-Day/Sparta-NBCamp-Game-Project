@@ -9,32 +9,31 @@ namespace Backend.Object.UI.Presenter
 {
     public class HealthPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is PlayerStatus playerStatus)
             {
-                case IncreasePointMessage msg:
-                    View.Change((int)Model.maximumHealthPoint, (int)Model.maximumHealthPoint + msg.Point);
-                    break;
-                case ConfirmMessage msg:
-                    Model.maximumHealthPoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)Model.maximumHealthPoint);
-                    break;
+                switch (message)
+                {
+                    case IncreasePointMessage msg:
+                        View.Change((int)playerStatus.maximumHealthPoint, (int)playerStatus.maximumHealthPoint + msg.Point);
+                        break;
+                    case ConfirmMessage msg:
+                        playerStatus.maximumHealthPoint = float.Parse(View.UpdatedPointText.text);
+                        View.Change((int)playerStatus.maximumHealthPoint);
+                        break;
+                }
+                _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(0, message);
             }
-            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(message);
         }
     }
 }

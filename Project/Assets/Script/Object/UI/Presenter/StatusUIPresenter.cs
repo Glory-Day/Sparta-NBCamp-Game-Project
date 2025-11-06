@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Backend.Object.Character.Player;
 using Backend.Util.Data;
+using Backend.Util.Debug;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
 using UnityEngine;
@@ -22,8 +23,8 @@ namespace Backend.Object.UI.Presenter
         {
             var message = new ConfirmMessage();
 
-            _dispatcher.DispatchTo<LifePointDifferenceTextPresenter, ConfirmMessage>(message);
-            _dispatcher.DispatchTo<EndurancePointDifferenceTextPresenter, ConfirmMessage>(message);
+            _dispatcher.DispatchTo<LifePointDifferenceTextPresenter, ConfirmMessage>(0, message);
+            _dispatcher.DispatchTo<EndurancePointDifferenceTextPresenter, ConfirmMessage>(0, message);
         }
     }
 }

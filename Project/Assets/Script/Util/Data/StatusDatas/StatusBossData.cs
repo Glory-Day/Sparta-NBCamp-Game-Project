@@ -10,5 +10,6 @@ namespace Backend.Util.Data.StatusDatas
         [field: SerializeField] public float ChasingSpeed { get; private set; }
         [field: SerializeField] public float TurnSpeed { get; private set; }
         [field: SerializeField] public float[] AttackRange { get; private set; }
+        [field: SerializeField] public float SoulPoint { get; private set; }
     }
 }

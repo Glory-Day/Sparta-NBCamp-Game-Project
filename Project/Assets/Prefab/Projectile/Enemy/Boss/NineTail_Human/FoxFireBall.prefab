@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7380550617745636848}
   - component: {fileID: -363616170541796656}
   - component: {fileID: -3494210739848242619}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoxFireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 3971435478627778168}
   - component: {fileID: 5957865560770564544}
   - component: {fileID: 936701449208456408}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,35 +8,36 @@ namespace Backend.Object.UI.Presenter
 {
     public class EndurancePointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public EndurancePointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public EndurancePointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
         }
 
         public override void Clear()
         {
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is PlayerStatus playerStatus)
             {
-                case IncreasePointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).EndurancePoint, ((int)((PlayerStatusData)Model.data).EndurancePoint) + msg.Point);
-                    _dispatcher.DispatchTo<StaminaPointDifferenceTextPresenter, T>(message);
-                    break;
-                case ConfirmMessage msg:
-                    ((PlayerStatusData)Model.data).EndurancePoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)((PlayerStatusData)Model.data).EndurancePoint);
-                    _dispatcher.DispatchTo<StaminaPointDifferenceTextPresenter, T>(message);
-                    break;
-                case InventoryPointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).EndurancePoint, ((int)((PlayerStatusData)Model.data).EndurancePoint) + msg.Point);
-                    break;
+                var status = (PlayerStatusData)playerStatus.data;
+
+                switch (message)
+                {
+                    case IncreasePointMessage msg:
+                        View.Change((int)status.EndurancePoint, (int)status.EndurancePoint + msg.Point);
+                        _dispatcher.DispatchTo<StaminaPointDifferenceTextPresenter, T>(0, message);
+                        break;
+                    case ConfirmMessage msg:
+                        status.EndurancePoint = float.Parse(View.UpdatedPointText.text);
+                        View.Change((int)status.EndurancePoint);
+                        _dispatcher.DispatchTo<StaminaPointDifferenceTextPresenter, T>(0, message);
+                        break;
+                    case InventoryPointMessage msg:
+                        View.Change((int)status.EndurancePoint, (int)status.EndurancePoint + msg.Point);
+                        break;
+                }
             }
         }
     }

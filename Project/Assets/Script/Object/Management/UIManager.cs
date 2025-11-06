@@ -103,53 +103,53 @@ namespace Backend.Object.Management
 
         private void ToggleStatusWindow(InputAction.CallbackContext context)
         {
-            var isOpened = _caches[AddressData.Assets_Prefab_UI_Status_Window_Prefab].IsOpened;
+            var isOpened = _caches[AddressData.Assets_Prefab_UI_Status_Window_1_Prefab].IsOpened;
             if (isOpened)
             {
-                _caches[AddressData.Assets_Prefab_UI_Status_Window_Prefab].Close();
+                _caches[AddressData.Assets_Prefab_UI_Status_Window_1_Prefab].Close();
             }
             else
             {
-                _caches[AddressData.Assets_Prefab_UI_Status_Window_Prefab].Open();
+                _caches[AddressData.Assets_Prefab_UI_Status_Window_1_Prefab].Open();
             }
         }
 
         private void ToggleLevelUpWindow(InputAction.CallbackContext context)
         {
-            var isOpened = _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_Prefab].IsOpened;
+            var isOpened = _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_1_Prefab].IsOpened;
             if (isOpened)
             {
-                _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_Prefab].Close();
+                _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_1_Prefab].Close();
             }
             else
             {
-                _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_Prefab].Open();
+                _caches[AddressData.Assets_Prefab_UI_Level_Up_Window_1_Prefab].Open();
             }
         }
 
         private void ToggleInventoryWindow(InputAction.CallbackContext context)
         {
-            var isOpened = _caches[AddressData.Assets_Prefab_UI_Inventory_Window_Prefab].IsOpened;
+            var isOpened = _caches[AddressData.Assets_Prefab_UI_Inventory_Window_1_Prefab].IsOpened;
             if (isOpened)
             {
-                _caches[AddressData.Assets_Prefab_UI_Inventory_Window_Prefab].Close();
+                _caches[AddressData.Assets_Prefab_UI_Inventory_Window_1_Prefab].Close();
             }
             else
             {
-                _caches[AddressData.Assets_Prefab_UI_Inventory_Window_Prefab].Open();
+                _caches[AddressData.Assets_Prefab_UI_Inventory_Window_1_Prefab].Open();
             }
         }
 
         private void ToggleEquipmentWindow(InputAction.CallbackContext context)
         {
-            var isOpened = _caches[AddressData.Assets_Prefab_UI_Equipment_Window_Prefab].IsOpened;
+            var isOpened = _caches[AddressData.Assets_Prefab_UI_Equipment_Window_1_Prefab].IsOpened;
             if (isOpened)
             {
-                _caches[AddressData.Assets_Prefab_UI_Equipment_Window_Prefab].Close();
+                _caches[AddressData.Assets_Prefab_UI_Equipment_Window_1_Prefab].Close();
             }
             else
             {
-                _caches[AddressData.Assets_Prefab_UI_Equipment_Window_Prefab].Open();
+                _caches[AddressData.Assets_Prefab_UI_Equipment_Window_1_Prefab].Open();
             }
         }
 

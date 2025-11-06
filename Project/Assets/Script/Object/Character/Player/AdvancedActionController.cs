@@ -199,7 +199,7 @@ namespace Backend.Object.Character.Player
                 var right = Vector3.Cross(Vector3.up, forward).normalized;
                 direction = ((right * direction.x) + (forward * direction.z)).normalized;
             }
-            else if (IsMoving)
+            else if (State == State.Grounded && IsMoving)
             {
                 var v = Vector3.ProjectOnPlane(CameraTransform.forward, transform.up).normalized;
                 var h = Vector3.ProjectOnPlane(CameraTransform.right, transform.up).normalized;
