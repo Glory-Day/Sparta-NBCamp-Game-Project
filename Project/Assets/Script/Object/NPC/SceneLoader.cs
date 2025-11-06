@@ -1,7 +1,7 @@
 ﻿using Backend.Object.Management;
 using UnityEngine;
 
-namespace Backend.Object
+namespace Backend.Object.NPC
 {
     public class SceneLoader : MonoBehaviour
     {
