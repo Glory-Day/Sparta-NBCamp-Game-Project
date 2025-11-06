@@ -20,6 +20,8 @@ namespace Backend.Object.Process
         [SerializeField] private PlayerStatusInformationBinder binder5;
         [SerializeField] private PlayerBattleSlotInformationBinder binder6;
 
+        [SerializeField] private SettingInformationBinder binder7;
+
         [SerializeField] private ItemData[] testItem = new ItemData[4];
         public override void Run()
         {
@@ -54,6 +56,7 @@ namespace Backend.Object.Process
             binder4.Bind(_inventory[0], model);
             binder5.Bind(_inventory, model);
             binder6.Binder(_inventory);
+            binder7.Bind();
         }
 
         public GameObject Target { get; set; }
