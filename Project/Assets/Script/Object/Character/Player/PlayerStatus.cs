@@ -1,13 +1,14 @@
 ﻿using System;
-using Backend.Util.Data;
-using UnityEngine;
+using System.Collections;
+using Backend.Object.Management;
 using Backend.Object.UI;
+using Backend.Util.Data;
 using Script.Object.Character.Player;
+using UnityEngine;
 
 
 #if UNITY_EDITOR
 
-using UnityEditor;
 
 #endif
 
@@ -50,6 +51,7 @@ namespace Backend.Object.Character.Player
         private float _regenRate;
         private float _lastUseTime;
 
+
         //인벤토리
         public Inventory inventory;
 
@@ -57,17 +59,30 @@ namespace Backend.Object.Character.Player
         {
             base.Awake();
 
+
+
+            _damageSender = GetComponentInChildren<DamageSender>();
+
+
+
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            Composer.AdvancedActionController.enabled = true;
+
             MaximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
             CurrentStaminaPoint = MaximumStaminaPoint;
 
-            _damageSender = GetComponentInChildren<DamageSender>();
             if (_damageSender == null)
             {
                 return;
             }
-
             _damageSender.PhysicalDamagePoint = data.PhysicalDamage;
             _damageSender.MagicalDamagePoint = data.MagicalDamage;
+
+
         }
 
         private void Start()
@@ -77,6 +92,11 @@ namespace Backend.Object.Character.Player
 
         private void Update()
         {
+            if (isDead)
+            {
+                return;
+            }
+
             if (IsStaminaPointRegenerable && (Time.time - _lastUseTime < Delay || CurrentStaminaPoint >= MaximumStaminaPoint))
             {
                 return;
@@ -89,12 +109,17 @@ namespace Backend.Object.Character.Player
 
         public override void TakeDamage(float damage, Vector3? position = null)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             base.TakeDamage(damage);
 
             if (0f >= currentHealthPoint)
             {
-                Composer.AnimationController.SetAnimationTrigger("Dying");
-
+                Composer.AnimationController.SetAnimationTrigger("Died");
+                PlayerDie();
                 return;
             }
 
@@ -108,6 +133,21 @@ namespace Backend.Object.Character.Player
             {
                 Composer.AnimationController.SetAnimationTrigger("High Damaged");
             }
+        }
+
+        private void PlayerDie()
+        {
+            isDead = true;
+            OnDeath?.Invoke();
+            Composer.AdvancedActionController.enabled = false;
+            Debug.Log("Player Died");
+            StartCoroutine(ReStart(3f));
+        }
+
+        IEnumerator ReStart(float time)
+        {
+            yield return new WaitForSeconds(time);
+            SceneManager.LoadSceneByIndex(SceneManager.CurrentSceneIndex);
         }
 
         public void UseStamina(int index)
