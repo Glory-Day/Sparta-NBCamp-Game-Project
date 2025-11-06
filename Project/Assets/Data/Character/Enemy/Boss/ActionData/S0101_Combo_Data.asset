@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: S0101
   <Name>k__BackingField: "\uC5F0\uC18D \uACF5\uACA9"
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 1
+  <DamageType>k__BackingField: 0
   <ActionSound>k__BackingField: {fileID: 0}
   <ActionRange>k__BackingField: 0
   <IsParryable>k__BackingField: 0
