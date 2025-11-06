@@ -61,6 +61,11 @@ namespace Backend.Object.Character.Player
             CurrentStaminaPoint = MaximumStaminaPoint;
 
             _damageSender = GetComponentInChildren<DamageSender>();
+            if (_damageSender == null)
+            {
+                return;
+            }
+
             _damageSender.PhysicalDamagePoint = data.PhysicalDamage;
             _damageSender.MagicalDamagePoint = data.MagicalDamage;
         }
