@@ -39,7 +39,7 @@ namespace Backend.Object.Management
             _currentSceneIndex = 0;
         }
 
-        private IEnumerator LoadingScene_Internal(int index)
+        private IEnumerator LoadingScene_Internal(int index, int id)
         {
             IsSceneLoaded = false;
 
@@ -113,7 +113,7 @@ namespace Backend.Object.Management
                 Debugger.LogMessage("Bootstrap found in the scene.");
                 Debugger.LogMessage("Bootstrap is running.");
 
-                bootstrap.Run();
+                bootstrap.Run(id);
 
                 while (bootstrap.IsDone == false)
                 {
@@ -132,13 +132,13 @@ namespace Backend.Object.Management
             Debugger.LogSuccess($"<b>{nextSceneName}</b> is loaded completely.");
         }
 
-        private async void LoadSceneByIndex_Internal(int index)
+        private async void LoadSceneByIndex_Internal(int index, int id)
         {
             try
             {
                 Debugger.LogProgress();
 
-                await LoadingScene_Internal(index).AsTask(this);
+                await LoadingScene_Internal(index, id).AsTask(this);
             }
             catch (Exception exception)
             {
@@ -154,9 +154,9 @@ namespace Backend.Object.Management
         /// Load the scene asynchronously by index.
         /// </summary>
         /// <param name="index"> Number of scene index. </param>
-        public static void LoadSceneByIndex(int index)
+        public static void LoadSceneByIndex(int index, int id)
         {
-            Instance.LoadSceneByIndex_Internal(index);
+            Instance.LoadSceneByIndex_Internal(index, id);
         }
 
         #endregion

@@ -7,6 +7,6 @@ namespace Backend.Util.Json.Data
     public class UserData
     {
         [SerializeField] public int SceneIndex { get; set; } = 1;
-        [SerializeField] public string SpawnerIndex { get; set; }
+        [SerializeField] public int SpawnerIndex { get; set; }
     }
 }

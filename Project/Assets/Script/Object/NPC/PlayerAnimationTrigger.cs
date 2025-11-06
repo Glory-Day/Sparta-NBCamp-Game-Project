@@ -1,6 +1,8 @@
 ﻿using System;
+using Backend.Object.Management;
 using Backend.Util.Debug;
 using Backend.Util.Input;
+using Backend.Util.Management;
 using Script.Object.Character.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,10 +11,17 @@ namespace Backend.Object.NPC
 {
     public class PlayerAnimationTrigger : MonoBehaviour
     {
-        [Header("Debug Information")]
-        [SerializeField] private PlayerCharacterComposer composer;
+        [field: Header("Debug Information")]
+        [field: SerializeField] public PlayerCharacterComposer Composer { get; set; }
+
+        private PlayerCharacterSpawner _spawner;
 
         private NPCControls _controls;
+
+        private void Awake()
+        {
+            _spawner = GetComponent<PlayerCharacterSpawner>();
+        }
 
         public void EnableControls()
         {
@@ -36,12 +45,16 @@ namespace Backend.Object.NPC
 
         private void Rest(InputAction.CallbackContext context)
         {
-            composer.AdvancedActionController.Rest();
+            DataManager.UserData.SceneIndex = SceneManager.CurrentSceneIndex;
+            DataManager.UserData.SpawnerIndex = _spawner.Identifier;
+            DataManager.SaveAllData();
+
+            Composer.AdvancedActionController.Rest();
         }
 
         private void StandUp(InputAction.CallbackContext context)
         {
-            composer.AdvancedActionController.StandUp();
+            Composer.AdvancedActionController.StandUp();
         }
     }
 }
