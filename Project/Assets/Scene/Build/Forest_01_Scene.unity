@@ -9,7 +9,7 @@ OcclusionCullingSettings:
     smallestHole: 0.25
     backfaceThreshold: 100
   m_SceneGUID: 8ca926bec3de9a84fbc517ab9b03041d
-  m_OcclusionCullingData: {fileID: 36300000, guid: 930ceff5afde9324eb847ad7ba57505d, type: 2}
+  m_OcclusionCullingData: {fileID: 36300000, guid: ac7b76b8104d13648b68e4b36da9f26c, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -233,15 +233,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -250,7 +250,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &41113266
@@ -613,15 +613,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -630,7 +630,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &712502193
@@ -706,15 +706,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -723,7 +723,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &777804522
@@ -834,13 +834,13 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
@@ -851,7 +851,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &907235868
@@ -927,15 +927,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -944,7 +944,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &995076456
@@ -1467,6 +1467,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 530231406}
     m_Modifications:
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 362876110297086496, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1130721336886955522, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1714448373971688800, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_Name
       value: AzureCoreSystem
@@ -1515,6 +1563,34 @@ PrefabInstance:
       propertyPath: m_weatherSystem.m_evaluationTimeGradient
       value: 0.7916667
       objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_followTargetList.Array.data[0].m_follower
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[0].m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[1].m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[2].m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[0].m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[1].m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974823580454898308, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_weatherSystem.m_weatherPropertyGroupList.Array.data[5].m_weatherPropertyList.Array.data[2].m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.092295974
@@ -1530,6 +1606,54 @@ PrefabInstance:
     - target: {fileID: 3701604041762352059, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.7010574
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3819110964787323466, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4009417010013188137, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4103551949178911760, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1554,6 +1678,30 @@ PrefabInstance:
     - target: {fileID: 4791347190383301350, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5357347807222445194, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6157664555825808682, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_Color.b
@@ -1590,6 +1738,58 @@ PrefabInstance:
     - target: {fileID: 6255840395601179683, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.70105755
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629925686542372330, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: SubModule.subEmitters.Array.data[0].emitter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6810380819494943827, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7496194973537726388, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7953403546012018190, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalScale.x
@@ -1651,6 +1851,54 @@ PrefabInstance:
       propertyPath: m_propertyGroupDataList.Array.data[3].m_propertyDataList.Array.data[2].m_floatData
       value: 0.496
       objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8879138907341591616, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetObject
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[0].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[1].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032459709689423003, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+      propertyPath: m_propertyGroupDataList.Array.data[5].m_propertyDataList.Array.data[2].m_weatherPropertyOwner.m_targetComponent
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9063230162086782788, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.00000016152688
@@ -1668,7 +1916,11 @@ PrefabInstance:
       value: -0.13052617
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8560088006527707713, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+    - {fileID: 1754167891039094656, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+    - {fileID: 6828940218110299877, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
+    - {fileID: 8210797993550650262, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4380352413285918650, guid: baab2c6cc48d21b47bc6c4965fcefccd, type: 3}
@@ -1827,15 +2079,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -1844,7 +2096,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &1739950478
@@ -1920,15 +2172,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -1937,7 +2189,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &1746846211
@@ -2013,15 +2265,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -2030,7 +2282,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &1783670113
@@ -3043,15 +3295,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -3060,7 +3312,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &1950377751
@@ -3274,15 +3526,15 @@ Terrain:
   m_SplatMapDistance: 1000
   m_HeightmapMinimumLODSimplification: 0
   m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
+  m_ShadowCastingMode: 0
   m_DrawHeightmap: 1
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_StaticShadowCaster: 0
   m_IgnoreQualitySettings: 0
-  m_ReflectionProbeUsage: 1
+  m_ReflectionProbeUsage: 0
   m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
-  m_BakeLightProbesForTrees: 1
+  m_BakeLightProbesForTrees: 0
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
   m_ReceiveGI: 1
@@ -3291,7 +3543,7 @@ Terrain:
   m_GroupingID: 0
   m_RenderingLayerMask: 1
   m_AllowAutoConnect: 1
-  m_EnableHeightmapRayTracing: 1
+  m_EnableHeightmapRayTracing: 0
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
 --- !u!4 &2107735172
