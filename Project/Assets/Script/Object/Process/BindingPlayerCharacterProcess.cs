@@ -2,8 +2,10 @@
 using System.Collections;
 using Backend.Object.Character.Player;
 using Backend.Object.Management;
+using Backend.Object.NPC;
 using Backend.Object.UI;
 using Backend.Util.Data;
+using Script.Object.Character.Player;
 using Script.Object.UI;
 using UnityEngine;
 
@@ -14,20 +16,11 @@ namespace Backend.Object.Process
     {
         public IEnumerator Running()
         {
-            var currentSceneIndex = SceneManager.CurrentSceneIndex;
-            var key = currentSceneIndex switch
-            {
-                1 => AddressData.Assets_Data_Spawn_Forest_01_Spawn_Data_Asset,
-                2 => AddressData.Assets_Data_Spawn_Village_01_Spawn_Data_Asset,
-                3 => AddressData.Assets_Data_Spawn_Boss_01_Spawn_Data_Asset,
-                _ => string.Empty
-            };
-
-            var data = Util.Management.ResourceManager.GetDataAsset<SpawnData>(key).PlayerCharacterData;
+            var data = Data.PlayerCharacterData;
             var position = data[0].Position;
             var rotation = data[0].Rotation;
 
-            key = AddressData.Assets_Prefab_Character_Player_Player_Character_Beta_Prefab;
+            var key = AddressData.Assets_Prefab_Character_Player_Player_Character_Beta_Prefab;
             var origin = Util.Management.ResourceManager.GetGameObjectAsset<GameObject>(key);
             var clone = ObjectPoolManager.SpawnPoolObject(origin, position, rotation, null);
             var model = clone.GetComponent<PlayerStatus>();
@@ -58,6 +51,8 @@ namespace Backend.Object.Process
 
             yield return null;
         }
+
+        public SpawnData Data { get; set; }
 
         public GameObject Target { get; set; }
     }

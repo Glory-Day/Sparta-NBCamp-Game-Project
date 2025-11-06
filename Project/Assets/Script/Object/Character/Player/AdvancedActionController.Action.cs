@@ -16,6 +16,19 @@ namespace Backend.Object.Character.Player
 
         public event Action<Vector3> OnLand;
 
+        public void StandUp()
+        {
+            Controls.Enable();
+            Composer.AnimationController.SetAnimationBoolean("Is Resting", false);
+        }
+
+        public void Rest()
+        {
+            Controls.Disable();
+            Composer.AnimationController.SetAnimationTrigger("Rested");
+            Composer.AnimationController.SetAnimationBoolean("Is Resting", true);
+        }
+
         private void OnMoveStarted(InputAction.CallbackContext context)
         {
             IsMoving = true;
