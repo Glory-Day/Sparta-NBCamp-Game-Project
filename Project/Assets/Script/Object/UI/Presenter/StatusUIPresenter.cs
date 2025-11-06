@@ -23,8 +23,7 @@ namespace Backend.Object.UI.Presenter
         {
             var message = new ConfirmMessage();
 
-            _dispatcher.DispatchTo<LifePointDifferenceTextPresenter, ConfirmMessage>(0, message);
-            _dispatcher.DispatchTo<EndurancePointDifferenceTextPresenter, ConfirmMessage>(0, message);
+            _dispatcher.DispatchTo<SoulPointDifferencetTextPresenter, ConfirmMessage>(0, message);
         }
     }
 }

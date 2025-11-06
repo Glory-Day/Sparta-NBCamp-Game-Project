@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Backend.Object.Character.Player;
+using Backend.Object.UI.View;
 using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
@@ -13,10 +14,18 @@ namespace Backend.Object.UI.Presenter
     {
         public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState += StateChange;
+            }
         }
 
         public override void Clear()
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState -= StateChange;
+            }
             base.Clear();
         }
 
@@ -34,7 +43,15 @@ namespace Backend.Object.UI.Presenter
                     View.Change((int)status.StaminaPoint);
                     break;
             }
-            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(0, message);
+        }
+        public override void StateChange()
+        {
+            base.StateChange();
+            if (Model is PlayerStatus playerStatus)
+            {
+                var status = (PlayerStatusData)playerStatus.data;
+                View.Change((int)status.StaminaPoint, (int)status.StaminaPoint);
+            }
         }
     }
 }

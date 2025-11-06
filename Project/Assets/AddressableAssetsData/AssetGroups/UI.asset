@@ -88,15 +88,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Main_Scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: feb25057ede924142ab25cb4bd40d1d1
-    m_Address: Assets/Prefab/UI/Level_Up_Window 1.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Boss_01_Scene
-    - Forest_01_Scene
-    - Gwanghwamun_Scene
-    - Village_01_Scene
-    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2fc3a041b03efa34d916490757ce4174, type: 2}
   m_SchemaSet:

@@ -4,6 +4,7 @@ using Backend.Object.Character.Player;
 using Backend.Util.Presentation;
 using Script.Object.UI.View;
 using UnityEngine;
+using static UnityEngine.CullingGroup;
 
 namespace Backend.Object.UI.Presenter
 {
@@ -27,6 +28,11 @@ namespace Backend.Object.UI.Presenter
         private void OnPointChanged(int point)
         {
             View.Change(point);
+        }
+
+        public virtual void StateChange()
+        {
+
         }
     }
 }

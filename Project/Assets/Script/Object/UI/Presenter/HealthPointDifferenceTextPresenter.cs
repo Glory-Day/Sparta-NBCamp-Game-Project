@@ -1,5 +1,6 @@
 ﻿using Backend.Object.Character;
 using Backend.Object.Character.Player;
+using Backend.Object.UI.View;
 using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
@@ -11,10 +12,18 @@ namespace Backend.Object.UI.Presenter
     {
         public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState += StateChange;
+            }
         }
 
         public override void Clear()
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState -= StateChange;
+            }
             base.Clear();
         }
 
@@ -32,7 +41,15 @@ namespace Backend.Object.UI.Presenter
                         View.Change((int)playerStatus.maximumHealthPoint);
                         break;
                 }
-                _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(0, message);
+            }
+        }
+
+        public override void StateChange()
+        {
+            base.StateChange();
+            if (Model is PlayerStatus playerStatus)
+            {
+                View.Change((int)playerStatus.maximumHealthPoint, (int)playerStatus.maximumHealthPoint);
             }
         }
     }
