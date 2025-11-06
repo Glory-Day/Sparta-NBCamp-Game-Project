@@ -23,18 +23,19 @@ MonoBehaviour:
     m_SerializedLabels:
     - Forest_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36b627c1fef2cdd43b8ec50bbdf76d39
+    m_Address: Assets/Prefab/Character/Player/Player_Character_(Final).prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Boss_01_Scene
+    - Forest_01_Scene
+    - Gwanghwamun_Scene
+    - Village_01_Scene
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c64407cd45a30b4b828c7ed86d22faf
     m_Address: Assets/Prefab/Character/Enemy/Normal/Skeleton_Sword.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Forest_01_Scene
-    - Village_01_Scene
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 830965388105d844b924a7907dfdd7fa
-    m_Address: Assets/Prefab/Character/Player/Player_Character_(Beta).prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Boss_01_Scene
     - Forest_01_Scene
     - Village_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
