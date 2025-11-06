@@ -3,6 +3,7 @@ using System.Collections;
 using Backend.Object.Management;
 using Backend.Object.UI;
 using Backend.Util.Data;
+using Backend.Util.Management;
 using Script.Object.Character.Player;
 using UnityEngine;
 
@@ -141,13 +142,16 @@ namespace Backend.Object.Character.Player
             OnDeath?.Invoke();
             Composer.AdvancedActionController.enabled = false;
             Debug.Log("Player Died");
-            StartCoroutine(ReStart(3f));
+            StartCoroutine(Restart(3f));
         }
 
-        IEnumerator ReStart(float time)
+        private IEnumerator Restart(float time)
         {
             yield return new WaitForSeconds(time);
-            SceneManager.LoadSceneByIndex(SceneManager.CurrentSceneIndex);
+
+            var sceneIndex = DataManager.UserData.SceneIndex;
+            var spawnerIndex = DataManager.UserData.SpawnerIndex;
+            SceneManager.LoadSceneByIndex(sceneIndex, spawnerIndex);
         }
 
         public void UseStamina(int index)
