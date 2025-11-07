@@ -59,7 +59,7 @@ namespace Backend.Object.Character.Enemy.Boss.Skill
                 {
                     var projectile = ObjectPoolManager.SpawnPoolObject(skillParam.ProjectilePrefab, projectileTransform.position, projectileTransform.rotation, _projectilePoolObject.transform);
 
-                    if (projectile != null)
+                    if (projectile != null && _movementController.Target != null)
                     {
                         var baseProjectile = projectile.GetComponent<BaseProjectile>();
                         if (baseProjectile != null)

@@ -28,6 +28,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -38,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Forest_01_Scene
     - Village_01_Scene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60fcbd23b3d4c6b48a974b2bbdf1c043
+    m_Address: Assets/Prefab/Character/Enemy/Boss/NineTaied_Beast/NineTaied_Beast_Walk.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Boss_02_Scene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8ff59b0f6cf7da44eb8eb1f2e5f25788
     m_Address: Assets/Prefab/Character/Enemy/Boss/NineTail_Human/NineTail_Human.prefab

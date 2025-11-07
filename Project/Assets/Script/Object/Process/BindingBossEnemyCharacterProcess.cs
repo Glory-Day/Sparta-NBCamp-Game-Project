@@ -14,7 +14,8 @@ namespace Backend.Object.Process
             var currentSceneIndex = SceneManager.CurrentSceneIndex;
             var key = currentSceneIndex switch
             {
-                3 => AddressData.Assets_Data_Spawn_Boss_01_Spawn_Data_Asset,
+                4 => AddressData.Assets_Data_Spawn_Boss_01_Spawn_Data_Asset,
+                7 => AddressData.Assets_Data_Spawn_Boss_02_Spawn_Data_Asset,
                 _ => string.Empty
             };
 
@@ -31,7 +32,8 @@ namespace Backend.Object.Process
 
             key = currentSceneIndex switch
             {
-                3 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTail_Human_NineTail_Human_Prefab,
+                4 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTail_Human_NineTail_Human_Prefab,
+                7 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTaied_Beast_NineTaied_Beast_Walk_Prefab,
                 _ => string.Empty
             };
 

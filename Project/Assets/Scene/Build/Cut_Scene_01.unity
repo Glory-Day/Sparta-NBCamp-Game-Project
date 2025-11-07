@@ -230,6 +230,99 @@ Transform:
   m_Children: []
   m_Father: {fileID: 986583873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &361888494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361888497}
+  - component: {fileID: 361888496}
+  - component: {fileID: 361888495}
+  m_Layer: 0
+  m_Name: Scene_Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &361888495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361888494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e5b572d49344ed891160a0e446eac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  index: 4
+  id: 0
+--- !u!114 &361888496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361888494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 3f3869197fbbd0847963622c7657b65d, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 361888495}
+          m_TargetAssemblyTypeName: Backend.Object.NPC.SceneLoader, Assembly-CSharp
+          m_MethodName: Load
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 361888495}
+          m_TargetAssemblyTypeName: Backend.Object.NPC.SceneLoader, Assembly-CSharp
+          m_MethodName: Load
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!4 &361888497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361888494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1068.9277, y: -23.32516, z: 672.6721}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &371695660
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +906,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7027244653150863273, guid: 44845a5ea82d24847abfb7d3cdd129b4, type: 3}
   m_PrefabInstance: {fileID: 1164661176}
   m_PrefabAsset: {fileID: 0}
---- !u!183 &808056422
+--- !u!183 &808056425
 Cloth:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2246,7 +2339,7 @@ PrefabInstance:
       addedObject: {fileID: 1272530082}
     - targetCorrespondingSourceObject: {fileID: 7027244653150863273, guid: 44845a5ea82d24847abfb7d3cdd129b4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 808056422}
+      addedObject: {fileID: 808056425}
   m_SourcePrefab: {fileID: 100100000, guid: 44845a5ea82d24847abfb7d3cdd129b4, type: 3}
 --- !u!95 &1164661177 stripped
 Animator:
@@ -3896,7 +3989,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7027244653150863273, guid: 6a53efea136cae84d968e806617b0305, type: 3}
   m_PrefabInstance: {fileID: 1919401415}
   m_PrefabAsset: {fileID: 0}
---- !u!183 &1610173251
+--- !u!183 &1610173254
 Cloth:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5113,7 +5206,7 @@ PrefabInstance:
       addedObject: {fileID: 604391568}
     - targetCorrespondingSourceObject: {fileID: 7027244653150863273, guid: 6a53efea136cae84d968e806617b0305, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1610173251}
+      addedObject: {fileID: 1610173254}
   m_SourcePrefab: {fileID: 100100000, guid: 6a53efea136cae84d968e806617b0305, type: 3}
 --- !u!95 &1919401416 stripped
 Animator:
@@ -5164,6 +5257,8 @@ PlayableDirector:
     value: {fileID: 1164661177}
   - key: {fileID: -5642866684177467351, guid: 0f428b09c52556c46a20529ad1f7549b, type: 2}
     value: {fileID: 115912365137020062}
+  - key: {fileID: -709644734912370741, guid: 0f428b09c52556c46a20529ad1f7549b, type: 2}
+    value: {fileID: 361888496}
   m_ExposedReferences:
     m_References:
     - 1ad5674c37979624a9fbb88fcbea27af: {fileID: 1424300824}
@@ -5653,21 +5748,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &409385554953592604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469522095869916722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47b63bf39b8fb8e4caf68788d43a3733, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Composer>k__BackingField: {fileID: 0}
-  <UseStrafeAnimation>k__BackingField: 0
-  <LandVelocityThreshold>k__BackingField: 5
 --- !u!4 &413923818453647695
 Transform:
   m_ObjectHideFlags: 0
@@ -5898,12 +5978,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'clavicle_r'\n\tTransform 'index_metacarpal_l'\n\tTransform
-    'pinky_01_l'\n\tTransform 'lowerarm_r'\n\tTransform 'ring_02_l'\n\tTransform
-    'index_metacarpal_r'\n\tTransform 'root'\n\tTransform 'spine_04'\n\tTransform
-    'ring_metacarpal_r'\n\tTransform 'dk_m_eye_r'\n\tand more ..."
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -6609,7 +6684,6 @@ GameObject:
   m_Component:
   - component: {fileID: 157390333799734247}
   - component: {fileID: 589640308227937790}
-  - component: {fileID: 409385554953592604}
   - component: {fileID: 4535127813589994209}
   m_Layer: 0
   m_Name: Player
@@ -11457,3 +11531,4 @@ SceneRoots:
   - {fileID: 2128764970}
   - {fileID: 1164661176}
   - {fileID: 4818633516332356699}
+  - {fileID: 361888497}

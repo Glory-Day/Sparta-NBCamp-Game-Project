@@ -22,6 +22,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -31,6 +32,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Main_Scene
@@ -41,6 +43,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -50,6 +53,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -59,6 +63,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Main_Scene
@@ -69,6 +74,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -78,6 +84,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -93,6 +100,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
