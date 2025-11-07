@@ -3628,7 +3628,7 @@ GameObject:
   - component: {fileID: 3565550215301351902}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3680,8 +3680,8 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 1000
-  field of view: 90
+  far clip plane: 200
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -3696,7 +3696,7 @@ Camera:
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!114 &3565550215301351902
@@ -3722,7 +3722,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5590,6 +5590,8 @@ GameObject:
   - component: {fileID: 5619646713884273913}
   - component: {fileID: 4763180320632602272}
   - component: {fileID: 5642552327814629094}
+  - component: {fileID: -7587636766269355627}
+  - component: {fileID: 5404877056927056199}
   m_Layer: 6
   m_Name: Player_Character_(Final)
   m_TagString: Player
@@ -5757,6 +5759,124 @@ MonoBehaviour:
   <Offset>k__BackingField: {x: 0, y: 0.5, z: 0}
   <IsDebugMode>k__BackingField: 1
   <Mode>k__BackingField: 1
+--- !u!82 &-7587636766269355627
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754050635531894787}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &5404877056927056199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8754050635531894787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d7ccfeec03a3824080a22e4fe1c027f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: 88e3a95f36ef5b644883ed971b6853d2, type: 3}
+  - {fileID: 8300000, guid: 1449d9cb2178f5245a6193708c2bd412, type: 3}
+  - {fileID: 8300000, guid: bcc694dc9f11fcd4cbd8a749ae11dff7, type: 3}
+  - {fileID: 8300000, guid: 30cba9b9e8879f940a5dd074df183f3b, type: 3}
+  - {fileID: 8300000, guid: ddae400aeaa383c478ceb33f307c43fa, type: 3}
+  - {fileID: 8300000, guid: 7cdfe954d509b2a4ca75de6a2dd90b45, type: 3}
+  - {fileID: 8300000, guid: 5857e40f6675b6343b2b857138bbe695, type: 3}
+  - {fileID: 8300000, guid: 69667a1f4a310744aaa9ae862a3a7a9f, type: 3}
+  _maximumDistance: 0
 --- !u!1 &8802389824285065457
 GameObject:
   m_ObjectHideFlags: 0
@@ -6291,6 +6411,14 @@ PrefabInstance:
     - target: {fileID: 7913184687093286978, guid: 4c8d7bd522f59ae4d8c855682233b7dc, type: 3}
       propertyPath: m_Name
       value: Sainchamsa_geom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842740372295318968, guid: 4c8d7bd522f59ae4d8c855682233b7dc, type: 3}
+      propertyPath: m_Height
+      value: 2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8842740372295318968, guid: 4c8d7bd522f59ae4d8c855682233b7dc, type: 3}
+      propertyPath: m_Radius
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

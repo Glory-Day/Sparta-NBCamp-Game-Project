@@ -106,7 +106,7 @@ namespace Backend.Object.Management
             var bootstrap = FindObjectOfType<Bootstrap>();
             if (bootstrap == null)
             {
-                Debugger.LogError("Bootstrap not found in the scene.");
+                Debugger.LogMessage("Bootstrap not found in the scene.");
             }
             else
             {

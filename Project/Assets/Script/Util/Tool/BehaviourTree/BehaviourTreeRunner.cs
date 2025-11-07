@@ -1,9 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using Backend.Object.Character;
 using Backend.Object.Character.Enemy;
-using Backend.Object.Character.Enemy.Boss;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -28,19 +24,21 @@ namespace GloryDay.BehaviourTree
             Tree = Tree.Clone();
             Tree.Bind(component);
 
-            component.Status.OnEnemyDeath += EnemyDeath;
-            component.Status.OnEnemyDeath += component.AnimationController.PlayDeathAnimation;
-            component.Status.OnEnemyDeath += component.MovementController.OnEnemyDeath;
+            component.Status.OnDeath += EnemyDeath;
+            component.Status.OnDeath += component.MovementController.OnEnemyDeath;
+            component.Status.OnDeath += component.AnimationController.PlayDeathAnimation;
 
-            component.Status.OnEnemyHit += EnemyHit;
-            component.Status.OnEnemyHit += component.AnimationController.PlayHitAnimation;
+            component.Status.OnHit += EnemyHit;
+            component.Status.OnHit += component.AnimationController.PlayHitAnimation;
 
             _hitStunTime = component.Status.HitStunTime;
 
-            
         }
         private void OnEnable()
         {
+            stop = false;
+            GetComponent<NavMeshAgent>().isStopped = false;
+            GetComponent<Collider>().enabled = true;
             EnemyMovementController movementController = GetComponent<EnemyMovementController>();
             if (movementController.IsGetUp)
             {

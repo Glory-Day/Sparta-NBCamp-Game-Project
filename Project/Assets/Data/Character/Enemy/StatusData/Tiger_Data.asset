@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 002
   <Name>k__BackingField: "\uC0B0\uC655"
-  <HealthPoint>k__BackingField: 420
+  <HealthPoint>k__BackingField: 121
   <Speed>k__BackingField: 7
   <PhysicalDamage>k__BackingField: 7
   <MagicalDamage>k__BackingField: 0
@@ -24,4 +24,5 @@ MonoBehaviour:
   <TurnSpeed>k__BackingField: 90
   <AttackRange>k__BackingField:
   - 4.2
-  - 15
+  - 100
+  <SoulPoint>k__BackingField: 0

@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Village_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3989e2ab2fc94845b781ba8da5da33c
+    m_Address: Assets/Data/Spawn/Boss_02_Spawn_Data.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Boss_02_Scene
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e6536ad95de8bbe4a8f3f89086c5dc50
     m_Address: Assets/Data/Spawn/Forest_01_Spawn_Data.asset
     m_ReadOnly: 0

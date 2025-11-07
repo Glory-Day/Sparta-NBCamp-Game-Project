@@ -10,7 +10,7 @@ namespace Backend.Object.Character
     [System.Serializable]
     public struct AnimationEvent
     {
-        public enum EventType { SetEffect, PlayEffect, PlaySfx, StopSfx, StopEffect, SetWeapon, StartAttack, EndAttack, SetSpeed, SetParry, PlaySkill, MovePos }
+        public enum EventType { SetEffect, PlayEffect, PlaySfx, InitializationSfx, StopEffect, SetWeapon, StartAttack, EndAttack, SetSpeed, SetParry, PlaySkill, MovePos }
         public string Descript;
         public EventType TypeEvent;
         [Range(0f, 1f)] public float NormalizeTime;
@@ -25,7 +25,7 @@ namespace Backend.Object.Character
         [Header("Events")]
         public AnimationEvent[] AnimationEvents;
 
-        private bool[] _eventsFired;
+        protected bool[] _eventsFired;
         protected Dictionary<AnimationEvent.EventType, Action<AnimationEvent>> _eventHandlers;
 
         protected Animator _animator;
@@ -45,7 +45,6 @@ namespace Backend.Object.Character
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             float normalizeTime = stateInfo.normalizedTime % 1;
-
             for (int i = 0; i < AnimationEvents.Length; i++)
             {
                 if (!_eventsFired[i] && normalizeTime >= AnimationEvents[i].NormalizeTime)

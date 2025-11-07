@@ -2,10 +2,8 @@
 using System.Collections;
 using Backend.Object.Character.Player;
 using Backend.Object.Management;
-using Backend.Object.NPC;
 using Backend.Object.UI;
 using Backend.Util.Data;
-using Script.Object.Character.Player;
 using Script.Object.UI;
 using UnityEngine;
 
@@ -20,7 +18,7 @@ namespace Backend.Object.Process
             var position = data[0].Position;
             var rotation = data[0].Rotation;
 
-            var key = AddressData.Assets_Prefab_Character_Player_Player_Character_Beta_Prefab;
+            var key = AddressData.Assets_Prefab_Character_Player_Player_Character_Final_Prefab;
             var origin = Util.Management.ResourceManager.GetGameObjectAsset<GameObject>(key);
             var clone = ObjectPoolManager.SpawnPoolObject(origin, position, rotation, null);
             var model = clone.GetComponent<PlayerStatus>();

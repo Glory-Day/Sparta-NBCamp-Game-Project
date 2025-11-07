@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Backend.Object.Character.Player;
 using Backend.Object.Management;
 using Backend.Util.Data.StatusDatas;
 using Backend.Util.Debug;
@@ -27,43 +28,60 @@ namespace Backend.Object.Character.Enemy
         // 일반 몬스터 인지
         public bool IsNormalMonster = false;
 
-        // 플레이어가 죽었을 때 이벤트
-        public event Action OnEnemyDeath;
-        public event Action OnEnemyHit;
         public bool IsParryable = false;
 
         // 히트 후 움직이기까지 시간
         public float HitStunTime = 0.5f;
 
         private bool _isHitAnimationPlaying = false;
-        private EffectSoundPlayer _effectSoundPlayer;
 
         protected override void Awake()
         {
             base.Awake();
 
             _enemyAnimationController = GetComponent<EnemyAnimationController>();
-            _effectSoundPlayer = GetComponent<EffectSoundPlayer>();
+
         }
 
         public override void TakeDamage(float damage, Vector3? position = null)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             base.TakeDamage(damage, null);
 
             if (currentHealthPoint <= 0)
             {
+                isDead = true;
                 currentHealthPoint = 0;
-                OnEnemyDeath?.Invoke();
-                OnEnemyDeath = null;
-                OnEnemyHit = null;
+                OnDeath?.Invoke();
+
                 if (_effectSoundPlayer != null && deathSfxIndex > 0)
                 {
                     _effectSoundPlayer.Play(deathSfxIndex);
                 }
 
-                // 플레이어에게 소울 지급
-                // GetComponent<EnemyMovementController>().Target.GetComponent<>().SetSoul(BossStatus.SoulPoint);
-
+                var movementController = GetComponent<EnemyMovementController>();
+                if (movementController != null && movementController.Target != null)
+                {
+                    var playerStatus = movementController.Target.GetComponent<PlayerStatus>();
+                    if (playerStatus != null)
+                    {
+                        // 모든 것이 정상이면 소울 지급
+                        playerStatus.TakeSoul(BossStatus.SoulPoint);
+                        Debug.Log(BossStatus.SoulPoint + " 지급");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("대상의 PlayerStatus 컴포넌트를 찾을 수 없습니다.", movementController.Target);
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("EnemyMovementController 또는 Target을 찾을 수 없습니다.");
+                }
                 StartCoroutine(FadeOutAndDestroy(5f));
                 return;
             }
@@ -76,7 +94,7 @@ namespace Backend.Object.Character.Enemy
             if (IsNormalMonster && !_isHitAnimationPlaying)
             {
                 StartCoroutine(HitCoroutine());
-                OnEnemyHit?.Invoke();
+                OnHit?.Invoke();
             }
 
             if (_enemyAnimationController != null)
