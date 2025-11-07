@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using Backend.Util.Data;
+using Backend.Util.Debug;
 
 namespace Backend.Object.UI
 {
     public class InventoryRepository
     {
-        private InventoryView _view;
+        private BaseInventoryView _view;
         private Inventory _model;
 
         /// <summary> 업데이트 할 인덱스 목록 </summary>
         private readonly HashSet<int> _indexSetForUpdate = new();
 
-        public InventoryRepository(InventoryView view, Inventory model)
+        public InventoryRepository(BaseInventoryView view, Inventory model)
         {
             _model = model;
             _view = view;
@@ -37,6 +38,27 @@ namespace Backend.Object.UI
             }
 
             return -1;
+        }
+
+
+        public bool FindRemoveItem(ItemData target)
+        {
+            if(target == null)
+            {
+                return false;
+            }
+
+            for(int i = 0; i < _model.Capacity; i++)
+            {
+                if (_model.items[i] == target)
+                {
+                    Remove(i);
+                    return true;
+                }
+            }
+
+            Debugger.LogMessage($"Can't Find Item {target.Name}");
+            return false;
         }
 
         /// <summary>

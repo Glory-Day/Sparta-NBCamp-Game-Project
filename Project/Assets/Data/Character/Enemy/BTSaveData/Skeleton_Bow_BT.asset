@@ -214,6 +214,35 @@ MonoBehaviour:
   description: "\uC2A4\uD0AC"
   Children:
   - {fileID: -2667179674389061801}
+--- !u!114 &-3808837782427390466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665389cfbf74f8343b8a681821e31802, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 444e0bb1ce3c5094d8b1eb777499f18c
+  Position: {x: 183.33331, y: 2138}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  WaitTime: 2
 --- !u!114 &-3576458939510429853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,8 +271,8 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  Speed: 5
-  StopDistance: 9.5
+  Speed: 2
+  StopDistance: 14.5
   Offset: 1
   EnableRotation: 1
 --- !u!114 &-2895913349374849906
@@ -261,7 +290,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 978bf3a2b7654cd4d8ec4846e783e106
-  Position: {x: -11.577404, y: 2106}
+  Position: {x: -7, y: 2130}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -335,8 +364,8 @@ MonoBehaviour:
     <IsParry>k__BackingField: 1
   tree: {fileID: 0}
   description: 
-  minDistance: 9.5
-  maxDistance: 20
+  minDistance: 14.5
+  maxDistance: 21
   useRangeCheck: 0
   rangeCheck: 1
 --- !u!114 &-2062706167207358310
@@ -633,8 +662,6 @@ MonoBehaviour:
   - {fileID: -2667179674389061801}
   - {fileID: 1709563112527370004}
   - {fileID: 624816327747977018}
-  - {fileID: 6803227641387545258}
-  - {fileID: 6095677599982996189}
   - {fileID: 6749015067409651586}
   - {fileID: -638203536360772579}
   - {fileID: 3118339430748246635}
@@ -667,6 +694,7 @@ MonoBehaviour:
   - {fileID: -2895913349374849906}
   - {fileID: -5908445701019544582}
   - {fileID: 7078056250561016668}
+  - {fileID: -3808837782427390466}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -945,34 +973,6 @@ MonoBehaviour:
   tree: {fileID: 0}
   description: 
   Child: {fileID: -6494827347744475839}
---- !u!114 &6095677599982996189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a2f0bd5d27409f4f9b0d64e548b70fe, type: 3}
-  m_Name: IsAttackEnd
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 9e8d4e01bb7db8e4ea0253c4df663f74
-  Position: {x: -195.00006, y: 2294}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: 
 --- !u!114 &6332503613711757279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,38 +1037,7 @@ MonoBehaviour:
   - {fileID: -5908445701019544582}
   - {fileID: 7078056250561016668}
   - {fileID: -2895913349374849906}
---- !u!114 &6803227641387545258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be1a0258bfbba5c4b8f1a1c7f53aea1f, type: 3}
-  m_Name: EnemyAttack
-  m_EditorClassIdentifier: 
-  mState: 0
-  Started: 0
-  Guid: 70f7b56a4ec0d4c4484597914bec3103
-  Position: {x: -530.00006, y: 2382.5613}
-  blackboard:
-    attackTimeCounter: 0
-    isHit: 0
-    playerOnLeft: 0
-    currentAnimationHash: 0
-    currentAnimationDuration: 0
-    moveDestination: {x: 0, y: 0, z: 0}
-    RangeCheck: 999
-    IsBackstepping: 0
-    <IsParry>k__BackingField: 1
-  tree: {fileID: 0}
-  description: B0301
-  AttackNum: 0
-  IsRandomAttack: 0
-  MinRandomIndex: 0
-  RandomLength: 0
+  - {fileID: -3808837782427390466}
 --- !u!114 &7078056250561016668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,7 +1053,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 68acbc3cdda85a0478a14bff04b6b242
-  Position: {x: -187.00002, y: 2114}
+  Position: {x: -179, y: 2122}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1145,7 +1114,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: bc96e1b6f1c1ba344861656d12b087f6
-  Position: {x: 914.2108, y: -34.500008}
+  Position: {x: 929.00006, y: -56.99999}
   blackboard:
     attackTimeCounter: 0
     isHit: 0

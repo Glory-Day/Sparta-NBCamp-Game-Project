@@ -4,6 +4,8 @@ using Backend.Object.Management;
 using Backend.Object.UI;
 using Backend.Util.Data;
 using Backend.Util.Debug;
+using Backend.Util.Management;
+using Unity.VisualScripting;
 using UnityEngine;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
@@ -20,10 +22,15 @@ namespace Backend.Object.Process
 
         private IEnumerator Booting()
         {
-            var currentSceneName = SceneManager.GetActiveScene().name;
-            Util.Management.ResourceManager.LoadAssetsByLabelAsync(currentSceneName);
+            if (DataManager.IsSettingDataExisted == false)
+            {
+                DataManager.ResetSettingData();
+            }
 
-            while (Util.Management.ResourceManager.IsLoadedDone == false)
+            var currentSceneName = SceneManager.GetActiveScene().name;
+            ResourceManager.LoadAssetsByLabelAsync(currentSceneName);
+
+            while (ResourceManager.IsLoadedDone == false)
             {
                 yield return null;
             }
@@ -31,9 +38,29 @@ namespace Backend.Object.Process
             var names = AddressData.Groups[AddressData.Group.UI][currentSceneName].ToArray();
             for (var i = 0; i < names.Length; i++)
             {
-                var asset = Util.Management.ResourceManager.GetUIAsset<GameObject>(names[i]);
-                UIManager.Add(names[i], asset.GetComponent<Window>());
+                var asset = ResourceManager.GetUIAsset<GameObject>(names[i]);
+                UIManager.AddAsDefault(names[i], asset.GetComponent<Window>());
             }
+
+            var value = UIManager.GetDefaultWindow(AddressData.Assets_Prefab_UI_Main_Window_Prefab);
+            var window = value.GetComponent<MainWindow>();
+
+            window.StartButton.onClick.AddListener(LoadNewData);
+            window.LoadButton.onClick.AddListener(LoadData);
+            window.SetLoadButtonInteractable(DataManager.IsUserDataExisted);
+            window.Open();
+        }
+
+        private void LoadNewData()
+        {
+            DataManager.ResetUserData();
+            DataManager.ResetStatusData();
+        }
+
+        private void LoadData()
+        {
+            DataManager.LoadUserData();
+            DataManager.LoadStatusData();
         }
     }
 }

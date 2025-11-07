@@ -1503,6 +1503,7 @@ MonoBehaviour:
   - {fileID: 3147088453187696173}
   - {fileID: -7921080943375965468}
   - {fileID: -2960684876693161237}
+  - {fileID: 2166415917678972200}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -1879,6 +1880,44 @@ MonoBehaviour:
   DestinationPosition: {x: 0, y: 0, z: -10}
   PlayerDestination: 0
   Offset: 2
+--- !u!114 &2166415917678972200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f082cc5606b83949905266a115bd09f, type: 3}
+  m_Name: SpawnProjectile
+  m_EditorClassIdentifier: 
+  mState: 0
+  Started: 0
+  Guid: 2549cceadec7ea74bab565f58f8e2292
+  Position: {x: 2503, y: 952}
+  blackboard:
+    attackTimeCounter: 0
+    isHit: 0
+    playerOnLeft: 0
+    currentAnimationHash: 0
+    currentAnimationDuration: 0
+    moveDestination: {x: 0, y: 0, z: 0}
+    RangeCheck: 999
+    IsBackstepping: 0
+    <IsParry>k__BackingField: 1
+  tree: {fileID: 0}
+  description: 
+  Projectile: {fileID: 0}
+  ProjectileSpawnPoint:
+  - {x: 0, y: 4, z: 0}
+  - {x: 1.5, y: 3, z: 0}
+  - {x: -1.5, y: 3, z: 0}
+  Delay: 0.2
+  Speed: 30
+  Duration: 10
+  ChasingTime: 1.9
+  SpawnDelay: 0
 --- !u!114 &2611671948994998535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2031,6 +2070,7 @@ MonoBehaviour:
   - {fileID: -2789634550323934002}
   - {fileID: 4601917796139099062}
   - {fileID: 8253595544172869629}
+  - {fileID: 2166415917678972200}
 --- !u!114 &3353165020559204505
 MonoBehaviour:
   m_ObjectHideFlags: 0

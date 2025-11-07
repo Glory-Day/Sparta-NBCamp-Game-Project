@@ -1,4 +1,5 @@
-﻿using Backend.Object.Character.Enemy;
+﻿using System.Collections;
+using Backend.Object.Character.Enemy;
 using Backend.Object.Management;
 using Backend.Util.Data;
 using Script.Object.UI;
@@ -8,18 +9,19 @@ namespace Backend.Object.Process
 {
     public class BindingBossEnemyCharacterProcess : IProcessable
     {
-        public void Run()
+        public IEnumerator Running()
         {
             var currentSceneIndex = SceneManager.CurrentSceneIndex;
             var key = currentSceneIndex switch
             {
-                3 => AddressData.Assets_Data_Spawn_Boss_01_Spawn_Data_Asset,
+                4 => AddressData.Assets_Data_Spawn_Boss_01_Spawn_Data_Asset,
+                7 => AddressData.Assets_Data_Spawn_Boss_02_Spawn_Data_Asset,
                 _ => string.Empty
             };
 
             if (key == string.Empty)
             {
-                return;
+                yield break;
             }
 
             var asset = Util.Management.ResourceManager.GetDataAsset<SpawnData>(key);
@@ -30,7 +32,8 @@ namespace Backend.Object.Process
 
             key = currentSceneIndex switch
             {
-                3 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTail_Human_NineTail_Human_Prefab,
+                4 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTail_Human_NineTail_Human_Prefab,
+                7 => AddressData.Assets_Prefab_Character_Enemy_Boss_NineTaied_Beast_NineTaied_Beast_Walk_Prefab,
                 _ => string.Empty
             };
 
@@ -41,7 +44,7 @@ namespace Backend.Object.Process
             controller.Target = Target;
 
             key = AddressData.Assets_Prefab_UI_Battle_Interface_Window_Prefab;
-            origin = UIManager.GetValue(key);
+            origin = UIManager.GetCachedWindow(key).gameObject;
 
             var binder = origin.GetComponentInChildren<BossEnemyConditionInformationBinder>();
             binder.Bind(model);

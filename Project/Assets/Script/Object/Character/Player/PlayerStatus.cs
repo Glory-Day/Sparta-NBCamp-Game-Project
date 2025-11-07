@@ -1,12 +1,16 @@
 ﻿using System;
-using Backend.Util.Data;
-using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using Backend.Object.Management;
 using Backend.Object.UI;
+using Backend.Util.Data;
+using Backend.Util.Management;
+using Script.Object.Character.Player;
+using UnityEngine;
 
 
 #if UNITY_EDITOR
 
-using UnityEditor;
 
 #endif
 
@@ -14,34 +18,41 @@ namespace Backend.Object.Character.Player
 {
     public class PlayerStatus : Status
     {
-        [Header("Stamina Point Information")]
-        [SerializeField] private float currentStaminaPoint;
-        [SerializeField] private float maximumStaminaPoint;
+        #region SERIALIZABLE PROPERTIES API
 
-        [Header("Stamina Point Settings")]
-        [SerializeField] private float regenDelay = 1.0f;
-        [SerializeField] private float regenDuration = 3.0f;
-        [SerializeField] private float regenAmount = 30.0f;
-        [SerializeField] private float cost = 30f;
+        [field: Header("Composition References")]
+        [field: SerializeField] public PlayerCharacterComposer Composer { get; private set; }
 
-        [Header("Damaged Point Settings")]
-        [SerializeField] private float lowDamagedPoint;
-        [SerializeField] private float highDamagedPoint;
+        [field: Header("Data Settings")]
+        [field: SerializeField] public PlayerStatusData Data { get; private set; }
 
-        [Header("Damage Point Information")]
-        [SerializeField] private float currentDamagePoint;
+        [field: Header("Stamina Point Information")]
+        [field: SerializeField] public float CurrentStaminaPoint { get; private set; }
+        [field: SerializeField] public float MaximumStaminaPoint { get; private set; }
 
-        [Header("Defense Point Information")]
-        [SerializeField] private float currentDefensePoint;
+        [field: Header("Stamina Point Settings")]
+        [field: SerializeField] public float Delay { get; private set; } = 1.0f;
+        [field: SerializeField] public float Duration { get; private set; } = 3.0f;
+        [field: SerializeField] public float Amount { get; private set; } = 30.0f;
+        [field: SerializeField] public float[] Costs { get; private set; }
 
-        private PlayerAnimationController _animationController;
-        private AdvancedActionController _actionController;
-        private PlayerMovementController _movementController;
+        [field: Header("Damaged Point Settings")]
+        [field: SerializeField] public float LowDamagedPoint { get; private set; }
+        [field: SerializeField] public float HighDamagedPoint { get; private set; }
+
+        [field: Header("Damage Point Information")]
+        [field: SerializeField] public float CurrentDamagePoint { get; private set; }
+
+        [field: Header("Defense Point Information")]
+        [field: SerializeField] public float CurrentDefensePoint { get; private set; }
+
+        #endregion
 
         private DamageSender _damageSender;
 
         private float _regenRate;
         private float _lastUseTime;
+
 
         //인벤토리
         public Inventory inventory;
@@ -50,81 +61,124 @@ namespace Backend.Object.Character.Player
         {
             base.Awake();
 
-            PointChanged = new Action<int>[7];
 
-            maximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
-            currentStaminaPoint = maximumStaminaPoint;
-
-            _animationController = GetComponent<PlayerAnimationController>();
-            _actionController = GetComponent<AdvancedActionController>();
-            _movementController = GetComponent<PlayerMovementController>();
 
             _damageSender = GetComponentInChildren<DamageSender>();
+
+
+
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            Composer.AdvancedActionController.enabled = true;
+
+            MaximumStaminaPoint = ((PlayerStatusData)data).StaminaPoint;
+            CurrentStaminaPoint = MaximumStaminaPoint;
+
+            if (_damageSender == null)
+            {
+                return;
+            }
             _damageSender.PhysicalDamagePoint = data.PhysicalDamage;
             _damageSender.MagicalDamagePoint = data.MagicalDamage;
+
+
         }
 
         private void Start()
         {
-            _regenRate = regenAmount / regenDuration;
+            _regenRate = Amount / Duration;
         }
 
         private void Update()
         {
-            if (Time.time - _lastUseTime >= regenDelay && currentStaminaPoint < maximumStaminaPoint)
+            if (isDead)
             {
-                currentStaminaPoint = Mathf.Min(currentStaminaPoint + (_regenRate * Time.deltaTime), maximumStaminaPoint);
-
-                StaminaPointChanged?.Invoke(NormalizedStaminaPoint);
+                return;
             }
+
+            if (IsStaminaPointRegenerable && (Time.time - _lastUseTime < Delay || CurrentStaminaPoint >= MaximumStaminaPoint))
+            {
+                return;
+            }
+
+            CurrentStaminaPoint = Mathf.Min(CurrentStaminaPoint + (_regenRate * Time.deltaTime), MaximumStaminaPoint);
+
+            StaminaPointChanged?.Invoke(NormalizedStaminaPoint);
         }
 
         public override void TakeDamage(float damage, Vector3? position = null)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             base.TakeDamage(damage);
 
             if (0f >= currentHealthPoint)
             {
-                _animationController.SetAnimationTrigger("Dying");
-
+                Composer.AnimationController.SetAnimationTrigger("Died");
+                Composer.PerspectiveController.Cancel();
+                PlayerDie();
                 return;
             }
 
-            _actionController.Direction = (transform.position - position ?? Vector3.zero).normalized;
+            Composer.AdvancedActionController.Direction[1] = (transform.position - position ?? Vector3.zero).normalized;
 
-            if (lowDamagedPoint < damage && damage < highDamagedPoint)
+            if (LowDamagedPoint < damage && damage < HighDamagedPoint)
             {
-                _animationController.SetAnimationTrigger("Low Damaged");
+                Composer.AnimationController.SetAnimationTrigger("Low Damaged");
             }
-            else if (highDamagedPoint < damage)
+            else if (HighDamagedPoint < damage)
             {
-                _animationController.SetAnimationTrigger("High Damaged");
+                Composer.AnimationController.SetAnimationTrigger("High Damaged");
             }
         }
 
-        public void UseStamina()
+        private void PlayerDie()
         {
-            currentStaminaPoint = Mathf.Max(currentStaminaPoint - cost, 0);
+            isDead = true;
+            OnDeath?.Invoke();
+            Composer.AdvancedActionController.enabled = false;
+            Debug.Log("Player Died");
+            StartCoroutine(Restart(3f));
+        }
+
+        private IEnumerator Restart(float time)
+        {
+            yield return new WaitForSeconds(time);
+
+            var sceneIndex = DataManager.UserData.SceneIndex;
+            var spawnerIndex = DataManager.UserData.SpawnerIndex;
+            SceneManager.LoadSceneByIndex(sceneIndex, spawnerIndex);
+        }
+
+        public void UseStamina(int index)
+        {
+            CurrentStaminaPoint = Mathf.Max(CurrentStaminaPoint - Costs[index], 0);
 
             _lastUseTime = Time.time;
 
             StaminaPointChanged?.Invoke(NormalizedStaminaPoint);
         }
 
-        public bool IsUsingStaminaAvailable()
+        public bool IsUsingStaminaAvailable(int index)
         {
-            return currentStaminaPoint >= cost;
+            return CurrentStaminaPoint >= Costs[index];
         }
 
-        public void TestFuction(int index, int point)
+        public void TakeSoul(float soul)
         {
-            PointChanged[index].Invoke(point);
+            Data.Soul += soul;
         }
 
         public Action<float> StaminaPointChanged;
-        //액션 배열
-        public Action<int>[] PointChanged;
 
-        private float NormalizedStaminaPoint => currentStaminaPoint / maximumStaminaPoint;
+        public bool IsStaminaPointRegenerable { get; set; } = true;
+
+        private float NormalizedStaminaPoint => CurrentStaminaPoint / MaximumStaminaPoint;
     }
 }

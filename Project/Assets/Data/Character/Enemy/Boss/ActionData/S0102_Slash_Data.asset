@@ -15,8 +15,9 @@ MonoBehaviour:
   <ID>k__BackingField: S0102
   <Name>k__BackingField: "\uD718\uB450\uB974\uAE30"
   <Damage>k__BackingField: 1.3
+  <DamageType>k__BackingField: 0
   <ActionSound>k__BackingField: {fileID: 0}
   <ActionRange>k__BackingField: 0
   <IsParryable>k__BackingField: 1
   <AttackWeight>k__BackingField: 0
-  <CoolDown>k__BackingField: 10
+  <CoolDown>k__BackingField: 5

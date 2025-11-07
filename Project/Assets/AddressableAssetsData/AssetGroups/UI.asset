@@ -17,20 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 94de7bfe5fd7a3143b168d4e880d524b
   m_SerializeEntries:
-  - m_GUID: 0507e86c72ae4a54dbba9a8248e36e0d
-    m_Address: Assets/Prefab/UI/Level_Up_Window.prefab
+  - m_GUID: 292474bb88ac9f544b940ead6ce52d2f
+    m_Address: Assets/Prefab/UI/Inventory_Window 1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
-    - Forest_01_Scene
-    - Gwanghwamun_Scene
-    - Village_01_Scene
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3c64862c9d9dd5a45a9a25a9add64f4f
-    m_Address: Assets/Prefab/UI/Status_Window.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -40,9 +32,20 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Main_Scene
+    - Village_01_Scene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 535260bad50503f44bce3923b5c59971
+    m_Address: Assets/Prefab/UI/Equipment_Window 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Boss_01_Scene
+    - Boss_02_Scene
+    - Forest_01_Scene
+    - Gwanghwamun_Scene
     - Village_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 72c3efa02453d5444ad703b90571745c
@@ -50,15 +53,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: db30718d007550f43b07dfe71e8bea83
-    m_Address: Assets/Prefab/UI/Equipment_Window.prefab
+  - m_GUID: 8841e09c00563594fa2eb59435ee7739
+    m_Address: Assets/Prefab/UI/Loading_Window.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
+    - Forest_01_Scene
+    - Gwanghwamun_Scene
+    - Main_Scene
+    - Village_01_Scene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9162f09b2fb818a4897f7f618c0d75a6
+    m_Address: Assets/Prefab/UI/Status_Window 1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
@@ -68,15 +84,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dc64bb5104a311a47b0c96caa08e3436
-    m_Address: Assets/Prefab/UI/Inventory_Window.prefab
+  - m_GUID: dea74372b8ec3264c8dc4137150db9cb
+    m_Address: Assets/Prefab/UI/Main_Window.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Main_Scene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: feb25057ede924142ab25cb4bd40d1d1
+    m_Address: Assets/Prefab/UI/Level_Up_Window 1.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Boss_01_Scene
+    - Boss_02_Scene
     - Forest_01_Scene
     - Gwanghwamun_Scene
     - Village_01_Scene

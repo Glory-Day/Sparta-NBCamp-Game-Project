@@ -6,17 +6,29 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/External/Scenes/Build/Main_Scene.unity
+    path: Assets/Scene/Build/Main_Scene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/External/Scenes/Build/Forest_01_Scene.unity
+    path: Assets/Scene/Build/Forest_01_Scene.unity
     guid: 8ca926bec3de9a84fbc517ab9b03041d
   - enabled: 1
-    path: Assets/External/Scenes/Build/Village_01_Scene.unity
+    path: Assets/Scene/Build/Village_01_Scene.unity
     guid: db2ba41c69aa09741b76561d61b865b7
   - enabled: 1
-    path: Assets/External/Scenes/Build/Boss_01_Scene.unity
+    path: Assets/Scene/Build/Cut_Scene_01.unity
+    guid: e2b9aca26c24f2e4e85852dae2f1023c
+  - enabled: 1
+    path: Assets/Scene/Build/Boss_01_Scene.unity
     guid: 0c51955085a870e4db79db050abc0964
+  - enabled: 1
+    path: Assets/External/Scenes/Build/Gwanghwamun_Scene.unity
+    guid: ff577af38d76a4542b9d13bd1ca0271c
+  - enabled: 1
+    path: Assets/Scene/Build/Cut_Scene_02.unity
+    guid: ac4d755f097b190409a35b30388fe938
+  - enabled: 1
+    path: Assets/Scene/Build/Boss_02_Scene.unity
+    guid: 17c7b5f053dabdf44a0d061fe9cd512c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d199e71144eed3d4e8965548c7879563, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 03678da2e6ad0c74ab4da816bd9eeacb, type: 2}

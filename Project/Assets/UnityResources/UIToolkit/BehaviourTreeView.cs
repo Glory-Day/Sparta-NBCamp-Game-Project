@@ -1,13 +1,14 @@
-#if UNITY_EDITOR
-
+﻿#if UNITY_EDITOR
 using UnityEngine.UIElements;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using UnityEditor.Experimental.GraphView;
-using UnityEditor;
+using GloryDay.BehaviourTree;
+using Node = GloryDay.BehaviourTree.Node;
 
 public class BehaviourTreeView : GraphView
 {
@@ -181,5 +182,4 @@ public class BehaviourTreeView : GraphView
         });
     }
 }
-
 #endif

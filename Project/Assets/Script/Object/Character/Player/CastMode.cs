@@ -2,7 +2,7 @@
 {
     public enum CastMode
     {
-        SingleRay,
-        MultipleRay
+        Raycast,
+        SphereCast
     }
 }

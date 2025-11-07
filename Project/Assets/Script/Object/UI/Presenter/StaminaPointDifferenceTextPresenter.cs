@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Backend.Object.Character.Player;
+using Backend.Object.UI.View;
 using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
@@ -11,32 +12,46 @@ namespace Backend.Object.UI.Presenter
 {
     public class StaminaPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public StaminaPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState += StateChange;
+            }
         }
 
         public override void Clear()
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState -= StateChange;
+            }
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
+            var status = (PlayerStatusData)((PlayerStatus)Model).data;
+
             switch (message)
             {
                 case IncreasePointMessage msg:
-                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint, ((int)((PlayerStatusData)Model.data).StaminaPoint) + msg.Point);
+                    View.Change((int)status.StaminaPoint, (int)status.StaminaPoint + msg.Point);
                     break;
                 case ConfirmMessage msg:
-                    ((PlayerStatusData)Model.data).StaminaPoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)((PlayerStatusData)Model.data).StaminaPoint);
+                    status.StaminaPoint = float.Parse(View.UpdatedPointText.text);
+                    View.Change((int)status.StaminaPoint);
                     break;
             }
-            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(message);
+        }
+        public override void StateChange()
+        {
+            base.StateChange();
+            if (Model is PlayerStatus playerStatus)
+            {
+                var status = (PlayerStatusData)playerStatus.data;
+                View.Change((int)status.StaminaPoint, (int)status.StaminaPoint);
+            }
         }
     }
 }

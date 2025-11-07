@@ -23,6 +23,7 @@ TagManager:
   - NavMeshIgnore
   - 
   - ColliderWall
+  - PlayerBody
   - 
   - 
   - 
@@ -32,8 +33,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Bone
   - 
   - 
   - 

@@ -1,5 +1,6 @@
 ﻿using Backend.Object.Character;
 using Backend.Object.Character.Player;
+using Backend.Object.UI.View;
 using Backend.Util.Data;
 using Backend.Util.Presentation;
 using Backend.Util.Presentation.Message;
@@ -9,32 +10,47 @@ namespace Backend.Object.UI.Presenter
 {
     public class HealthPointDifferenceTextPresenter : PointDifferenceTextPresenter
     {
-        private Dispatcher _dispatcher;
-        public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, int index, Dispatcher dispatcher) : base(view, model, index)
+        public HealthPointDifferenceTextPresenter(PointDifferenceTextView view, PlayerStatus model, Dispatcher dispatcher) : base(view, model, dispatcher)
         {
-            _dispatcher = dispatcher;
-            _dispatcher.Subscribe(this);
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState += StateChange;
+            }
         }
 
         public override void Clear()
         {
+            if (View is StatusDifferenceTextView statusView)
+            {
+                statusView.UpdateState -= StateChange;
+            }
             base.Clear();
-            _dispatcher.Unsubscribe(this);
         }
 
         public override void Receive<T>(T message)
         {
-            switch (message)
+            if (Model is PlayerStatus playerStatus)
             {
-                case IncreasePointMessage msg:
-                    View.Change((int)Model.maximumHealthPoint, (int)Model.maximumHealthPoint + msg.Point);
-                    break;
-                case ConfirmMessage msg:
-                    Model.maximumHealthPoint = float.Parse(View.UpdatedPointText.text);
-                    View.Change((int)Model.maximumHealthPoint);
-                    break;
+                switch (message)
+                {
+                    case IncreasePointMessage msg:
+                        View.Change((int)playerStatus.maximumHealthPoint, (int)playerStatus.maximumHealthPoint + msg.Point);
+                        break;
+                    case ConfirmMessage msg:
+                        playerStatus.maximumHealthPoint = float.Parse(View.UpdatedPointText.text);
+                        View.Change((int)playerStatus.maximumHealthPoint);
+                        break;
+                }
             }
-            _dispatcher.DispatchTo<LevelPointDifferenceTextPresenter, T>(message);
+        }
+
+        public override void StateChange()
+        {
+            base.StateChange();
+            if (Model is PlayerStatus playerStatus)
+            {
+                View.Change((int)playerStatus.maximumHealthPoint, (int)playerStatus.maximumHealthPoint);
+            }
         }
     }
 }

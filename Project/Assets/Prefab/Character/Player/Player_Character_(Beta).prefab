@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550290075445983114}
   - component: {fileID: 5248343523577798622}
-  - component: {fileID: 7737496227040952236}
+  - component: {fileID: 6735545999972307723}
   m_Layer: 0
   m_Name: SK_DeathKnight_M_Lingerie Variant
   m_TagString: Untagged
@@ -91,7 +91,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7737496227040952236
+--- !u!114 &6735545999972307723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,9 +100,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 102058864424047238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f39c5478639d4163bfbcf3bdfdee782b, type: 3}
+  m_Script: {fileID: 11500000, guid: 47b63bf39b8fb8e4caf68788d43a3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Composer>k__BackingField: {fileID: 2128751778533547607}
+  <UseStrafeAnimation>k__BackingField: 0
+  <LandVelocityThreshold>k__BackingField: 5
 --- !u!1 &112643581864335859
 GameObject:
   m_ObjectHideFlags: 0
@@ -1025,6 +1028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   physicalDamagePoint: 0
   magicalDamagePoint: 0
+  detector: {fileID: 3664819375036549341}
   layerMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2498,17 +2502,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18313fbad664ae94784d6540675d23d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 8094587927395728598}
-  cameraRigTransform: {fileID: 6010115604541703735}
-  smoothingFactor: 25
-  includeLayers:
+  <CameraTransform>k__BackingField: {fileID: 8094587927395728598}
+  <CameraRigTransform>k__BackingField: {fileID: 6010115604541703735}
+  <SmoothingFactor>k__BackingField: 25
+  <IncludeLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 4294967295
-  excludeColliders:
+  <ExcludeColliders>k__BackingField:
   - {fileID: 9219404325148374331}
-  castMode: 1
-  minimumCastingDistance: 0.1
-  radius: 0.2
+  <CastMode>k__BackingField: 0
 --- !u!114 &2206131035689729515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2521,15 +2523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458661df663781b4bb3ab2e4b7215321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upperVerticalLimit: 60
-  lowerVerticalLimit: 60
-  smoothingFactor: 25
-  turningSpeed: 250
-  isSmoothMode: 0
-  controller: {fileID: 1969857033368978983}
-  turningTowardSpeed: 120
-  maximumMovementSpeed: 7
-  isTurningToward: 0
+  <UpperVerticalLimit>k__BackingField: 60
+  <LowerVerticalLimit>k__BackingField: 60
+  <SmoothingFactor>k__BackingField: 25
+  <TurningSpeed>k__BackingField: 250
+  <IsSmoothMode>k__BackingField: 0
+  <Composer>k__BackingField: {fileID: 2128751778533547607}
+  <TurningTowardSpeed>k__BackingField: 120
+  <MaximumMovementSpeed>k__BackingField: 7
+  <IsTurningToward>k__BackingField: 0
 --- !u!114 &6835589968479238423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,11 +2544,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0cc6c2394c8594da8e29dddbe6c3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseHorizontalAxis: Mouse X
-  mouseVerticalAxis: Mouse Y
-  isHorizontalInputInverted: 0
-  isVerticalInputInverted: 0
-  multiplier: 0.01
+  <MouseHorizontalAxis>k__BackingField: Mouse X
+  <MouseVerticalAxis>k__BackingField: Mouse Y
+  <IsHorizontalInputInverted>k__BackingField: 0
+  <IsVerticalInputInverted>k__BackingField: 0
+  <Multiplier>k__BackingField: 0.01
 --- !u!1 &3232796896144917256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2857,7 +2859,7 @@ Transform:
   m_GameObject: {fileID: 3658051079758253973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.29, z: 0}
+  m_LocalPosition: {x: 0, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2876,12 +2878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf785ec47155e74f992ea1287a4c85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  updateType: 0
-  isExtrapolated: 0
-  interpolationMode: 0
-  speed: 20
-  time: 0.02
+  <Target>k__BackingField: {fileID: 0}
+  <UpdateMode>k__BackingField: 0
+  <IsExtrapolated>k__BackingField: 0
+  <InterpolationMode>k__BackingField: 0
 --- !u!114 &900297419889091652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2894,10 +2894,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90a5a3969aac8545916b5bd37a5cc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  updateMode: 0
-  isExtrapolated: 0
-  speed: 20
+  <Target>k__BackingField: {fileID: 0}
+  <UpdateMode>k__BackingField: 0
+  <IsExtrapolated>k__BackingField: 0
+  <Speed>k__BackingField: 20
 --- !u!1 &3720779459476011882
 GameObject:
   m_ObjectHideFlags: 0
@@ -3673,11 +3673,13 @@ GameObject:
   - component: {fileID: 3799191537385710079}
   - component: {fileID: 5592506983043506718}
   - component: {fileID: 9219404325148374331}
-  - component: {fileID: 577979405784028665}
+  - component: {fileID: 2128751778533547607}
+  - component: {fileID: 1969857033368978983}
   - component: {fileID: 6991172403497783732}
   - component: {fileID: 4246933426907511177}
-  - component: {fileID: 1969857033368978983}
-  m_Layer: 0
+  - component: {fileID: 5891416090194211484}
+  - component: {fileID: 6640559400961234647}
+  m_Layer: 6
   m_Name: Player_Character_(Beta)
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3748,10 +3750,10 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.25
-  m_Height: 1.5
+  m_Height: 1.3499999
   m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0}
---- !u!114 &577979405784028665
+  m_Center: {x: 0, y: 1.125, z: 0}
+--- !u!114 &2128751778533547607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3760,11 +3762,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 5098359680417575583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47b63bf39b8fb8e4caf68788d43a3733, type: 3}
+  m_Script: {fileID: 11500000, guid: b664c02636f64ae989c9487bce0a916d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useStrafeAnimations: 0
-  landVelocityThreshold: 5
+  <AdvancedActionController>k__BackingField: {fileID: 1969857033368978983}
+  <CameraDistanceRaycaster>k__BackingField: {fileID: 48147489556464820}
+  <EnemyCharacterFinder>k__BackingField: {fileID: 0}
+  <PerspectiveController>k__BackingField: {fileID: 1861259375928890727}
+  <AnimationController>k__BackingField: {fileID: 6735545999972307723}
+  <MovementController>k__BackingField: {fileID: 4246933426907511177}
+  <ThirdPersonCameraController>k__BackingField: {fileID: 2206131035689729515}
+--- !u!114 &1969857033368978983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098359680417575583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb3252f16a726546a460edb794f4759, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Composer>k__BackingField: {fileID: 2128751778533547607}
+  <CameraTransform>k__BackingField: {fileID: 814531714257443822}
+  <Body>k__BackingField: {fileID: 9219404325148374331}
+  <Detector>k__BackingField: {fileID: 5212214719129567546}
+  <DeltaSpeed>k__BackingField: 1
+  <MovementSpeed>k__BackingField: 7
+  <SlidingSpeed>k__BackingField: 5
+  <SlopeLimit>k__BackingField: 80
+  <AirControlRate>k__BackingField: 2
+  <Gravity>k__BackingField: 30
+  <AirFriction>k__BackingField: 0.5
+  <GroundFriction>k__BackingField: 100
+  <UseLocalSpace>k__BackingField: 0
 --- !u!114 &6991172403497783732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3780,16 +3812,21 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 12a02ece1b18af945b075ac9642dbfcb, type: 2}
   currentHealthPoint: 0
   maximumHealthPoint: 0
-  currentStaminaPoint: 0
-  maximumStaminaPoint: 0
-  regenDelay: 1
-  regenDuration: 3
-  regenAmount: 30
-  cost: 30
-  lowDamagedPoint: 0
-  highDamagedPoint: 0
-  currentDamagePoint: 0
-  currentDefensePoint: 0
+  <Composer>k__BackingField: {fileID: 2128751778533547607}
+  <Data>k__BackingField: {fileID: 11400000, guid: 12a02ece1b18af945b075ac9642dbfcb, type: 2}
+  <CurrentStaminaPoint>k__BackingField: 0
+  <MaximumStaminaPoint>k__BackingField: 0
+  <Delay>k__BackingField: 1
+  <Duration>k__BackingField: 3
+  <Amount>k__BackingField: 30
+  <Costs>k__BackingField:
+  - 30
+  - 3
+  - 1
+  <LowDamagedPoint>k__BackingField: 0
+  <HighDamagedPoint>k__BackingField: 0
+  <CurrentDamagePoint>k__BackingField: 0
+  <CurrentDefensePoint>k__BackingField: 0
 --- !u!114 &4246933426907511177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3802,24 +3839,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e751c3569553ef4590d5f100e7ea47a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepHeightRatio: 0.25
-  height: 2
-  thickness: 0.5
-  offset: {x: 0, y: 0.5, z: 0}
-  isDebugMode: 1
-  mode: 1
-  rows: 1
-  count: 6
-  isOffset: 0
-  multipleRayPositions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 0, z: 0}
-  - {x: 0.49999997, y: 0, z: 0.86602545}
-  - {x: -0.50000006, y: 0, z: 0.8660254}
-  - {x: -1, y: 0, z: -0.00000008742278}
-  - {x: -0.4999999, y: 0, z: -0.86602545}
-  - {x: 0.4999999, y: 0, z: -0.86602545}
---- !u!114 &1969857033368978983
+  <StepHeightRatio>k__BackingField: 0.25
+  <Collider>k__BackingField: {fileID: 9219404325148374331}
+  <Height>k__BackingField: 1.8
+  <Thickness>k__BackingField: 0.5
+  <Offset>k__BackingField: {x: 0, y: 0.5, z: 0}
+  <IsDebugMode>k__BackingField: 1
+  <Mode>k__BackingField: 1
+--- !u!82 &5891416090194211484
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098359680417575583}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6640559400961234647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3828,23 +3951,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5098359680417575583}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acb3252f16a726546a460edb794f4759, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d7ccfeec03a3824080a22e4fe1c027f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTransform: {fileID: 814531714257443822}
-  detectionCollider: {fileID: 5212214719129567546}
-  movementSpeed: 7
-  slidingSpeed: 5
-  slopeLimit: 80
-  airControlRate: 2
-  gravity: 30
-  jumpSpeed: 10
-  jumpDuration: 0.2
-  deltaSpeed: 1
-  rollingDuration: 0
-  airFriction: 0.5
-  groundFriction: 100
-  useLocalSpace: 0
+  _clips:
+  - {fileID: 8300000, guid: 88e3a95f36ef5b644883ed971b6853d2, type: 3}
+  - {fileID: 8300000, guid: 1449d9cb2178f5245a6193708c2bd412, type: 3}
+  - {fileID: 8300000, guid: bcc694dc9f11fcd4cbd8a749ae11dff7, type: 3}
+  - {fileID: 8300000, guid: 30cba9b9e8879f940a5dd074df183f3b, type: 3}
+  - {fileID: 8300000, guid: ddae400aeaa383c478ceb33f307c43fa, type: 3}
+  - {fileID: 8300000, guid: 5857e40f6675b6343b2b857138bbe695, type: 3}
+  - {fileID: 8300000, guid: 7cdfe954d509b2a4ca75de6a2dd90b45, type: 3}
+  - {fileID: 8300000, guid: 2fccfe6e7df8ca640b256aff20fd9a2d, type: 3}
+  _maximumDistance: 0
 --- !u!1 &5157476340549214637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,7 +3977,7 @@ GameObject:
   - component: {fileID: 8012733953322356945}
   - component: {fileID: 1861259375928890727}
   - component: {fileID: 804735100016995008}
-  m_Layer: 6
+  m_Layer: 16
   m_Name: Root_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3916,12 +4035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cf785ec47155e74f992ea1287a4c85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  updateType: 1
-  isExtrapolated: 0
-  interpolationMode: 0
-  speed: 20
-  time: 0.02
+  <Target>k__BackingField: {fileID: 0}
+  <UpdateMode>k__BackingField: 1
+  <IsExtrapolated>k__BackingField: 0
+  <InterpolationMode>k__BackingField: 0
 --- !u!114 &1861259375928890727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3934,11 +4051,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e72c68a0f4200854db21d0eb7126b790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionController: {fileID: 1969857033368978983}
-  cameraController: {fileID: 2206131035689729515}
-  animationController: {fileID: 577979405784028665}
-  turningSpeed: 1500
-  isMomentumIgnored: 0
+  <Composer>k__BackingField: {fileID: 2128751778533547607}
+  <TurningSpeed>k__BackingField: 1500
+  <IsMomentumIgnored>k__BackingField: 0
 --- !u!114 &804735100016995008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3951,11 +4066,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35bdcb22b3645bf809c1fd69c542c49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10
-  layer:
+  <Radius>k__BackingField: 10
+  <MaximumCount>k__BackingField: 20
+  <IncludedLayers>k__BackingField:
     serializedVersion: 2
     m_Bits: 512
-  maximumCount: 20
 --- !u!1 &5192427715769696800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4704,7 +4819,7 @@ GameObject:
   - component: {fileID: 965805770912670126}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5738,7 +5853,7 @@ Transform:
   m_GameObject: {fileID: 7891165194501213137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.7}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

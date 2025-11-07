@@ -1,7 +1,9 @@
-﻿namespace Backend.Object.Process
+﻿using System.Collections;
+
+namespace Backend.Object.Process
 {
     public interface IProcessable
     {
-        public void Run();
+        public IEnumerator Running();
     }
 }

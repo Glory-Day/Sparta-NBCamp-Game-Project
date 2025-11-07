@@ -14,10 +14,23 @@ namespace Backend.Object.Character
         [SerializeField] public float currentHealthPoint;
         [SerializeField] public float maximumHealthPoint;
 
+
+        public Action OnDeath;
+        public Action OnHit;
+        protected EffectSoundPlayer _effectSoundPlayer;
+        protected bool isDead = false;
         protected virtual void Awake()
+        {
+
+            _effectSoundPlayer = GetComponent<EffectSoundPlayer>();
+        }
+
+        protected virtual void OnEnable()
         {
             currentHealthPoint = data.HealthPoint;
             maximumHealthPoint = data.HealthPoint;
+            HealthPointChanged?.Invoke(NormalizedHealthPoint);
+            isDead = false;
         }
 
         public virtual void TakeDamage(float damage, Vector3? position = null)
@@ -31,5 +44,14 @@ namespace Backend.Object.Character
         public event Action<float> HealthPointChanged;
 
         private float NormalizedHealthPoint => currentHealthPoint / maximumHealthPoint;
+
+        public bool IsDead => currentHealthPoint == 0f;
+
+        protected virtual void OnDestroy()
+        {
+            OnDeath = null;
+            OnHit = null;
+            HealthPointChanged = null;
+        }
     }
 }

@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 
 using System;
 using UnityEngine;
@@ -6,6 +6,8 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using UnityEditor;
 using UnityEditor.UIElements;
+using GloryDay.BehaviourTree;
+using Node = GloryDay.BehaviourTree.Node;
 
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {

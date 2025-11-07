@@ -21,6 +21,7 @@ namespace Backend.Object.Projectile
         [SerializeField] private GameObject rangeProjectilePrefab;      // 생성할 RangeProjectile 프리팹
 
         private float _time = 0f;                                       // 경과 시간
+
         private void OnEnable()
         {
             _time = 0f;

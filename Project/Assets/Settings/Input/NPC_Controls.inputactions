@@ -1,0 +1,54 @@
+{
+    "name": "NPC_Controls",
+    "maps": [
+        {
+            "name": "Campfire",
+            "id": "ba3d29e0-f0d2-405e-9fec-85041863cb0b",
+            "actions": [
+                {
+                    "name": "Rest",
+                    "type": "Button",
+                    "id": "3b72b69c-7887-4997-a2b4-95e966e8f000",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Stand Up",
+                    "type": "Button",
+                    "id": "eff0e57a-157e-4066-ae76-d109da2b0d70",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ccd7d8fa-76c9-4fa0-a638-86c1269c2050",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee4f9695-edf2-4fd3-b8d4-e79fd720d52c",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stand Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

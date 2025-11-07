@@ -23,7 +23,6 @@ public class InspectorView : VisualElement
                 editor.OnInspectorGUI();
             }
         });
-
         Add(container);
     }
 }

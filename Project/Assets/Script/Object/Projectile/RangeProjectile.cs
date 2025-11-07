@@ -23,11 +23,23 @@ namespace Backend.Object.Projectile
         private readonly HashSet<int> _hits = new();
         private float _currentRadius;
 
+        private EffectSoundPlayer _effectSoundPlayer;
+
+        private void Awake()
+        {
+            _effectSoundPlayer = GetComponent<EffectSoundPlayer>();
+        }
+
         private void OnEnable()
         {
             _hits.Clear();
             // 성장 효과 사용 여부에 따라 초기 반지름 설정
             _currentRadius = useGrowingRadius ? startRadius : _radius;
+
+            if(_effectSoundPlayer != null)
+            {
+                _effectSoundPlayer.Play(0);
+            }
         }
 
         protected override void OnInitialized()

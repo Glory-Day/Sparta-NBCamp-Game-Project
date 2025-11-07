@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Backend.Util.Debug;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,10 @@ namespace Backend.Object.UI.View
         protected override void Awake()
         {
             base.Awake();
+        }
 
+        protected void OnEnable()
+        {
             backgroundImage.fillAmount = percentage;
         }
 

@@ -21,6 +21,9 @@ namespace Backend.Object.Character.Enemy
 
         private bool _isDie = false;
 
+        [Header("대기 상태")]
+        public bool IsGetUp = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -30,6 +33,7 @@ namespace Backend.Object.Character.Enemy
         private void OnEnable()
         {
             InitialPosition = transform.position;
+            _isDie = false;
         }
 
         private void Update()

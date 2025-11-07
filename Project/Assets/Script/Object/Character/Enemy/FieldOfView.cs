@@ -27,11 +27,15 @@ namespace Backend.Object.Character.Enemy
             _movementController = GetComponent<EnemyMovementController>();
             _enemyStatus = GetComponent<EnemyStatus>();
 
-            viewRadius = _enemyStatus.BossStatus.AttackRange[(_enemyStatus.BossStatus.AttackRange.Length - 1)];
-        }
 
-        private void Start()
+        }
+        private void OnEnable()
         {
+            viewRadius = _enemyStatus.BossStatus.AttackRange[(_enemyStatus.BossStatus.AttackRange.Length - 1)];
+            if (_movementController.IsGetUp)
+            {
+                viewAngle = 360f;
+            }
             // 0.2초 간격으로 코루틴 호출
             StartCoroutine(FindTargetsWithDelay(0.2f));
         }

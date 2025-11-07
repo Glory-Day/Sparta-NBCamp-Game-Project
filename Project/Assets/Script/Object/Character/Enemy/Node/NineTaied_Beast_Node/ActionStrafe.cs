@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GloryDay.BehaviourTree;
+using UnityEngine;
 
 namespace Backend.Object.Character.Enemy.Node
 {
@@ -9,7 +10,7 @@ namespace Backend.Object.Character.Enemy.Node
         public float MaxStrafeDuration = 3.0f;
 
         public float MoveSpeed = 15.0f; // 이동 속도
-        public float RotationSpeed = 270f; // 회전 속도 
+        public float RotationSpeed = 270f; // 회전 속도
 
         private float _strafeDuration;
         private float _desiredDistance; // 플레이어와의 원하는 거리
