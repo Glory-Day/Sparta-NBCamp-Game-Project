@@ -99,4 +99,7 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 # External asset directory
-/[Aa]ssets/External/
+/[Aa]ssets/[Ee]xternal/
+
+# Rider cache directory
+/.idea/
