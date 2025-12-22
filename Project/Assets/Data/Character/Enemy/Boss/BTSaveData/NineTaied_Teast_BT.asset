@@ -496,7 +496,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 65fc5b1dba513e149ac0037280cf35ab
-  Position: {x: 216.00008, y: 776}
+  Position: {x: 218.00003, y: 846.3559}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: fa7400946e7efff43a4bbf9fe8d39f97
-  Position: {x: 219.00006, y: 645}
+  Position: {x: 218.00003, y: 687.6461}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: 76ae33c264d7ea741adccdbd24f98195
-  Position: {x: 135.00003, y: 931.99994}
+  Position: {x: 135.00003, y: 1005.3976}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
@@ -937,7 +937,7 @@ MonoBehaviour:
   mState: 0
   Started: 0
   Guid: cc7435a77581c42438419ec4119acdd5
-  Position: {x: 299.00006, y: 935.99994}
+  Position: {x: 299, y: 1009.3976}
   blackboard:
     attackTimeCounter: 0
     isHit: 0
