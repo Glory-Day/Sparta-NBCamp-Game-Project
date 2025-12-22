@@ -6,6 +6,7 @@ namespace GloryDay.BehaviourTree
     {
         public float minWaitTime = 0f;
         public float maxWaitTime = 2f;
+
         private float _waitTime;
         private float _startTime;
 
@@ -15,20 +16,11 @@ namespace GloryDay.BehaviourTree
             _startTime = Time.time;
         }
 
-        protected override void Stop()
-        {
-
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-
-            if (Time.time - _startTime >= _waitTime)
-            {
-                return State.Success;
-            }
-
-            return State.Running;
+            return Time.time - _startTime >= _waitTime ? State.Success : State.Running;
         }
     }
 }

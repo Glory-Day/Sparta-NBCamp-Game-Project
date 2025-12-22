@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace GloryDay.BehaviourTree
+﻿namespace GloryDay.BehaviourTree
 {
     public abstract class ActionNode : Node
     {
+        public override string ToString()
+        {
+            return "action";
+        }
     }
 }
 

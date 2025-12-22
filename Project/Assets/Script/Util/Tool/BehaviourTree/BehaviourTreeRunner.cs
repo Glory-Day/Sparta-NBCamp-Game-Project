@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 namespace GloryDay.BehaviourTree
 {
+    //TODO: 적 캐릭터 관련 기능이 Behaviour Tree 기능에 포함되어 있다.
+    //      따라서 해당 기능들을 분리하여 다른 클래스에 포함시키는 방향으로 수정해야 한다.
     public class BehaviourTreeRunner : MonoBehaviour
     {
         public BehaviourTree Tree;

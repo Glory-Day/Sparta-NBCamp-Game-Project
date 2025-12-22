@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:bt="GloryDay.BehaviourTree.Editor" editor-extension-mode="True">
+    <Style src="project://database/Assets/Script/Util/Tool/BehaviourTree/Style/BehaviourTreeEditor.uss" />
+    <uie:Toolbar>
+        <uie:ToolbarMenu display-tooltip-when-elided="true" text="Assets" />
+    </uie:Toolbar>
+    <bt:SplitView fixed-pane-initial-dimension="304" style="width: auto; flex-basis: auto; flex-wrap: nowrap; height: auto;">
+        <ui:VisualElement name="left-panel" style="width: 291px; height: auto; flex-basis: auto; position: relative;">
+            <bt:SplitView orientation="Vertical" fixed-pane-initial-dimension="215" fixed-pane-index="0" style="position: relative;">
+                <ui:VisualElement name="inspector-container" style="flex-grow: 0; padding: 4px;">
+                    <bt:InspectorView style="width: auto; flex-basis: auto; flex-grow: 1;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="blackboard-container" style="padding: 4px;">
+                    <ui:IMGUIContainer style="width: auto; flex-basis: auto; flex-grow: 1;" />
+                </ui:VisualElement>
+            </bt:SplitView>
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-direction: column; align-items: stretch; width: auto;">
+            <bt:BehaviourTreeView focusable="true" style="flex-grow: 1; width: auto;" />
+        </ui:VisualElement>
+    </bt:SplitView>
+</ui:UXML>

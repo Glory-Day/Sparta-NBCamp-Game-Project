@@ -25,6 +25,10 @@ namespace GloryDay.BehaviourTree
             node.Child = Child.Clone();
             return node;
         }
-    }
 
+        public override string ToString()
+        {
+            return "root";
+        }
+    }
 }

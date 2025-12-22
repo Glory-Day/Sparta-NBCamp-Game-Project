@@ -1,56 +1,60 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GloryDay.BehaviourTree
 {
     public class ParallelNode : CompositeNode
     {
-        List<State> childrenLeftToExecute = new List<State>();
+        private readonly List<State> _states = new ();
 
         protected override void Start()
         {
-            childrenLeftToExecute.Clear();
-            Children.ForEach(a =>
-            {
-                childrenLeftToExecute.Add(State.Running);
-            });
+            _states.Clear();
+
+            Children.ForEach(_ => { _states.Add(State.Running); });
         }
 
-        protected override void Stop()
-        {
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            bool stillRunning = false;
-            for (int i = 0; i < childrenLeftToExecute.Count(); ++i)
+            var isRunning = false;
+
+            var count = _states.Count;
+            for (var i = 0; i < count; ++i)
             {
-                if (childrenLeftToExecute[i] == State.Running)
+                if (_states[i] != State.Running)
                 {
-                    var status = Children[i].Update();
-                    if (status == State.Failure)
-                    {
+                    continue;
+                }
+
+                var status = Children[i].Update();
+                switch (status)
+                {
+                    case State.Failure:
                         AbortRunningChildren();
                         return State.Failure;
-                    }
-
-                    if (status == State.Running)
-                    {
-                        stillRunning = true;
-                    }
-
-                    childrenLeftToExecute[i] = status;
+                    case State.Running:
+                        isRunning = true;
+                        break;
+                    case State.Success:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
+
+                _states[i] = status;
             }
 
-            return stillRunning ? State.Running : State.Success;
+            return isRunning ? State.Running : State.Success;
         }
 
-        void AbortRunningChildren()
+        private void AbortRunningChildren()
         {
-            for (int i = 0; i < childrenLeftToExecute.Count(); ++i)
+            var count = _states.Count;
+            for (int i = 0; i < count; ++i)
             {
-                if (childrenLeftToExecute[i] == State.Running)
+                if (_states[i] == State.Running)
                 {
                     Children[i].Abort();
                 }

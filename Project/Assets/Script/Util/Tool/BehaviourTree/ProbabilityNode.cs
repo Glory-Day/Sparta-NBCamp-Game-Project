@@ -5,34 +5,21 @@ namespace GloryDay.BehaviourTree
     public class ProbabilityNode : DecoratorNode
     {
         public float probability;
-        private bool _isSuccessed = false;
+
+        private bool _isSuccess;
 
         protected override void Start()
         {
-            int randomNum = Random.Range(0, 100);
-            if (100 - 100 * probability <= randomNum)
-            {
-                _isSuccessed = true;
-            }
-            else
-            {
-                _isSuccessed = false;
-            }
-            //Debug.Log("state: " + _isSuccessed.ToString());// + " with random num:" + randomNum.ToString());
+            var number = Random.Range(0, 100);
+
+            _isSuccess = 100 - (100 * probability) <= number;
         }
 
-        protected override void Stop()
-        {
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            if (_isSuccessed)
-            {
-                return Child.Update();
-            }
-
-            return State.Failure;
+            return _isSuccess ? Child.Update() : State.Failure;
         }
     }
 }

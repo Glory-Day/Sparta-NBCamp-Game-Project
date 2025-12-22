@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace GloryDay.BehaviourTree
@@ -10,10 +9,15 @@ namespace GloryDay.BehaviourTree
 
         public override Node Clone()
         {
-            CompositeNode node = Instantiate(this);
-            node.Children = Children.ConvertAll(c => c.Clone());
+            var clone = Instantiate(this);
+            clone.Children = Children.ConvertAll(node => node.Clone());
 
-            return node;
+            return clone;
+        }
+
+        public override string ToString()
+        {
+            return "composite";
         }
     }
 }

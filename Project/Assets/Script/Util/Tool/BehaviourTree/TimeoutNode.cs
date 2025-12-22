@@ -14,23 +14,16 @@ namespace GloryDay.BehaviourTree
             _time = Time.time;
         }
 
-        protected override void Stop()
-        {
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            if (Child == null)
+            if (Child is null)
             {
                 return State.Failure;
             }
 
-            if (Time.time - _time > duration)
-            {
-                return State.Failure;
-            }
-
-            return Child.Update();
+            return Time.time - _time > duration ? State.Failure : Child.Update();
         }
     }
 }

@@ -1,22 +1,21 @@
-﻿namespace GloryDay.BehaviourTree
+﻿using System;
+
+namespace GloryDay.BehaviourTree
 {
     public class SequencerNode : CompositeNode
     {
-        private int _currentChild;
+        private int _index;
 
         protected override void Start()
         {
-            _currentChild = 0;
+            _index = 0;
         }
 
-        protected override void Stop()
-        {
-
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            Node child = Children[_currentChild];
+            var child = Children[_index];
             switch (child.Update())
             {
                 case State.Running:
@@ -24,11 +23,13 @@
                 case State.Failure:
                     return State.Failure;
                 case State.Success:
-                    _currentChild++;
+                    _index++;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
-            return _currentChild == Children.Count ? State.Success : State.Running;
+            return _index == Children.Count ? State.Success : State.Running;
         }
     }
 }

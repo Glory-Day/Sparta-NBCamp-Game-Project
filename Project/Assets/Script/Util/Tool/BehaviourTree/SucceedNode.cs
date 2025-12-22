@@ -1,31 +1,21 @@
-﻿using UnityEngine;
-
-namespace GloryDay.BehaviourTree
+﻿namespace GloryDay.BehaviourTree
 {
     public class SucceedNode : DecoratorNode
     {
-        protected override void Start()
-        {
-        }
+        protected override void Start() { }
 
-        protected override void Stop()
-        {
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            if (Child == null)
+            if (Child is null)
             {
                 return State.Failure;
             }
 
             var state = Child.Update();
-            if (state == State.Failure)
-            {
-                return State.Success;
-            }
 
-            return state;
+            return state == State.Failure ? State.Success : state;
         }
     }
 }

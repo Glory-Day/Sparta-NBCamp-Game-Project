@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using Backend.Util.Debug;
 
 namespace GloryDay.BehaviourTree
 {
@@ -8,17 +8,18 @@ namespace GloryDay.BehaviourTree
 
         protected override void Start()
         {
-            Debug.Log($"OnStart{Message}");
+            Debugger.LogMessage(Message);
         }
 
         protected override void Stop()
         {
-            Debug.Log($"OnStop{Message}");
+            Debugger.LogMessage(Message);
         }
 
         protected override State OnUpdate()
         {
-            Debug.Log($"OnUpdate{Message}");
+            Debugger.LogMessage(Message);
+
             return State.Success;
         }
     }

@@ -2,32 +2,24 @@
 {
     public class InverterNode : DecoratorNode
     {
-        protected override void Start()
-        {
-        }
+        protected override void Start() { }
 
-        protected override void Stop()
-        {
-        }
+        protected override void Stop() { }
 
         protected override State OnUpdate()
         {
-            if (Child == null)
+            if (Child is null)
             {
                 return State.Failure;
             }
 
-            switch (Child.Update())
+            return Child.Update() switch
             {
-                case State.Running:
-                    return State.Running;
-                case State.Failure:
-                    return State.Success;
-                case State.Success:
-                    return State.Failure;
-            }
-
-            return State.Failure;
+                State.Running => State.Running,
+                State.Failure => State.Success,
+                State.Success => State.Failure,
+                _ => State.Failure
+            };
         }
     }
 }

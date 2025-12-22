@@ -5,13 +5,6 @@ namespace GloryDay.BehaviourTree
 {
     public abstract class Node : ScriptableObject
     {
-        public enum State
-        {
-            Running,
-            Failure,
-            Success
-        }
-
         [HideInInspector] public State mState = State.Running;
         [HideInInspector] public bool Started = false;
         [HideInInspector] public string Guid;
@@ -47,7 +40,7 @@ namespace GloryDay.BehaviourTree
 
         public void Abort()
         {
-            tree.Traverse(this, (node) =>
+            BehaviourTree.Traverse(this, node =>
             {
                 node.Started = false;
                 node.mState = State.Running;
@@ -60,5 +53,16 @@ namespace GloryDay.BehaviourTree
         protected abstract void Stop();
 
         protected abstract State OnUpdate();
+
+        #region NESTED ENUMERATION API
+
+        public enum State
+        {
+            Running,
+            Failure,
+            Success
+        }
+
+        #endregion
     }
 }
