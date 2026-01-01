@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Backend.Util.Json
+namespace GloryDay.Json.Serialization
 {
     public static class JsonSerializer
     {

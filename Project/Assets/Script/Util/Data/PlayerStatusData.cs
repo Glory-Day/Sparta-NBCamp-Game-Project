@@ -1,4 +1,4 @@
-﻿using Backend.Util.Json;
+﻿using GloryDay.Json.Serialization;
 using UnityEngine;
 
 namespace Backend.Util.Data

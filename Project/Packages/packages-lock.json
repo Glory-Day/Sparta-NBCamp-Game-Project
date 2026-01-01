@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "com.gloryday.addressables_key_generator": {
+      "version": "file:com.gloryday.addressables_key_generator@1.0.0",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
+    "com.gloryday.json_serializer": {
+      "version": "file:com.gloryday.json_serializer@1.0.0",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "9.2.0",
       "depth": 1,
